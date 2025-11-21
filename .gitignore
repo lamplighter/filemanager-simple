@@ -1,0 +1,26 @@
+# Backup files created by scripts
+*.bak
+
+# Log backups
+logs/*.bak
+
+# Temporary files
+~$*
+*.tmp
+
+# System files
+.DS_Store
+Thumbs.db
+
+# IDE and editor files
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# Local settings
+.claude/settings.local.json
+
+# Node modules (if using JavaScript/Node in future)
+node_modules/
