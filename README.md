@@ -1,120 +1,254 @@
 # File Organization System
 
-A Claude Code-driven file organization system that processes unorganized files with intelligent confidence-based routing.
+A Claude Code-driven file organization system that intelligently organizes files with confidence-based routing, comprehensive safety features, and undo capability.
 
 ## 🚀 Quick Start
 
 ```bash
-# Auto-organize files with confidence-based routing
-./scripts/auto_execute.sh --dry-run  # Preview what would happen
-./scripts/auto_execute.sh            # Interactive mode
-./scripts/auto_execute.sh --auto     # Fully automated
+# 1. Ask Claude to analyze files
+"organize next file"
+
+# 2. Process the queue
+./organize.sh               # Interactive mode with confirmations
+./organize.sh --auto        # Automatic (high-confidence only)
+./organize.sh --dry-run     # Preview without executing
+
+# 3. Check status or undo if needed
+./organize.sh --status      # View queue status
+./organize.sh --undo        # Revert last batch of operations
 ```
 
 ## 📁 Repository Structure
 
 ```
 filemanager-simple/
-├── docs/                      # 📖 Documentation
-│   ├── filing-structure.md   # Directory structure & categories  
-│   ├── naming-conventions.md # File naming patterns
-│   └── examples.md           # Example workflows
-├── scripts/                   # 🔧 Executable scripts
-│   ├── auto_execute.sh       # ⭐ Intelligent auto-router
-│   └── execute.sh            # Manual execution helper
-├── logs/                      # 📝 Organization logs
-│   ├── organize_log.md       # Suggestions with confidence scores
-│   └── execution_log.md      # Approved commands ready to run
-├── CLAUDE.md                  # 🧠 Core instructions for Claude
-└── README.md                  # 👋 This file
+├── organize.sh                 # ⭐ Main script - unified workflow
+├── config.yaml                 # ⚙️  Configuration (paths & thresholds)
+├── state/                      # 📊 State management
+│   ├── file_queue.json        # Pending file operations
+│   ├── history.json           # Undo capability
+│   └── README.md              # State file documentation
+├── scripts/                    # 🔧 Helper scripts
+│   ├── validate_suggestion.sh # Validation tool for Claude
+│   ├── auto_execute.sh.bak    # (archived)
+│   └── execute.sh.bak         # (archived)
+├── docs/                       # 📖 Documentation
+│   ├── filing-structure.md    # Directory layout
+│   ├── naming-conventions.md  # File naming patterns
+│   └── examples.md            # Usage examples
+├── logs/                       # 📝 Archived logs (old system)
+│   ├── organize_log.md.bak
+│   └── execution_log.md.bak
+├── CLAUDE.md                   # 🧠 Instructions for Claude
+└── README.md                   # 👋 This file
 ```
 
 ## 🎯 How It Works
 
-### 1. Organization Phase
-- Ask Claude: `"organize next file"` or `"file _filename"`  
-- Claude analyzes files and calculates confidence scores (0-100%)
-- Suggestions logged in `logs/organize_log.md` with detailed reasoning
+### The Workflow
 
-### 2. Auto-Routing Phase ⭐ 
-- **90-100% confidence**: Auto-approve → `logs/execution_log.md`
-- **50-89% confidence**: Ask for user confirmation  
-- **0-49% confidence**: Auto-move to `~/Files/unknown/`
+1. **Claude Analyzes** - When you say "organize next file", Claude:
+   - Finds unorganized files in Downloads/Desktop
+   - Analyzes content and finds similar files
+   - Calculates confidence score (0-100%)
+   - Adds suggestion to `state/file_queue.json` as JSON
 
-### 3. Execution Phase
-- Run `./scripts/execute.sh` to execute approved moves
-- All moves are logged with timestamps and status
+2. **organize.sh Executes** - You run the script to process the queue:
+   - **90-100% confidence**: Auto-approved, executed immediately
+   - **50-89% confidence**: Asks for your confirmation
+   - **0-49% confidence**: Moved to `~/Files/unknown/`
+
+3. **Full Undo** - Every operation is tracked in `history.json`:
+   - Run `./organize.sh --undo` to revert the last batch
+   - File hashes ensure integrity
+
+### Architecture
+
+```
+┌─────────────┐
+│   Claude    │ Analyzes files, calculates confidence,
+│  (Brain)    │ adds JSON entries to queue
+└─────┬───────┘
+      │
+      ▼
+┌──────────────────────┐
+│ state/file_queue.json│ Stores pending operations as structured data
+└─────┬────────────────┘
+      │
+      ▼
+┌─────────────┐
+│ organize.sh │ Executes based on confidence,
+│  (Hands)    │ tracks history for undo
+└──────────────┘
+```
 
 ## 📊 Confidence Scoring
 
-Files are automatically scored based on:
-- **+30%**: Similar files found in destination
-- **+20%**: File type matches folder content
-- **+20%**: Strong entity keywords (TD, Rogers, etc.)
-- **+15%**: Content matches category patterns
-- **+10%**: Naming pattern matches existing files
-- **+5%**: File size similar to others in category
-- **-20%**: Ambiguous or generic filename
-- **-30%**: No similar files in Filing directory
+Files are scored 0-100% based on:
+
+**Positive Factors:**
+- +30%: Similar files found in destination
+- +20%: File type matches folder content
+- +20%: Strong entity keywords (TD, Rogers, etc.)
+- +15%: Content matches category patterns
+- +10%: Naming pattern matches existing files
+- +5%: File size similar to others
+
+**Negative Factors:**
+- -20%: Ambiguous or generic filename
+- -30%: No similar files in filing directory
+- -20%: Multiple equally valid destinations
 
 ## 🏗️ File Categories
 
-The system organizes files into:
-
 ### Main Directory: `~/Dropbox/Filing/`
-Entity-based structure with:
-- **Financial** (Banking, Investments, Insurance)  
-- **Business** (HoldCo, Uken, Jam City, etc.)
-- **Real Estate** (by property address)
-- **Utilities** (Rogers, Bell, Toronto Hydro, etc.)
-- **Legal & Personal** documents
+Entity-based organization:
+- **Financial**: TD, RBC, Tangerine (by account)
+- **Insurance**: Life Insurance, Property Insurance
+- **Business**: HoldCo, Uken, Jam City
+- **Utilities**: Rogers, Bell, Hydro
+- **Real Estate**: By property address
+- **Legal/Personal**: Family Trust, Wills, etc.
 
 ### Special Directories
-- **`~/Files/installers/`** - DMG files and software installers
-- **`~/Files/screenshots/`** - Screenshot images
-- **`~/Files/unknown/`** - Files that cannot be categorized
+- `~/Files/installers/` - DMG files and software
+- `~/Files/screenshots/` - Screenshot images
+- `~/Files/unknown/` - Low-confidence files
 
-## 🔧 Usage Examples
+## 🔧 Command Reference
+
+### Main Commands
 
 ```bash
-# Preview auto-routing decisions
-./scripts/auto_execute.sh --dry-run
-
-# Interactive mode (asks for medium confidence files)  
-./scripts/auto_execute.sh
-
-# Fully automated (only processes high confidence)
-./scripts/auto_execute.sh --auto
-
-# Manual execution of approved commands
-./scripts/execute.sh --dry-run  # Preview
-./scripts/execute.sh            # Execute
-
-# Get help
-./scripts/auto_execute.sh --help
-./scripts/execute.sh --help
+./organize.sh               # Interactive - asks for medium confidence
+./organize.sh --auto        # Auto mode - high confidence only
+./organize.sh --dry-run     # Preview what would happen
+./organize.sh --status      # Show queue status
+./organize.sh --undo        # Revert last batch
+./organize.sh --help        # Show help
 ```
 
-## 📚 Documentation
+### Helper Commands
 
-- **[Filing Structure](docs/filing-structure.md)** - Complete directory layout and categories
-- **[Naming Conventions](docs/naming-conventions.md)** - File naming patterns and rules  
-- **[Examples](docs/examples.md)** - Detailed workflow examples and patterns
+```bash
+# Validate a suggestion before adding to queue
+./scripts/validate_suggestion.sh "<source>" "<dest>"
+
+# Check queue manually
+cat state/file_queue.json | jq '.files[] | select(.status == "pending")'
+
+# View history
+cat state/history.json | jq '.operations[-5:]'  # Last 5 operations
+```
+
+## ⚙️ Configuration
+
+Edit `config.yaml` to customize:
+
+```yaml
+# Source directories to scan
+source_directories:
+  - ~/Downloads
+  - ~/Desktop
+
+# Main filing directory
+filing_root: ~/Dropbox/Filing
+
+# Confidence thresholds (0-100)
+thresholds:
+  auto_approve: 90    # Execute immediately
+  ask_user: 50        # Require confirmation
+  # Below ask_user → unknown folder
+```
 
 ## 🛡️ Safety Features
 
-- **Dry-run mode** for testing
-- **Source file verification** before moves
-- **Automatic directory creation**
-- **Conflict resolution** for duplicate filenames
-- **Detailed logging** with timestamps
-- **Backup creation** before modifications
+- ✅ **Undo Capability** - Revert operations with `--undo`
+- ✅ **Dry-Run Mode** - Preview before executing
+- ✅ **File Validation** - Check existence, permissions, conflicts
+- ✅ **Conflict Resolution** - Prompt to overwrite/rename/skip
+- ✅ **Atomic Operations** - File hashes verify integrity
+- ✅ **Detailed Logging** - All operations tracked with timestamps
+- ✅ **State Management** - JSON tracking of all file operations
 
 ## 🎨 Features
 
-- ✅ **Intelligent confidence scoring** - Learn from existing file patterns
-- ✅ **Auto-routing** - Reduce manual review burden  
-- ✅ **Pattern recognition** - Find similar files automatically
-- ✅ **Smart renaming** - Apply consistent naming conventions
-- ✅ **Interactive confirmation** - Ask when uncertain
-- ✅ **Comprehensive logging** - Track all decisions and reasoning
+### What's New in 2.0
+
+- ✨ **Single Unified Script** - No more confusion about which script to run
+- ✨ **JSON State Management** - Structured data instead of markdown parsing
+- ✨ **Full Undo** - Revert any batch of operations
+- ✨ **Validation Helper** - Claude can test suggestions before adding
+- ✨ **Better Error Handling** - Comprehensive checks and clear messages
+- ✨ **Configuration File** - Customize paths and thresholds
+- ✨ **Color Output** - Clear visual feedback
+- ✨ **Progress Indicators** - Know what's happening
+- ✨ **Status Command** - Check queue at any time
+
+### Platform Support
+
+- ✅ **macOS** - Fully supported (BSD tools)
+- ✅ **Linux** - Fully supported (GNU tools)
+- ⚠️ **Windows** - Requires WSL
+
+## 📚 Documentation
+
+- **[CLAUDE.md](CLAUDE.md)** - Complete instructions for Claude
+- **[Filing Structure](docs/filing-structure.md)** - Directory organization
+- **[Naming Conventions](docs/naming-conventions.md)** - File naming rules
+- **[Examples](docs/examples.md)** - Detailed workflow examples
+- **[State Files](state/README.md)** - JSON schema documentation
+
+## 🔍 Troubleshooting
+
+### Queue not processing?
+```bash
+./organize.sh --status  # Check if files are in queue
+cat state/file_queue.json | jq  # View raw JSON
+```
+
+### Need to start fresh?
+```bash
+# Clear queue (keep history for undo)
+echo '{"schema_version": "1.0", "files": []}' > state/file_queue.json
+
+# Clear everything
+echo '{"schema_version": "1.0", "operations": []}' > state/history.json
+```
+
+### Validation failing?
+```bash
+# Test a specific path
+./scripts/validate_suggestion.sh "/path/to/source" "/path/to/dest"
+```
+
+## 🤝 Contributing
+
+This is a personal tool, but improvements welcome! Key areas:
+
+- Better confidence scoring algorithms
+- Duplicate detection
+- File type-specific handlers
+- Analytics and reporting
+- Additional platform support
+
+## 📝 License
+
+Personal use. No license.
+
+---
+
+## Changelog
+
+### Version 2.0 (2025-01-21)
+- Complete redesign with unified organize.sh script
+- JSON-based state management
+- Full undo capability
+- Validation helper for Claude
+- Configuration file support
+- Platform-independent (macOS & Linux)
+- Comprehensive error handling
+
+### Version 1.0 (2025-01-09)
+- Initial release with markdown-based logging
+- Separate auto_execute.sh and execute.sh scripts

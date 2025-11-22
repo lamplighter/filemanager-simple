@@ -1,0 +1,38 @@
+# File Organization System Configuration
+
+# Source directories to scan for unorganized files
+source_directories:
+  - ~/Downloads
+  - ~/Desktop
+
+# Main organized filing directory
+filing_root: ~/Dropbox/Filing
+
+# Special purpose directories
+special_directories:
+  installers: ~/Files/installers
+  screenshots: ~/Files/screenshots
+  unknown: ~/Files/unknown
+
+# Confidence thresholds (0-100)
+thresholds:
+  # Files at or above this confidence are auto-approved
+  auto_approve: 90
+  # Files at or above this threshold but below auto_approve require user confirmation
+  ask_user: 50
+  # Files below ask_user go to unknown folder
+
+# Display options
+display:
+  use_color: true
+  show_progress: true
+  verbose: false
+
+# Safety options
+safety:
+  # Create backup before overwrites
+  backup_before_overwrite: false
+  # Maximum file size to process (in bytes, 0 = unlimited)
+  max_file_size: 0
+  # Require confirmation for batch operations over this many files
+  batch_confirm_threshold: 10
