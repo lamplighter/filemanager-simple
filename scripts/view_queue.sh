@@ -52,14 +52,14 @@ fi
 echo "Opening file queue viewer in isolated Chrome instance..."
 echo "Viewer: $VIEWER_PATH"
 
-# Launch Chrome directly with a temporary profile
-# This creates an isolated instance that won't interfere with your main Chrome
+# Launch Chrome in app mode with a temporary profile
+# App mode gives a cleaner interface without browser chrome
 "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome" \
+    --app="file://$VIEWER_PATH" \
     --allow-file-access-from-files \
     --user-data-dir="$TEMP_USER_DATA" \
     --no-first-run \
-    --no-default-browser-check \
-    "$VIEWER_PATH" &
+    --no-default-browser-check &
 
 echo "✓ Viewer opened in isolated Chrome instance"
 echo ""
