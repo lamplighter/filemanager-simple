@@ -66,6 +66,75 @@ class ViewerRequestHandler(http.server.SimpleHTTPRequestHandler):
         else:
             self.send_error(404)
 
+    def do_GET(self):
+        """Handle GET requests"""
+        parsed_url = urlparse(self.path)
+
+        if parsed_url.path == '/api/list-directory':
+            # Extract directory path from query parameter
+            query_params = parse_qs(parsed_url.query)
+            dir_path = query_params.get('path', [None])[0]
+
+            if not dir_path:
+                self.send_error(400, "Missing path parameter")
+                return
+
+            # Expand ~ to user home directory
+            dir_path = os.path.expanduser(dir_path)
+
+            try:
+                # Check if directory exists
+                if not os.path.exists(dir_path):
+                    self.send_response(200)
+                    self.send_header('Content-type', 'application/json')
+                    self.send_header('Access-Control-Allow-Origin', '*')
+                    self.end_headers()
+                    self.wfile.write(json.dumps({
+                        'success': False,
+                        'error': 'Directory does not exist',
+                        'directory': dir_path,
+                        'files': []
+                    }).encode())
+                    return
+
+                if not os.path.isdir(dir_path):
+                    self.send_error(400, "Path is not a directory")
+                    return
+
+                # List all files in directory
+                files = []
+                for entry in os.scandir(dir_path):
+                    if entry.is_file():
+                        stat = entry.stat()
+                        files.append({
+                            'name': entry.name,
+                            'size': stat.st_size,
+                            'modified': datetime.fromtimestamp(stat.st_mtime).strftime('%Y-%m-%d %H:%M:%S')
+                        })
+
+                # Sort by modified date (newest first)
+                files.sort(key=lambda x: x['modified'], reverse=True)
+
+                # Send success response
+                self.send_response(200)
+                self.send_header('Content-type', 'application/json')
+                self.send_header('Access-Control-Allow-Origin', '*')
+                self.end_headers()
+                self.wfile.write(json.dumps({
+                    'success': True,
+                    'directory': dir_path,
+                    'files': files,
+                    'total_count': len(files)
+                }).encode())
+
+            except PermissionError:
+                self.send_error(403, "Permission denied")
+            except Exception as e:
+                self.send_error(500, str(e))
+        else:
+            # Delegate to parent class for serving static files
+            super().do_GET()
+
     def do_OPTIONS(self):
         """Handle CORS preflight requests"""
         self.send_response(200)

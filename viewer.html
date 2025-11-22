@@ -79,6 +79,7 @@
         table {
             width: 100%;
             border-collapse: collapse;
+            table-layout: fixed;
         }
 
         thead {
@@ -111,12 +112,12 @@
             font-family: 'Monaco', 'Courier New', monospace;
             color: #333;
             word-break: break-all;
-            max-width: 400px;
+            width: 200px;
         }
 
         .confidence-cell {
             text-align: center;
-            min-width: 100px;
+            width: 100px;
         }
 
         .confidence-badge {
@@ -145,7 +146,7 @@
         .timestamp-cell {
             color: #666;
             white-space: nowrap;
-            min-width: 140px;
+            width: 160px;
         }
 
         tbody tr {
@@ -154,7 +155,7 @@
 
         .approval-cell {
             text-align: center;
-            min-width: 140px;
+            width: 150px;
         }
 
         .approval-buttons {
@@ -200,7 +201,7 @@
             text-transform: capitalize;
         }
 
-        .status-pending_approval {
+        .status-pending {
             background: #fff3cd;
             color: #856404;
         }
@@ -412,6 +413,103 @@
             margin-bottom: 10px;
             color: #333;
         }
+
+        /* Directory Files Styles */
+        .directory-files-container {
+            background: #f8f9fa;
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        .directory-files-header {
+            padding: 12px 15px;
+            background: #e9ecef;
+            font-size: 12px;
+            color: #495057;
+            font-weight: 500;
+            border-bottom: 1px solid #dee2e6;
+        }
+
+        .directory-files-scroll {
+            max-height: 300px;
+            overflow-y: auto;
+        }
+
+        .directory-files-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 13px;
+        }
+
+        .directory-files-table thead {
+            position: sticky;
+            top: 0;
+            background: #fff;
+            z-index: 1;
+        }
+
+        .directory-files-table th {
+            padding: 10px 15px;
+            text-align: left;
+            font-weight: 600;
+            color: #495057;
+            border-bottom: 2px solid #dee2e6;
+            font-size: 12px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .directory-files-table td {
+            padding: 10px 15px;
+            border-bottom: 1px solid #dee2e6;
+            color: #333;
+        }
+
+        .directory-files-table tbody tr:hover {
+            background: #f1f3f5;
+        }
+
+        .directory-files-table tbody tr:last-child td {
+            border-bottom: none;
+        }
+
+        .directory-files-table .file-name {
+            font-family: 'Monaco', 'Courier New', monospace;
+            word-break: break-all;
+        }
+
+        .directory-files-table .file-size {
+            text-align: right;
+            color: #6c757d;
+            white-space: nowrap;
+        }
+
+        .directory-files-table .file-modified {
+            color: #6c757d;
+            white-space: nowrap;
+        }
+
+        .loading-message {
+            padding: 20px;
+            text-align: center;
+            color: #6c757d;
+            font-style: italic;
+        }
+
+        .error-message {
+            background: #f8d7da;
+            color: #721c24;
+            padding: 15px;
+            border-radius: 6px;
+            margin: 10px;
+        }
+
+        .empty-message {
+            padding: 20px;
+            text-align: center;
+            color: #6c757d;
+            font-style: italic;
+        }
     </style>
 </head>
 <body>
@@ -436,7 +534,7 @@
             <label>Filter by Approval:</label>
             <select id="approvalFilter">
                 <option value="all">All</option>
-                <option value="pending_approval">Pending Approval</option>
+                <option value="pending">Pending</option>
                 <option value="approved">Approved</option>
                 <option value="rejected">Rejected</option>
                 <option value="completed">Completed</option>
@@ -474,7 +572,7 @@
 
         async function loadQueue() {
             try {
-                const response = await fetch('state/file_queue.json');
+                const response = await fetch('http://localhost:8765/state/file_queue.json');
                 if (!response.ok) {
                     throw new Error(`HTTP error! status: ${response.status}`);
                 }
@@ -502,7 +600,14 @@
         }
 
         function formatPath(path) {
-            return path.replace(/^\/Users\/marklampert/, '~');
+            const formatted = path.replace(/^\/Users\/marklampert/, '~');
+            const lastSlash = formatted.lastIndexOf('/');
+            if (lastSlash === -1) return formatted;
+
+            const dir = formatted.substring(0, lastSlash + 1);
+            const filename = formatted.substring(lastSlash + 1);
+
+            return `<div style="color: #999; font-size: 11px; margin-bottom: 2px;">${dir}</div><div>${filename}</div>`;
         }
 
         function formatTimestamp(timestamp) {
@@ -513,7 +618,7 @@
             const confidenceClass = getConfidenceClass(file.confidence);
 
             let approvalCell;
-            if (file.status === 'pending_approval') {
+            if (file.status === 'pending') {
                 approvalCell = `
                     <div class="approval-buttons">
                         <button class="approval-btn approve-btn" onclick="event.stopPropagation(); approveFile(${index})">Approve</button>
@@ -589,11 +694,11 @@
                     <table>
                         <thead>
                             <tr>
-                                <th>Source</th>
-                                <th>Destination</th>
-                                <th>Confidence</th>
-                                <th>Approval</th>
-                                <th>Time of Evaluation</th>
+                                <th class="path-cell">Source</th>
+                                <th class="path-cell">Destination</th>
+                                <th class="confidence-cell">Confidence</th>
+                                <th class="approval-cell">Approval</th>
+                                <th class="timestamp-cell">Time of Evaluation</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -661,7 +766,7 @@
 
             const preview = createPreview(file);
 
-            const approvalSection = file.status === 'pending_approval' ? `
+            const approvalSection = file.status === 'pending' ? `
                 <div class="modal-section">
                     <div class="modal-section-title">Approval Required</div>
                     <div class="approval-buttons">
@@ -720,18 +825,98 @@
                     </div>
                 </div>
 
+                <div class="modal-section">
+                    <div class="modal-section-title">Files in Destination Directory</div>
+                    <div id="directoryFiles" class="directory-files-container">
+                        <div class="loading-message">Loading...</div>
+                    </div>
+                </div>
+
                 ${preview}
             `;
 
             document.getElementById('modalBody').innerHTML = modalContent;
             document.getElementById('modalOverlay').classList.add('active');
+
+            // Fetch and display directory files
+            loadDirectoryFiles(file.dest_path);
+        }
+
+        async function loadDirectoryFiles(destPath) {
+            const container = document.getElementById('directoryFiles');
+
+            // Extract directory path from destination path
+            const dirPath = destPath.substring(0, destPath.lastIndexOf('/'));
+
+            try {
+                const response = await fetch(`http://localhost:8765/api/list-directory?path=${encodeURIComponent(dirPath)}`);
+                const data = await response.json();
+
+                if (!data.success) {
+                    container.innerHTML = `<div class="error-message">${data.error || 'Failed to load directory contents'}</div>`;
+                    return;
+                }
+
+                if (data.files.length === 0) {
+                    container.innerHTML = '<div class="empty-message">No files in directory</div>';
+                    return;
+                }
+
+                // Format file size
+                function formatFileSize(bytes) {
+                    if (bytes === 0) return '0 Bytes';
+                    const k = 1024;
+                    const sizes = ['Bytes', 'KB', 'MB', 'GB'];
+                    const i = Math.floor(Math.log(bytes) / Math.log(k));
+                    return Math.round(bytes / Math.pow(k, i) * 100) / 100 + ' ' + sizes[i];
+                }
+
+                // Build table HTML
+                let tableHTML = `
+                    <div class="directory-files-header">
+                        ${data.total_count} file${data.total_count !== 1 ? 's' : ''} in ${dirPath.replace('/Users/marklampert/', '~/')}
+                    </div>
+                    <div class="directory-files-scroll">
+                        <table class="directory-files-table">
+                            <thead>
+                                <tr>
+                                    <th>Filename</th>
+                                    <th>Size</th>
+                                    <th>Modified</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                `;
+
+                data.files.forEach(file => {
+                    tableHTML += `
+                        <tr>
+                            <td class="file-name">${file.name}</td>
+                            <td class="file-size">${formatFileSize(file.size)}</td>
+                            <td class="file-modified">${file.modified}</td>
+                        </tr>
+                    `;
+                });
+
+                tableHTML += `
+                            </tbody>
+                        </table>
+                    </div>
+                `;
+
+                container.innerHTML = tableHTML;
+
+            } catch (error) {
+                console.error('Error loading directory files:', error);
+                container.innerHTML = '<div class="error-message">Error loading directory contents</div>';
+            }
         }
 
         async function updateFileStatus(index, newStatus) {
             const file = filteredData[index];
 
             try {
-                const response = await fetch('/api/update-status', {
+                const response = await fetch('http://localhost:8765/api/update-status', {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',
