@@ -15,8 +15,17 @@
   - **Legal**: Family Trust, Will, Legal matters
   - **Vehicles**: Mazda CX-5
   - **Personal**: Life Insurance, Executive Assistant, Housekeeper
-  
+
   *Note: This directory is highly organized by entity/account rather than file type*
+
+- `~/Dropbox/Taxes/` - **EXISTING** Tax returns, CRA correspondence, and tax-related documents:
+  - **HoldCo**: Corporate tax returns (by year), CRA notices, audit documents
+  - **Personal**: Personal tax returns (by year), tax slips, CRA correspondence
+  - **Family Trust**: Trust tax returns and related documents
+  - **Custo**: Custo-related tax documents
+  - **W-8BEN**: Tax residency forms
+
+  *Note: Organized by entity and year, contains CRA/IRS official documents*
 
 ### Special Directories
 - `~/Files/` - **EXISTING** but empty base directory
