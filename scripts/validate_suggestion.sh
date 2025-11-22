@@ -50,7 +50,13 @@ parse_yaml() {
 
 # Load config
 eval "$(parse_yaml "CONFIG_" "$CONFIG_FILE")"
+
+# Expand destination roots
 CONFIG_filing_root="${CONFIG_filing_root/#\~/$HOME}"
+CONFIG_taxes_root="${CONFIG_taxes_root:-}"
+if [[ -n "$CONFIG_taxes_root" ]]; then
+    CONFIG_taxes_root="${CONFIG_taxes_root/#\~/$HOME}"
+fi
 
 # Check arguments
 if [[ $# -lt 2 ]]; then
@@ -159,13 +165,33 @@ if [[ "$SOURCE_EXT" =~ ^(png|jpg|jpeg|gif|bmp)$ ]] && [[ "$SOURCE_BASENAME" =~ S
     fi
 fi
 
-# Check 8: Destination is under filing root
-if [[ ! "$DEST_PATH" =~ ^${CONFIG_filing_root} ]] && \
-   [[ ! "$DEST_PATH" =~ Files/installers ]] && \
-   [[ ! "$DEST_PATH" =~ Files/screenshots ]] && \
-   [[ ! "$DEST_PATH" =~ Files/unknown ]]; then
+# Check 8: Destination is under a known root
+VALID_LOCATION=false
+
+# Check against filing_root
+if [[ -n "$CONFIG_filing_root" ]] && [[ "$DEST_PATH" =~ ^${CONFIG_filing_root} ]]; then
+    VALID_LOCATION=true
+fi
+
+# Check against taxes_root
+if [[ -n "$CONFIG_taxes_root" ]] && [[ "$DEST_PATH" =~ ^${CONFIG_taxes_root} ]]; then
+    VALID_LOCATION=true
+fi
+
+# Check against special directories
+if [[ "$DEST_PATH" =~ Files/installers ]] || \
+   [[ "$DEST_PATH" =~ Files/screenshots ]] || \
+   [[ "$DEST_PATH" =~ Files/unknown ]]; then
+    VALID_LOCATION=true
+fi
+
+if [[ "$VALID_LOCATION" == "false" ]]; then
     echo -e "${YELLOW}⚠ Destination is not in a known filing location${NC}"
-    echo "  Expected under: $CONFIG_filing_root or ~/Files/*"
+    local expected_locations="$CONFIG_filing_root"
+    if [[ -n "$CONFIG_taxes_root" ]]; then
+        expected_locations="$expected_locations, $CONFIG_taxes_root"
+    fi
+    echo "  Expected under: $expected_locations or ~/Files/*"
     ((WARNINGS++))
 fi
 

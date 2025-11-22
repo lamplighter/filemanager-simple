@@ -5,8 +5,9 @@ source_directories:
   - ~/Downloads
   - ~/Desktop
 
-# Main organized filing directory
+# Valid destination roots for organized files
 filing_root: ~/Dropbox/Filing
+taxes_root: ~/Dropbox/Taxes
 
 # Special purpose directories
 special_directories:

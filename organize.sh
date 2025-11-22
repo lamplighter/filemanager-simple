@@ -103,7 +103,6 @@ load_config() {
     eval "$(parse_yaml "CONFIG_" "$CONFIG_FILE")"
 
     # Expand tildes in paths
-    CONFIG_filing_root="${CONFIG_filing_root/#\~/$HOME}"
     CONFIG_special_directories_installers="${CONFIG_special_directories_installers/#\~/$HOME}"
     CONFIG_special_directories_screenshots="${CONFIG_special_directories_screenshots/#\~/$HOME}"
     CONFIG_special_directories_unknown="${CONFIG_special_directories_unknown/#\~/$HOME}"
