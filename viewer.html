@@ -139,6 +139,179 @@
             min-width: 140px;
         }
 
+        tbody tr {
+            cursor: pointer;
+        }
+
+        /* Modal styles */
+        .modal-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.6);
+            z-index: 1000;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .modal-overlay.active {
+            display: flex;
+        }
+
+        .modal {
+            background: white;
+            border-radius: 12px;
+            max-width: 900px;
+            max-height: 90vh;
+            width: 90%;
+            overflow-y: auto;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.3);
+        }
+
+        .modal-header {
+            padding: 20px 30px;
+            border-bottom: 1px solid #e9ecef;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: sticky;
+            top: 0;
+            background: white;
+            z-index: 1;
+        }
+
+        .modal-title {
+            font-size: 18px;
+            font-weight: 600;
+            color: #333;
+        }
+
+        .modal-close {
+            background: none;
+            border: none;
+            font-size: 24px;
+            cursor: pointer;
+            color: #666;
+            padding: 0;
+            width: 30px;
+            height: 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 4px;
+        }
+
+        .modal-close:hover {
+            background: #f8f9fa;
+        }
+
+        .modal-body {
+            padding: 30px;
+        }
+
+        .modal-section {
+            margin-bottom: 25px;
+        }
+
+        .modal-section:last-child {
+            margin-bottom: 0;
+        }
+
+        .modal-section-title {
+            font-size: 14px;
+            font-weight: 600;
+            color: #666;
+            margin-bottom: 10px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .modal-confidence {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .modal-confidence-badge {
+            padding: 8px 16px;
+            border-radius: 16px;
+            font-weight: 600;
+            font-size: 18px;
+        }
+
+        .modal-confidence-factors {
+            font-size: 12px;
+            color: #666;
+            margin-top: 8px;
+        }
+
+        .modal-path {
+            background: #f8f9fa;
+            padding: 12px;
+            border-radius: 6px;
+            font-family: 'Monaco', 'Courier New', monospace;
+            font-size: 13px;
+            word-break: break-all;
+            color: #333;
+        }
+
+        .modal-reasoning {
+            background: #e7f3ff;
+            padding: 15px;
+            border-left: 3px solid #007bff;
+            border-radius: 4px;
+            color: #333;
+            line-height: 1.6;
+            font-size: 14px;
+        }
+
+        .modal-meta {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+        }
+
+        .modal-meta-item {
+            background: #f8f9fa;
+            padding: 12px;
+            border-radius: 6px;
+        }
+
+        .modal-meta-label {
+            font-size: 11px;
+            color: #666;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 4px;
+        }
+
+        .modal-meta-value {
+            font-size: 13px;
+            color: #333;
+            font-weight: 500;
+        }
+
+        .modal-preview {
+            background: #f8f9fa;
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        .modal-preview iframe {
+            width: 100%;
+            height: 500px;
+            border: none;
+        }
+
+        .modal-preview img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+
         .error-message {
             background: #f8d7da;
             color: #721c24;
@@ -198,6 +371,19 @@
 
     <div id="queueContainer"></div>
 
+    <!-- Modal -->
+    <div id="modalOverlay" class="modal-overlay">
+        <div class="modal">
+            <div class="modal-header">
+                <div class="modal-title">File Details</div>
+                <button class="modal-close" onclick="closeModal()">&times;</button>
+            </div>
+            <div class="modal-body" id="modalBody">
+                <!-- Content will be populated by JavaScript -->
+            </div>
+        </div>
+    </div>
+
     <script>
         let queueData = null;
         let filteredData = [];
@@ -239,11 +425,11 @@
             return new Date(timestamp).toLocaleString();
         }
 
-        function createTableRow(file) {
+        function createTableRow(file, index) {
             const confidenceClass = getConfidenceClass(file.confidence);
 
             return `
-                <tr>
+                <tr data-index="${index}" onclick="openModal(${index})">
                     <td class="path-cell">${formatPath(file.source_path)}</td>
                     <td class="path-cell">${formatPath(file.dest_path)}</td>
                     <td class="confidence-cell">
@@ -312,7 +498,7 @@
                             </tr>
                         </thead>
                         <tbody>
-                            ${filteredData.map(file => createTableRow(file)).join('')}
+                            ${filteredData.map((file, index) => createTableRow(file, index)).join('')}
                         </tbody>
                     </table>
                 </div>
@@ -333,6 +519,115 @@
                 </div>
             `;
         }
+
+        // Modal functions
+        function getFileExtension(path) {
+            return path.split('.').pop().toLowerCase();
+        }
+
+        function createPreview(file) {
+            const ext = getFileExtension(file.source_path);
+            const filePath = `file://${file.source_path}`;
+
+            if (ext === 'pdf') {
+                return `
+                    <div class="modal-section">
+                        <div class="modal-section-title">Preview</div>
+                        <div class="modal-preview">
+                            <iframe src="${filePath}"></iframe>
+                        </div>
+                    </div>
+                `;
+            } else if (['jpg', 'jpeg', 'png', 'gif', 'webp'].includes(ext)) {
+                return `
+                    <div class="modal-section">
+                        <div class="modal-section-title">Preview</div>
+                        <div class="modal-preview">
+                            <img src="${filePath}" alt="Preview">
+                        </div>
+                    </div>
+                `;
+            }
+            return '';
+        }
+
+        function openModal(index) {
+            const file = filteredData[index];
+            const confidenceClass = getConfidenceClass(file.confidence);
+
+            const factors = file.confidence_factors ?
+                Object.entries(file.confidence_factors)
+                    .map(([key, value]) => `${key.replace(/_/g, ' ')}: +${value}`)
+                    .join(', ') : '';
+
+            const preview = createPreview(file);
+
+            const modalContent = `
+                <div class="modal-section">
+                    <div class="modal-section-title">Confidence</div>
+                    <div class="modal-confidence">
+                        <span class="modal-confidence-badge confidence-badge ${confidenceClass}">${file.confidence}%</span>
+                    </div>
+                    ${factors ? `<div class="modal-confidence-factors">${factors}</div>` : ''}
+                </div>
+
+                <div class="modal-section">
+                    <div class="modal-section-title">Source Path</div>
+                    <div class="modal-path">${formatPath(file.source_path)}</div>
+                </div>
+
+                <div class="modal-section">
+                    <div class="modal-section-title">Destination Path</div>
+                    <div class="modal-path">${formatPath(file.dest_path)}</div>
+                </div>
+
+                <div class="modal-section">
+                    <div class="modal-section-title">Reasoning</div>
+                    <div class="modal-reasoning">${file.reasoning}</div>
+                </div>
+
+                <div class="modal-section">
+                    <div class="modal-section-title">Metadata</div>
+                    <div class="modal-meta">
+                        <div class="modal-meta-item">
+                            <div class="modal-meta-label">Status</div>
+                            <div class="modal-meta-value">${file.status}</div>
+                        </div>
+                        <div class="modal-meta-item">
+                            <div class="modal-meta-label">Added</div>
+                            <div class="modal-meta-value">${formatTimestamp(file.timestamp)}</div>
+                        </div>
+                        <div class="modal-meta-item">
+                            <div class="modal-meta-label">File ID</div>
+                            <div class="modal-meta-value">${file.id}</div>
+                        </div>
+                    </div>
+                </div>
+
+                ${preview}
+            `;
+
+            document.getElementById('modalBody').innerHTML = modalContent;
+            document.getElementById('modalOverlay').classList.add('active');
+        }
+
+        function closeModal() {
+            document.getElementById('modalOverlay').classList.remove('active');
+        }
+
+        // Close modal when clicking outside
+        document.getElementById('modalOverlay').addEventListener('click', function(e) {
+            if (e.target === this) {
+                closeModal();
+            }
+        });
+
+        // Close modal on escape key
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') {
+                closeModal();
+            }
+        });
 
         // Event listeners
         document.getElementById('confidenceFilter').addEventListener('change', applyFiltersAndSort);
