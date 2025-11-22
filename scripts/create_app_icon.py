@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Generate app icon for File Queue Viewer"""
+"""Generate app icon for File Queue Viewer using emoji"""
 
 from PIL import Image, ImageDraw, ImageFont
 import os
@@ -7,60 +7,52 @@ import os
 # Create icon sizes for macOS
 SIZES = [16, 32, 64, 128, 256, 512, 1024]
 
+# Icon configuration
+EMOJI = "🗂️"  # Card File Box
+BACKGROUND_COLOR = "#F3F4F6"  # Light gray background for contrast
+
+# Try to find a system font that supports emoji
+FONT_PATHS = [
+    "/System/Library/Fonts/Apple Color Emoji.ttc",
+    "/System/Library/Fonts/AppleColorEmoji.ttf",
+    "/Library/Fonts/Apple Color Emoji.ttc",
+]
+
+def get_emoji_font(size):
+    """Get emoji font at specified size"""
+    for font_path in FONT_PATHS:
+        if os.path.exists(font_path):
+            try:
+                return ImageFont.truetype(font_path, size)
+            except:
+                pass
+    # Fallback to default font
+    return ImageFont.load_default()
+
 # Create iconset directory
 iconset_dir = "AppIcon.iconset"
 os.makedirs(iconset_dir, exist_ok=True)
 
 for size in SIZES:
-    # Create image with gradient background
-    img = Image.new('RGB', (size, size), color='#4A90E2')
+    # Create image with light background
+    img = Image.new('RGB', (size, size), color=BACKGROUND_COLOR)
     draw = ImageDraw.Draw(img)
 
-    # Draw folder icon representation (simple rounded rectangle)
-    margin = size // 8
-    folder_top = size // 3
+    # Calculate emoji size (80% of icon size for nice padding)
+    emoji_size = int(size * 0.8)
+    font = get_emoji_font(emoji_size)
 
-    # Folder body
-    draw.rounded_rectangle(
-        [(margin, folder_top), (size - margin, size - margin)],
-        radius=size // 16,
-        fill='#5DA3F5'
-    )
+    # Get text bounding box to center it
+    bbox = draw.textbbox((0, 0), EMOJI, font=font)
+    text_width = bbox[2] - bbox[0]
+    text_height = bbox[3] - bbox[1]
 
-    # Folder tab
-    tab_width = size // 2
-    draw.rounded_rectangle(
-        [(margin, folder_top - size//8), (margin + tab_width, folder_top)],
-        radius=size // 32,
-        fill='#5DA3F5'
-    )
+    # Center the emoji
+    x = (size - text_width) // 2 - bbox[0]
+    y = (size - text_height) // 2 - bbox[1]
 
-    # Add checkmark
-    check_size = size // 4
-    check_x = size - margin - check_size
-    check_y = size - margin - check_size
-
-    # Draw circle background for checkmark
-    draw.ellipse(
-        [(check_x - check_size//4, check_y - check_size//4),
-         (check_x + check_size + check_size//4, check_y + check_size + check_size//4)],
-        fill='#4CAF50'
-    )
-
-    # Draw checkmark (simplified)
-    check_thickness = max(2, size // 64)
-    draw.line(
-        [(check_x + check_size//4, check_y + check_size//2),
-         (check_x + check_size//2, check_y + check_size*3//4)],
-        fill='white',
-        width=check_thickness
-    )
-    draw.line(
-        [(check_x + check_size//2, check_y + check_size*3//4),
-         (check_x + check_size, check_y + check_size//4)],
-        fill='white',
-        width=check_thickness
-    )
+    # Draw emoji
+    draw.text((x, y), EMOJI, font=font, fill='black', embedded_color=True)
 
     # Save as PNG with proper naming for iconset
     filename = f"icon_{size}x{size}.png"
@@ -72,7 +64,7 @@ for size in SIZES:
     else:
         img.save(os.path.join(iconset_dir, filename))
 
-print(f"✓ Created icon files in {iconset_dir}/")
+print(f"✓ Created icon files in {iconset_dir}/ using {EMOJI} emoji")
 print("Converting to .icns format...")
 
 # Convert to .icns using iconutil
