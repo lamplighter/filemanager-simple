@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0",
-  "last_updated": "2025-01-21T20:35:00Z",
+  "last_updated": "2025-11-22T16:28:22Z",
   "files": [
     {
       "id": "8af6bfc9-cc5d-496a-aad3-e034d03d7ab7",
@@ -46,7 +46,7 @@
         "naming_pattern_match": 10,
         "content_match": 15
       },
-      "status": "pending_approval",
+      "status": "approved",
       "timestamp": "2025-01-21T20:35:00Z",
       "reasoning": "CRA (Canada Revenue Agency) document submission confirmation for 11087592 Canada Inc. (HoldCo). Dated Nov 12, 2025, confirming submission of common share documentation for Mark Lewis Lampert covering period 2021-11-01 to 2023-10-31. Case reference 17593071, confirmation 3655P48. Found existing ~/Dropbox/Taxes/HoldCo/CRA/ folder containing Notices of Assessment, audit letters, and other CRA correspondence. Applied standard naming pattern YYYY-MM-DD [Document Type] - [Specifics] YE [years] matching existing files. High confidence based on exact folder match and consistent naming pattern."
     }

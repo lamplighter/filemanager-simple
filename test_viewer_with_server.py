@@ -1,18 +1,21 @@
 #!/usr/bin/env python3
-"""Test the file queue viewer table layout with HTTP server"""
+"""Test the file queue viewer with approval functionality"""
 
 from playwright.sync_api import sync_playwright
 import subprocess
 import time
 import os
 import signal
+import json
 
-# Start a simple HTTP server
+# Start the viewer server with API
 port = 8765
-print(f"Starting HTTP server on port {port}...")
+script_dir = os.path.dirname(os.path.abspath(__file__))
+server_script = os.path.join(script_dir, 'scripts', 'viewer_server.py')
+
+print(f"Starting viewer server on port {port}...")
 server_process = subprocess.Popen(
-    ['python3', '-m', 'http.server', str(port)],
-    cwd=os.path.dirname(os.path.abspath(__file__)),
+    ['python3', server_script],
     stdout=subprocess.DEVNULL,
     stderr=subprocess.DEVNULL
 )
@@ -60,7 +63,7 @@ try:
             headers = page.locator('thead th').all_text_contents()
             print(f"✓ Table headers: {headers}")
 
-            expected_headers = ['Source', 'Destination', 'Confidence', 'Time of Evaluation']
+            expected_headers = ['Source', 'Destination', 'Confidence', 'Approval', 'Time of Evaluation']
             if headers == expected_headers:
                 print("✓ Headers match expected columns")
             else:
@@ -75,15 +78,16 @@ try:
             if row_count > 0:
                 first_row_cells = page.locator('tbody tr:first-child td').all_text_contents()
                 print(f"✓ First row has {len(first_row_cells)} cells")
-                if len(first_row_cells) == 4:
-                    print("✓ Row structure is correct (4 columns)")
+                if len(first_row_cells) == 5:
+                    print("✓ Row structure is correct (5 columns)")
                     print(f"\nFirst row sample:")
                     print(f"  Source: {first_row_cells[0][:50]}...")
                     print(f"  Destination: {first_row_cells[1][:50]}...")
                     print(f"  Confidence: {first_row_cells[2]}")
-                    print(f"  Time: {first_row_cells[3]}")
+                    print(f"  Approval: {first_row_cells[3][:30]}...")
+                    print(f"  Time: {first_row_cells[4]}")
                 else:
-                    print(f"✗ Expected 4 cells, got {len(first_row_cells)}")
+                    print(f"✗ Expected 5 cells, got {len(first_row_cells)}")
         else:
             print("✗ No table element found")
 
@@ -94,12 +98,65 @@ try:
         else:
             print(f"✗ Found {cards.count()} card elements (should be 0)")
 
-        # Test modal functionality
+        # Test approval functionality
         if row_count > 0:
+            print("\n--- Testing Approval Functionality ---")
+
+            # Check for approval column
+            approval_header = page.locator('th:has-text("Approval")')
+            if approval_header.count() > 0:
+                print("✓ Approval column exists in table")
+
+                # Check for approve/reject buttons in first row
+                first_row = page.locator('tbody tr:first-child')
+                approve_btn = first_row.locator('.approve-btn')
+                reject_btn = first_row.locator('.reject-btn')
+
+                if approve_btn.count() > 0 and reject_btn.count() > 0:
+                    print("✓ Approve and Reject buttons found")
+
+                    # Read current queue file to verify before state
+                    queue_file_path = os.path.join(script_dir, 'state', 'file_queue.json')
+                    with open(queue_file_path, 'r') as f:
+                        queue_before = json.load(f)
+
+                    first_file_id = queue_before['files'][0]['id']
+                    print(f"✓ File ID to approve: {first_file_id[:8]}...")
+
+                    # Click approve button (without opening modal)
+                    approve_btn.click()
+                    page.wait_for_timeout(1000)  # Wait for API call
+
+                    # Read queue file to verify status update
+                    with open(queue_file_path, 'r') as f:
+                        queue_after = json.load(f)
+
+                    # Find the file and check status
+                    approved_file = next((f for f in queue_after['files'] if f['id'] == first_file_id), None)
+
+                    if approved_file and approved_file['status'] == 'approved':
+                        print("✓ File status updated to 'approved' in JSON")
+
+                        # Verify UI updated
+                        page.wait_for_timeout(500)
+                        first_row_cells = page.locator('tbody tr:first-child td').all_inner_texts()
+                        if 'approved' in ' '.join(first_row_cells).lower():
+                            print("✓ UI updated to show 'approved' status")
+                        else:
+                            print("✗ UI didn't update to show approved status")
+                    else:
+                        print("✗ File status not updated to approved")
+                else:
+                    print("✗ Approve/Reject buttons not found")
+            else:
+                print("✗ Approval column not found")
+
+        # Test modal functionality
+        if row_count > 1:  # Use second row since first is now approved
             print("\n--- Testing Modal ---")
 
-            # Click first row to open modal
-            page.locator('tbody tr:first-child').click()
+            # Click second row to open modal
+            page.locator('tbody tr:nth-child(2)').click()
             page.wait_for_timeout(500)
 
             # Check if modal is visible
@@ -111,6 +168,8 @@ try:
                 modal_body = page.locator('#modalBody')
                 modal_content = modal_body.inner_text()
 
+                if 'APPROVAL REQUIRED' in modal_content.upper():
+                    print("✓ Modal shows approval section for pending files")
                 if 'CONFIDENCE' in modal_content.upper():
                     print("✓ Modal shows confidence section")
                 if 'SOURCE PATH' in modal_content.upper():
