@@ -34,10 +34,20 @@ Look in source directories (default: `~/Downloads/` and `~/Desktop/`) for unorga
 - Identify potential category matches from filing structure
 
 ### 3. Explore Destinations
+
+**IMPORTANT**: Search in BOTH primary locations:
+- `~/Dropbox/Filing/` - Entity-based organization (business, financial, utilities, real estate)
+- `~/Dropbox/Taxes/` - Tax documents by entity (HoldCo, Personal, Family Trust, etc.)
+
+Exploration steps:
 - **Search for similar files**: Use Glob/Grep to locate similar files in potential destinations
 - **Analyze existing patterns**: Check naming conventions of files already in target folders
 - **Explore subfolders**: Look at subfolder structure to find the most specific placement
 - **Pattern matching**: Compare file content/name against existing files to find best match
+
+**Key distinction**:
+- Tax returns, CRA/IRS notices, audit docs → `~/Dropbox/Taxes/`
+- Bank statements, invoices, contracts, general business docs → `~/Dropbox/Filing/`
 
 ### 4. Smart Categorization
 - Match against documented category patterns (Financial, Utilities, Business, etc.)
