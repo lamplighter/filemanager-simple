@@ -1,58 +1,78 @@
 #!/usr/bin/env python3
-"""Generate app icon for File Queue Viewer using emoji"""
+"""Generate app icon for File Queue Viewer - Card File Box style"""
 
-from PIL import Image, ImageDraw, ImageFont
+from PIL import Image, ImageDraw
 import os
 
 # Create icon sizes for macOS
 SIZES = [16, 32, 64, 128, 256, 512, 1024]
-
-# Icon configuration
-EMOJI = "🗂️"  # Card File Box
-BACKGROUND_COLOR = "#F3F4F6"  # Light gray background for contrast
-
-# Try to find a system font that supports emoji
-FONT_PATHS = [
-    "/System/Library/Fonts/Apple Color Emoji.ttc",
-    "/System/Library/Fonts/AppleColorEmoji.ttf",
-    "/Library/Fonts/Apple Color Emoji.ttc",
-]
-
-def get_emoji_font(size):
-    """Get emoji font at specified size"""
-    for font_path in FONT_PATHS:
-        if os.path.exists(font_path):
-            try:
-                return ImageFont.truetype(font_path, size)
-            except:
-                pass
-    # Fallback to default font
-    return ImageFont.load_default()
 
 # Create iconset directory
 iconset_dir = "AppIcon.iconset"
 os.makedirs(iconset_dir, exist_ok=True)
 
 for size in SIZES:
-    # Create image with light background
-    img = Image.new('RGB', (size, size), color=BACKGROUND_COLOR)
+    # Create image with gradient background
+    img = Image.new('RGB', (size, size), color='#E8EAF6')  # Light indigo background
     draw = ImageDraw.Draw(img)
 
-    # Calculate emoji size (80% of icon size for nice padding)
-    emoji_size = int(size * 0.8)
-    font = get_emoji_font(emoji_size)
+    # Card file box design - like an index card holder
+    margin = size // 8
+    box_height = int(size * 0.6)
+    box_width = int(size * 0.7)
+    box_x = (size - box_width) // 2
+    box_y = (size - box_height) // 2 + margin // 2
 
-    # Get text bounding box to center it
-    bbox = draw.textbbox((0, 0), EMOJI, font=font)
-    text_width = bbox[2] - bbox[0]
-    text_height = bbox[3] - bbox[1]
+    # Main box body (darker gray-blue)
+    draw.rounded_rectangle(
+        [(box_x, box_y), (box_x + box_width, box_y + box_height)],
+        radius=size // 20,
+        fill='#5C6BC0'  # Indigo
+    )
 
-    # Center the emoji
-    x = (size - text_width) // 2 - bbox[0]
-    y = (size - text_height) // 2 - bbox[1]
+    # Draw 3 cards/tabs sticking up from the box
+    card_width = box_width // 4
+    card_height = box_height // 3
+    card_spacing = (box_width - card_width * 3) // 4
 
-    # Draw emoji
-    draw.text((x, y), EMOJI, font=font, fill='black', embedded_color=True)
+    for i in range(3):
+        card_x = box_x + card_spacing + i * (card_width + card_spacing)
+        card_y = box_y - card_height // 2
+
+        # Card/tab
+        draw.rounded_rectangle(
+            [(card_x, card_y), (card_x + card_width, card_y + card_height)],
+            radius=size // 40,
+            fill='#7986CB' if i == 1 else '#9FA8DA'  # Middle card lighter
+        )
+
+    # Add a subtle checkmark or indicator on the front
+    check_size = size // 6
+    check_x = box_x + box_width // 2 - check_size // 2
+    check_y = box_y + box_height // 2
+
+    # Small badge/circle for the checkmark
+    badge_radius = check_size
+    draw.ellipse(
+        [(check_x - badge_radius//2, check_y - badge_radius//2),
+         (check_x + badge_radius + badge_radius//2, check_y + badge_radius + badge_radius//2)],
+        fill='#4CAF50'  # Green
+    )
+
+    # Checkmark
+    check_thickness = max(2, size // 48)
+    draw.line(
+        [(check_x, check_y + check_size//4),
+         (check_x + check_size//3, check_y + check_size//2)],
+        fill='white',
+        width=check_thickness
+    )
+    draw.line(
+        [(check_x + check_size//3, check_y + check_size//2),
+         (check_x + check_size, check_y - check_size//4)],
+        fill='white',
+        width=check_thickness
+    )
 
     # Save as PNG with proper naming for iconset
     filename = f"icon_{size}x{size}.png"
@@ -64,7 +84,7 @@ for size in SIZES:
     else:
         img.save(os.path.join(iconset_dir, filename))
 
-print(f"✓ Created icon files in {iconset_dir}/ using {EMOJI} emoji")
+print(f"✓ Created icon files in {iconset_dir}/ (card file box design)")
 print("Converting to .icns format...")
 
 # Convert to .icns using iconutil
