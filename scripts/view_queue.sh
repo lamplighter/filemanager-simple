@@ -19,15 +19,17 @@ fi
 
 # Check if server is already running
 SERVER_RUNNING=false
-if [ -f "$PID_FILE" ]; then
-    SERVER_PID=$(cat "$PID_FILE")
-    if ps -p "$SERVER_PID" > /dev/null 2>&1; then
-        SERVER_RUNNING=true
-        echo "✓ API server already running (PID: $SERVER_PID)"
-    else
-        # Stale PID file, remove it
-        rm "$PID_FILE"
-    fi
+
+# First check if port is in use
+if lsof -i :$SERVER_PORT -sTCP:LISTEN -t >/dev/null 2>&1; then
+    SERVER_PID=$(lsof -i :$SERVER_PORT -sTCP:LISTEN -t)
+    SERVER_RUNNING=true
+    echo "✓ API server already running on port $SERVER_PORT (PID: $SERVER_PID)"
+    # Update PID file if it's missing or wrong
+    echo $SERVER_PID > "$PID_FILE"
+elif [ -f "$PID_FILE" ]; then
+    # PID file exists but port not in use - clean up stale PID file
+    rm "$PID_FILE"
 fi
 
 # Start server if not running
@@ -55,7 +57,7 @@ echo "Viewer: $VIEWER_PATH"
 # Launch Chrome in app mode with a temporary profile
 # App mode gives a cleaner interface without browser chrome
 "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome" \
-    --app="http://localhost:$SERVER_PORT/viewer.html" \
+    --app="file://$VIEWER_PATH" \
     --allow-file-access-from-files \
     --user-data-dir="$TEMP_USER_DATA" \
     --no-first-run \
