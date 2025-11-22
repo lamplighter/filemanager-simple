@@ -94,6 +94,51 @@ try:
         else:
             print(f"✗ Found {cards.count()} card elements (should be 0)")
 
+        # Test modal functionality
+        if row_count > 0:
+            print("\n--- Testing Modal ---")
+
+            # Click first row to open modal
+            page.locator('tbody tr:first-child').click()
+            page.wait_for_timeout(500)
+
+            # Check if modal is visible
+            modal_overlay = page.locator('#modalOverlay')
+            if modal_overlay.evaluate('el => el.classList.contains("active")'):
+                print("✓ Modal opened on row click")
+
+                # Check modal content
+                modal_body = page.locator('#modalBody')
+                modal_content = modal_body.inner_text()
+
+                if 'CONFIDENCE' in modal_content.upper():
+                    print("✓ Modal shows confidence section")
+                if 'SOURCE PATH' in modal_content.upper():
+                    print("✓ Modal shows source path")
+                if 'DESTINATION PATH' in modal_content.upper():
+                    print("✓ Modal shows destination path")
+                if 'REASONING' in modal_content.upper():
+                    print("✓ Modal shows reasoning")
+                if 'METADATA' in modal_content.upper():
+                    print("✓ Modal shows metadata")
+
+                # Take screenshot with modal open
+                modal_screenshot = '/tmp/viewer_modal_test.png'
+                page.screenshot(path=modal_screenshot, full_page=True)
+                print(f"✓ Modal screenshot saved to: {modal_screenshot}")
+
+                # Test closing modal with X button
+                page.locator('.modal-close').click()
+                page.wait_for_timeout(300)
+
+                if not modal_overlay.evaluate('el => el.classList.contains("active")'):
+                    print("✓ Modal closes with X button")
+                else:
+                    print("✗ Modal didn't close with X button")
+
+            else:
+                print("✗ Modal didn't open on row click")
+
         browser.close()
         print("\n✓ Test complete!")
         print(f"\nView the screenshot at: {screenshot_path}")
