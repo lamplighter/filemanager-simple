@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>File Queue Viewer</title>
+    <link rel="icon" type="image/png" href="icon.png">
     <style>
         * {
             margin: 0;
@@ -29,6 +30,14 @@
         .header h1 {
             font-size: 24px;
             margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .header h1 img {
+            width: 32px;
+            height: 32px;
         }
 
         .header .meta {
@@ -407,7 +416,7 @@
 </head>
 <body>
     <div class="header">
-        <h1>📁 File Queue Viewer</h1>
+        <h1><img src="icon.png" alt="Icon"> File Queue Viewer</h1>
         <div class="meta">
             <span id="queueInfo">Loading...</span>
         </div>
