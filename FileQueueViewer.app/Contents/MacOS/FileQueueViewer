@@ -35,6 +35,7 @@ fi
 # This keeps the FileQueueViewer.app process running with custom icon
 "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome" \
     --app="file://$VIEWER_PATH" \
+    --app-name="File Queue Viewer" \
     --allow-file-access-from-files \
     --user-data-dir="$TEMP_USER_DATA" \
     --no-first-run \
