@@ -328,8 +328,8 @@ process_queue() {
         local status=$(echo "$file_json" | jq -r '.status')
         local reasoning=$(echo "$file_json" | jq -r '.reasoning')
 
-        # Skip if not pending
-        if [[ "$status" != "pending" ]]; then
+        # Skip if not approved
+        if [[ "$status" != "approved" ]]; then
             continue
         fi
 
@@ -345,9 +345,9 @@ process_queue() {
 
         # Validate source exists
         if [[ ! -f "$source_path" ]]; then
-            warn "Source file not found, skipping"
-            update_file_status "$file_id" "rejected"
-            ((skipped++))
+            warn "Source file not found, marking as failed"
+            update_file_status "$file_id" "failed"
+            ((failed++))
             echo ""
             continue
         fi
@@ -404,10 +404,10 @@ process_queue() {
                     # Proceed with move
                     if execute_move "$source_path" "$dest_path" "$file_id"; then
                         success "Moved to $dest_path"
-                        update_file_status "$file_id" "executed"
+                        update_file_status "$file_id" "completed"
                     else
                         error "Failed to move file"
-                        update_file_status "$file_id" "rejected"
+                        update_file_status "$file_id" "failed"
                         ((failed++))
                     fi
                     ;;
@@ -416,21 +416,18 @@ process_queue() {
                     local new_dest=$(get_unique_filename "$dest_path")
                     if execute_move "$source_path" "$new_dest" "$file_id"; then
                         success "Moved to $new_dest"
-                        update_file_status "$file_id" "executed"
+                        update_file_status "$file_id" "completed"
                     else
                         error "Failed to move file"
-                        update_file_status "$file_id" "rejected"
+                        update_file_status "$file_id" "failed"
                         ((failed++))
                     fi
                     ;;
                 "skip")
                     warn "Skipped by user"
-                    update_file_status "$file_id" "rejected"
                     ((skipped++))
                     ;;
             esac
-        else
-            update_file_status "$file_id" "rejected"
         fi
 
         echo ""
@@ -455,22 +452,33 @@ process_queue() {
 # Show queue status
 show_status() {
     local total=$(jq '.files | length' "$QUEUE_FILE")
-    local pending=$(jq '[.files[] | select(.status == "pending")] | length' "$QUEUE_FILE")
-    local executed=$(jq '[.files[] | select(.status == "executed")] | length' "$QUEUE_FILE")
+    local pending_approval=$(jq '[.files[] | select(.status == "pending_approval")] | length' "$QUEUE_FILE")
+    local approved=$(jq '[.files[] | select(.status == "approved")] | length' "$QUEUE_FILE")
     local rejected=$(jq '[.files[] | select(.status == "rejected")] | length' "$QUEUE_FILE")
+    local completed=$(jq '[.files[] | select(.status == "completed")] | length' "$QUEUE_FILE")
+    local failed=$(jq '[.files[] | select(.status == "failed")] | length' "$QUEUE_FILE")
 
     echo "${BOLD}Queue Status:${RESET}"
     echo "  Total files: $total"
-    echo "  Pending: $pending"
-    echo "  Executed: $executed"
+    echo "  Pending Approval: $pending_approval"
+    echo "  Approved (ready to move): $approved"
     echo "  Rejected: $rejected"
+    echo "  Completed: $completed"
+    echo "  Failed: $failed"
     echo ""
 
-    if [[ $pending -gt 0 ]]; then
-        echo "${BOLD}Pending files:${RESET}"
-        jq -r '.files[] | select(.status == "pending") | "  [\(.confidence)%] \(.source_path)"' "$QUEUE_FILE"
+    if [[ $pending_approval -gt 0 ]]; then
+        echo "${BOLD}Files pending approval:${RESET}"
+        jq -r '.files[] | select(.status == "pending_approval") | "  [\(.confidence)%] \(.source_path)"' "$QUEUE_FILE"
         echo ""
-        info "Run './organize.sh' to process pending files"
+        info "Use the viewer to approve/reject files, then run './organize.sh'"
+    fi
+
+    if [[ $approved -gt 0 ]]; then
+        echo "${BOLD}Approved files (ready to move):${RESET}"
+        jq -r '.files[] | select(.status == "approved") | "  [\(.confidence)%] \(.source_path)"' "$QUEUE_FILE"
+        echo ""
+        info "Run './organize.sh' to process approved files"
     fi
 }
 

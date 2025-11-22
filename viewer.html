@@ -143,6 +143,79 @@
             cursor: pointer;
         }
 
+        .approval-cell {
+            text-align: center;
+            min-width: 140px;
+        }
+
+        .approval-buttons {
+            display: flex;
+            gap: 8px;
+            justify-content: center;
+        }
+
+        .approval-btn {
+            padding: 4px 12px;
+            border: none;
+            border-radius: 4px;
+            font-size: 12px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .approve-btn {
+            background: #28a745;
+            color: white;
+        }
+
+        .approve-btn:hover {
+            background: #218838;
+        }
+
+        .reject-btn {
+            background: #dc3545;
+            color: white;
+        }
+
+        .reject-btn:hover {
+            background: #c82333;
+        }
+
+        .status-badge {
+            display: inline-block;
+            padding: 4px 12px;
+            border-radius: 12px;
+            font-size: 11px;
+            font-weight: 600;
+            text-transform: capitalize;
+        }
+
+        .status-pending_approval {
+            background: #fff3cd;
+            color: #856404;
+        }
+
+        .status-approved {
+            background: #d4edda;
+            color: #155724;
+        }
+
+        .status-rejected {
+            background: #f8d7da;
+            color: #721c24;
+        }
+
+        .status-completed {
+            background: #d1ecf1;
+            color: #0c5460;
+        }
+
+        .status-failed {
+            background: #f8d7da;
+            color: #721c24;
+        }
+
         /* Modal styles */
         .modal-overlay {
             display: none;
@@ -351,10 +424,12 @@
             </select>
         </div>
         <div>
-            <label>Filter by Status:</label>
-            <select id="statusFilter">
-                <option value="all">All Statuses</option>
-                <option value="pending">Pending</option>
+            <label>Filter by Approval:</label>
+            <select id="approvalFilter">
+                <option value="all">All</option>
+                <option value="pending_approval">Pending Approval</option>
+                <option value="approved">Approved</option>
+                <option value="rejected">Rejected</option>
                 <option value="completed">Completed</option>
                 <option value="failed">Failed</option>
             </select>
@@ -428,6 +503,19 @@
         function createTableRow(file, index) {
             const confidenceClass = getConfidenceClass(file.confidence);
 
+            let approvalCell;
+            if (file.status === 'pending_approval') {
+                approvalCell = `
+                    <div class="approval-buttons">
+                        <button class="approval-btn approve-btn" onclick="event.stopPropagation(); approveFile(${index})">Approve</button>
+                        <button class="approval-btn reject-btn" onclick="event.stopPropagation(); rejectFile(${index})">Reject</button>
+                    </div>
+                `;
+            } else {
+                const statusLabel = file.status.replace(/_/g, ' ');
+                approvalCell = `<span class="status-badge status-${file.status}">${statusLabel}</span>`;
+            }
+
             return `
                 <tr data-index="${index}" onclick="openModal(${index})">
                     <td class="path-cell">${formatPath(file.source_path)}</td>
@@ -435,6 +523,7 @@
                     <td class="confidence-cell">
                         <span class="confidence-badge ${confidenceClass}">${file.confidence}%</span>
                     </td>
+                    <td class="approval-cell">${approvalCell}</td>
                     <td class="timestamp-cell">${formatTimestamp(file.timestamp)}</td>
                 </tr>
             `;
@@ -444,7 +533,7 @@
             if (!queueData) return;
 
             const confidenceFilter = document.getElementById('confidenceFilter').value;
-            const statusFilter = document.getElementById('statusFilter').value;
+            const approvalFilter = document.getElementById('approvalFilter').value;
             const sortBy = document.getElementById('sortBy').value;
 
             filteredData = queueData.files.filter(file => {
@@ -453,8 +542,8 @@
                 if (confidenceFilter === 'medium' && (file.confidence < 50 || file.confidence >= 90)) return false;
                 if (confidenceFilter === 'low' && file.confidence >= 50) return false;
 
-                // Status filter
-                if (statusFilter !== 'all' && file.status !== statusFilter) return false;
+                // Approval filter
+                if (approvalFilter !== 'all' && file.status !== approvalFilter) return false;
 
                 return true;
             });
@@ -494,6 +583,7 @@
                                 <th>Source</th>
                                 <th>Destination</th>
                                 <th>Confidence</th>
+                                <th>Approval</th>
                                 <th>Time of Evaluation</th>
                             </tr>
                         </thead>
@@ -562,7 +652,24 @@
 
             const preview = createPreview(file);
 
+            const approvalSection = file.status === 'pending_approval' ? `
+                <div class="modal-section">
+                    <div class="modal-section-title">Approval Required</div>
+                    <div class="approval-buttons">
+                        <button class="approval-btn approve-btn" onclick="approveFile(${index})">Approve</button>
+                        <button class="approval-btn reject-btn" onclick="rejectFile(${index})">Reject</button>
+                    </div>
+                </div>
+            ` : `
+                <div class="modal-section">
+                    <div class="modal-section-title">Status</div>
+                    <span class="status-badge status-${file.status}">${file.status.replace(/_/g, ' ')}</span>
+                </div>
+            `;
+
             const modalContent = `
+                ${approvalSection}
+
                 <div class="modal-section">
                     <div class="modal-section-title">Confidence</div>
                     <div class="modal-confidence">
@@ -611,6 +718,52 @@
             document.getElementById('modalOverlay').classList.add('active');
         }
 
+        async function updateFileStatus(index, newStatus) {
+            const file = filteredData[index];
+
+            try {
+                const response = await fetch('/api/update-status', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        id: file.id,
+                        status: newStatus
+                    })
+                });
+
+                if (!response.ok) {
+                    throw new Error('Failed to update status');
+                }
+
+                // Update local data - find the file in queueData and update it
+                const queueFile = queueData.files.find(f => f.id === file.id);
+                if (queueFile) {
+                    queueFile.status = newStatus;
+                }
+                file.status = newStatus;
+
+                // Update queue info and re-render
+                updateQueueInfo();
+                applyFiltersAndSort();
+
+                // If modal is open, close it
+                closeModal();
+
+            } catch (error) {
+                alert(`Error updating status: ${error.message}`);
+            }
+        }
+
+        function approveFile(index) {
+            updateFileStatus(index, 'approved');
+        }
+
+        function rejectFile(index) {
+            updateFileStatus(index, 'rejected');
+        }
+
         function closeModal() {
             document.getElementById('modalOverlay').classList.remove('active');
         }
@@ -631,7 +784,7 @@
 
         // Event listeners
         document.getElementById('confidenceFilter').addEventListener('change', applyFiltersAndSort);
-        document.getElementById('statusFilter').addEventListener('change', applyFiltersAndSort);
+        document.getElementById('approvalFilter').addEventListener('change', applyFiltersAndSort);
         document.getElementById('sortBy').addEventListener('change', applyFiltersAndSort);
 
         // Load queue on page load
