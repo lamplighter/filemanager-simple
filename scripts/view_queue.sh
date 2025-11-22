@@ -55,7 +55,7 @@ echo "Viewer: $VIEWER_PATH"
 # Launch Chrome in app mode with a temporary profile
 # App mode gives a cleaner interface without browser chrome
 "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome" \
-    --app="file://$VIEWER_PATH" \
+    --app="http://localhost:$SERVER_PORT/viewer.html" \
     --allow-file-access-from-files \
     --user-data-dir="$TEMP_USER_DATA" \
     --no-first-run \
