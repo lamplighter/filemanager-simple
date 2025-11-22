@@ -52,13 +52,12 @@ if [ "$SERVER_RUNNING" = false ]; then
 fi
 
 echo "Opening file queue viewer in isolated Chrome instance..."
-echo "Viewer: $VIEWER_PATH"
+echo "Viewer URL: http://localhost:$SERVER_PORT/viewer.html"
 
 # Launch Chrome in app mode with a temporary profile
 # App mode gives a cleaner interface without browser chrome
 "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome" \
-    --app="file://$VIEWER_PATH" \
-    --allow-file-access-from-files \
+    --app="http://localhost:$SERVER_PORT/viewer.html" \
     --user-data-dir="$TEMP_USER_DATA" \
     --no-first-run \
     --no-default-browser-check &
@@ -66,7 +65,7 @@ echo "Viewer: $VIEWER_PATH"
 echo "✓ Viewer opened in isolated Chrome instance"
 echo ""
 echo "Note: The viewer has full functionality:"
-echo "  - File previews work (file:// access enabled)"
+echo "  - Directory file listings work (API server running)"
 echo "  - Approve/Reject buttons work (API server running)"
 echo "  - Just refresh the browser to see queue updates"
 echo ""
