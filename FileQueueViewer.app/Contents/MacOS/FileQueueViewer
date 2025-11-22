@@ -1,0 +1,10 @@
+#!/bin/bash
+
+# File Queue Viewer App Wrapper
+# This app launches the file queue viewer with full functionality
+
+# Get the directory where this app is located
+APP_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")/../../../" && pwd)"
+
+# Run the view_queue script
+"$APP_DIR/scripts/view_queue.sh"
