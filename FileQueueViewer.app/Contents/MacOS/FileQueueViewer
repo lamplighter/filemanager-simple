@@ -2,9 +2,43 @@
 
 # File Queue Viewer App Wrapper
 # This app launches the file queue viewer with full functionality
+# Keeps running to show custom app icon in dock
 
 # Get the directory where this app is located
 APP_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")/../../../" && pwd)"
+VIEWER_PATH="$APP_DIR/viewer.html"
+SERVER_SCRIPT="$APP_DIR/scripts/viewer_server.py"
+SERVER_PORT=8765
+TEMP_USER_DATA="/tmp/chrome-fileviewer-$(date +%s)"
+PID_FILE="/tmp/viewer-server.pid"
 
-# Run the view_queue script
-"$APP_DIR/scripts/view_queue.sh"
+# Check if server is already running
+SERVER_RUNNING=false
+if [ -f "$PID_FILE" ]; then
+    SERVER_PID=$(cat "$PID_FILE")
+    if ps -p "$SERVER_PID" > /dev/null 2>&1; then
+        SERVER_RUNNING=true
+    else
+        rm "$PID_FILE"
+    fi
+fi
+
+# Start server if not running
+if [ "$SERVER_RUNNING" = false ]; then
+    python3 "$SERVER_SCRIPT" > /dev/null 2>&1 &
+    SERVER_PID=$!
+    echo $SERVER_PID > "$PID_FILE"
+    sleep 1
+fi
+
+# Launch Chrome in app mode and wait for it to exit
+# This keeps the FileQueueViewer.app process running with custom icon
+"/Applications/Google Chrome.app/Contents/MacOS/Google Chrome" \
+    --app="file://$VIEWER_PATH" \
+    --allow-file-access-from-files \
+    --user-data-dir="$TEMP_USER_DATA" \
+    --no-first-run \
+    --no-default-browser-check
+
+# Clean up temp profile after Chrome exits
+rm -rf "$TEMP_USER_DATA"
