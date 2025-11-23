@@ -27,6 +27,11 @@ When asked to "organize next file" or similar:
 ### 1. Find Next File
 Look in source directories (default: `~/Downloads/` and `~/Desktop/`) for unorganized files.
 
+**IMPORTANT**: Always prioritize the most recently added files first.
+- Use `ls -lt` to list files sorted by modification time (newest first)
+- Analyze the most recent file that hasn't been processed yet
+- This ensures new downloads are organized promptly
+
 ### 2. Analyze the File
 - Check file extension, size, and basic metadata
 - For text files: Use Read tool to examine content (first ~50 lines)
@@ -233,8 +238,8 @@ After adding to queue, tell the user:
 # User says: "organize next file"
 
 # 1. You find and analyze the file
-ls ~/Downloads/  # Find next file
-# Found: "Rogers-Invoice-Jan-2024.pdf"
+ls -lt ~/Downloads/  # Find next file (sorted by newest first)
+# Found: "Rogers-Invoice-Jan-2024.pdf" (most recent file)
 
 # 2. Analyze the file content
 read /Users/marklampert/Downloads/Rogers-Invoice-Jan-2024.pdf
@@ -283,8 +288,8 @@ Run ./organize.sh to process the queue."
 # User says: "organize next file"
 
 # 1. You find and analyze the file
-ls ~/Downloads/
-# Found: "Statement-Jan-2024.pdf"
+ls -lt ~/Downloads/  # Find next file (sorted by newest first)
+# Found: "Statement-Jan-2024.pdf" (most recent file)
 
 # 2. Analyze the file content
 read /Users/marklampert/Downloads/Statement-Jan-2024.pdf
@@ -336,8 +341,8 @@ Run ./organize.sh to review and approve deletion."
 # User says: "organize next file"
 
 # 1. You find and analyze the file
-ls ~/Downloads/
-# Found: "Bell-Internet-Invoice-2024-01.pdf"
+ls -lt ~/Downloads/  # Find next file (sorted by newest first)
+# Found: "Bell-Internet-Invoice-2024-01.pdf" (most recent file)
 
 # 2. Analyze the file content
 read /Users/marklampert/Downloads/Bell-Internet-Invoice-2024-01.pdf
