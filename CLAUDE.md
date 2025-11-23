@@ -86,15 +86,22 @@ Exploration steps:
 - **Analyze existing patterns**: Check naming conventions of files already in target folders
 - **Explore subfolders**: Look at subfolder structure to find the most specific placement
 - **Pattern matching**: Compare file content/name against existing files to find best match
+- **Find multiple options**: When exploring, identify ALL valid destinations (not just the first match)
 
 **Key distinction**:
 - Tax returns, CRA/IRS notices, audit docs → `~/Dropbox/Taxes/`
 - Bank statements, invoices, contracts, general business docs → `~/Dropbox/Filing/`
 
-### 4. Smart Categorization
+**Multiple Destinations**:
+When you find multiple valid destinations, score each one independently and save ALL options with confidence >= 60% to the `alternatives` array. This gives the user transparency into your decision-making process.
+
+### 4. Smart Categorization & Ranking
 - Match against documented category patterns (Financial, Utilities, Business, etc.)
 - Use similarity to existing files to refine placement
-- When multiple options exist, prefer more specific entity folders
+- When multiple options exist, score each independently using confidence factors
+- Rank options by confidence score - highest becomes primary destination
+- Save all alternatives with confidence >= 60% to `alternatives` array
+- For each alternative, document key differences from primary choice
 - For unclear categorization, examine 3-5 similar files for pattern confirmation
 
 ### 5. Calculate Confidence Score (0-100%)
@@ -194,11 +201,21 @@ When a duplicate is detected, the entry looks like this:
 - **timestamp**: ISO 8601 format `YYYY-MM-DDTHH:MM:SSZ` (use UTC)
 - **reasoning**: Detailed explanation of why this destination was chosen (1-3 sentences)
 
-#### Optional Fields (for Duplicates)
+#### Optional Fields
 
+**For Duplicates:**
 - **duplicate_of**: Array of paths to existing duplicate files (only when duplicates detected)
 - **checksum**: SHA256 hash of the source file (only when duplicates detected)
 - **action**: `"move"` (default) or `"delete"` (for duplicates)
+
+**For Multiple Destination Options:**
+- **alternatives**: Array of alternative destination options (only when multiple valid options exist with confidence >= 60%)
+  - Each alternative object contains:
+    - **dest_path**: Full absolute path to alternative destination
+    - **confidence**: Confidence score for this alternative (0-100)
+    - **confidence_factors**: Breakdown of confidence scoring for this option
+    - **reasoning**: Why this option ranked lower than primary (1-2 sentences)
+    - **differences**: Key differences from primary destination (1 sentence)
 
 ### 9. Inform the User
 
@@ -313,6 +330,97 @@ Added to queue with DELETE action (100% confidence - exact checksum match).
 Run ./organize.sh to review and approve deletion."
 ```
 
+### Workflow Example: Multiple Valid Destinations
+
+```bash
+# User says: "organize next file"
+
+# 1. You find and analyze the file
+ls ~/Downloads/
+# Found: "Bell-Internet-Invoice-2024-01.pdf"
+
+# 2. Analyze the file content
+read /Users/marklampert/Downloads/Bell-Internet-Invoice-2024-01.pdf
+# Identified: Bell internet invoice (business expense, could be tax deductible)
+
+# 2.5. Check for duplicates
+./scripts/find_duplicates.sh \
+  "/Users/marklampert/Downloads/Bell-Internet-Invoice-2024-01.pdf" \
+  "/Users/marklampert/Dropbox/Filing/"
+# Returns: {"source_checksum": "xyz789...", "duplicates": []}
+# No duplicates found - continue
+
+# 3. Explore multiple potential destinations
+glob "**/*Bell*" ~/Dropbox/Filing/
+# Found: ~/Dropbox/Filing/Bell - Internet/ (12 similar invoices)
+#        ~/Dropbox/Filing/Utilities/Internet/ (3 mixed provider invoices)
+
+glob "**/*Bell*" ~/Dropbox/Taxes/
+# Found: ~/Dropbox/Taxes/HoldCo/Expenses/Utilities/ (tax-deductible expenses)
+
+# 4. Score each destination independently
+# Option 1 (Primary): ~/Dropbox/Filing/Bell - Internet/
+#   - Similar files found: +30
+#   - File type match: +20
+#   - Entity keyword: +20
+#   - Content match: +15
+#   - Naming pattern: +10
+#   Total: 95%
+
+# Option 2: ~/Dropbox/Filing/Utilities/Internet/
+#   - Similar files found: +15 (fewer Bell files, mixed providers)
+#   - File type match: +20
+#   - Content match: +15
+#   - Naming pattern: +10
+#   Total: 60% (less specific than Bell folder)
+
+# Option 3: ~/Dropbox/Taxes/HoldCo/Expenses/Utilities/
+#   - Similar files found: +10 (some utility expenses)
+#   - File type match: +20
+#   - Content match: +15
+#   - Tax context: +10
+#   Total: 55% (below 60% threshold - not included)
+
+# 5. Generate UUID and add to queue with alternatives
+{
+  "id": "9e8f7766-9647-42de-a66d-f19fc3f92be9",
+  "source_path": "/Users/marklampert/Downloads/Bell-Internet-Invoice-2024-01.pdf",
+  "dest_path": "/Users/marklampert/Dropbox/Filing/Bell - Internet/Bell-2024-01-15.pdf",
+  "confidence": 95,
+  "confidence_factors": {
+    "similar_files_found": 30,
+    "file_type_match": 20,
+    "entity_keyword": 20,
+    "content_match": 15,
+    "naming_pattern": 10
+  },
+  "alternatives": [
+    {
+      "dest_path": "/Users/marklampert/Dropbox/Filing/Utilities/Internet/Bell-2024-01-15.pdf",
+      "confidence": 60,
+      "confidence_factors": {
+        "similar_files_found": 15,
+        "file_type_match": 20,
+        "content_match": 15,
+        "naming_pattern": 10
+      },
+      "reasoning": "Less specific folder with mixed internet providers rather than Bell-specific organization",
+      "differences": "General utilities/internet folder vs dedicated Bell folder with 12 existing invoices"
+    }
+  ],
+  "status": "pending",
+  "timestamp": "2025-01-21T15:00:00Z",
+  "reasoning": "Bell-specific folder has 12 similar invoices with consistent naming pattern. Highest confidence due to entity-specific organization and strong pattern match. Alternative general utilities folder also valid but less specific."
+}
+
+# 6. Inform the user
+"Added Bell internet invoice to queue with 95% confidence (+1 alternative option).
+Primary: ~/Dropbox/Filing/Bell - Internet/Bell-2024-01-15.pdf
+Alternative: ~/Dropbox/Filing/Utilities/Internet/ (60% confidence)
+
+Run ./organize.sh or open viewer to see all options."
+```
+
 ---
 
 ## User Review and Approval via organize.sh
@@ -384,9 +492,11 @@ This will check for:
 - Include reasoning about why categorization is unclear
 
 ### Multiple Valid Destinations
-- Choose the most specific folder
-- Reduce confidence by -20%
-- Explain alternatives in reasoning
+- Score each option independently using confidence factors
+- Choose the highest confidence as primary destination
+- Save all alternatives with confidence >= 60% to `alternatives` array
+- For each alternative, explain key differences from primary
+- DO NOT reduce primary confidence - each option is scored independently
 
 ### Special File Types
 - **DMG files**: `~/Files/installers/`
