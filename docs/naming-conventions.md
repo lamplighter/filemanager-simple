@@ -5,6 +5,11 @@ Apply these naming patterns based on the destination category:
 ## Financial Documents
 - **Bank Statements**: `YYYY-MM-DD_[account_identifier].pdf`
   - Example: `2024-04-30_x2705.pdf` (TD Chequing)
+- **HoldCo Bank Statements**: `YYYY-MM-DD [Currency] [Account].pdf`
+  - Use **start date only** (not date range)
+  - Examples:
+    - `2024-10-31 USD 1043-7309548.pdf`
+    - `2024-01-31 CAD 1043-5236007.pdf`
 - **Credit Card Statements**: `YYYY-MM-DD_[card_identifier].pdf`
 - **Investment Documents**: `YYYY-MM-DD [Document_Type] - [Details].pdf`
 
