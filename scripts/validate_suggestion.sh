@@ -72,9 +72,19 @@ DEST_PATH="${2/#\~/$HOME}"
 ERRORS=0
 WARNINGS=0
 
+# Check if this is a DELETE action
+IS_DELETE=false
+if [[ "$DEST_PATH" == "DELETE" ]]; then
+    IS_DELETE=true
+fi
+
 echo "Validating file organization suggestion..."
 echo "  Source: $SOURCE_PATH"
-echo "  Dest:   $DEST_PATH"
+if [[ "$IS_DELETE" == true ]]; then
+    echo "  Action: DELETE (duplicate)"
+else
+    echo "  Dest:   $DEST_PATH"
+fi
 echo ""
 
 ##############################################################################
@@ -101,13 +111,33 @@ else
     echo -e "${GREEN}✓ Source file is readable${NC}"
 fi
 
-# Check 3: Destination path structure
-DEST_DIR=$(dirname "$DEST_PATH")
+# Check 3: Destination path structure (skip for DELETE actions)
+if [[ "$IS_DELETE" == true ]]; then
+    echo -e "${GREEN}✓ DELETE action - destination checks skipped${NC}"
+else
+    DEST_DIR=$(dirname "$DEST_PATH")
 
-if [[ ! "$DEST_PATH" =~ ^/ ]]; then
-    echo -e "${YELLOW}⚠ Destination path is not absolute${NC}"
-    ((WARNINGS++))
+    if [[ ! "$DEST_PATH" =~ ^/ ]]; then
+        echo -e "${YELLOW}⚠ Destination path is not absolute${NC}"
+        ((WARNINGS++))
+    fi
 fi
+
+# Skip remaining destination checks if DELETE action
+if [[ "$IS_DELETE" == true ]]; then
+    # All validations passed for DELETE action
+    echo ""
+    if [[ $ERRORS -eq 0 ]]; then
+        echo -e "${GREEN}✓ Validation passed (DELETE action)${NC}"
+        echo -e "${YELLOW}→ Source file will be deleted (duplicate)${NC}"
+        exit 0
+    else
+        echo -e "${RED}✗ Validation failed with $ERRORS error(s)${NC}"
+        exit 1
+    fi
+fi
+
+DEST_DIR=$(dirname "$DEST_PATH")
 
 # Check 4: Destination directory exists or can be created
 if [[ -d "$DEST_DIR" ]]; then
@@ -144,6 +174,20 @@ if [[ -f "$DEST_PATH" ]]; then
         DEST_SIZE=$(stat -f%z "$DEST_PATH" 2>/dev/null || stat -c%s "$DEST_PATH" 2>/dev/null || echo "unknown")
         if [[ "$FILE_SIZE" == "$DEST_SIZE" ]]; then
             echo -e "${YELLOW}  ⚠ Files have the same size (possible duplicate)${NC}"
+
+            # Compare checksums to verify if it's a true duplicate
+            if [[ -x "$SCRIPT_DIR/calculate_checksum.sh" ]]; then
+                SOURCE_HASH=$("$SCRIPT_DIR/calculate_checksum.sh" "$SOURCE_PATH" 2>/dev/null || echo "")
+                DEST_HASH=$("$SCRIPT_DIR/calculate_checksum.sh" "$DEST_PATH" 2>/dev/null || echo "")
+
+                if [[ -n "$SOURCE_HASH" ]] && [[ -n "$DEST_HASH" ]] && [[ "$SOURCE_HASH" == "$DEST_HASH" ]]; then
+                    echo -e "${RED}  ✗ FILES ARE IDENTICAL (same SHA256 checksum)${NC}"
+                    echo -e "${YELLOW}  → Consider using dest_path=\"DELETE\" for duplicates${NC}"
+                    ((ERRORS++))
+                elif [[ -n "$SOURCE_HASH" ]] && [[ -n "$DEST_HASH" ]]; then
+                    echo -e "${GREEN}  ✓ Files have different content (not duplicates)${NC}"
+                fi
+            fi
         fi
     fi
 fi
@@ -187,7 +231,7 @@ fi
 
 if [[ "$VALID_LOCATION" == "false" ]]; then
     echo -e "${YELLOW}⚠ Destination is not in a known filing location${NC}"
-    local expected_locations="$CONFIG_filing_root"
+    expected_locations="$CONFIG_filing_root"
     if [[ -n "$CONFIG_taxes_root" ]]; then
         expected_locations="$expected_locations, $CONFIG_taxes_root"
     fi

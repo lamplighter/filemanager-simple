@@ -1,6 +1,6 @@
 # File Organizer
 
-This is a Claude Code driven file organization system. It processes unorganized files with intelligent confidence-based routing.
+This is a Claude Code driven file organization system. Claude analyzes files and suggests destinations with confidence scores. You review and approve each suggestion before files are moved.
 
 ## Quick Reference
 
@@ -16,7 +16,7 @@ This is a Claude Code driven file organization system. It processes unorganized 
 You analyze files and add suggestions to the queue. You **NEVER** move files directly.
 
 ### organize.sh's Role
-The `organize.sh` script reads your suggestions from `state/file_queue.json` and executes them based on confidence scores.
+The `organize.sh` script reads your suggestions from `state/file_queue.json` and presents them for user review and approval. It executes only the moves that the user approves.
 
 ---
 
@@ -32,6 +32,48 @@ Look in source directories (default: `~/Downloads/` and `~/Desktop/`) for unorga
 - For text files: Use Read tool to examine content (first ~50 lines)
 - For spreadsheets/PDFs: Examine content for entity names and domain-specific terms
 - Identify potential category matches from filing structure
+
+### 2.5. Check for Duplicates
+
+**IMPORTANT**: Before exploring destinations, check if this file already exists elsewhere.
+
+Use the duplicate detection script:
+```bash
+./scripts/find_duplicates.sh "<source_path>" "<destination_directory>"
+```
+
+The script will:
+- Calculate SHA256 checksum of the source file
+- Search the destination directory for files with matching checksums
+- Search the pending queue for files with matching checksums
+- Return JSON with duplicate information
+
+**If duplicates are found:**
+- Set `dest_path` to `"DELETE"`
+- Add `duplicate_of` field with array of duplicate file paths
+- Add `checksum` field with the SHA256 hash
+- Add `action` field set to `"delete"`
+- Set confidence to 100% (exact match)
+- Skip remaining steps and go directly to step 8 (Add to Queue)
+
+**If no duplicates found:**
+- Continue to step 3 (Explore Destinations)
+
+**Example duplicate detection:**
+```bash
+# Check for duplicates in the proposed destination folder
+./scripts/find_duplicates.sh \
+  "/Users/marklampert/Downloads/invoice.pdf" \
+  "/Users/marklampert/Dropbox/Filing/TD Chequing/"
+
+# Returns:
+# {
+#   "source_checksum": "abc123...",
+#   "duplicates": [
+#     {"path": "/Users/marklampert/Dropbox/Filing/TD Chequing/2024-01-15.pdf", "location": "destination"}
+#   ]
+# }
+```
 
 ### 3. Explore Destinations
 
@@ -116,16 +158,47 @@ Add the suggestion to `state/file_queue.json` using the Write tool.
 }
 ```
 
+#### Duplicate File Example
+
+When a duplicate is detected, the entry looks like this:
+
+```json
+{
+  "id": "660e8400-e29b-41d4-a716-446655440001",
+  "source_path": "/Users/marklampert/Downloads/Invoice_duplicate.pdf",
+  "dest_path": "DELETE",
+  "duplicate_of": [
+    "/Users/marklampert/Dropbox/Filing/TD Chequing/2024-01-15_x2705.pdf",
+    "/Users/marklampert/Dropbox/Filing/TD Chequing/Archive/2024-01-15_x2705_old.pdf"
+  ],
+  "checksum": "a1b2c3d4e5f6789012345678901234567890abcdef1234567890abcdef123456",
+  "action": "delete",
+  "confidence": 100,
+  "confidence_factors": {
+    "exact_checksum_match": 100
+  },
+  "status": "pending",
+  "timestamp": "2025-01-21T10:30:00Z",
+  "reasoning": "Exact duplicate detected. File has identical SHA256 checksum as 2 existing files in destination directory. Source file can be safely deleted to avoid duplication."
+}
+```
+
 #### Required Fields
 
 - **id**: Generate a UUID (use `uuidgen` command or create a unique ID)
 - **source_path**: Full absolute path to the source file (expand `~` to full path)
-- **dest_path**: Full absolute path to destination including new filename
+- **dest_path**: Full absolute path to destination including new filename (or `"DELETE"` for duplicates)
 - **confidence**: Integer 0-100
 - **confidence_factors**: Object with individual scoring factors and their values
 - **status**: Always `"pending"` for new suggestions
 - **timestamp**: ISO 8601 format `YYYY-MM-DDTHH:MM:SSZ` (use UTC)
 - **reasoning**: Detailed explanation of why this destination was chosen (1-3 sentences)
+
+#### Optional Fields (for Duplicates)
+
+- **duplicate_of**: Array of paths to existing duplicate files (only when duplicates detected)
+- **checksum**: SHA256 hash of the source file (only when duplicates detected)
+- **action**: `"move"` (default) or `"delete"` (for duplicates)
 
 ### 9. Inform the User
 
@@ -146,13 +219,23 @@ After adding to queue, tell the user:
 ls ~/Downloads/  # Find next file
 # Found: "Rogers-Invoice-Jan-2024.pdf"
 
-# 2. You explore and categorize
+# 2. Analyze the file content
+read /Users/marklampert/Downloads/Rogers-Invoice-Jan-2024.pdf
+
+# 2.5. Check for duplicates BEFORE exploring destinations
+./scripts/find_duplicates.sh \
+  "/Users/marklampert/Downloads/Rogers-Invoice-Jan-2024.pdf" \
+  "/Users/marklampert/Dropbox/Filing/Rogers - Wireless/"
+# Returns: {"source_checksum": "abc123...", "duplicates": []}
+# No duplicates found - continue to exploration
+
+# 3. You explore and categorize
 glob "**/*Rogers*" ~/Dropbox/Filing/  # Find similar files
 # Found: ~/Dropbox/Filing/Rogers - Wireless/ with similar invoices
 
-# 3. You calculate confidence (95%) and create suggestion
+# 4. You calculate confidence (95%) and create suggestion
 
-# 4. You generate UUID and add to queue
+# 5. You generate UUID and add to queue
 {
   "id": "7c9e6679-7425-40de-944b-e07fc1f90ae7",
   "source_path": "/Users/marklampert/Downloads/Rogers-Invoice-Jan-2024.pdf",
@@ -170,27 +253,83 @@ glob "**/*Rogers*" ~/Dropbox/Filing/  # Find similar files
   "reasoning": "Found 12 similar Rogers wireless invoices in destination folder. PDF format matches typical invoice format. Applied standard naming pattern Rogers-YYYY-MM-DD.pdf used by existing files."
 }
 
-# 5. You inform the user
+# 6. You inform the user
 "Added Rogers invoice to queue with 95% confidence.
 Destination: ~/Dropbox/Filing/Rogers - Wireless/Rogers-2024-01-15.pdf
 
 Run ./organize.sh to process the queue."
 ```
 
+### Workflow Example: Duplicate Detected
+
+```bash
+# User says: "organize next file"
+
+# 1. You find and analyze the file
+ls ~/Downloads/
+# Found: "Statement-Jan-2024.pdf"
+
+# 2. Analyze the file content
+read /Users/marklampert/Downloads/Statement-Jan-2024.pdf
+# Identified: TD Bank statement for account x2705
+
+# 2.5. Check for duplicates BEFORE exploring
+./scripts/find_duplicates.sh \
+  "/Users/marklampert/Downloads/Statement-Jan-2024.pdf" \
+  "/Users/marklampert/Dropbox/Filing/TD Chequing/"
+# Returns: {
+#   "source_checksum": "a1b2c3d4...",
+#   "duplicates": [
+#     {"path": "/Users/marklampert/Dropbox/Filing/TD Chequing/2024-01-15_x2705.pdf", "location": "destination"}
+#   ]
+# }
+# DUPLICATE FOUND! Skip to adding DELETE entry to queue
+
+# 3. Generate UUID and add DELETE entry to queue
+{
+  "id": "8d7e6679-8536-41de-955c-e08fc2f91ae8",
+  "source_path": "/Users/marklampert/Downloads/Statement-Jan-2024.pdf",
+  "dest_path": "DELETE",
+  "duplicate_of": [
+    "/Users/marklampert/Dropbox/Filing/TD Chequing/2024-01-15_x2705.pdf"
+  ],
+  "checksum": "a1b2c3d4e5f6789012345678901234567890abcdef1234567890abcdef123456",
+  "action": "delete",
+  "confidence": 100,
+  "confidence_factors": {
+    "exact_checksum_match": 100
+  },
+  "status": "pending",
+  "timestamp": "2025-01-21T14:35:00Z",
+  "reasoning": "Exact duplicate detected. File has identical SHA256 checksum as existing file at /Users/marklampert/Dropbox/Filing/TD Chequing/2024-01-15_x2705.pdf. Source file can be safely deleted."
+}
+
+# 4. Inform the user
+"Duplicate file detected! Statement-Jan-2024.pdf is identical to existing file:
+/Users/marklampert/Dropbox/Filing/TD Chequing/2024-01-15_x2705.pdf
+
+Added to queue with DELETE action (100% confidence - exact checksum match).
+
+Run ./organize.sh to review and approve deletion."
+```
+
 ---
 
-## Auto-Routing by organize.sh
+## User Review and Approval via organize.sh
 
-When user runs `./organize.sh`, it will:
+The `organize.sh` script is the execution layer - it reads suggestions from the queue and lets the user review and approve them.
 
-- **90-100% confidence**: Auto-approve and execute immediately
-- **50-89% confidence**: Ask user for confirmation
-- **0-49% confidence**: Move to `~/Files/unknown/` folder
+**All files require explicit user approval** - there is no automatic execution. Confidence scores help you prioritize which suggestions to trust, but you always have the final say.
+
+### Confidence Scores Guide User Review:
+- **90-100%**: High confidence - Claude found strong matching patterns and similar files
+- **70-89%**: Good confidence - Clear categorization with some supporting evidence
+- **50-69%**: Moderate confidence - Reasonable guess but limited supporting evidence
+- **Below 50%**: Low confidence - Unclear categorization, may need manual review
 
 User can run:
-- `./organize.sh` - Interactive mode (asks for medium confidence)
-- `./organize.sh --auto` - Only process high confidence automatically
-- `./organize.sh --dry-run` - Preview what would happen
+- `./organize.sh` - Interactive review mode (review and approve/reject each suggestion)
+- `./organize.sh --dry-run` - Preview suggestions without executing
 - `./organize.sh --status` - Check queue status
 - `./organize.sh --undo` - Revert last batch of moves
 
@@ -260,9 +399,8 @@ This will check for:
 
 ```bash
 # Process the queue
-./organize.sh                    # Interactive
-./organize.sh --auto             # Auto mode
-./organize.sh --dry-run          # Preview
+./organize.sh                    # Interactive review and approval
+./organize.sh --dry-run          # Preview suggestions only
 
 # Check status
 ./organize.sh --status           # See pending files
@@ -282,8 +420,8 @@ uuidgen | tr '[:upper:]' '[:lower:]'
 ## Summary
 
 1. **You analyze** files and add JSON entries to `state/file_queue.json`
-2. **organize.sh executes** based on confidence scores
-3. **User controls** via command-line options
+2. **User reviews** suggestions via `./organize.sh` and approves/rejects each one
+3. **organize.sh executes** approved moves only
 4. **System tracks** everything in JSON for undo capability
 
-Your job is to be the "brain" - analyze files intelligently and create accurate suggestions. The organize.sh script is the "hands" - it handles all actual file operations safely.
+Your job is to be the "brain" - analyze files intelligently and create accurate suggestions. The user is the decision-maker. The organize.sh script is the "hands" - it handles all actual file operations safely after user approval.

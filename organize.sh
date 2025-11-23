@@ -209,6 +209,50 @@ get_unique_filename() {
 }
 
 # Execute file move (with atomic operation attempt)
+execute_delete() {
+    local source="$1"
+    local file_id="$2"
+    local duplicate_of="$3"
+
+    if [[ "$DRY_RUN" == "true" ]]; then
+        info "Would delete duplicate: $source"
+        return 0
+    fi
+
+    # Calculate hash before deletion (for undo capability)
+    local hash_before=""
+    if command -v shasum &> /dev/null; then
+        hash_before=$(shasum -a 256 "$source" | awk '{print $1}')
+    fi
+
+    # Perform the deletion
+    if rm "$source" 2>/dev/null; then
+        # Add to history for undo capability (note: can't undo deletions)
+        local timestamp=$(date -u +"%Y-%m-%dT%H:%M:%SZ")
+
+        # Update history.json
+        local history=$(jq --arg id "$file_id" \
+                           --arg source "$source" \
+                           --arg executed_at "$timestamp" \
+                           --arg hash_before "$hash_before" \
+                           --arg duplicate_of "$duplicate_of" \
+                           '.operations += [{
+                               id: $id,
+                               action: "delete",
+                               source_path: $source,
+                               duplicate_of: $duplicate_of,
+                               executed_at: $executed_at,
+                               hash_before: $hash_before,
+                               can_undo: false
+                           }]' "$HISTORY_FILE")
+        echo "$history" > "$HISTORY_FILE"
+
+        return 0
+    else
+        return 1
+    fi
+}
+
 execute_move() {
     local source="$1"
     local dest="$2"
@@ -327,6 +371,8 @@ process_queue() {
         local confidence=$(echo "$file_json" | jq -r '.confidence')
         local status=$(echo "$file_json" | jq -r '.status')
         local reasoning=$(echo "$file_json" | jq -r '.reasoning')
+        local action_type=$(echo "$file_json" | jq -r '.action // "move"')
+        local duplicate_of=$(echo "$file_json" | jq -r '.duplicate_of // [] | join(", ")')
 
         # Skip if not approved
         if [[ "$status" != "approved" ]]; then
@@ -339,9 +385,22 @@ process_queue() {
         source_path="${source_path/#\~/$HOME}"
         dest_path="${dest_path/#\~/$HOME}"
 
+        # Check if this is a delete action
+        local is_delete=false
+        if [[ "$dest_path" == "DELETE" ]] || [[ "$action_type" == "delete" ]]; then
+            is_delete=true
+        fi
+
         echo "${BOLD}[$processed/$total_files]${RESET} $(basename "$source_path")"
         echo "  Confidence: ${confidence}%"
-        echo "  Destination: $dest_path"
+        if [[ "$is_delete" == true ]]; then
+            echo "  Action: DELETE (duplicate)"
+            if [[ -n "$duplicate_of" ]]; then
+                echo "  Duplicate of: $duplicate_of"
+            fi
+        else
+            echo "  Destination: $dest_path"
+        fi
 
         # Validate source exists
         if [[ ! -f "$source_path" ]]; then
@@ -396,38 +455,51 @@ process_queue() {
 
         # Execute approved actions
         if [[ "$action" == "approve" ]]; then
-            # Check for conflicts
-            local conflict_action=$(handle_conflict "$dest_path")
+            if [[ "$is_delete" == true ]]; then
+                # Handle DELETE action for duplicates
+                if execute_delete "$source_path" "$file_id" "$duplicate_of"; then
+                    success "Deleted duplicate file"
+                    update_file_status "$file_id" "deleted"
+                else
+                    error "Failed to delete file"
+                    update_file_status "$file_id" "failed"
+                    ((failed++))
+                fi
+            else
+                # Handle normal MOVE action
+                # Check for conflicts
+                local conflict_action=$(handle_conflict "$dest_path")
 
-            case $conflict_action in
-                "proceed"|"overwrite")
-                    # Proceed with move
-                    if execute_move "$source_path" "$dest_path" "$file_id"; then
-                        success "Moved to $dest_path"
-                        update_file_status "$file_id" "completed"
-                    else
-                        error "Failed to move file"
-                        update_file_status "$file_id" "failed"
-                        ((failed++))
-                    fi
-                    ;;
-                "rename")
-                    # Get unique filename
-                    local new_dest=$(get_unique_filename "$dest_path")
-                    if execute_move "$source_path" "$new_dest" "$file_id"; then
-                        success "Moved to $new_dest"
-                        update_file_status "$file_id" "completed"
-                    else
-                        error "Failed to move file"
-                        update_file_status "$file_id" "failed"
-                        ((failed++))
-                    fi
-                    ;;
-                "skip")
-                    warn "Skipped by user"
-                    ((skipped++))
-                    ;;
-            esac
+                case $conflict_action in
+                    "proceed"|"overwrite")
+                        # Proceed with move
+                        if execute_move "$source_path" "$dest_path" "$file_id"; then
+                            success "Moved to $dest_path"
+                            update_file_status "$file_id" "completed"
+                        else
+                            error "Failed to move file"
+                            update_file_status "$file_id" "failed"
+                            ((failed++))
+                        fi
+                        ;;
+                    "rename")
+                        # Get unique filename
+                        local new_dest=$(get_unique_filename "$dest_path")
+                        if execute_move "$source_path" "$new_dest" "$file_id"; then
+                            success "Moved to $new_dest"
+                            update_file_status "$file_id" "completed"
+                        else
+                            error "Failed to move file"
+                            update_file_status "$file_id" "failed"
+                            ((failed++))
+                        fi
+                        ;;
+                    "skip")
+                        warn "Skipped by user"
+                        ((skipped++))
+                        ;;
+                esac
+            fi
         fi
 
         echo ""

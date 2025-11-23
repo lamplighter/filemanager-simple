@@ -227,6 +227,50 @@
             color: #721c24;
         }
 
+        .status-deleted {
+            background: #e8e8e8;
+            color: #666;
+        }
+
+        .status-duplicate {
+            background: #ffeaa7;
+            color: #d63031;
+            font-weight: 700;
+        }
+
+        .duplicate-info {
+            background: #fff3cd;
+            border-left: 3px solid #ffc107;
+            padding: 8px 12px;
+            margin-top: 8px;
+            font-size: 12px;
+            border-radius: 4px;
+        }
+
+        .duplicate-info strong {
+            color: #856404;
+            display: block;
+            margin-bottom: 4px;
+        }
+
+        .duplicate-path {
+            font-family: 'Monaco', 'Courier New', monospace;
+            color: #666;
+            font-size: 11px;
+            margin-left: 12px;
+            display: block;
+            margin-top: 2px;
+        }
+
+        .delete-btn {
+            background: #ff6b6b;
+            color: white;
+        }
+
+        .delete-btn:hover {
+            background: #ee5a52;
+        }
+
         /* Modal styles */
         .modal-overlay {
             display: none;
@@ -648,15 +692,42 @@
 
         function createTableRow(file, index) {
             const confidenceClass = getConfidenceClass(file.confidence);
+            const isDuplicate = file.dest_path === "DELETE" || file.action === "delete";
+
+            // Format destination cell
+            let destCell;
+            if (isDuplicate) {
+                const duplicatePaths = (file.duplicate_of || []).map(path =>
+                    `<span class="duplicate-path">→ ${formatPath(path)}</span>`
+                ).join('');
+                destCell = `
+                    <span class="status-badge status-duplicate">DELETE (duplicate)</span>
+                    <div class="duplicate-info">
+                        <strong>Identical to:</strong>
+                        ${duplicatePaths}
+                    </div>
+                `;
+            } else {
+                destCell = formatPath(file.dest_path);
+            }
 
             let approvalCell;
             if (file.status === 'pending') {
-                approvalCell = `
-                    <div class="approval-buttons">
-                        <button class="approval-btn approve-btn" onclick="event.stopPropagation(); approveFile(${index})">Approve</button>
-                        <button class="approval-btn reject-btn" onclick="event.stopPropagation(); rejectFile(${index})">Reject</button>
-                    </div>
-                `;
+                if (isDuplicate) {
+                    approvalCell = `
+                        <div class="approval-buttons">
+                            <button class="approval-btn delete-btn" onclick="event.stopPropagation(); approveFile(${index})">Delete</button>
+                            <button class="approval-btn reject-btn" onclick="event.stopPropagation(); rejectFile(${index})">Keep</button>
+                        </div>
+                    `;
+                } else {
+                    approvalCell = `
+                        <div class="approval-buttons">
+                            <button class="approval-btn approve-btn" onclick="event.stopPropagation(); approveFile(${index})">Approve</button>
+                            <button class="approval-btn reject-btn" onclick="event.stopPropagation(); rejectFile(${index})">Reject</button>
+                        </div>
+                    `;
+                }
             } else {
                 const statusLabel = file.status.replace(/_/g, ' ');
                 approvalCell = `<span class="status-badge status-${file.status}">${statusLabel}</span>`;
@@ -665,7 +736,7 @@
             return `
                 <tr data-index="${index}" onclick="openModal(${index})">
                     <td class="path-cell">${formatPath(file.source_path)}</td>
-                    <td class="path-cell">${formatPath(file.dest_path)}</td>
+                    <td class="path-cell">${destCell}</td>
                     <td class="confidence-cell">
                         <span class="confidence-badge ${confidenceClass}">${file.confidence}%</span>
                     </td>
@@ -790,6 +861,7 @@
         function openModal(index) {
             const file = filteredData[index];
             const confidenceClass = getConfidenceClass(file.confidence);
+            const isDuplicate = file.dest_path === "DELETE" || file.action === "delete";
 
             const factors = file.confidence_factors ?
                 Object.entries(file.confidence_factors)
@@ -798,20 +870,75 @@
 
             const preview = createPreview(file);
 
-            const approvalSection = file.status === 'pending' ? `
+            // Approval section
+            let approvalSection;
+            if (file.status === 'pending') {
+                if (isDuplicate) {
+                    approvalSection = `
+                        <div class="modal-section">
+                            <div class="modal-section-title">⚠️ Duplicate Detected - Confirm Action</div>
+                            <div class="approval-buttons">
+                                <button class="approval-btn delete-btn" onclick="approveFile(${index})">Delete Duplicate</button>
+                                <button class="approval-btn reject-btn" onclick="rejectFile(${index})">Keep Both Files</button>
+                            </div>
+                        </div>
+                    `;
+                } else {
+                    approvalSection = `
+                        <div class="modal-section">
+                            <div class="modal-section-title">Approval Required</div>
+                            <div class="approval-buttons">
+                                <button class="approval-btn approve-btn" onclick="approveFile(${index})">Approve</button>
+                                <button class="approval-btn reject-btn" onclick="rejectFile(${index})">Reject</button>
+                            </div>
+                        </div>
+                    `;
+                }
+            } else {
+                approvalSection = `
+                    <div class="modal-section">
+                        <div class="modal-section-title">Status</div>
+                        <span class="status-badge status-${file.status}">${file.status.replace(/_/g, ' ')}</span>
+                    </div>
+                `;
+            }
+
+            // Destination section
+            let destSection;
+            if (isDuplicate) {
+                const duplicatePaths = (file.duplicate_of || []).map(path =>
+                    `<div class="modal-path" style="margin-top: 8px;">${formatPath(path)}</div>`
+                ).join('');
+                destSection = `
+                    <div class="modal-section">
+                        <div class="modal-section-title">Action</div>
+                        <span class="status-badge status-duplicate">DELETE (duplicate)</span>
+                    </div>
+
+                    <div class="modal-section">
+                        <div class="modal-section-title">Identical Files Found</div>
+                        ${duplicatePaths}
+                        ${file.checksum ? `<div style="margin-top: 12px; font-size: 11px; color: #666; font-family: monospace;">SHA256: ${file.checksum.substring(0, 16)}...</div>` : ''}
+                    </div>
+                `;
+            } else {
+                destSection = `
+                    <div class="modal-section">
+                        <div class="modal-section-title">Destination Path</div>
+                        <div class="modal-path">${formatPath(file.dest_path)}</div>
+                    </div>
+                `;
+            }
+
+            // Directory files section (only for non-duplicates)
+            const directorySection = !isDuplicate ? `
                 <div class="modal-section">
-                    <div class="modal-section-title">Approval Required</div>
-                    <div class="approval-buttons">
-                        <button class="approval-btn approve-btn" onclick="approveFile(${index})">Approve</button>
-                        <button class="approval-btn reject-btn" onclick="rejectFile(${index})">Reject</button>
+                    <div class="modal-section-title">Files in Destination Directory</div>
+                    <div id="directoryFiles" class="directory-files-container">
+                        <div class="loading-message">Loading...</div>
                     </div>
                 </div>
-            ` : `
-                <div class="modal-section">
-                    <div class="modal-section-title">Status</div>
-                    <span class="status-badge status-${file.status}">${file.status.replace(/_/g, ' ')}</span>
-                </div>
-            `;
+            ` : '';
 
             const modalContent = `
                 ${approvalSection}
@@ -829,10 +956,7 @@
                     <div class="modal-path">${formatPath(file.source_path)}</div>
                 </div>
 
-                <div class="modal-section">
-                    <div class="modal-section-title">Destination Path</div>
-                    <div class="modal-path">${formatPath(file.dest_path)}</div>
-                </div>
+                ${destSection}
 
                 <div class="modal-section">
                     <div class="modal-section-title">Reasoning</div>
@@ -857,12 +981,7 @@
                     </div>
                 </div>
 
-                <div class="modal-section">
-                    <div class="modal-section-title">Files in Destination Directory</div>
-                    <div id="directoryFiles" class="directory-files-container">
-                        <div class="loading-message">Loading...</div>
-                    </div>
-                </div>
+                ${directorySection}
 
                 ${preview}
             `;
@@ -870,8 +989,10 @@
             document.getElementById('modalBody').innerHTML = modalContent;
             document.getElementById('modalOverlay').classList.add('active');
 
-            // Fetch and display directory files
-            loadDirectoryFiles(file.dest_path);
+            // Fetch and display directory files (only for non-duplicates)
+            if (!isDuplicate) {
+                loadDirectoryFiles(file.dest_path);
+            }
         }
 
         let currentDirectoryFiles = [];
