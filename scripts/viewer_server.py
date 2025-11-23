@@ -131,6 +131,51 @@ class ViewerRequestHandler(http.server.SimpleHTTPRequestHandler):
                 self.send_error(403, "Permission denied")
             except Exception as e:
                 self.send_error(500, str(e))
+
+        elif parsed_url.path == '/api/file-preview':
+            # Serve a local file for preview (PDF, image, etc.)
+            query_params = parse_qs(parsed_url.query)
+            file_path = query_params.get('path', [None])[0]
+
+            if not file_path:
+                self.send_error(400, "Missing path parameter")
+                return
+
+            # Expand ~ to user home directory
+            file_path = os.path.expanduser(file_path)
+
+            # Security: Validate path exists and is a file
+            if not os.path.exists(file_path):
+                self.send_error(404, "File not found")
+                return
+
+            if not os.path.isfile(file_path):
+                self.send_error(400, "Path is not a file")
+                return
+
+            try:
+                # Determine content type based on file extension
+                import mimetypes
+                content_type, _ = mimetypes.guess_type(file_path)
+                if content_type is None:
+                    content_type = 'application/octet-stream'
+
+                # Read and serve the file
+                with open(file_path, 'rb') as f:
+                    file_content = f.read()
+
+                self.send_response(200)
+                self.send_header('Content-type', content_type)
+                self.send_header('Content-Length', len(file_content))
+                self.send_header('Access-Control-Allow-Origin', '*')
+                self.end_headers()
+                self.wfile.write(file_content)
+
+            except PermissionError:
+                self.send_error(403, "Permission denied")
+            except Exception as e:
+                self.send_error(500, str(e))
+
         else:
             # Delegate to parent class for serving static files
             super().do_GET()

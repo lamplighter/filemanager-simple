@@ -572,7 +572,7 @@
 
         async function loadQueue() {
             try {
-                const response = await fetch('http://localhost:8765/state/file_queue.json');
+                const response = await fetch('/state/file_queue.json');
                 if (!response.ok) {
                     throw new Error(`HTTP error! status: ${response.status}`);
                 }
@@ -731,7 +731,7 @@
 
         function createPreview(file) {
             const ext = getFileExtension(file.source_path);
-            const filePath = `file://${file.source_path}`;
+            const filePath = `/api/file-preview?path=${encodeURIComponent(file.source_path)}`;
 
             if (ext === 'pdf') {
                 return `
@@ -849,7 +849,7 @@
             const dirPath = destPath.substring(0, destPath.lastIndexOf('/'));
 
             try {
-                const response = await fetch(`http://localhost:8765/api/list-directory?path=${encodeURIComponent(dirPath)}`);
+                const response = await fetch(`/api/list-directory?path=${encodeURIComponent(dirPath)}`);
                 const data = await response.json();
 
                 if (!data.success) {
@@ -916,7 +916,7 @@
             const file = filteredData[index];
 
             try {
-                const response = await fetch('http://localhost:8765/api/update-status', {
+                const response = await fetch('/api/update-status', {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',
