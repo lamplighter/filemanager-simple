@@ -479,19 +479,28 @@
             word-break: break-all;
         }
 
-        .directory-files-table .file-size {
+        .directory-files-table th:nth-child(2),
+        .directory-files-table td.file-size {
             text-align: right;
             color: #6c757d;
             white-space: nowrap;
             width: 65px;
+            max-width: 65px;
             font-size: 12px;
         }
 
-        .directory-files-table .file-modified {
+        .directory-files-table th:nth-child(3),
+        .directory-files-table td.file-modified {
             color: #6c757d;
             white-space: nowrap;
             width: 110px;
+            max-width: 110px;
             font-size: 12px;
+        }
+
+        .directory-files-table th:nth-child(1),
+        .directory-files-table td.file-name {
+            width: auto;
         }
 
         .sortable-header {
