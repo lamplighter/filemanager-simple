@@ -160,8 +160,9 @@
 
         .approval-buttons {
             display: flex;
+            flex-direction: column;
             gap: 8px;
-            justify-content: center;
+            align-items: stretch;
         }
 
         .approval-btn {
@@ -607,11 +608,14 @@
             const dir = formatted.substring(0, lastSlash + 1);
             const filename = formatted.substring(lastSlash + 1);
 
-            return `<div style="color: #999; font-size: 11px; margin-bottom: 2px;">${dir}</div><div>${filename}</div>`;
+            return `<div style="color: #999; font-size: 11px; margin-bottom: 2px;">${dir}</div><div style="font-size: 11px;">${filename}</div>`;
         }
 
         function formatTimestamp(timestamp) {
-            return new Date(timestamp).toLocaleString();
+            const date = new Date(timestamp);
+            const dateStr = date.toLocaleDateString();
+            const timeStr = date.toLocaleTimeString();
+            return `<div>${dateStr}</div><div style="font-size: 11px; color: #999;">${timeStr}</div>`;
         }
 
         function createTableRow(file, index) {
