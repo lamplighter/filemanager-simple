@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0",
-  "last_updated": "2025-11-23T02:06:45Z",
+  "last_updated": "2025-11-23T02:02:00Z",
   "files": [
     {
       "id": "8af6bfc9-cc5d-496a-aad3-e034d03d7ab7",
@@ -133,7 +133,7 @@
     {
       "id": "b42d2693-1e3c-4b29-8148-73537b194a33",
       "source_path": "/Users/marklampert/Downloads/HoldCo_Banking_USD_1043-7309548_Oct_31-Nov_29_2024.pdf",
-      "dest_path": "/Users/marklampert/Dropbox/Filing/HoldCo/bank statements/2024-10-31 USD 1043-7309548.pdf",
+      "dest_path": "/Users/marklampert/Dropbox/Filing/HoldCo/bank statements/TD x9548 USD/2024-10-31 USD 1043-7309548.pdf",
       "confidence": 95,
       "confidence_factors": {
         "similar_files_found": 30,
@@ -144,12 +144,12 @@
       },
       "status": "pending",
       "timestamp": "2025-11-23T01:54:39Z",
-      "reasoning": "TD Canada Trust business chequing account statement (USD) for 11087592 Canada Inc. (HoldCo), account 1043-7309548, period Oct 31 - Nov 29, 2024. Found 5 similar USD account statements in ~/Dropbox/Filing/HoldCo/bank statements/_old USD Checking/ for the same account from 2019. Applied clean naming pattern YYYY-MM-DD to YYYY-MM-DD [Currency] [Account].pdf. High confidence based on exact account number match and established folder structure for HoldCo banking documents."
+      "reasoning": "TD Canada Trust business chequing account statement (USD) for 11087592 Canada Inc. (HoldCo), account 1043-7309548, period Oct 31 - Nov 29, 2024. Found 5 similar USD account statements in ~/Dropbox/Filing/HoldCo/bank statements/TD x9548 USD/_old USD Checking/ for the same account from 2019. Applied clean naming pattern YYYY-MM-DD to YYYY-MM-DD [Currency] [Account].pdf. High confidence based on exact account number match and established folder structure for HoldCo banking documents."
     },
     {
       "id": "43081b57-5c93-42aa-9b61-40d3f2404be1",
       "source_path": "/Users/marklampert/Downloads/HoldCo_Banking_USD_1043-7309548_Dec_31-Jan_31_2025.pdf",
-      "dest_path": "/Users/marklampert/Dropbox/Filing/HoldCo/bank statements/2024-12-31 USD 1043-7309548.pdf",
+      "dest_path": "/Users/marklampert/Dropbox/Filing/HoldCo/bank statements/TD x9548 USD/2024-12-31 USD 1043-7309548.pdf",
       "confidence": 95,
       "confidence_factors": {
         "similar_files_found": 30,
@@ -160,12 +160,12 @@
       },
       "status": "pending",
       "timestamp": "2025-11-23T01:55:41Z",
-      "reasoning": "TD Canada Trust business chequing account statement (USD) for 11087592 Canada Inc. (HoldCo), account 1043-7309548, period 2024-12-31 to 2025-01-31. Found 5 similar USD account statements in ~/Dropbox/Filing/HoldCo/bank statements/_old USD Checking/ for the same account from 2019. Applied clean naming pattern YYYY-MM-DD to YYYY-MM-DD [Currency] [Account].pdf. High confidence based on exact account number match and established folder structure for HoldCo banking documents."
+      "reasoning": "TD Canada Trust business chequing account statement (USD) for 11087592 Canada Inc. (HoldCo), account 1043-7309548, period 2024-12-31 to 2025-01-31. Found 5 similar USD account statements in ~/Dropbox/Filing/HoldCo/bank statements/TD x9548 USD/_old USD Checking/ for the same account from 2019. Applied clean naming pattern YYYY-MM-DD to YYYY-MM-DD [Currency] [Account].pdf. High confidence based on exact account number match and established folder structure for HoldCo banking documents."
     },
     {
       "id": "fc4ba225-5148-4438-91ec-4b11c2ef653f",
       "source_path": "/Users/marklampert/Downloads/HoldCo_Banking_USD_1043-7309548_Nov_29-Dec_31_2024.pdf",
-      "dest_path": "/Users/marklampert/Dropbox/Filing/HoldCo/bank statements/2024-11-29 USD 1043-7309548.pdf",
+      "dest_path": "/Users/marklampert/Dropbox/Filing/HoldCo/bank statements/TD x9548 USD/2024-11-29 USD 1043-7309548.pdf",
       "confidence": 95,
       "confidence_factors": {
         "similar_files_found": 30,
@@ -176,12 +176,12 @@
       },
       "status": "pending",
       "timestamp": "2025-11-23T01:55:41Z",
-      "reasoning": "TD Canada Trust business chequing account statement (USD) for 11087592 Canada Inc. (HoldCo), account 1043-7309548, period 2024-11-29 to 2024-12-31. Found 5 similar USD account statements in ~/Dropbox/Filing/HoldCo/bank statements/_old USD Checking/ for the same account from 2019. Applied clean naming pattern YYYY-MM-DD to YYYY-MM-DD [Currency] [Account].pdf. High confidence based on exact account number match and established folder structure for HoldCo banking documents."
+      "reasoning": "TD Canada Trust business chequing account statement (USD) for 11087592 Canada Inc. (HoldCo), account 1043-7309548, period 2024-11-29 to 2024-12-31. Found 5 similar USD account statements in ~/Dropbox/Filing/HoldCo/bank statements/TD x9548 USD/_old USD Checking/ for the same account from 2019. Applied clean naming pattern YYYY-MM-DD to YYYY-MM-DD [Currency] [Account].pdf. High confidence based on exact account number match and established folder structure for HoldCo banking documents."
     },
     {
       "id": "a9c26b99-310b-4b2b-bd18-556dc514f292",
       "source_path": "/Users/marklampert/Downloads/HoldCo_Banking_USD_1043-7309548_Jan_31-Feb_28_2025.pdf",
-      "dest_path": "/Users/marklampert/Dropbox/Filing/HoldCo/bank statements/2025-01-31 USD 1043-7309548.pdf",
+      "dest_path": "/Users/marklampert/Dropbox/Filing/HoldCo/bank statements/TD x9548 USD/2025-01-31 USD 1043-7309548.pdf",
       "confidence": 95,
       "confidence_factors": {
         "similar_files_found": 30,
@@ -192,12 +192,12 @@
       },
       "status": "pending",
       "timestamp": "2025-11-23T01:55:41Z",
-      "reasoning": "TD Canada Trust business chequing account statement (USD) for 11087592 Canada Inc. (HoldCo), account 1043-7309548, period 2025-01-31 to 2025-02-28. Found 5 similar USD account statements in ~/Dropbox/Filing/HoldCo/bank statements/_old USD Checking/ for the same account from 2019. Applied clean naming pattern YYYY-MM-DD to YYYY-MM-DD [Currency] [Account].pdf. High confidence based on exact account number match and established folder structure for HoldCo banking documents."
+      "reasoning": "TD Canada Trust business chequing account statement (USD) for 11087592 Canada Inc. (HoldCo), account 1043-7309548, period 2025-01-31 to 2025-02-28. Found 5 similar USD account statements in ~/Dropbox/Filing/HoldCo/bank statements/TD x9548 USD/_old USD Checking/ for the same account from 2019. Applied clean naming pattern YYYY-MM-DD to YYYY-MM-DD [Currency] [Account].pdf. High confidence based on exact account number match and established folder structure for HoldCo banking documents."
     },
     {
       "id": "9e0e4dcf-fb8c-4648-b5e0-b6a8c42451bb",
       "source_path": "/Users/marklampert/Downloads/HoldCo_Banking_USD_1043-7309548_Feb_28-Mar_31_2025.pdf",
-      "dest_path": "/Users/marklampert/Dropbox/Filing/HoldCo/bank statements/2025-02-28 USD 1043-7309548.pdf",
+      "dest_path": "/Users/marklampert/Dropbox/Filing/HoldCo/bank statements/TD x9548 USD/2025-02-28 USD 1043-7309548.pdf",
       "confidence": 95,
       "confidence_factors": {
         "similar_files_found": 30,
@@ -208,12 +208,12 @@
       },
       "status": "pending",
       "timestamp": "2025-11-23T01:55:41Z",
-      "reasoning": "TD Canada Trust business chequing account statement (USD) for 11087592 Canada Inc. (HoldCo), account 1043-7309548, period 2025-02-28 to 2025-03-31. Found 5 similar USD account statements in ~/Dropbox/Filing/HoldCo/bank statements/_old USD Checking/ for the same account from 2019. Applied clean naming pattern YYYY-MM-DD to YYYY-MM-DD [Currency] [Account].pdf. High confidence based on exact account number match and established folder structure for HoldCo banking documents."
+      "reasoning": "TD Canada Trust business chequing account statement (USD) for 11087592 Canada Inc. (HoldCo), account 1043-7309548, period 2025-02-28 to 2025-03-31. Found 5 similar USD account statements in ~/Dropbox/Filing/HoldCo/bank statements/TD x9548 USD/_old USD Checking/ for the same account from 2019. Applied clean naming pattern YYYY-MM-DD to YYYY-MM-DD [Currency] [Account].pdf. High confidence based on exact account number match and established folder structure for HoldCo banking documents."
     },
     {
       "id": "3c9ecc2e-260d-4a76-8634-d0f4cc3b1307",
       "source_path": "/Users/marklampert/Downloads/HoldCo_Banking_USD_1043-7309548_Mar_31-May_30_2025.pdf",
-      "dest_path": "/Users/marklampert/Dropbox/Filing/HoldCo/bank statements/2025-03-31 USD 1043-7309548.pdf",
+      "dest_path": "/Users/marklampert/Dropbox/Filing/HoldCo/bank statements/TD x9548 USD/2025-03-31 USD 1043-7309548.pdf",
       "confidence": 95,
       "confidence_factors": {
         "similar_files_found": 30,
@@ -224,12 +224,12 @@
       },
       "status": "pending",
       "timestamp": "2025-11-23T01:55:41Z",
-      "reasoning": "TD Canada Trust business chequing account statement (USD) for 11087592 Canada Inc. (HoldCo), account 1043-7309548, period 2025-03-31 to 2025-05-30. Found 5 similar USD account statements in ~/Dropbox/Filing/HoldCo/bank statements/_old USD Checking/ for the same account from 2019. Applied clean naming pattern YYYY-MM-DD to YYYY-MM-DD [Currency] [Account].pdf. High confidence based on exact account number match and established folder structure for HoldCo banking documents."
+      "reasoning": "TD Canada Trust business chequing account statement (USD) for 11087592 Canada Inc. (HoldCo), account 1043-7309548, period 2025-03-31 to 2025-05-30. Found 5 similar USD account statements in ~/Dropbox/Filing/HoldCo/bank statements/TD x9548 USD/_old USD Checking/ for the same account from 2019. Applied clean naming pattern YYYY-MM-DD to YYYY-MM-DD [Currency] [Account].pdf. High confidence based on exact account number match and established folder structure for HoldCo banking documents."
     },
     {
       "id": "d3a5f531-9fcf-4716-b5c9-f2a43684121a",
       "source_path": "/Users/marklampert/Downloads/HoldCo_Banking_USD_1043-7309548_May_30-Jun_30_2025.pdf",
-      "dest_path": "/Users/marklampert/Dropbox/Filing/HoldCo/bank statements/2025-05-30 USD 1043-7309548.pdf",
+      "dest_path": "/Users/marklampert/Dropbox/Filing/HoldCo/bank statements/TD x9548 USD/2025-05-30 USD 1043-7309548.pdf",
       "confidence": 95,
       "confidence_factors": {
         "similar_files_found": 30,
@@ -240,12 +240,12 @@
       },
       "status": "pending",
       "timestamp": "2025-11-23T01:55:41Z",
-      "reasoning": "TD Canada Trust business chequing account statement (USD) for 11087592 Canada Inc. (HoldCo), account 1043-7309548, period 2025-05-30 to 2025-06-30. Found 5 similar USD account statements in ~/Dropbox/Filing/HoldCo/bank statements/_old USD Checking/ for the same account from 2019. Applied clean naming pattern YYYY-MM-DD to YYYY-MM-DD [Currency] [Account].pdf. High confidence based on exact account number match and established folder structure for HoldCo banking documents."
+      "reasoning": "TD Canada Trust business chequing account statement (USD) for 11087592 Canada Inc. (HoldCo), account 1043-7309548, period 2025-05-30 to 2025-06-30. Found 5 similar USD account statements in ~/Dropbox/Filing/HoldCo/bank statements/TD x9548 USD/_old USD Checking/ for the same account from 2019. Applied clean naming pattern YYYY-MM-DD to YYYY-MM-DD [Currency] [Account].pdf. High confidence based on exact account number match and established folder structure for HoldCo banking documents."
     },
     {
       "id": "a2079e6d-e2e0-4aa1-af82-0729ca2fb02e",
       "source_path": "/Users/marklampert/Downloads/HoldCo_Banking_USD_1043-7309548_Jun_30-Jul_31_2025.pdf",
-      "dest_path": "/Users/marklampert/Dropbox/Filing/HoldCo/bank statements/2025-06-30 USD 1043-7309548.pdf",
+      "dest_path": "/Users/marklampert/Dropbox/Filing/HoldCo/bank statements/TD x9548 USD/2025-06-30 USD 1043-7309548.pdf",
       "confidence": 95,
       "confidence_factors": {
         "similar_files_found": 30,
@@ -256,12 +256,12 @@
       },
       "status": "pending",
       "timestamp": "2025-11-23T01:55:41Z",
-      "reasoning": "TD Canada Trust business chequing account statement (USD) for 11087592 Canada Inc. (HoldCo), account 1043-7309548, period 2025-06-30 to 2025-07-31. Found 5 similar USD account statements in ~/Dropbox/Filing/HoldCo/bank statements/_old USD Checking/ for the same account from 2019. Applied clean naming pattern YYYY-MM-DD to YYYY-MM-DD [Currency] [Account].pdf. High confidence based on exact account number match and established folder structure for HoldCo banking documents."
+      "reasoning": "TD Canada Trust business chequing account statement (USD) for 11087592 Canada Inc. (HoldCo), account 1043-7309548, period 2025-06-30 to 2025-07-31. Found 5 similar USD account statements in ~/Dropbox/Filing/HoldCo/bank statements/TD x9548 USD/_old USD Checking/ for the same account from 2019. Applied clean naming pattern YYYY-MM-DD to YYYY-MM-DD [Currency] [Account].pdf. High confidence based on exact account number match and established folder structure for HoldCo banking documents."
     },
     {
       "id": "866466b5-695f-4137-957e-edf157fe9d50",
       "source_path": "/Users/marklampert/Downloads/HoldCo_Banking_USD_1043-7309548_Jul_31-Aug_29_2025.pdf",
-      "dest_path": "/Users/marklampert/Dropbox/Filing/HoldCo/bank statements/2025-07-31 USD 1043-7309548.pdf",
+      "dest_path": "/Users/marklampert/Dropbox/Filing/HoldCo/bank statements/TD x9548 USD/2025-07-31 USD 1043-7309548.pdf",
       "confidence": 95,
       "confidence_factors": {
         "similar_files_found": 30,
@@ -272,12 +272,12 @@
       },
       "status": "pending",
       "timestamp": "2025-11-23T01:55:41Z",
-      "reasoning": "TD Canada Trust business chequing account statement (USD) for 11087592 Canada Inc. (HoldCo), account 1043-7309548, period 2025-07-31 to 2025-08-29. Found 5 similar USD account statements in ~/Dropbox/Filing/HoldCo/bank statements/_old USD Checking/ for the same account from 2019. Applied clean naming pattern YYYY-MM-DD to YYYY-MM-DD [Currency] [Account].pdf. High confidence based on exact account number match and established folder structure for HoldCo banking documents."
+      "reasoning": "TD Canada Trust business chequing account statement (USD) for 11087592 Canada Inc. (HoldCo), account 1043-7309548, period 2025-07-31 to 2025-08-29. Found 5 similar USD account statements in ~/Dropbox/Filing/HoldCo/bank statements/TD x9548 USD/_old USD Checking/ for the same account from 2019. Applied clean naming pattern YYYY-MM-DD to YYYY-MM-DD [Currency] [Account].pdf. High confidence based on exact account number match and established folder structure for HoldCo banking documents."
     },
     {
       "id": "b0b67749-2a6f-47a2-b9c8-cb23956a75c1",
       "source_path": "/Users/marklampert/Downloads/HoldCo_Banking_USD_1043-7309548_Aug_29-Sep_29_2025.pdf",
-      "dest_path": "/Users/marklampert/Dropbox/Filing/HoldCo/bank statements/2025-08-29 USD 1043-7309548.pdf",
+      "dest_path": "/Users/marklampert/Dropbox/Filing/HoldCo/bank statements/TD x9548 USD/2025-08-29 USD 1043-7309548.pdf",
       "confidence": 95,
       "confidence_factors": {
         "similar_files_found": 30,
@@ -288,12 +288,12 @@
       },
       "status": "pending",
       "timestamp": "2025-11-23T01:55:41Z",
-      "reasoning": "TD Canada Trust business chequing account statement (USD) for 11087592 Canada Inc. (HoldCo), account 1043-7309548, period 2025-08-29 to 2025-09-29. Found 5 similar USD account statements in ~/Dropbox/Filing/HoldCo/bank statements/_old USD Checking/ for the same account from 2019. Applied clean naming pattern YYYY-MM-DD to YYYY-MM-DD [Currency] [Account].pdf. High confidence based on exact account number match and established folder structure for HoldCo banking documents."
+      "reasoning": "TD Canada Trust business chequing account statement (USD) for 11087592 Canada Inc. (HoldCo), account 1043-7309548, period 2025-08-29 to 2025-09-29. Found 5 similar USD account statements in ~/Dropbox/Filing/HoldCo/bank statements/TD x9548 USD/_old USD Checking/ for the same account from 2019. Applied clean naming pattern YYYY-MM-DD to YYYY-MM-DD [Currency] [Account].pdf. High confidence based on exact account number match and established folder structure for HoldCo banking documents."
     },
     {
       "id": "88fe053c-cf73-4d27-bc1b-034c246eb4ae",
       "source_path": "/Users/marklampert/Downloads/HoldCo_Banking_USD_1043-7309548_Sep_29-Oct_31_2025.pdf",
-      "dest_path": "/Users/marklampert/Dropbox/Filing/HoldCo/bank statements/2025-09-29 USD 1043-7309548.pdf",
+      "dest_path": "/Users/marklampert/Dropbox/Filing/HoldCo/bank statements/TD x9548 USD/2025-09-29 USD 1043-7309548.pdf",
       "confidence": 95,
       "confidence_factors": {
         "similar_files_found": 30,
@@ -304,12 +304,12 @@
       },
       "status": "pending",
       "timestamp": "2025-11-23T01:55:41Z",
-      "reasoning": "TD Canada Trust business chequing account statement (USD) for 11087592 Canada Inc. (HoldCo), account 1043-7309548, period 2025-09-29 to 2025-10-31. Found 5 similar USD account statements in ~/Dropbox/Filing/HoldCo/bank statements/_old USD Checking/ for the same account from 2019. Applied clean naming pattern YYYY-MM-DD to YYYY-MM-DD [Currency] [Account].pdf. High confidence based on exact account number match and established folder structure for HoldCo banking documents."
+      "reasoning": "TD Canada Trust business chequing account statement (USD) for 11087592 Canada Inc. (HoldCo), account 1043-7309548, period 2025-09-29 to 2025-10-31. Found 5 similar USD account statements in ~/Dropbox/Filing/HoldCo/bank statements/TD x9548 USD/_old USD Checking/ for the same account from 2019. Applied clean naming pattern YYYY-MM-DD to YYYY-MM-DD [Currency] [Account].pdf. High confidence based on exact account number match and established folder structure for HoldCo banking documents."
     },
     {
       "id": "32e65a4e-07e7-4f19-b29b-c1441a815aaf",
       "source_path": "/Users/marklampert/Downloads/HoldCo_Banking_CAD_1043-5236007_Dec_29-Jan_31_2024.pdf",
-      "dest_path": "/Users/marklampert/Dropbox/Filing/HoldCo/bank statements/2023-12-29 CAD 1043-5236007.pdf",
+      "dest_path": "/Users/marklampert/Dropbox/Filing/HoldCo/bank statements/TD x6007 CAD/2023-12-29 CAD 1043-5236007.pdf",
       "confidence": 95,
       "confidence_factors": {
         "similar_files_found": 30,
@@ -320,12 +320,12 @@
       },
       "status": "approved",
       "timestamp": "2025-11-23T01:56:30Z",
-      "reasoning": "TD Canada Trust business chequing account statement (CAD) for 11087592 Canada Inc. (HoldCo), account 1043-5236007, period 2023-12-29 to 2024-01-31. Found 5 similar CAD account statements in ~/Dropbox/Filing/HoldCo/bank statements/_old CAD Checking/ for the same account from 2019-2020. Applied clean naming pattern YYYY-MM-DD to YYYY-MM-DD [Currency] [Account].pdf. High confidence based on exact account number match and established folder structure for HoldCo banking documents."
+      "reasoning": "TD Canada Trust business chequing account statement (CAD) for 11087592 Canada Inc. (HoldCo), account 1043-5236007, period 2023-12-29 to 2024-01-31. Found 5 similar CAD account statements in ~/Dropbox/Filing/HoldCo/bank statements/TD x6007 CAD/_old CAD Checking/ for the same account from 2019-2020. Applied clean naming pattern YYYY-MM-DD to YYYY-MM-DD [Currency] [Account].pdf. High confidence based on exact account number match and established folder structure for HoldCo banking documents."
     },
     {
       "id": "86efcbb8-e681-4812-96c3-30b3ad5dcec5",
       "source_path": "/Users/marklampert/Downloads/HoldCo_Banking_CAD_1043-5236007_Jan_31-Feb_29_2024.pdf",
-      "dest_path": "/Users/marklampert/Dropbox/Filing/HoldCo/bank statements/2024-01-31 CAD 1043-5236007.pdf",
+      "dest_path": "/Users/marklampert/Dropbox/Filing/HoldCo/bank statements/TD x6007 CAD/2024-01-31 CAD 1043-5236007.pdf",
       "confidence": 95,
       "confidence_factors": {
         "similar_files_found": 30,
@@ -336,12 +336,12 @@
       },
       "status": "pending",
       "timestamp": "2025-11-23T01:56:30Z",
-      "reasoning": "TD Canada Trust business chequing account statement (CAD) for 11087592 Canada Inc. (HoldCo), account 1043-5236007, period 2024-01-31 to 2024-02-29. Found 5 similar CAD account statements in ~/Dropbox/Filing/HoldCo/bank statements/_old CAD Checking/ for the same account from 2019-2020. Applied clean naming pattern YYYY-MM-DD to YYYY-MM-DD [Currency] [Account].pdf. High confidence based on exact account number match and established folder structure for HoldCo banking documents."
+      "reasoning": "TD Canada Trust business chequing account statement (CAD) for 11087592 Canada Inc. (HoldCo), account 1043-5236007, period 2024-01-31 to 2024-02-29. Found 5 similar CAD account statements in ~/Dropbox/Filing/HoldCo/bank statements/TD x6007 CAD/_old CAD Checking/ for the same account from 2019-2020. Applied clean naming pattern YYYY-MM-DD to YYYY-MM-DD [Currency] [Account].pdf. High confidence based on exact account number match and established folder structure for HoldCo banking documents."
     },
     {
       "id": "7f1fcaac-34a9-4ac8-b724-285dd8fde6ce",
       "source_path": "/Users/marklampert/Downloads/HoldCo_Banking_CAD_1043-5236007_Feb_29-Mar_28_2024.pdf",
-      "dest_path": "/Users/marklampert/Dropbox/Filing/HoldCo/bank statements/2024-02-29 CAD 1043-5236007.pdf",
+      "dest_path": "/Users/marklampert/Dropbox/Filing/HoldCo/bank statements/TD x6007 CAD/2024-02-29 CAD 1043-5236007.pdf",
       "confidence": 95,
       "confidence_factors": {
         "similar_files_found": 30,
@@ -352,12 +352,12 @@
       },
       "status": "pending",
       "timestamp": "2025-11-23T01:56:30Z",
-      "reasoning": "TD Canada Trust business chequing account statement (CAD) for 11087592 Canada Inc. (HoldCo), account 1043-5236007, period 2024-02-29 to 2024-03-28. Found 5 similar CAD account statements in ~/Dropbox/Filing/HoldCo/bank statements/_old CAD Checking/ for the same account from 2019-2020. Applied clean naming pattern YYYY-MM-DD to YYYY-MM-DD [Currency] [Account].pdf. High confidence based on exact account number match and established folder structure for HoldCo banking documents."
+      "reasoning": "TD Canada Trust business chequing account statement (CAD) for 11087592 Canada Inc. (HoldCo), account 1043-5236007, period 2024-02-29 to 2024-03-28. Found 5 similar CAD account statements in ~/Dropbox/Filing/HoldCo/bank statements/TD x6007 CAD/_old CAD Checking/ for the same account from 2019-2020. Applied clean naming pattern YYYY-MM-DD to YYYY-MM-DD [Currency] [Account].pdf. High confidence based on exact account number match and established folder structure for HoldCo banking documents."
     },
     {
       "id": "abefa398-b3bc-4300-a6b6-31240de8dba4",
       "source_path": "/Users/marklampert/Downloads/HoldCo_Banking_CAD_1043-5236007_Mar_28-Apr_30_2024.pdf",
-      "dest_path": "/Users/marklampert/Dropbox/Filing/HoldCo/bank statements/2024-03-28 CAD 1043-5236007.pdf",
+      "dest_path": "/Users/marklampert/Dropbox/Filing/HoldCo/bank statements/TD x6007 CAD/2024-03-28 CAD 1043-5236007.pdf",
       "confidence": 95,
       "confidence_factors": {
         "similar_files_found": 30,
@@ -368,12 +368,12 @@
       },
       "status": "pending",
       "timestamp": "2025-11-23T01:56:30Z",
-      "reasoning": "TD Canada Trust business chequing account statement (CAD) for 11087592 Canada Inc. (HoldCo), account 1043-5236007, period 2024-03-28 to 2024-04-30. Found 5 similar CAD account statements in ~/Dropbox/Filing/HoldCo/bank statements/_old CAD Checking/ for the same account from 2019-2020. Applied clean naming pattern YYYY-MM-DD to YYYY-MM-DD [Currency] [Account].pdf. High confidence based on exact account number match and established folder structure for HoldCo banking documents."
+      "reasoning": "TD Canada Trust business chequing account statement (CAD) for 11087592 Canada Inc. (HoldCo), account 1043-5236007, period 2024-03-28 to 2024-04-30. Found 5 similar CAD account statements in ~/Dropbox/Filing/HoldCo/bank statements/TD x6007 CAD/_old CAD Checking/ for the same account from 2019-2020. Applied clean naming pattern YYYY-MM-DD to YYYY-MM-DD [Currency] [Account].pdf. High confidence based on exact account number match and established folder structure for HoldCo banking documents."
     },
     {
       "id": "f75d18a5-8b0f-4b8b-948b-ad53b231c4dc",
       "source_path": "/Users/marklampert/Downloads/HoldCo_Banking_CAD_1043-5236007_Apr_30-May_31_2024.pdf",
-      "dest_path": "/Users/marklampert/Dropbox/Filing/HoldCo/bank statements/2024-04-30 CAD 1043-5236007.pdf",
+      "dest_path": "/Users/marklampert/Dropbox/Filing/HoldCo/bank statements/TD x6007 CAD/2024-04-30 CAD 1043-5236007.pdf",
       "confidence": 95,
       "confidence_factors": {
         "similar_files_found": 30,
@@ -384,12 +384,12 @@
       },
       "status": "pending",
       "timestamp": "2025-11-23T01:56:30Z",
-      "reasoning": "TD Canada Trust business chequing account statement (CAD) for 11087592 Canada Inc. (HoldCo), account 1043-5236007, period 2024-04-30 to 2024-05-31. Found 5 similar CAD account statements in ~/Dropbox/Filing/HoldCo/bank statements/_old CAD Checking/ for the same account from 2019-2020. Applied clean naming pattern YYYY-MM-DD to YYYY-MM-DD [Currency] [Account].pdf. High confidence based on exact account number match and established folder structure for HoldCo banking documents."
+      "reasoning": "TD Canada Trust business chequing account statement (CAD) for 11087592 Canada Inc. (HoldCo), account 1043-5236007, period 2024-04-30 to 2024-05-31. Found 5 similar CAD account statements in ~/Dropbox/Filing/HoldCo/bank statements/TD x6007 CAD/_old CAD Checking/ for the same account from 2019-2020. Applied clean naming pattern YYYY-MM-DD to YYYY-MM-DD [Currency] [Account].pdf. High confidence based on exact account number match and established folder structure for HoldCo banking documents."
     },
     {
       "id": "6c83e869-53f0-44b0-a425-22ff03ec32bd",
       "source_path": "/Users/marklampert/Downloads/HoldCo_Banking_CAD_1043-5236007_May_31-Jun_28_2024.pdf",
-      "dest_path": "/Users/marklampert/Dropbox/Filing/HoldCo/bank statements/2024-05-31 CAD 1043-5236007.pdf",
+      "dest_path": "/Users/marklampert/Dropbox/Filing/HoldCo/bank statements/TD x6007 CAD/2024-05-31 CAD 1043-5236007.pdf",
       "confidence": 95,
       "confidence_factors": {
         "similar_files_found": 30,
@@ -400,12 +400,12 @@
       },
       "status": "pending",
       "timestamp": "2025-11-23T01:56:30Z",
-      "reasoning": "TD Canada Trust business chequing account statement (CAD) for 11087592 Canada Inc. (HoldCo), account 1043-5236007, period 2024-05-31 to 2024-06-28. Found 5 similar CAD account statements in ~/Dropbox/Filing/HoldCo/bank statements/_old CAD Checking/ for the same account from 2019-2020. Applied clean naming pattern YYYY-MM-DD to YYYY-MM-DD [Currency] [Account].pdf. High confidence based on exact account number match and established folder structure for HoldCo banking documents."
+      "reasoning": "TD Canada Trust business chequing account statement (CAD) for 11087592 Canada Inc. (HoldCo), account 1043-5236007, period 2024-05-31 to 2024-06-28. Found 5 similar CAD account statements in ~/Dropbox/Filing/HoldCo/bank statements/TD x6007 CAD/_old CAD Checking/ for the same account from 2019-2020. Applied clean naming pattern YYYY-MM-DD to YYYY-MM-DD [Currency] [Account].pdf. High confidence based on exact account number match and established folder structure for HoldCo banking documents."
     },
     {
       "id": "10cb9730-2c46-44dc-97a2-eb5582d283cc",
       "source_path": "/Users/marklampert/Downloads/HoldCo_Banking_CAD_1043-5236007_Jun_28-Aug_30_2024.pdf",
-      "dest_path": "/Users/marklampert/Dropbox/Filing/HoldCo/bank statements/2024-06-28 CAD 1043-5236007.pdf",
+      "dest_path": "/Users/marklampert/Dropbox/Filing/HoldCo/bank statements/TD x6007 CAD/2024-06-28 CAD 1043-5236007.pdf",
       "confidence": 95,
       "confidence_factors": {
         "similar_files_found": 30,
@@ -416,12 +416,12 @@
       },
       "status": "pending",
       "timestamp": "2025-11-23T01:56:30Z",
-      "reasoning": "TD Canada Trust business chequing account statement (CAD) for 11087592 Canada Inc. (HoldCo), account 1043-5236007, period 2024-06-28 to 2024-08-30. Found 5 similar CAD account statements in ~/Dropbox/Filing/HoldCo/bank statements/_old CAD Checking/ for the same account from 2019-2020. Applied clean naming pattern YYYY-MM-DD to YYYY-MM-DD [Currency] [Account].pdf. High confidence based on exact account number match and established folder structure for HoldCo banking documents."
+      "reasoning": "TD Canada Trust business chequing account statement (CAD) for 11087592 Canada Inc. (HoldCo), account 1043-5236007, period 2024-06-28 to 2024-08-30. Found 5 similar CAD account statements in ~/Dropbox/Filing/HoldCo/bank statements/TD x6007 CAD/_old CAD Checking/ for the same account from 2019-2020. Applied clean naming pattern YYYY-MM-DD to YYYY-MM-DD [Currency] [Account].pdf. High confidence based on exact account number match and established folder structure for HoldCo banking documents."
     },
     {
       "id": "bb5db011-4b8c-45e5-973c-d425c39b3314",
       "source_path": "/Users/marklampert/Downloads/HoldCo_Banking_CAD_1043-5236007_Aug_30-Sep_27_2024.pdf",
-      "dest_path": "/Users/marklampert/Dropbox/Filing/HoldCo/bank statements/2024-08-30 CAD 1043-5236007.pdf",
+      "dest_path": "/Users/marklampert/Dropbox/Filing/HoldCo/bank statements/TD x6007 CAD/2024-08-30 CAD 1043-5236007.pdf",
       "confidence": 95,
       "confidence_factors": {
         "similar_files_found": 30,
@@ -432,7 +432,7 @@
       },
       "status": "pending",
       "timestamp": "2025-11-23T01:56:30Z",
-      "reasoning": "TD Canada Trust business chequing account statement (CAD) for 11087592 Canada Inc. (HoldCo), account 1043-5236007, period 2024-08-30 to 2024-09-27. Found 5 similar CAD account statements in ~/Dropbox/Filing/HoldCo/bank statements/_old CAD Checking/ for the same account from 2019-2020. Applied clean naming pattern YYYY-MM-DD to YYYY-MM-DD [Currency] [Account].pdf. High confidence based on exact account number match and established folder structure for HoldCo banking documents."
+      "reasoning": "TD Canada Trust business chequing account statement (CAD) for 11087592 Canada Inc. (HoldCo), account 1043-5236007, period 2024-08-30 to 2024-09-27. Found 5 similar CAD account statements in ~/Dropbox/Filing/HoldCo/bank statements/TD x6007 CAD/_old CAD Checking/ for the same account from 2019-2020. Applied clean naming pattern YYYY-MM-DD to YYYY-MM-DD [Currency] [Account].pdf. High confidence based on exact account number match and established folder structure for HoldCo banking documents."
     }
   ]
 }
