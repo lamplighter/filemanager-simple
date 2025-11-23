@@ -483,11 +483,28 @@
             text-align: right;
             color: #6c757d;
             white-space: nowrap;
+            width: 80px;
         }
 
         .directory-files-table .file-modified {
             color: #6c757d;
             white-space: nowrap;
+            width: 140px;
+        }
+
+        .sortable-header {
+            cursor: pointer;
+            user-select: none;
+        }
+
+        .sortable-header:hover {
+            background: #e9ecef;
+        }
+
+        .sort-indicator {
+            margin-left: 5px;
+            font-size: 10px;
+            color: #6c757d;
         }
 
         .loading-message {
@@ -846,6 +863,9 @@
             loadDirectoryFiles(file.dest_path);
         }
 
+        let currentDirectoryFiles = [];
+        let directorySortState = { column: 'name', direction: 'asc' };
+
         async function loadDirectoryFiles(destPath) {
             const container = document.getElementById('directoryFiles');
 
@@ -866,54 +886,100 @@
                     return;
                 }
 
-                // Format file size
-                function formatFileSize(bytes) {
-                    if (bytes === 0) return '0 Bytes';
-                    const k = 1024;
-                    const sizes = ['Bytes', 'KB', 'MB', 'GB'];
-                    const i = Math.floor(Math.log(bytes) / Math.log(k));
-                    return Math.round(bytes / Math.pow(k, i) * 100) / 100 + ' ' + sizes[i];
-                }
-
-                // Build table HTML
-                let tableHTML = `
-                    <div class="directory-files-header">
-                        ${data.total_count} file${data.total_count !== 1 ? 's' : ''} in ${dirPath.replace('/Users/marklampert/', '~/')}
-                    </div>
-                    <div class="directory-files-scroll">
-                        <table class="directory-files-table">
-                            <thead>
-                                <tr>
-                                    <th>Filename</th>
-                                    <th>Size</th>
-                                    <th>Modified</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                `;
-
-                data.files.forEach(file => {
-                    tableHTML += `
-                        <tr>
-                            <td class="file-name">${file.name}</td>
-                            <td class="file-size">${formatFileSize(file.size)}</td>
-                            <td class="file-modified">${file.modified}</td>
-                        </tr>
-                    `;
-                });
-
-                tableHTML += `
-                            </tbody>
-                        </table>
-                    </div>
-                `;
-
-                container.innerHTML = tableHTML;
+                // Store files and render
+                currentDirectoryFiles = data.files;
+                directorySortState = { column: 'name', direction: 'asc' };
+                renderDirectoryFiles(dirPath, data.total_count);
 
             } catch (error) {
                 console.error('Error loading directory files:', error);
                 container.innerHTML = '<div class="error-message">Error loading directory contents</div>';
             }
+        }
+
+        function sortDirectoryFiles(column) {
+            if (directorySortState.column === column) {
+                directorySortState.direction = directorySortState.direction === 'asc' ? 'desc' : 'asc';
+            } else {
+                directorySortState.column = column;
+                directorySortState.direction = 'asc';
+            }
+
+            currentDirectoryFiles.sort((a, b) => {
+                let valA, valB;
+
+                if (column === 'name') {
+                    valA = a.name.toLowerCase();
+                    valB = b.name.toLowerCase();
+                } else if (column === 'size') {
+                    valA = a.size;
+                    valB = b.size;
+                } else if (column === 'modified') {
+                    valA = new Date(a.modified);
+                    valB = new Date(b.modified);
+                }
+
+                if (valA < valB) return directorySortState.direction === 'asc' ? -1 : 1;
+                if (valA > valB) return directorySortState.direction === 'asc' ? 1 : -1;
+                return 0;
+            });
+
+            const dirPath = document.querySelector('.directory-files-header').textContent.match(/in (.+)/)[1].replace('~/', '/Users/marklampert/');
+            const totalCount = currentDirectoryFiles.length;
+            renderDirectoryFiles(dirPath, totalCount);
+        }
+
+        function renderDirectoryFiles(dirPath, totalCount) {
+            const container = document.getElementById('directoryFiles');
+
+            // Format file size
+            function formatFileSize(bytes) {
+                if (bytes === 0) return '0 Bytes';
+                const k = 1024;
+                const sizes = ['Bytes', 'KB', 'MB', 'GB'];
+                const i = Math.floor(Math.log(bytes) / Math.log(k));
+                return Math.round(bytes / Math.pow(k, i) * 100) / 100 + ' ' + sizes[i];
+            }
+
+            function getSortIndicator(column) {
+                if (directorySortState.column !== column) return '';
+                return `<span class="sort-indicator">${directorySortState.direction === 'asc' ? '▲' : '▼'}</span>`;
+            }
+
+            // Build table HTML
+            let tableHTML = `
+                <div class="directory-files-header">
+                    ${totalCount} file${totalCount !== 1 ? 's' : ''} in ${dirPath.replace('/Users/marklampert/', '~/')}
+                </div>
+                <div class="directory-files-scroll">
+                    <table class="directory-files-table">
+                        <thead>
+                            <tr>
+                                <th class="sortable-header" onclick="sortDirectoryFiles('name')">Filename${getSortIndicator('name')}</th>
+                                <th class="sortable-header" onclick="sortDirectoryFiles('size')">Size${getSortIndicator('size')}</th>
+                                <th class="sortable-header" onclick="sortDirectoryFiles('modified')">Modified${getSortIndicator('modified')}</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+            `;
+
+            currentDirectoryFiles.forEach(file => {
+                tableHTML += `
+                    <tr>
+                        <td class="file-name">${file.name}</td>
+                        <td class="file-size">${formatFileSize(file.size)}</td>
+                        <td class="file-modified">${file.modified}</td>
+                    </tr>
+                `;
+            });
+
+            tableHTML += `
+                        </tbody>
+                    </table>
+                </div>
+            `;
+
+            container.innerHTML = tableHTML;
         }
 
         async function updateFileStatus(index, newStatus) {
