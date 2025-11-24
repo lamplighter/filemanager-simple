@@ -1304,13 +1304,7 @@
         async function approveFile(index) {
             const file = filteredData[index];
 
-            // Show confirmation for move
             const action = file.dest_path === 'DELETE' ? 'delete' : 'move';
-            const actionText = action === 'delete' ? 'Delete this file' : 'Move this file';
-
-            if (!confirm(`${actionText}?\n\nFrom: ${file.source_path}\n${action === 'delete' ? '' : 'To: ' + file.dest_path}`)) {
-                return;
-            }
 
             try {
                 const response = await fetch('/api/move-file', {
@@ -1330,14 +1324,13 @@
                     return;
                 }
 
-                // Remove file from local data
+                // Update file status to "moved" instead of removing
                 const queueFileIndex = queueData.files.findIndex(f => f.id === file.id);
                 if (queueFileIndex !== -1) {
-                    queueData.files.splice(queueFileIndex, 1);
+                    queueData.files[queueFileIndex].status = 'moved';
                 }
 
-                // Update queue info and re-render
-                updateQueueInfo();
+                // Re-render to show "MOVED" status
                 applyFiltersAndSort();
 
                 // If modal is open, close it
