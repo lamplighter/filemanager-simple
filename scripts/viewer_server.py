@@ -6,13 +6,35 @@ import socketserver
 import json
 import os
 import shutil
+import tempfile
 from urllib.parse import parse_qs, urlparse
 from datetime import datetime
 
 PORT = 8765
+HOST = '127.0.0.1'  # Bind to localhost only for security
 PROJECT_ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 QUEUE_FILE = os.path.join(PROJECT_ROOT, 'state', 'file_queue.json')
 HISTORY_FILE = os.path.join(PROJECT_ROOT, 'state', 'move_history.json')
+
+
+def atomic_write_json(data: dict, filepath: str) -> None:
+    """Write JSON data atomically to prevent race conditions.
+
+    Uses a temporary file and atomic rename to ensure the file is either
+    fully written or not written at all, preventing data corruption when
+    organize.sh and viewer_server.py write concurrently.
+    """
+    dir_path = os.path.dirname(filepath)
+    fd, temp_path = tempfile.mkstemp(dir=dir_path, suffix='.tmp')
+    try:
+        with os.fdopen(fd, 'w') as f:
+            json.dump(data, f, indent=2)
+        os.rename(temp_path, filepath)
+    except Exception:
+        # Clean up temp file on error
+        if os.path.exists(temp_path):
+            os.unlink(temp_path)
+        raise
 
 class ViewerRequestHandler(http.server.SimpleHTTPRequestHandler):
     def __init__(self, *args, **kwargs):
@@ -52,9 +74,8 @@ class ViewerRequestHandler(http.server.SimpleHTTPRequestHandler):
                 # Update last_updated timestamp
                 queue_data['last_updated'] = datetime.utcnow().strftime('%Y-%m-%dT%H:%M:%SZ')
 
-                # Write back to file
-                with open(QUEUE_FILE, 'w') as f:
-                    json.dump(queue_data, f, indent=2)
+                # Write back to file atomically
+                atomic_write_json(queue_data, QUEUE_FILE)
 
                 # Send success response
                 self.send_response(200)
@@ -177,17 +198,15 @@ class ViewerRequestHandler(http.server.SimpleHTTPRequestHandler):
                 history_data['files'].append(file_entry)
                 history_data['last_updated'] = datetime.utcnow().strftime('%Y-%m-%dT%H:%M:%SZ')
 
-                # Write history file
-                with open(HISTORY_FILE, 'w') as f:
-                    json.dump(history_data, f, indent=2)
+                # Write history file atomically
+                atomic_write_json(history_data, HISTORY_FILE)
 
                 # Remove file from queue
                 queue_data['files'].pop(file_index)
                 queue_data['last_updated'] = datetime.utcnow().strftime('%Y-%m-%dT%H:%M:%SZ')
 
-                # Write back to queue file
-                with open(QUEUE_FILE, 'w') as f:
-                    json.dump(queue_data, f, indent=2)
+                # Write back to queue file atomically
+                atomic_write_json(queue_data, QUEUE_FILE)
 
                 # Send success response
                 self.send_response(200)
@@ -222,9 +241,8 @@ class ViewerRequestHandler(http.server.SimpleHTTPRequestHandler):
                 queue_data['files'] = files
                 queue_data['last_updated'] = datetime.utcnow().strftime('%Y-%m-%dT%H:%M:%SZ')
 
-                # Write back to file
-                with open(QUEUE_FILE, 'w') as f:
-                    json.dump(queue_data, f, indent=2)
+                # Write back to file atomically
+                atomic_write_json(queue_data, QUEUE_FILE)
 
                 # Send success response
                 self.send_response(200)
@@ -367,10 +385,11 @@ class ViewerRequestHandler(http.server.SimpleHTTPRequestHandler):
         super().end_headers()
 
 if __name__ == '__main__':
-    with socketserver.TCPServer(("", PORT), ViewerRequestHandler) as httpd:
-        print(f"Server running at http://localhost:{PORT}/")
+    with socketserver.TCPServer((HOST, PORT), ViewerRequestHandler) as httpd:
+        print(f"Server running at http://{HOST}:{PORT}/")
         print(f"Open http://localhost:{PORT}/viewer.html to view the queue")
         print("Press Ctrl+C to stop")
+        print(f"(Bound to {HOST} only for security)")
         try:
             httpd.serve_forever()
         except KeyboardInterrupt:

@@ -23,7 +23,7 @@ cd "$SCRIPT_DIR"
 # File paths
 CONFIG_FILE="$SCRIPT_DIR/config.yaml"
 QUEUE_FILE="$SCRIPT_DIR/state/file_queue.json"
-HISTORY_FILE="$SCRIPT_DIR/state/history.json"
+HISTORY_FILE="$SCRIPT_DIR/state/move_history.json"  # Unified with viewer_server.py
 
 # Default options
 DRY_RUN=false
@@ -70,6 +70,16 @@ success() {
 # Print info message
 info() {
     echo "${BLUE}ℹ $1${RESET}"
+}
+
+# Atomic file write - prevents race conditions with viewer_server.py
+# Usage: atomic_write "content" "target_file"
+atomic_write() {
+    local content="$1"
+    local target_file="$2"
+    local temp_file="${target_file}.tmp.$$"
+
+    echo "$content" > "$temp_file" && mv "$temp_file" "$target_file"
 }
 
 # Parse YAML config (simple key: value parser)
@@ -227,25 +237,32 @@ execute_delete() {
 
     # Perform the deletion
     if rm "$source" 2>/dev/null; then
-        # Add to history for undo capability (note: can't undo deletions)
+        # Add to history (unified format with viewer_server.py)
         local timestamp=$(date -u +"%Y-%m-%dT%H:%M:%SZ")
 
-        # Update history.json
+        # Ensure history file exists with correct structure
+        if [[ ! -f "$HISTORY_FILE" ]] || [[ ! -s "$HISTORY_FILE" ]]; then
+            echo '{"schema_version": "1.0", "last_updated": "", "files": []}' > "$HISTORY_FILE"
+        fi
+
+        # Update move_history.json (unified format)
         local history=$(jq --arg id "$file_id" \
                            --arg source "$source" \
                            --arg executed_at "$timestamp" \
                            --arg hash_before "$hash_before" \
                            --arg duplicate_of "$duplicate_of" \
-                           '.operations += [{
+                           '.last_updated = $executed_at | .files += [{
                                id: $id,
-                               action: "delete",
                                source_path: $source,
+                               dest_path: "DELETE",
+                               action: "delete",
+                               status: "deleted",
                                duplicate_of: $duplicate_of,
-                               executed_at: $executed_at,
+                               moved_at: $executed_at,
                                hash_before: $hash_before,
                                can_undo: false
                            }]' "$HISTORY_FILE")
-        echo "$history" > "$HISTORY_FILE"
+        atomic_write "$history" "$HISTORY_FILE"
 
         return 0
     else
@@ -285,7 +302,7 @@ execute_move() {
             hash_after=$(shasum -a 256 "$dest" | awk '{print $1}')
         fi
 
-        # Add to history for undo capability
+        # Add to history (unified format with viewer_server.py)
         local timestamp=$(date -u +"%Y-%m-%dT%H:%M:%SZ")
         local can_undo="true"
 
@@ -294,7 +311,12 @@ execute_move() {
             can_undo="false"
         fi
 
-        # Update history.json
+        # Ensure history file exists with correct structure
+        if [[ ! -f "$HISTORY_FILE" ]] || [[ ! -s "$HISTORY_FILE" ]]; then
+            echo '{"schema_version": "1.0", "last_updated": "", "files": []}' > "$HISTORY_FILE"
+        fi
+
+        # Update move_history.json (unified format)
         local history=$(jq --arg id "$file_id" \
                            --arg source "$source" \
                            --arg dest "$dest" \
@@ -302,16 +324,17 @@ execute_move() {
                            --arg hash_before "$hash_before" \
                            --arg hash_after "$hash_after" \
                            --arg can_undo "$can_undo" \
-                           '.operations += [{
+                           '.last_updated = $executed_at | .files += [{
                                id: $id,
                                source_path: $source,
                                dest_path: $dest,
-                               executed_at: $executed_at,
+                               status: "moved",
+                               moved_at: $executed_at,
                                hash_before: $hash_before,
                                hash_after: $hash_after,
                                can_undo: ($can_undo == "true")
                            }]' "$HISTORY_FILE")
-        echo "$history" > "$HISTORY_FILE"
+        atomic_write "$history" "$HISTORY_FILE"
 
         return 0
     else
@@ -332,7 +355,7 @@ update_file_status() {
                      --arg status "$new_status" \
                      '(.files[] | select(.id == $id) | .status) = $status' \
                      "$QUEUE_FILE")
-    echo "$queue" > "$QUEUE_FILE"
+    atomic_write "$queue" "$QUEUE_FILE"
 }
 
 ##############################################################################
@@ -561,7 +584,13 @@ show_status() {
 
 # Undo last batch
 undo_operations() {
-    local total=$(jq '.operations | length' "$HISTORY_FILE")
+    # Check if history file exists
+    if [[ ! -f "$HISTORY_FILE" ]] || [[ ! -s "$HISTORY_FILE" ]]; then
+        info "No operations to undo"
+        return 0
+    fi
+
+    local total=$(jq '.files | length' "$HISTORY_FILE")
 
     if [[ $total -eq 0 ]]; then
         info "No operations to undo"
@@ -582,11 +611,19 @@ undo_operations() {
     local undone=0
     local failed=0
 
-    # Process in reverse order
+    # Process in reverse order (unified format uses .files)
     while IFS= read -r op_json; do
         local source=$(echo "$op_json" | jq -r '.source_path')
         local dest=$(echo "$op_json" | jq -r '.dest_path')
-        local can_undo=$(echo "$op_json" | jq -r '.can_undo')
+        local can_undo=$(echo "$op_json" | jq -r '.can_undo // true')
+        local status=$(echo "$op_json" | jq -r '.status // "moved"')
+
+        # Skip deleted files (can't undo deletions)
+        if [[ "$status" == "deleted" ]] || [[ "$dest" == "DELETE" ]]; then
+            warn "Cannot undo: $source (file was deleted)"
+            ((failed++))
+            continue
+        fi
 
         if [[ "$can_undo" != "true" ]]; then
             warn "Cannot undo: $dest (file was modified)"
@@ -616,7 +653,7 @@ undo_operations() {
             fi
         fi
 
-    done < <(jq -c '.operations | reverse | .[]' "$HISTORY_FILE")
+    done < <(jq -c '.files | reverse | .[]' "$HISTORY_FILE")
 
     echo ""
     echo "${BOLD}Undo Summary:${RESET}"
@@ -624,8 +661,8 @@ undo_operations() {
     echo "  Failed: $failed"
 
     if [[ "$DRY_RUN" == "false" ]] && [[ $undone -gt 0 ]]; then
-        # Clear history
-        echo '{"schema_version": "1.0", "operations": []}' > "$HISTORY_FILE"
+        # Clear history (unified format)
+        atomic_write '{"schema_version": "1.0", "last_updated": "", "files": []}' "$HISTORY_FILE"
         success "History cleared"
     fi
 }
