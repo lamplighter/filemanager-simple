@@ -74,6 +74,41 @@ The `~/Dropbox/Filing/` directory contains the following main categories:
 - **Personal Services**: `Executive Assistant/`, `Housekeeper/` - Service provider documents
 - **Vehicles**: `Vehicles - Mazda CX-5/` - Vehicle-related documents
 
+## Folder Naming Conventions
+
+### Multi-Part Folder Names
+When creating folders with multiple parts (entity-type, account names, related entities), use the **space-hyphen-space** separator:
+
+**Standard**: ` - ` (space-hyphen-space)
+
+**Examples**:
+- `Rogers - Wireless` (entity-type)
+- `Real Estate - 40 Gibson Ave` (category-location)
+- `Investments - Funds` (category-subcategory)
+- `TD Visa - CAD Mark x1381` (institution-details)
+- `Uken - Jam City` (related entities)
+
+**Do NOT use**:
+- `:` (colon alone)
+- ` : ` (space-colon-space)
+- Mixed separators in the same path
+
+### Archive and Legacy Folders
+For archived, old, or legacy content, use the **z prefix** to push folders to the bottom of alphabetical listings:
+
+**Standard**: `z [Descriptor]`
+
+**Examples**:
+- `z Old` (general legacy content)
+- `z Old CAD Checking` (specific old account)
+- `z Archived` (archived content)
+- `z Passed` (closed/completed items)
+
+**Benefits**:
+- Visual clarity (all archived items grouped at bottom)
+- Consistent sorting across all systems
+- Easy to identify what's active vs archived
+
 ## File Organization Strategy
 
 Given the existing `~/Dropbox/Filing/` structure is entity-based rather than file-type based:

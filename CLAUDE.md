@@ -125,11 +125,21 @@ When you find multiple valid destinations, score each one independently and save
 - **-20%**: Multiple equally valid destinations exist
 
 ### 6. Apply Naming Conventions
+
+**File Naming**:
 - Follow category-specific naming patterns (see `docs/naming-conventions.md`)
 - Remove version numbers like `(1)`, `(2)`, etc.
 - Remove leading underscores and normalize spacing
 - Ensure consistent date format: `YYYY-MM-DD`
 - Remove duplicate entity names if they're in the folder path
+
+**Folder Naming Standards** (when suggesting new folders):
+- **Multi-part names**: Use ` - ` (space-hyphen-space) separator
+  - ✅ Correct: `Rogers - Wireless`, `TD Visa - CAD Mark x1381`
+  - ❌ Wrong: `Rogers : Wireless`, `TD Visa:USD`, mixed separators
+- **Archive folders**: Use `z` prefix to push to bottom
+  - ✅ Correct: `z Old`, `z Archived`, `z Old CAD Checking`
+  - ❌ Wrong: `_old`, `old`, `archived` (without z prefix)
 
 ### 7. Validate the Suggestion (Optional but Recommended)
 Before adding to queue, you can validate using:

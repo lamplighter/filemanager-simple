@@ -1,4 +1,47 @@
-# File Naming Conventions
+# Naming Conventions
+
+This document covers both **folder naming** and **file naming** conventions for the filing system.
+
+---
+
+## Folder Naming Conventions
+
+### Multi-Part Folder Names
+When creating folders with multiple components, use the **space-hyphen-space** separator consistently:
+
+**Standard**: ` - ` (space-hyphen-space)
+
+**Examples**:
+- `Rogers - Wireless` (entity and service type)
+- `Real Estate - 40 Gibson Ave` (category and specific property)
+- `TD Visa - CAD Mark x1381` (institution and account details)
+- `Investments - Angel` (category and investment type)
+- `Uken - Jam City` (related business entities)
+
+**NOT Allowed**:
+- `:` (colon) - e.g., ~~`Uken : Jam City`~~
+- ` : ` (space-colon-space) - e.g., ~~`TD Visa : USD`~~
+- Mixed separators - e.g., ~~`Mark x1381:x3752 : Ashley`~~
+
+### Archive and Legacy Folders
+For old, archived, or legacy content, use the **z prefix**:
+
+**Standard**: `z [Descriptor]`
+
+**Examples**:
+- `z Old` - general legacy files
+- `z Old CAD Checking` - specific legacy account
+- `z Archived` - archived content
+- `z Passed` - closed investments or completed items
+
+**Benefits**:
+- Alphabetically sorted to bottom of directory listings
+- Instantly recognizable as non-current content
+- Consistent across all folders
+
+---
+
+## File Naming Conventions
 
 Apply these naming patterns based on the destination category:
 
