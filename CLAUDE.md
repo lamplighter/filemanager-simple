@@ -15,8 +15,8 @@ This is a Claude Code driven file organization system. Claude analyzes files and
 ### Your Role (Claude)
 You analyze files and add suggestions to the queue. You **NEVER** move files directly.
 
-### organize.sh's Role
-The `organize.sh` script reads your suggestions from `state/file_queue.json` and presents them for user review and approval. It executes only the moves that the user approves.
+### Viewer UI's Role
+The viewer UI (`/view`) displays suggestions from `state/file_queue.json` and provides Move/Skip buttons. When the user clicks **Move**, the file is immediately moved to the destination. When the user clicks **Skip**, the file is removed from the queue without moving.
 
 ---
 
@@ -108,7 +108,7 @@ If NO existing folder is appropriate for the file, you can propose creating a ne
 - Include justification in the reasoning field
 - Typically set confidence to 70-85% (lower than exact matches, higher than unclear categorization)
 - The viewer UI will highlight new folder proposals with a special badge
-- The organize.sh script will create the folder if the user approves
+- The folder will be created automatically when the user clicks Move
 
 **Examples of when to propose new folders**:
 - New utility provider not in existing structure (e.g., "Enwave" for a new heating/cooling service)
@@ -253,7 +253,7 @@ When a duplicate is detected, the entry looks like this:
 - **new_folder**: `true` when proposing to create a new folder (dest_path parent doesn't exist yet)
   - Set to `true` when the destination folder needs to be created
   - The viewer UI will highlight this with a "NEW FOLDER" badge
-  - organize.sh will create the folder when user approves
+  - The folder will be created automatically when the user clicks Move
   - Include clear justification in reasoning field for why new folder is needed
 
 ### 9. Inform the User
@@ -262,7 +262,7 @@ After adding to queue, tell the user:
 - What file was analyzed
 - Confidence score
 - Destination path
-- Next step: Run `./organize.sh` to process
+- Next step: Open viewer (`/view`) to review and click Move or Skip
 
 ---
 
@@ -313,7 +313,7 @@ glob "**/*Rogers*" ~/Dropbox/Filing/  # Find similar files
 "Added Rogers invoice to queue with 95% confidence.
 Destination: ~/Dropbox/Filing/Rogers - Wireless/Rogers-2024-01-15.pdf
 
-Run ./organize.sh to process the queue."
+Open viewer with /view to review and click Move or Skip."
 ```
 
 ### Workflow Example: Duplicate Detected
@@ -366,7 +366,7 @@ read /Users/marklampert/Downloads/Statement-Jan-2024.pdf
 
 Added to queue with DELETE action (100% confidence - exact checksum match).
 
-Run ./organize.sh to review and approve deletion."
+Open viewer with /view to review and click Delete or Keep."
 ```
 
 ### Workflow Example: Multiple Valid Destinations
@@ -457,7 +457,7 @@ glob "**/*Bell*" ~/Dropbox/Taxes/
 Primary: ~/Dropbox/Filing/Bell - Internet/Bell-2024-01-15.pdf
 Alternative: ~/Dropbox/Filing/Utilities/Internet/ (60% confidence)
 
-Run ./organize.sh or open viewer to see all options."
+Open viewer with /view to see all options and choose."
 ```
 
 ### Workflow Example: Proposing a New Folder
@@ -521,28 +521,34 @@ glob "**/TD WebBroker*" ~/Dropbox/Filing/
 Confidence: 75% (following existing pattern for brokerage platforms)
 Will create new folder if approved.
 
-Run ./organize.sh or open viewer to review."
+Open viewer with /view to review and approve.""
 ```
 
 ---
 
-## User Review and Approval via organize.sh
+## User Review and Approval via Viewer UI
 
-The `organize.sh` script is the execution layer - it reads suggestions from the queue and lets the user review and approve them.
+The **viewer UI** is the primary way to review and execute file organization. Open it with `/view` or `./scripts/view_queue.sh`.
 
-**All files require explicit user approval** - there is no automatic execution. Confidence scores help you prioritize which suggestions to trust, but you always have the final say.
+**All files require explicit user action** - clicking the Move or Skip button in the UI.
 
-### Confidence Scores Guide User Review:
+### In the Viewer UI:
+- **Move button** - Immediately moves the file to the suggested destination
+- **Skip button** - Removes from queue without moving (file stays in original location)
+- **Confidence scores** help you prioritize which suggestions to trust
+- **Directory listings** show what's already in the destination folder
+- **Success notifications** confirm when files are moved
+
+### Confidence Scores Guide Your Decision:
 - **90-100%**: High confidence - Claude found strong matching patterns and similar files
 - **70-89%**: Good confidence - Clear categorization with some supporting evidence
 - **50-69%**: Moderate confidence - Reasonable guess but limited supporting evidence
-- **Below 50%**: Low confidence - Unclear categorization, may need manual review
+- **Below 50%**: Low confidence - Unclear categorization, review carefully
 
-User can run:
-- `./organize.sh` - Interactive review mode (review and approve/reject each suggestion)
-- `./organize.sh --dry-run` - Preview suggestions without executing
-- `./organize.sh --status` - Check queue status
-- `./organize.sh --undo` - Revert last batch of moves
+### Optional: Batch Processing
+For power users, `organize.sh` can still be used for batch operations:
+- `./organize.sh --dry-run` - Preview all suggestions without executing
+- `./organize.sh --status` - Check queue status from command line
 
 ---
 
@@ -611,15 +617,12 @@ This will check for:
 ## Quick Command Reference
 
 ```bash
-# Process the queue
-./organize.sh                    # Interactive review and approval
-./organize.sh --dry-run          # Preview suggestions only
+# Open viewer UI (primary method)
+/view                            # Open viewer with Move/Skip buttons
 
-# Check status
-./organize.sh --status           # See pending files
-
-# Undo operations
-./organize.sh --undo             # Revert last batch
+# Optional batch operations
+./organize.sh --dry-run          # Preview all suggestions
+./organize.sh --status           # Check pending file count
 
 # Validate before adding
 ./scripts/validate_suggestion.sh <source> <dest>
@@ -633,8 +636,9 @@ uuidgen | tr '[:upper:]' '[:lower:]'
 ## Summary
 
 1. **You analyze** files and add JSON entries to `state/file_queue.json`
-2. **User reviews** suggestions via `./organize.sh` and approves/rejects each one
-3. **organize.sh executes** approved moves only
-4. **System tracks** everything in JSON for undo capability
+2. **User reviews** suggestions in the viewer UI (`/view`)
+3. **User clicks Move** → file is immediately moved to destination
+4. **User clicks Skip** → file is removed from queue without moving
+5. **System tracks** operations in JSON for transparency
 
-Your job is to be the "brain" - analyze files intelligently and create accurate suggestions. The user is the decision-maker. The organize.sh script is the "hands" - it handles all actual file operations safely after user approval.
+Your job is to be the "brain" - analyze files intelligently and create accurate suggestions. The user is the decision-maker. The viewer UI is the "hands" - it handles all actual file operations immediately when the user clicks Move or Skip.

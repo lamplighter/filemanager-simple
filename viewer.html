@@ -820,8 +820,8 @@
                 } else {
                     approvalCell = `
                         <div class="approval-buttons">
-                            <button class="approval-btn approve-btn" onclick="event.stopPropagation(); approveFile(${index})">Approve</button>
-                            <button class="approval-btn reject-btn" onclick="event.stopPropagation(); rejectFile(${index})">Reject</button>
+                            <button class="approval-btn approve-btn" onclick="event.stopPropagation(); approveFile(${index})">Move</button>
+                            <button class="approval-btn reject-btn" onclick="event.stopPropagation(); rejectFile(${index})">Skip</button>
                         </div>
                     `;
                 }
@@ -984,10 +984,10 @@
                 } else {
                     approvalSection = `
                         <div class="modal-section">
-                            <div class="modal-section-title">Approval Required</div>
+                            <div class="modal-section-title">Action Required</div>
                             <div class="approval-buttons">
-                                <button class="approval-btn approve-btn" onclick="approveFile(${index})">Approve</button>
-                                <button class="approval-btn reject-btn" onclick="rejectFile(${index})">Reject</button>
+                                <button class="approval-btn approve-btn" onclick="approveFile(${index})">Move</button>
+                                <button class="approval-btn reject-btn" onclick="rejectFile(${index})">Skip</button>
                             </div>
                         </div>
                     `;
@@ -1275,12 +1275,106 @@
             }
         }
 
-        function approveFile(index) {
-            updateFileStatus(index, 'approved');
+        async function approveFile(index) {
+            const file = filteredData[index];
+
+            // Show confirmation for move
+            const action = file.dest_path === 'DELETE' ? 'delete' : 'move';
+            const actionText = action === 'delete' ? 'Delete this file' : 'Move this file';
+
+            if (!confirm(`${actionText}?\n\nFrom: ${file.source_path}\n${action === 'delete' ? '' : 'To: ' + file.dest_path}`)) {
+                return;
+            }
+
+            try {
+                const response = await fetch('/api/move-file', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        id: file.id
+                    })
+                });
+
+                const result = await response.json();
+
+                if (!result.success) {
+                    alert(`Error: ${result.error}`);
+                    return;
+                }
+
+                // Remove file from local data
+                const queueFileIndex = queueData.files.findIndex(f => f.id === file.id);
+                if (queueFileIndex !== -1) {
+                    queueData.files.splice(queueFileIndex, 1);
+                }
+
+                // Update queue info and re-render
+                updateQueueInfo();
+                applyFiltersAndSort();
+
+                // If modal is open, close it
+                closeModal();
+
+                // Show success message briefly
+                const message = result.message || (action === 'delete' ? 'File deleted' : 'File moved');
+                showSuccessMessage(message);
+
+            } catch (error) {
+                alert(`Error: ${error.message}`);
+            }
         }
 
-        function rejectFile(index) {
-            updateFileStatus(index, 'rejected');
+        async function rejectFile(index) {
+            const file = filteredData[index];
+
+            if (!confirm(`Remove this file from the queue?\n\n${file.source_path}\n\nThe file will remain in its current location.`)) {
+                return;
+            }
+
+            try {
+                // Simply remove from queue without moving
+                const queueFileIndex = queueData.files.findIndex(f => f.id === file.id);
+                if (queueFileIndex !== -1) {
+                    queueData.files.splice(queueFileIndex, 1);
+                }
+
+                // Update the queue file via API (write back)
+                const response = await fetch('/api/update-queue', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        files: queueData.files
+                    })
+                });
+
+                if (!response.ok) {
+                    throw new Error('Failed to update queue');
+                }
+
+                // Update queue info and re-render
+                updateQueueInfo();
+                applyFiltersAndSort();
+
+                // If modal is open, close it
+                closeModal();
+
+                showSuccessMessage('File removed from queue');
+
+            } catch (error) {
+                alert(`Error: ${error.message}`);
+            }
+        }
+
+        function showSuccessMessage(message) {
+            const msgDiv = document.createElement('div');
+            msgDiv.style.cssText = 'position: fixed; top: 20px; right: 20px; background: #4CAF50; color: white; padding: 15px 20px; border-radius: 4px; z-index: 10000; box-shadow: 0 2px 8px rgba(0,0,0,0.2);';
+            msgDiv.textContent = message;
+            document.body.appendChild(msgDiv);
+            setTimeout(() => msgDiv.remove(), 3000);
         }
 
         function closeModal() {

@@ -5,6 +5,7 @@ import http.server
 import socketserver
 import json
 import os
+import shutil
 from urllib.parse import parse_qs, urlparse
 from datetime import datetime
 
@@ -63,6 +64,155 @@ class ViewerRequestHandler(http.server.SimpleHTTPRequestHandler):
 
             except Exception as e:
                 self.send_error(500, str(e))
+
+        elif self.path == '/api/move-file':
+            content_length = int(self.headers['Content-Length'])
+            post_data = self.rfile.read(content_length)
+
+            try:
+                data = json.loads(post_data.decode('utf-8'))
+                file_id = data.get('id')
+
+                if not file_id:
+                    self.send_error(400, "Missing file id")
+                    return
+
+                # Read current queue
+                with open(QUEUE_FILE, 'r') as f:
+                    queue_data = json.load(f)
+
+                # Find the file in queue
+                file_entry = None
+                file_index = None
+                for i, file in enumerate(queue_data['files']):
+                    if file['id'] == file_id:
+                        file_entry = file
+                        file_index = i
+                        break
+
+                if not file_entry:
+                    self.send_error(404, "File not found in queue")
+                    return
+
+                source_path = os.path.expanduser(file_entry['source_path'])
+                dest_path = os.path.expanduser(file_entry['dest_path'])
+                action = file_entry.get('action', 'move')
+
+                # Check if source file exists
+                if not os.path.exists(source_path):
+                    self.send_response(200)
+                    self.send_header('Content-type', 'application/json')
+                    self.send_header('Access-Control-Allow-Origin', '*')
+                    self.end_headers()
+                    self.wfile.write(json.dumps({
+                        'success': False,
+                        'error': f'Source file not found: {source_path}'
+                    }).encode())
+                    return
+
+                # Handle DELETE action (duplicates)
+                if dest_path == "DELETE" or action == "delete":
+                    try:
+                        os.remove(source_path)
+                        message = f"Deleted duplicate file: {os.path.basename(source_path)}"
+                    except Exception as e:
+                        self.send_response(200)
+                        self.send_header('Content-type', 'application/json')
+                        self.send_header('Access-Control-Allow-Origin', '*')
+                        self.end_headers()
+                        self.wfile.write(json.dumps({
+                            'success': False,
+                            'error': f'Failed to delete file: {str(e)}'
+                        }).encode())
+                        return
+                else:
+                    # Normal move operation
+                    # Create destination directory if it doesn't exist
+                    dest_dir = os.path.dirname(dest_path)
+                    os.makedirs(dest_dir, exist_ok=True)
+
+                    # Check if destination file already exists
+                    if os.path.exists(dest_path):
+                        self.send_response(200)
+                        self.send_header('Content-type', 'application/json')
+                        self.send_header('Access-Control-Allow-Origin', '*')
+                        self.end_headers()
+                        self.wfile.write(json.dumps({
+                            'success': False,
+                            'error': f'Destination file already exists: {dest_path}'
+                        }).encode())
+                        return
+
+                    # Move the file
+                    try:
+                        shutil.move(source_path, dest_path)
+                        message = f"Moved {os.path.basename(source_path)} to {dest_path}"
+                    except Exception as e:
+                        self.send_response(200)
+                        self.send_header('Content-type', 'application/json')
+                        self.send_header('Access-Control-Allow-Origin', '*')
+                        self.end_headers()
+                        self.wfile.write(json.dumps({
+                            'success': False,
+                            'error': f'Failed to move file: {str(e)}'
+                        }).encode())
+                        return
+
+                # Remove file from queue
+                queue_data['files'].pop(file_index)
+                queue_data['last_updated'] = datetime.utcnow().strftime('%Y-%m-%dT%H:%M:%SZ')
+
+                # Write back to file
+                with open(QUEUE_FILE, 'w') as f:
+                    json.dump(queue_data, f, indent=2)
+
+                # Send success response
+                self.send_response(200)
+                self.send_header('Content-type', 'application/json')
+                self.send_header('Access-Control-Allow-Origin', '*')
+                self.end_headers()
+                self.wfile.write(json.dumps({
+                    'success': True,
+                    'message': message
+                }).encode())
+
+            except Exception as e:
+                self.send_error(500, str(e))
+
+        elif self.path == '/api/update-queue':
+            content_length = int(self.headers['Content-Length'])
+            post_data = self.rfile.read(content_length)
+
+            try:
+                data = json.loads(post_data.decode('utf-8'))
+                files = data.get('files')
+
+                if files is None:
+                    self.send_error(400, "Missing files array")
+                    return
+
+                # Read current queue to preserve schema
+                with open(QUEUE_FILE, 'r') as f:
+                    queue_data = json.load(f)
+
+                # Update files array
+                queue_data['files'] = files
+                queue_data['last_updated'] = datetime.utcnow().strftime('%Y-%m-%dT%H:%M:%SZ')
+
+                # Write back to file
+                with open(QUEUE_FILE, 'w') as f:
+                    json.dump(queue_data, f, indent=2)
+
+                # Send success response
+                self.send_response(200)
+                self.send_header('Content-type', 'application/json')
+                self.send_header('Access-Control-Allow-Origin', '*')
+                self.end_headers()
+                self.wfile.write(json.dumps({'success': True}).encode())
+
+            except Exception as e:
+                self.send_error(500, str(e))
+
         else:
             self.send_error(404)
 
