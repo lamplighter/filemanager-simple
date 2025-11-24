@@ -373,6 +373,7 @@ process_queue() {
         local reasoning=$(echo "$file_json" | jq -r '.reasoning')
         local action_type=$(echo "$file_json" | jq -r '.action // "move"')
         local duplicate_of=$(echo "$file_json" | jq -r '.duplicate_of // [] | join(", ")')
+        local new_folder=$(echo "$file_json" | jq -r '.new_folder // false')
 
         # Skip if not approved
         if [[ "$status" != "approved" ]]; then
@@ -400,6 +401,10 @@ process_queue() {
             fi
         else
             echo "  Destination: $dest_path"
+            if [[ "$new_folder" == "true" ]]; then
+                local folder_path=$(dirname "$dest_path")
+                echo "  ${BLUE}📁 NEW FOLDER: $folder_path${RESET}"
+            fi
         fi
 
         # Validate source exists

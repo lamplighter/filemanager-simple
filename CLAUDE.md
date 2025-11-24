@@ -100,6 +100,23 @@ Exploration steps:
 **Multiple Destinations**:
 When you find multiple valid destinations, score each one independently and save ALL options with confidence >= 60% to the `alternatives` array. This gives the user transparency into your decision-making process.
 
+**Creating New Folders**:
+If NO existing folder is appropriate for the file, you can propose creating a new folder:
+- Analyze the file's entity/category (e.g., new utility provider, new bank account, new business entity)
+- Propose a new folder name following the naming conventions (use ` - ` separator for multi-part names)
+- Set `new_folder: true` in the JSON entry
+- Include justification in the reasoning field
+- Typically set confidence to 70-85% (lower than exact matches, higher than unclear categorization)
+- The viewer UI will highlight new folder proposals with a special badge
+- The organize.sh script will create the folder if the user approves
+
+**Examples of when to propose new folders**:
+- New utility provider not in existing structure (e.g., "Enwave" for a new heating/cooling service)
+- New bank account or financial institution (e.g., "Wealthsimple" for a new investment platform)
+- New business entity or investment (e.g., new angel investment company)
+- New real estate property (e.g., "Real Estate - 123 Main St")
+- New service provider category (e.g., "Lawn Care" if not currently tracked)
+
 ### 4. Smart Categorization & Ranking
 - Match against documented category patterns (Financial, Utilities, Business, etc.)
 - Use similarity to existing files to refine placement
@@ -231,6 +248,13 @@ When a duplicate is detected, the entry looks like this:
     - **confidence_factors**: Breakdown of confidence scoring for this option
     - **reasoning**: Why this option ranked lower than primary (1-2 sentences)
     - **differences**: Key differences from primary destination (1 sentence)
+
+**For New Folder Proposals:**
+- **new_folder**: `true` when proposing to create a new folder (dest_path parent doesn't exist yet)
+  - Set to `true` when the destination folder needs to be created
+  - The viewer UI will highlight this with a "NEW FOLDER" badge
+  - organize.sh will create the folder when user approves
+  - Include clear justification in reasoning field for why new folder is needed
 
 ### 9. Inform the User
 
@@ -434,6 +458,70 @@ Primary: ~/Dropbox/Filing/Bell - Internet/Bell-2024-01-15.pdf
 Alternative: ~/Dropbox/Filing/Utilities/Internet/ (60% confidence)
 
 Run ./organize.sh or open viewer to see all options."
+```
+
+### Workflow Example: Proposing a New Folder
+
+```bash
+# User says: "organize next file"
+
+# 1. You find and analyze the file
+ls -lt ~/Downloads/  # Find next file (sorted by newest first)
+# Found: "Wealthsimple-Statement-2024-01.pdf" (most recent file)
+
+# 2. Analyze the file content
+read /Users/marklampert/Downloads/Wealthsimple-Statement-2024-01.pdf
+# Identified: Investment statement from Wealthsimple (new platform not in filing system)
+
+# 2.5. Check for duplicates
+./scripts/find_duplicates.sh \
+  "/Users/marklampert/Downloads/Wealthsimple-Statement-2024-01.pdf" \
+  "/Users/marklampert/Dropbox/Filing/"
+# Returns: {"source_checksum": "def456...", "duplicates": []}
+# No duplicates found - continue
+
+# 3. Explore existing destinations
+glob "**/*Wealthsimple*" ~/Dropbox/Filing/
+# Returns: No matches found
+
+glob "**/*Investment*" ~/Dropbox/Filing/
+# Found: ~/Dropbox/Filing/Investments - Angel/, Investments - Funds/, Investments - Advisors/
+# None match Wealthsimple (online brokerage platform)
+
+glob "**/TD WebBroker*" ~/Dropbox/Filing/
+# Found: ~/Dropbox/Filing/TD WebBroker/ (similar brokerage platform)
+# Pattern suggests creating dedicated folder for each brokerage
+
+# 4. Decision: Propose new folder "Wealthsimple"
+# Rationale: Similar platforms (TD WebBroker) have dedicated folders
+# Confidence: 75% (clear category, following existing pattern, but new folder)
+
+# 5. Generate UUID and add to queue with new_folder flag
+{
+  "id": "a1b2c3d4-e5f6-47de-b88f-f20fc4f93cf0",
+  "source_path": "/Users/marklampert/Downloads/Wealthsimple-Statement-2024-01.pdf",
+  "dest_path": "/Users/marklampert/Dropbox/Filing/Wealthsimple/Wealthsimple-2024-01-31.pdf",
+  "new_folder": true,
+  "confidence": 75,
+  "confidence_factors": {
+    "similar_platform_pattern": 25,
+    "file_type_match": 20,
+    "entity_keyword": 20,
+    "content_match": 10
+  },
+  "status": "pending",
+  "timestamp": "2025-01-21T16:00:00Z",
+  "reasoning": "New investment platform (Wealthsimple) not currently in filing system. Proposing new folder following pattern of existing brokerage folders (TD WebBroker). Investment statement matches PDF format typical of brokerage platforms."
+}
+
+# 6. Inform the user
+"New folder proposal! Wealthsimple investment statement to be filed in new folder:
+/Users/marklampert/Dropbox/Filing/Wealthsimple/
+
+Confidence: 75% (following existing pattern for brokerage platforms)
+Will create new folder if approved.
+
+Run ./organize.sh or open viewer to review."
 ```
 
 ---

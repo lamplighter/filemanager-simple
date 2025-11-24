@@ -247,6 +247,29 @@
             border-radius: 4px;
         }
 
+        .new-folder-badge {
+            display: inline-block;
+            background: #17a2b8;
+            color: white;
+            padding: 3px 8px;
+            border-radius: 4px;
+            font-size: 10px;
+            font-weight: 700;
+            margin-left: 6px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .new-folder-info {
+            background: #d1ecf1;
+            border-left: 3px solid #17a2b8;
+            padding: 8px 12px;
+            margin-top: 8px;
+            font-size: 12px;
+            border-radius: 4px;
+            color: #0c5460;
+        }
+
         .duplicate-info strong {
             color: #856404;
             display: block;
@@ -756,6 +779,7 @@
         function createTableRow(file, index) {
             const confidenceClass = getConfidenceClass(file.confidence);
             const isDuplicate = file.dest_path === "DELETE" || file.action === "delete";
+            const isNewFolder = file.new_folder === true;
 
             // Format destination cell
             let destCell;
@@ -772,6 +796,16 @@
                 `;
             } else {
                 destCell = formatPath(file.dest_path);
+                if (isNewFolder) {
+                    // Extract folder path from dest_path
+                    const folderPath = file.dest_path.substring(0, file.dest_path.lastIndexOf('/'));
+                    destCell += `
+                        <span class="new-folder-badge">New Folder</span>
+                        <div class="new-folder-info">
+                            <strong>📁 Will create:</strong> ${formatPath(folderPath)}
+                        </div>
+                    `;
+                }
             }
 
             let approvalCell;
