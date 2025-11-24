@@ -12,6 +12,7 @@ from datetime import datetime
 PORT = 8765
 PROJECT_ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 QUEUE_FILE = os.path.join(PROJECT_ROOT, 'state', 'file_queue.json')
+HISTORY_FILE = os.path.join(PROJECT_ROOT, 'state', 'move_history.json')
 
 class ViewerRequestHandler(http.server.SimpleHTTPRequestHandler):
     def __init__(self, *args, **kwargs):
@@ -158,11 +159,33 @@ class ViewerRequestHandler(http.server.SimpleHTTPRequestHandler):
                         }).encode())
                         return
 
+                # Update file entry with moved status and timestamp
+                file_entry['status'] = 'moved'
+                file_entry['moved_at'] = datetime.utcnow().strftime('%Y-%m-%dT%H:%M:%SZ')
+
+                # Add to move history
+                try:
+                    with open(HISTORY_FILE, 'r') as f:
+                        history_data = json.load(f)
+                except (FileNotFoundError, json.JSONDecodeError):
+                    history_data = {
+                        'schema_version': '1.0',
+                        'last_updated': datetime.utcnow().strftime('%Y-%m-%dT%H:%M:%SZ'),
+                        'files': []
+                    }
+
+                history_data['files'].append(file_entry)
+                history_data['last_updated'] = datetime.utcnow().strftime('%Y-%m-%dT%H:%M:%SZ')
+
+                # Write history file
+                with open(HISTORY_FILE, 'w') as f:
+                    json.dump(history_data, f, indent=2)
+
                 # Remove file from queue
                 queue_data['files'].pop(file_index)
                 queue_data['last_updated'] = datetime.utcnow().strftime('%Y-%m-%dT%H:%M:%SZ')
 
-                # Write back to file
+                # Write back to queue file
                 with open(QUEUE_FILE, 'w') as f:
                     json.dump(queue_data, f, indent=2)
 

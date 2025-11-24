@@ -212,6 +212,11 @@
             color: #155724;
         }
 
+        .status-moved {
+            background: #28a745;
+            color: #ffffff;
+        }
+
         .status-rejected {
             background: #f8d7da;
             color: #721c24;
@@ -731,11 +736,31 @@
 
         async function loadQueue() {
             try {
-                const response = await fetch('/state/file_queue.json');
-                if (!response.ok) {
-                    throw new Error(`HTTP error! status: ${response.status}`);
+                // Load pending queue
+                const queueResponse = await fetch('/state/file_queue.json');
+                if (!queueResponse.ok) {
+                    throw new Error(`HTTP error loading queue! status: ${queueResponse.status}`);
                 }
-                queueData = await response.json();
+                const queueJson = await queueResponse.json();
+
+                // Load move history
+                let historyJson = { files: [] };
+                try {
+                    const historyResponse = await fetch('/state/move_history.json');
+                    if (historyResponse.ok) {
+                        historyJson = await historyResponse.json();
+                    }
+                } catch (historyError) {
+                    console.warn('Move history not available:', historyError);
+                }
+
+                // Combine both into queueData
+                queueData = {
+                    schema_version: queueJson.schema_version,
+                    last_updated: queueJson.last_updated,
+                    files: [...queueJson.files, ...historyJson.files]
+                };
+
                 updateQueueInfo();
                 applyFiltersAndSort();
             } catch (error) {
@@ -746,10 +771,11 @@
         function updateQueueInfo() {
             const totalFiles = queueData.files.length;
             const pendingCount = queueData.files.filter(f => f.status === 'pending').length;
+            const movedCount = queueData.files.filter(f => f.status === 'moved').length;
             const lastUpdated = new Date(queueData.last_updated).toLocaleString();
 
             document.getElementById('queueInfo').textContent =
-                `${totalFiles} total files | ${pendingCount} pending | Last updated: ${lastUpdated}`;
+                `${totalFiles} total files | ${pendingCount} pending | ${movedCount} moved | Last updated: ${lastUpdated}`;
         }
 
         function getConfidenceClass(confidence) {
