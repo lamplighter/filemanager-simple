@@ -38,6 +38,20 @@ Look in source directories (default: `~/Downloads/` and `~/Desktop/`) for unorga
 - For spreadsheets/PDFs: Examine content for entity names and domain-specific terms
 - Identify potential category matches from filing structure
 
+**Special handling for Insurance PDFs**:
+- Read PDF content to identify:
+  - Document type (Renewal, Policy Change, Coverage Increase, Pink Card, Issuance, etc.)
+  - Property addresses mentioned in the document
+  - Policy numbers and account identifiers
+  - Effective dates or transaction dates
+- Map property addresses to standardized short names (see `docs/naming-conventions.md`):
+  - "1035 Fire Route 20G" or "1035 FIRE ROUTE 20G" → "Cottage"
+  - "40 Gibson Ave" or "40 GIBSON AVE" → "40 Gibson"
+  - "319 Carlaw Ave Unit 711" or "319 CARLAW AVE UNIT 711" → "Carlaw"
+  - Vehicle make/model → use short format (e.g., "Mazda CX-5")
+- If multiple properties in one document → use combined format (e.g., "Cottage + Carlaw")
+- Extract document date for filename (prefer effective date, statement date, or issue date)
+
 ### 2.5. Check for Duplicates
 
 **IMPORTANT**: Before exploring destinations, check if this file already exists elsewhere.
@@ -149,6 +163,13 @@ If NO existing folder is appropriate for the file, you can propose creating a ne
 - Remove leading underscores and normalize spacing
 - Ensure consistent date format: `YYYY-MM-DD`
 - Remove duplicate entity names if they're in the folder path
+
+**Insurance File Naming** (specific pattern):
+- Format: `YYYY-MM-DD [Document Type] - [Property].pdf`
+- Extract document type from PDF content (Renewal, Policy Change, Coverage Increase, etc.)
+- Map property addresses to short identifiers (Cottage, 40 Gibson, Carlaw, etc.)
+- Examples: `2024-11-13 Renewal - Cottage + Carlaw.pdf`, `2021-06-23 Pink Card - Mazda CX-5.pdf`
+- Never use machine-generated policy numbers or document IDs in filename
 
 **Folder Naming Standards** (when suggesting new folders):
 - **Multi-part names**: Use ` - ` (space-hyphen-space) separator

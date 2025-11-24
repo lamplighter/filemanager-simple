@@ -64,11 +64,25 @@ Apply these naming patterns based on the destination category:
   - `Toronto Hydro-2024-03-20.pdf`
 
 ## Insurance Documents
-- **Pattern**: `YYYY-MM-DD [Document_Type] - [Details].ext`
+- **Pattern**: `YYYY-MM-DD [Document_Type] - [Property].ext`
+- **Document Types**: Renewal, Policy Change, Coverage Increase, Pink Card, Issuance, Servicing Letter
+- **Property Identifiers** (use short, consistent names):
+  - `Cottage` - 1035 Fire Route 20G, Gravenhurst
+  - `40 Gibson` - 40 Gibson Ave (house)
+  - `Carlaw` - 319 Carlaw Ave Unit 711 (rental condo)
+  - `[Vehicle Make Model]` - for auto insurance (e.g., "Mazda CX-5")
+  - `Cottage + Carlaw` - for multi-property documents
+  - `All Properties` - for portfolio-wide documents
 - **Examples**:
-  - `2025-04-25 Scenarios Summary.xlsx`
-  - `2025-04-11 Insurance as an Alternative Investment (April 2025).pdf`
-  - `2024-11-18 Policy Application.pdf`
+  - `2024-11-13 Renewal - Cottage + Carlaw.pdf` (multi-property renewal)
+  - `2024-09-30 Coverage Increase - Cottage.pdf` (single property change)
+  - `2021-06-23 Pink Card - Mazda CX-5.pdf` (auto insurance card)
+  - `2024-11-18 Policy Application - 40 Gibson.pdf` (new policy application)
+  - `2025-04-25 Scenarios Summary.xlsx` (general analysis, no property)
+  - `2025-04-11 Insurance as an Alternative Investment (April 2025).pdf` (general article)
+- **Machine-Generated Names to Avoid**:
+  - ❌ `00134652057_2023-11-13_Renewal_0000252724963.pdf` (policy numbers, document IDs)
+  - ❌ `Renewal_0000252724963 (1).pdf` (version numbers without context)
 
 ## General Business Documents
 - **Pattern**: `YYYY-MM-DD [Descriptive_Name].ext`

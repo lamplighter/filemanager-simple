@@ -1,0 +1,16 @@
+[project]
+name = "filemanager-simple"
+version = "0.1.0"
+description = "Claude Code driven file organization system"
+requires-python = ">=3.9"
+dependencies = [
+    "PyPDF2>=3.0.0",
+]
+
+[project.optional-dependencies]
+dev = [
+    "playwright>=1.40.0",
+]
+
+[tool.hatch.build.targets.wheel]
+packages = ["scripts"]
