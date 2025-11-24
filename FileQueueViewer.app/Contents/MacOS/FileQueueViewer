@@ -14,13 +14,12 @@ PID_FILE="/tmp/viewer-server.pid"
 
 # Check if server is already running
 SERVER_RUNNING=false
-if [ -f "$PID_FILE" ]; then
-    SERVER_PID=$(cat "$PID_FILE")
-    if ps -p "$SERVER_PID" > /dev/null 2>&1; then
-        SERVER_RUNNING=true
-    else
-        rm "$PID_FILE"
-    fi
+if lsof -i :$SERVER_PORT -sTCP:LISTEN -t >/dev/null 2>&1; then
+    SERVER_PID=$(lsof -i :$SERVER_PORT -sTCP:LISTEN -t)
+    SERVER_RUNNING=true
+    echo $SERVER_PID > "$PID_FILE"
+elif [ -f "$PID_FILE" ]; then
+    rm "$PID_FILE"
 fi
 
 # Start server if not running
@@ -34,9 +33,8 @@ fi
 # Launch Chrome in app mode and wait for it to exit
 # This keeps the FileQueueViewer.app process running with custom icon
 "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome" \
-    --app="file://$VIEWER_PATH" \
+    --app="http://localhost:$SERVER_PORT/viewer.html" \
     --app-name="File Queue Viewer" \
-    --allow-file-access-from-files \
     --user-data-dir="$TEMP_USER_DATA" \
     --no-first-run \
     --no-default-browser-check

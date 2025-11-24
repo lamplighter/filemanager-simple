@@ -9,7 +9,6 @@ PROJECT_ROOT="$(dirname "$SCRIPT_DIR")"
 VIEWER_PATH="$PROJECT_ROOT/viewer.html"
 SERVER_SCRIPT="$SCRIPT_DIR/viewer_server.py"
 SERVER_PORT=8765
-TEMP_USER_DATA="/tmp/chrome-fileviewer-$(date +%s)"
 PID_FILE="/tmp/viewer-server.pid"
 
 if [ ! -f "$VIEWER_PATH" ]; then
@@ -51,18 +50,13 @@ if [ "$SERVER_RUNNING" = false ]; then
     fi
 fi
 
-echo "Opening file queue viewer in isolated Chrome instance..."
+echo "Opening file queue viewer with custom app..."
 echo "Viewer URL: http://localhost:$SERVER_PORT/viewer.html"
 
-# Launch Chrome in app mode with a temporary profile
-# App mode gives a cleaner interface without browser chrome
-"/Applications/Google Chrome.app/Contents/MacOS/Google Chrome" \
-    --app="http://localhost:$SERVER_PORT/viewer.html" \
-    --user-data-dir="$TEMP_USER_DATA" \
-    --no-first-run \
-    --no-default-browser-check &
+# Launch the FileQueueViewer.app bundle (has custom icon)
+open "$PROJECT_ROOT/FileQueueViewer.app"
 
-echo "✓ Viewer opened in isolated Chrome instance"
+echo "✓ Viewer opened with custom app icon"
 echo ""
 echo "Note: The viewer has full functionality:"
 echo "  - Directory file listings work (API server running)"
