@@ -9,6 +9,6 @@ Open the file queue viewer in Chrome app mode.
 4. Leaves server running for future use
 
 **Instructions:**
-Run the view_queue.sh script which handles server startup and Chrome launching.
+Run `./scripts/view_queue.sh` which handles server startup and Chrome launching.
 
 Open the file queue viewer now.
