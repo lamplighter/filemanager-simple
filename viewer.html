@@ -1348,10 +1348,6 @@
         async function rejectFile(index) {
             const file = filteredData[index];
 
-            if (!confirm(`Skip this file?\n\n${file.source_path}\n\nThe file will remain in its current location and be saved to skip history.`)) {
-                return;
-            }
-
             try {
                 // Call skip-file API which saves to skip_history.json and removes from queue
                 const response = await fetch('/api/skip-file', {

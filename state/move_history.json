@@ -1,5 +1,57 @@
 {
   "schema_version": "1.0",
-  "last_updated": "2025-01-23T00:00:00Z",
-  "files": []
+  "last_updated": "2025-11-25T00:32:26Z",
+  "files": [
+    {
+      "id": "8af68bbe-7d7e-4d21-b3fb-62153b6aa558",
+      "source_path": "/Users/marklampert/Downloads/Submit documents - Confirmation 2.pdf",
+      "dest_path": "/Users/marklampert/Dropbox/Taxes/HoldCo/CRA/2025-11-12 Document Submission Confirmation - Common Share Documentation YE 2021-2023.pdf",
+      "confidence": 95,
+      "confidence_factors": {
+        "similar_files_found": 30,
+        "file_type_match": 20,
+        "entity_keyword": 20,
+        "naming_pattern_match": 10,
+        "content_match": 15
+      },
+      "status": "moved",
+      "timestamp": "2025-01-21T20:35:00Z",
+      "reasoning": "CRA (Canada Revenue Agency) document submission confirmation for 11087592 Canada Inc. (HoldCo). Dated Nov 12, 2025, confirming submission of common share documentation for Mark Lewis Lampert covering period 2021-11-01 to 2023-10-31. Case reference 17593071, confirmation 3655P48. Found existing ~/Dropbox/Taxes/HoldCo/CRA/ folder containing Notices of Assessment, audit letters, and other CRA correspondence. Applied standard naming pattern YYYY-MM-DD [Document Type] - [Specifics] YE [years] matching existing files. High confidence based on exact folder match and consistent naming pattern.",
+      "moved_at": "2025-11-25T00:32:23Z"
+    },
+    {
+      "id": "9ecb485d-fd6b-4192-9cbe-3500bae6b0a5",
+      "source_path": "/Users/marklampert/Downloads/Submit documents - Confirmation 3.pdf",
+      "dest_path": "/Users/marklampert/Dropbox/Taxes/HoldCo/CRA/2025-11-12 Document Submission Confirmation - Financial Statements YE 2022-2023.pdf",
+      "confidence": 95,
+      "confidence_factors": {
+        "similar_files_found": 30,
+        "file_type_match": 20,
+        "entity_keyword": 20,
+        "naming_pattern_match": 10,
+        "content_match": 15
+      },
+      "status": "moved",
+      "timestamp": "2025-01-21T20:30:00Z",
+      "reasoning": "CRA (Canada Revenue Agency) document submission confirmation for 11087592 Canada Inc. (HoldCo). Dated Nov 12, 2025, confirming submission of financial statements and trial balances for YE 2022 and 2023. Case reference 17593071, confirmation 3655P9E. Found existing ~/Dropbox/Taxes/HoldCo/CRA/ folder containing Notices of Assessment, audit letters, and other CRA correspondence. Applied standard naming pattern YYYY-MM-DD [Document Type] - [Specifics] YE [years] matching existing files like '2025-09-25 Audit Letter.pdf'. High confidence based on exact folder match and consistent naming pattern.",
+      "moved_at": "2025-11-25T00:32:24Z"
+    },
+    {
+      "id": "8af6bfc9-cc5d-496a-aad3-e034d03d7ab7",
+      "source_path": "/Users/marklampert/Downloads/Submit documents - Confirmation 4.pdf",
+      "dest_path": "/Users/marklampert/Dropbox/Taxes/HoldCo/CRA/2025-11-12 Document Submission Confirmation - Investment Statements YE 2022-2023.pdf",
+      "confidence": 95,
+      "confidence_factors": {
+        "similar_files_found": 30,
+        "file_type_match": 20,
+        "entity_keyword": 20,
+        "naming_pattern_match": 10,
+        "content_match": 15
+      },
+      "status": "moved",
+      "timestamp": "2025-01-21T20:25:00Z",
+      "reasoning": "CRA (Canada Revenue Agency) document submission confirmation for 11087592 Canada Inc. (HoldCo). Dated Nov 12, 2025, confirming submission of investment statements, T5013, T1135 and other tax documents for 2022-2023 tax years. Case reference 17593071, confirmation 3655Q6H. Found existing ~/Dropbox/Taxes/HoldCo/CRA/ folder containing Notices of Assessment, audit letters, and other CRA correspondence. Applied standard naming pattern YYYY-MM-DD [Document Type] YE [years] matching existing files. High confidence based on exact folder match and consistent naming pattern.",
+      "moved_at": "2025-11-25T00:32:26Z"
+    }
+  ]
 }
