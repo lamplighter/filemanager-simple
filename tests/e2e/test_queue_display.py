@@ -19,7 +19,7 @@ class TestQueueDisplay:
         """Empty queue shows appropriate message or empty table."""
         write_queue(make_empty_queue())
 
-        viewer = ViewerPage(page)
+        viewer = ViewerPage(page, viewer_url)
         viewer.navigate()
 
         # Either no table (empty state message) or table with no rows
@@ -41,7 +41,7 @@ class TestQueueDisplay:
         ])
         write_queue(queue)
 
-        viewer = ViewerPage(page)
+        viewer = ViewerPage(page, viewer_url)
         viewer.navigate()
 
         assert viewer.has_table()
@@ -57,7 +57,7 @@ class TestQueueDisplay:
         ])
         write_queue(queue)
 
-        viewer = ViewerPage(page)
+        viewer = ViewerPage(page, viewer_url)
         viewer.navigate()
 
         headers = viewer.get_header_texts()
@@ -74,7 +74,7 @@ class TestQueueDisplay:
         ])
         write_queue(queue)
 
-        viewer = ViewerPage(page)
+        viewer = ViewerPage(page, viewer_url)
         viewer.navigate()
 
         assert viewer.has_move_buttons()
@@ -91,7 +91,7 @@ class TestQueueDisplay:
         ])
         write_queue(queue)
 
-        viewer = ViewerPage(page)
+        viewer = ViewerPage(page, viewer_url)
         viewer.navigate()
 
         info_text = viewer.queue_info.text_content()
@@ -114,7 +114,7 @@ class TestQueueFiltering:
         ])
         write_queue(queue)
 
-        viewer = ViewerPage(page)
+        viewer = ViewerPage(page, viewer_url)
         viewer.navigate()
 
         # Initially shows all files
@@ -139,7 +139,7 @@ class TestQueueFiltering:
         ])
         write_queue(queue)
 
-        viewer = ViewerPage(page)
+        viewer = ViewerPage(page, viewer_url)
         viewer.navigate()
 
         viewer.filter_by_confidence("low")
@@ -164,7 +164,7 @@ class TestQueueSorting:
         ])
         write_queue(queue)
 
-        viewer = ViewerPage(page)
+        viewer = ViewerPage(page, viewer_url)
         viewer.navigate()
 
         viewer.sort_by_option("confidence")
@@ -184,7 +184,7 @@ class TestQueueSorting:
         ])
         write_queue(queue)
 
-        viewer = ViewerPage(page)
+        viewer = ViewerPage(page, viewer_url)
         viewer.navigate()
 
         viewer.sort_by_option("confidence-asc")

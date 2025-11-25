@@ -10,12 +10,15 @@ import tempfile
 from urllib.parse import parse_qs, urlparse
 from datetime import datetime
 
-PORT = 8765
+PORT = int(os.environ.get('FILEMANAGER_PORT', 8765))
 HOST = '127.0.0.1'  # Bind to localhost only for security
 PROJECT_ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-QUEUE_FILE = os.path.join(PROJECT_ROOT, 'state', 'file_queue.json')
-HISTORY_FILE = os.path.join(PROJECT_ROOT, 'state', 'move_history.json')
-SKIP_HISTORY_FILE = os.path.join(PROJECT_ROOT, 'state', 'skip_history.json')
+
+# State directory can be overridden via environment variable (used by tests)
+STATE_DIR = os.environ.get('FILEMANAGER_STATE_DIR', os.path.join(PROJECT_ROOT, 'state'))
+QUEUE_FILE = os.path.join(STATE_DIR, 'file_queue.json')
+HISTORY_FILE = os.path.join(STATE_DIR, 'move_history.json')
+SKIP_HISTORY_FILE = os.path.join(STATE_DIR, 'skip_history.json')
 
 
 def atomic_write_json(data: dict, filepath: str) -> None:
@@ -340,7 +343,30 @@ class ViewerRequestHandler(http.server.SimpleHTTPRequestHandler):
         """Handle GET requests"""
         parsed_url = urlparse(self.path)
 
-        if parsed_url.path == '/api/list-directory':
+        # Serve state files from STATE_DIR (supports test isolation)
+        if parsed_url.path.startswith('/state/') and parsed_url.path.endswith('.json'):
+            filename = os.path.basename(parsed_url.path)
+            file_path = os.path.join(STATE_DIR, filename)
+
+            if not os.path.exists(file_path):
+                self.send_json_error(404, f"State file not found: {filename}")
+                return
+
+            try:
+                with open(file_path, 'r') as f:
+                    content = f.read()
+
+                self.send_response(200)
+                self.send_header('Content-type', 'application/json')
+                self.send_header('Access-Control-Allow-Origin', '*')
+                self.end_headers()
+                self.wfile.write(content.encode())
+
+            except Exception as e:
+                self.send_json_error(500, str(e))
+            return
+
+        elif parsed_url.path == '/api/list-directory':
             # Extract directory path from query parameter
             query_params = parse_qs(parsed_url.query)
             dir_path = query_params.get('path', [None])[0]

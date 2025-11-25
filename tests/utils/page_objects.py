@@ -6,7 +6,13 @@ from playwright.sync_api import Page, expect
 class ViewerPage:
     """Page Object for the file queue viewer."""
 
-    def __init__(self, page: Page, base_url: str = "http://localhost:8765"):
+    def __init__(self, page: Page, base_url: str):
+        """Initialize ViewerPage.
+
+        Args:
+            page: Playwright page object
+            base_url: Server URL (required - no default to prevent accidental production access)
+        """
         self.page = page
         self.base_url = base_url
 

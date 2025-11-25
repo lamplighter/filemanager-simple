@@ -24,7 +24,7 @@ class TestModalBasics:
         ])
         write_queue(queue)
 
-        viewer = ViewerPage(page)
+        viewer = ViewerPage(page, viewer_url)
         viewer.navigate()
 
         # Modal should be closed initially
@@ -52,7 +52,7 @@ class TestModalBasics:
         ])
         write_queue(queue)
 
-        viewer = ViewerPage(page)
+        viewer = ViewerPage(page, viewer_url)
         viewer.navigate()
         viewer.click_row(0)
 
@@ -69,7 +69,7 @@ class TestModalBasics:
         ])
         write_queue(queue)
 
-        viewer = ViewerPage(page)
+        viewer = ViewerPage(page, viewer_url)
         viewer.navigate()
         viewer.click_row(0)
 
@@ -86,7 +86,7 @@ class TestModalBasics:
         ])
         write_queue(queue)
 
-        viewer = ViewerPage(page)
+        viewer = ViewerPage(page, viewer_url)
         viewer.navigate()
         viewer.click_row(0)
 
@@ -115,7 +115,7 @@ class TestModalBasics:
         ])
         write_queue(queue)
 
-        viewer = ViewerPage(page)
+        viewer = ViewerPage(page, viewer_url)
         viewer.navigate()
         viewer.click_row(0)
 
@@ -139,7 +139,7 @@ class TestModalActions:
         ])
         write_queue(queue)
 
-        viewer = ViewerPage(page)
+        viewer = ViewerPage(page, viewer_url)
         viewer.navigate()
         viewer.click_row(0)
 
@@ -168,7 +168,7 @@ class TestModalActions:
         ])
         write_queue(queue)
 
-        viewer = ViewerPage(page)
+        viewer = ViewerPage(page, viewer_url)
         viewer.navigate()
 
         initial_count = viewer.get_row_count()
@@ -223,7 +223,7 @@ class TestModalAlternatives:
         ])
         write_queue(queue)
 
-        viewer = ViewerPage(page)
+        viewer = ViewerPage(page, viewer_url)
         viewer.navigate()
         viewer.click_row(0)
 
@@ -254,7 +254,7 @@ class TestModalAlternatives:
         ])
         write_queue(queue)
 
-        viewer = ViewerPage(page)
+        viewer = ViewerPage(page, viewer_url)
         viewer.navigate()
         viewer.click_row(0)
 

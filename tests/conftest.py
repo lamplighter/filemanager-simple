@@ -5,45 +5,75 @@ import subprocess
 import time
 import os
 import json
-import shutil
+import socket
 from pathlib import Path
 from playwright.sync_api import Page, Browser
 
 # Project paths
 PROJECT_ROOT = Path(__file__).parent.parent
-STATE_DIR = PROJECT_ROOT / "state"
-QUEUE_FILE = STATE_DIR / "file_queue.json"
-HISTORY_FILE = STATE_DIR / "move_history.json"
-SKIP_HISTORY_FILE = STATE_DIR / "skip_history.json"
 SERVER_SCRIPT = PROJECT_ROOT / "scripts" / "viewer_server.py"
-SERVER_PORT = 8765
-SERVER_URL = f"http://localhost:{SERVER_PORT}"
+
+# Test server uses a different port to avoid conflicts with production
+TEST_SERVER_PORT = 8766
 
 
 @pytest.fixture(scope="session")
-def server():
-    """Start the viewer server for the test session."""
-    # Check if server is already running
-    import socket
+def test_state_dir(tmp_path_factory):
+    """Create isolated state directory for all tests.
+
+    This ensures tests NEVER touch production state files.
+    """
+    state_dir = tmp_path_factory.mktemp("test_state")
+
+    # Initialize empty state files
+    (state_dir / "file_queue.json").write_text(json.dumps({
+        "schema_version": "1.0",
+        "last_updated": "",
+        "files": []
+    }, indent=2))
+    (state_dir / "move_history.json").write_text(json.dumps({"files": []}, indent=2))
+    (state_dir / "skip_history.json").write_text(json.dumps({"files": []}, indent=2))
+
+    return state_dir
+
+
+@pytest.fixture(scope="session")
+def server(test_state_dir):
+    """Start the viewer server for the test session with isolated state."""
+    server_url = f"http://localhost:{TEST_SERVER_PORT}"
+
+    # Check if something is already running on our test port
     sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-    result = sock.connect_ex(('localhost', SERVER_PORT))
+    result = sock.connect_ex(('localhost', TEST_SERVER_PORT))
     sock.close()
 
     if result == 0:
-        # Server already running, just use it
-        yield {"url": SERVER_URL, "port": SERVER_PORT, "process": None}
-        return
+        # Something already on this port - this is unexpected for test port
+        raise RuntimeError(f"Port {TEST_SERVER_PORT} is already in use. Cannot start test server.")
 
-    # Start the server
+    # Start the server with isolated state directory
+    env = os.environ.copy()
+    env['FILEMANAGER_STATE_DIR'] = str(test_state_dir)
+    env['FILEMANAGER_PORT'] = str(TEST_SERVER_PORT)
+
     proc = subprocess.Popen(
         ["python3", str(SERVER_SCRIPT)],
         stdout=subprocess.PIPE,
         stderr=subprocess.PIPE,
         cwd=str(PROJECT_ROOT),
+        env=env,
     )
     time.sleep(2)  # Wait for server to start
 
-    yield {"process": proc, "url": SERVER_URL, "port": SERVER_PORT}
+    # Verify server started successfully
+    sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+    result = sock.connect_ex(('localhost', TEST_SERVER_PORT))
+    sock.close()
+    if result != 0:
+        proc.kill()
+        raise RuntimeError(f"Test server failed to start on port {TEST_SERVER_PORT}")
+
+    yield {"process": proc, "url": server_url, "port": TEST_SERVER_PORT}
 
     # Cleanup
     if proc:
@@ -52,28 +82,6 @@ def server():
             proc.wait(timeout=5)
         except subprocess.TimeoutExpired:
             proc.kill()
-
-
-@pytest.fixture
-def backup_state():
-    """Backup and restore state files around each test."""
-    backups = {}
-
-    # Backup existing state files
-    for file in [QUEUE_FILE, HISTORY_FILE, SKIP_HISTORY_FILE]:
-        if file.exists():
-            backups[file] = file.read_text()
-
-    yield
-
-    # Restore originals
-    for file, content in backups.items():
-        file.write_text(content)
-
-    # Remove files that didn't exist before
-    for file in [QUEUE_FILE, HISTORY_FILE, SKIP_HISTORY_FILE]:
-        if file not in backups and file.exists():
-            file.unlink()
 
 
 @pytest.fixture
@@ -119,25 +127,25 @@ def sample_txt(temp_test_dir):
 
 
 @pytest.fixture
-def queue_file():
-    """Get the path to the queue file."""
-    return QUEUE_FILE
+def queue_file(test_state_dir):
+    """Get the path to the test queue file."""
+    return test_state_dir / "file_queue.json"
 
 
 @pytest.fixture
-def history_file():
-    """Get the path to the history file."""
-    return HISTORY_FILE
+def history_file(test_state_dir):
+    """Get the path to the test history file."""
+    return test_state_dir / "move_history.json"
 
 
 @pytest.fixture
-def skip_history_file():
-    """Get the path to the skip history file."""
-    return SKIP_HISTORY_FILE
+def skip_history_file(test_state_dir):
+    """Get the path to the test skip history file."""
+    return test_state_dir / "skip_history.json"
 
 
 @pytest.fixture
-def write_queue(backup_state, queue_file, history_file, skip_history_file):
+def write_queue(queue_file, history_file, skip_history_file):
     """Factory fixture to write test queue data.
 
     Also clears history files since the viewer loads both queue AND history.
@@ -183,5 +191,5 @@ def read_skip_history(skip_history_file):
 
 @pytest.fixture
 def viewer_url(server):
-    """Get the viewer URL."""
-    return f"{server['url']}/viewer.html"
+    """Get the base URL for the viewer server."""
+    return server['url']

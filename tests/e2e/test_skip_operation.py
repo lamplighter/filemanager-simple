@@ -20,7 +20,7 @@ class TestSkipOperation:
         ])
         write_queue(queue)
 
-        viewer = ViewerPage(page)
+        viewer = ViewerPage(page, viewer_url)
         viewer.navigate()
 
         initial_count = viewer.get_row_count()
@@ -43,7 +43,7 @@ class TestSkipOperation:
         ])
         write_queue(queue)
 
-        viewer = ViewerPage(page)
+        viewer = ViewerPage(page, viewer_url)
         viewer.navigate()
 
         viewer.click_skip_button(0)
@@ -65,7 +65,7 @@ class TestSkipOperation:
         ])
         write_queue(queue)
 
-        viewer = ViewerPage(page)
+        viewer = ViewerPage(page, viewer_url)
         viewer.navigate()
 
         # Verify file exists at source before skip
@@ -88,7 +88,7 @@ class TestSkipOperation:
         ])
         write_queue(queue)
 
-        viewer = ViewerPage(page)
+        viewer = ViewerPage(page, viewer_url)
         viewer.navigate()
 
         # Get skip history before
@@ -126,7 +126,7 @@ class TestSkipMultipleFiles:
         ])
         write_queue(queue)
 
-        viewer = ViewerPage(page)
+        viewer = ViewerPage(page, viewer_url)
         viewer.navigate()
 
         assert viewer.get_row_count() == 2

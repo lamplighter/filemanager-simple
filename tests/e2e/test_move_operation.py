@@ -27,7 +27,7 @@ class TestMoveOperation:
         ])
         write_queue(queue)
 
-        viewer = ViewerPage(page)
+        viewer = ViewerPage(page, viewer_url)
         viewer.navigate()
 
         # Verify file exists at source
@@ -54,7 +54,7 @@ class TestMoveOperation:
         ])
         write_queue(queue)
 
-        viewer = ViewerPage(page)
+        viewer = ViewerPage(page, viewer_url)
         viewer.navigate()
 
         initial_row_count = viewer.get_row_count()
@@ -81,7 +81,7 @@ class TestMoveOperation:
         ])
         write_queue(queue)
 
-        viewer = ViewerPage(page)
+        viewer = ViewerPage(page, viewer_url)
         viewer.navigate()
 
         # Get history before
@@ -109,7 +109,7 @@ class TestMoveOperation:
         ])
         write_queue(queue)
 
-        viewer = ViewerPage(page)
+        viewer = ViewerPage(page, viewer_url)
         viewer.navigate()
 
         viewer.click_move_button(0)
@@ -136,7 +136,7 @@ class TestMoveOperation:
         ])
         write_queue(queue)
 
-        viewer = ViewerPage(page)
+        viewer = ViewerPage(page, viewer_url)
         viewer.navigate()
 
         viewer.click_move_button(0)
@@ -161,7 +161,7 @@ class TestMoveErrors:
         ])
         write_queue(queue)
 
-        viewer = ViewerPage(page)
+        viewer = ViewerPage(page, viewer_url)
         viewer.navigate()
 
         # Capture console errors
