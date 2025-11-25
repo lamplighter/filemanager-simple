@@ -672,6 +672,80 @@
             color: #333;
             font-weight: 600;
         }
+
+        /* Bulk selection styles */
+        .checkbox-cell {
+            width: 40px;
+            text-align: center;
+            padding: 12px 8px;
+        }
+
+        .checkbox-cell input[type="checkbox"] {
+            width: 18px;
+            height: 18px;
+            cursor: pointer;
+        }
+
+        tbody tr.selected {
+            background: #e3f2fd;
+        }
+
+        tbody tr.selected:hover {
+            background: #bbdefb;
+        }
+
+        .bulk-action-bar {
+            background: #2196f3;
+            color: white;
+            padding: 12px 20px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            display: flex;
+            gap: 15px;
+            align-items: center;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+        }
+
+        .bulk-action-bar #selectedCount {
+            font-weight: 600;
+            margin-right: auto;
+        }
+
+        .bulk-btn {
+            padding: 8px 16px;
+            border: none;
+            border-radius: 4px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+
+        .bulk-move-btn {
+            background: #4caf50;
+            color: white;
+        }
+
+        .bulk-move-btn:hover {
+            background: #388e3c;
+        }
+
+        .bulk-skip-btn {
+            background: #ff9800;
+            color: white;
+        }
+
+        .bulk-skip-btn:hover {
+            background: #f57c00;
+        }
+
+        .bulk-clear-btn {
+            background: rgba(255,255,255,0.2);
+            color: white;
+        }
+
+        .bulk-clear-btn:hover {
+            background: rgba(255,255,255,0.3);
+        }
     </style>
 </head>
 <body>
@@ -713,6 +787,13 @@
         </div>
     </div>
 
+    <div id="bulkActionBar" class="bulk-action-bar" style="display: none;">
+        <span id="selectedCount">0 files selected</span>
+        <button class="bulk-btn bulk-move-btn" onclick="bulkMove()">Move Selected</button>
+        <button class="bulk-btn bulk-skip-btn" onclick="bulkSkip()">Skip Selected</button>
+        <button class="bulk-btn bulk-clear-btn" onclick="clearSelection()">Clear Selection</button>
+    </div>
+
     <div id="queueContainer"></div>
 
     <!-- Modal -->
@@ -731,6 +812,7 @@
     <script>
         let queueData = null;
         let filteredData = [];
+        let selectedFileIds = new Set();
 
         async function loadQueue() {
             try {
@@ -805,6 +887,13 @@
             const isDuplicate = file.dest_path === "DELETE" || file.action === "delete";
             const isNewFolder = file.new_folder === true;
 
+            // Checkbox cell (only for pending files)
+            const checkboxCell = file.status === 'pending'
+                ? `<td class="checkbox-cell" onclick="event.stopPropagation()">
+                       <input type="checkbox" class="row-checkbox" data-file-id="${file.id}" data-index="${index}">
+                   </td>`
+                : `<td class="checkbox-cell"></td>`;
+
             // Format destination cell
             let destCell;
             if (isDuplicate) {
@@ -856,6 +945,7 @@
 
             return `
                 <tr data-index="${index}" onclick="openModal(${index})">
+                    ${checkboxCell}
                     <td class="path-cell">${formatPath(file.source_path)}</td>
                     <td class="path-cell">${destCell}</td>
                     <td class="confidence-cell">
@@ -919,6 +1009,9 @@
                     <table>
                         <thead>
                             <tr>
+                                <th class="checkbox-cell">
+                                    <input type="checkbox" id="selectAllCheckbox" title="Select all">
+                                </th>
                                 <th class="path-cell">Source</th>
                                 <th class="path-cell">Destination</th>
                                 <th class="confidence-cell">Confidence</th>
@@ -934,6 +1027,154 @@
             `;
 
             container.innerHTML = tableHTML;
+            setupCheckboxListeners();
+            restoreSelectionState();
+        }
+
+        // Selection management functions
+        function updateSelectionCount() {
+            const bar = document.getElementById('bulkActionBar');
+            const countSpan = document.getElementById('selectedCount');
+
+            if (selectedFileIds.size > 0) {
+                bar.style.display = 'flex';
+                countSpan.textContent = `${selectedFileIds.size} file${selectedFileIds.size > 1 ? 's' : ''} selected`;
+            } else {
+                bar.style.display = 'none';
+            }
+        }
+
+        function clearSelection() {
+            selectedFileIds.clear();
+            document.querySelectorAll('.row-checkbox').forEach(cb => cb.checked = false);
+            document.querySelectorAll('tbody tr').forEach(tr => tr.classList.remove('selected'));
+            const selectAllCb = document.getElementById('selectAllCheckbox');
+            if (selectAllCb) selectAllCb.checked = false;
+            updateSelectionCount();
+        }
+
+        function setupCheckboxListeners() {
+            // Select All checkbox
+            const selectAllCb = document.getElementById('selectAllCheckbox');
+            if (selectAllCb) {
+                selectAllCb.addEventListener('change', function() {
+                    const isChecked = this.checked;
+                    document.querySelectorAll('.row-checkbox').forEach(cb => {
+                        cb.checked = isChecked;
+                        const fileId = cb.dataset.fileId;
+                        const row = cb.closest('tr');
+
+                        if (isChecked) {
+                            selectedFileIds.add(fileId);
+                            row.classList.add('selected');
+                        } else {
+                            selectedFileIds.delete(fileId);
+                            row.classList.remove('selected');
+                        }
+                    });
+                    updateSelectionCount();
+                });
+            }
+
+            // Individual row checkboxes
+            document.querySelectorAll('.row-checkbox').forEach(cb => {
+                cb.addEventListener('change', function() {
+                    const fileId = this.dataset.fileId;
+                    const row = this.closest('tr');
+
+                    if (this.checked) {
+                        selectedFileIds.add(fileId);
+                        row.classList.add('selected');
+                    } else {
+                        selectedFileIds.delete(fileId);
+                        row.classList.remove('selected');
+                    }
+
+                    updateSelectAllState();
+                    updateSelectionCount();
+                });
+            });
+        }
+
+        function updateSelectAllState() {
+            const allCheckboxes = document.querySelectorAll('.row-checkbox');
+            const checkedCheckboxes = document.querySelectorAll('.row-checkbox:checked');
+            const selectAllCb = document.getElementById('selectAllCheckbox');
+
+            if (selectAllCb) {
+                selectAllCb.checked = allCheckboxes.length > 0 &&
+                                      allCheckboxes.length === checkedCheckboxes.length;
+                selectAllCb.indeterminate = checkedCheckboxes.length > 0 &&
+                                            checkedCheckboxes.length < allCheckboxes.length;
+            }
+        }
+
+        function restoreSelectionState() {
+            document.querySelectorAll('.row-checkbox').forEach(cb => {
+                if (selectedFileIds.has(cb.dataset.fileId)) {
+                    cb.checked = true;
+                    cb.closest('tr').classList.add('selected');
+                }
+            });
+            updateSelectAllState();
+            updateSelectionCount();
+        }
+
+        // Bulk operation functions
+        async function bulkMove() {
+            if (selectedFileIds.size === 0) return;
+
+            const ids = Array.from(selectedFileIds);
+
+            try {
+                const response = await fetch('/api/bulk-move', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ ids })
+                });
+
+                const result = await response.json();
+
+                if (result.success) {
+                    selectedFileIds.clear();
+                    showSuccessMessage(result.message);
+                    loadQueue();
+                } else {
+                    alert(`Error: ${result.error}\n\n${result.moved_count || 0} file(s) were moved before the error.`);
+                    selectedFileIds.clear();
+                    loadQueue();
+                }
+            } catch (error) {
+                alert(`Error: ${error.message}`);
+            }
+        }
+
+        async function bulkSkip() {
+            if (selectedFileIds.size === 0) return;
+
+            const ids = Array.from(selectedFileIds);
+
+            try {
+                const response = await fetch('/api/bulk-skip', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ ids })
+                });
+
+                const result = await response.json();
+
+                if (result.success) {
+                    selectedFileIds.clear();
+                    showSuccessMessage(result.message);
+                    loadQueue();
+                } else {
+                    alert(`Error: ${result.error}\n\n${result.skipped_count || 0} file(s) were skipped before the error.`);
+                    selectedFileIds.clear();
+                    loadQueue();
+                }
+            } catch (error) {
+                alert(`Error: ${error.message}`);
+            }
         }
 
         function showError(message) {

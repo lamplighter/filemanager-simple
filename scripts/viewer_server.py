@@ -52,6 +52,19 @@ class ViewerRequestHandler(http.server.SimpleHTTPRequestHandler):
         self.end_headers()
         self.wfile.write(json.dumps({'success': False, 'error': message}).encode())
 
+    def _send_bulk_error(self, error: str, processed_count: int, action: str = "move"):
+        """Send error response for bulk operations that stopped on first error."""
+        self.send_response(200)
+        self.send_header('Content-type', 'application/json')
+        self.send_header('Access-Control-Allow-Origin', '*')
+        self.end_headers()
+        count_key = 'moved_count' if action == 'move' else 'skipped_count'
+        self.wfile.write(json.dumps({
+            'success': False,
+            'error': error,
+            count_key: processed_count
+        }).encode())
+
     def do_POST(self):
         """Handle POST requests to update file status"""
         if self.path == '/api/update-status':
@@ -331,6 +344,180 @@ class ViewerRequestHandler(http.server.SimpleHTTPRequestHandler):
                 self.wfile.write(json.dumps({
                     'success': True,
                     'message': f"Skipped {os.path.basename(file_entry['source_path'])}"
+                }).encode())
+
+            except Exception as e:
+                self.send_json_error(500, str(e))
+
+        elif self.path == '/api/bulk-move':
+            content_length = int(self.headers['Content-Length'])
+            post_data = self.rfile.read(content_length)
+
+            try:
+                data = json.loads(post_data.decode('utf-8'))
+                file_ids = data.get('ids', [])
+
+                if not file_ids:
+                    self.send_json_error(400, "Missing file ids")
+                    return
+
+                # Read current queue
+                with open(QUEUE_FILE, 'r') as f:
+                    queue_data = json.load(f)
+
+                # Read/initialize history
+                try:
+                    with open(HISTORY_FILE, 'r') as f:
+                        history_data = json.load(f)
+                except (FileNotFoundError, json.JSONDecodeError):
+                    history_data = {
+                        'schema_version': '1.0',
+                        'last_updated': datetime.utcnow().strftime('%Y-%m-%dT%H:%M:%SZ'),
+                        'files': []
+                    }
+
+                moved_count = 0
+                processed_ids = []
+
+                for file_id in file_ids:
+                    # Find file in queue
+                    file_entry = None
+                    for f in queue_data['files']:
+                        if f['id'] == file_id:
+                            file_entry = f
+                            break
+
+                    if not file_entry:
+                        # Stop on first error
+                        self._send_bulk_error(f"File not found in queue: {file_id[:8]}...", moved_count)
+                        return
+
+                    source_path = os.path.expanduser(file_entry['source_path'])
+                    dest_path = os.path.expanduser(file_entry['dest_path'])
+                    action = file_entry.get('action', 'move')
+
+                    if not os.path.exists(source_path):
+                        self._send_bulk_error(
+                            f"Source file not found: {os.path.basename(source_path)}",
+                            moved_count
+                        )
+                        return
+
+                    try:
+                        if dest_path == "DELETE" or action == "delete":
+                            os.remove(source_path)
+                        else:
+                            dest_dir = os.path.dirname(dest_path)
+                            os.makedirs(dest_dir, exist_ok=True)
+                            if os.path.exists(dest_path):
+                                self._send_bulk_error(
+                                    f"Destination already exists: {os.path.basename(dest_path)}",
+                                    moved_count
+                                )
+                                return
+                            shutil.move(source_path, dest_path)
+
+                        # Mark as moved
+                        file_entry['status'] = 'moved'
+                        file_entry['moved_at'] = datetime.utcnow().strftime('%Y-%m-%dT%H:%M:%SZ')
+                        history_data['files'].append(file_entry.copy())
+                        processed_ids.append(file_id)
+                        moved_count += 1
+
+                    except Exception as e:
+                        self._send_bulk_error(
+                            f"Failed to move {os.path.basename(source_path)}: {str(e)}",
+                            moved_count
+                        )
+                        return
+
+                # Remove processed files from queue
+                queue_data['files'] = [f for f in queue_data['files'] if f['id'] not in processed_ids]
+                queue_data['last_updated'] = datetime.utcnow().strftime('%Y-%m-%dT%H:%M:%SZ')
+                history_data['last_updated'] = datetime.utcnow().strftime('%Y-%m-%dT%H:%M:%SZ')
+
+                atomic_write_json(queue_data, QUEUE_FILE)
+                atomic_write_json(history_data, HISTORY_FILE)
+
+                self.send_response(200)
+                self.send_header('Content-type', 'application/json')
+                self.send_header('Access-Control-Allow-Origin', '*')
+                self.end_headers()
+                self.wfile.write(json.dumps({
+                    'success': True,
+                    'message': f"Successfully moved {moved_count} file{'s' if moved_count != 1 else ''}",
+                    'moved_count': moved_count
+                }).encode())
+
+            except Exception as e:
+                self.send_json_error(500, str(e))
+
+        elif self.path == '/api/bulk-skip':
+            content_length = int(self.headers['Content-Length'])
+            post_data = self.rfile.read(content_length)
+
+            try:
+                data = json.loads(post_data.decode('utf-8'))
+                file_ids = data.get('ids', [])
+
+                if not file_ids:
+                    self.send_json_error(400, "Missing file ids")
+                    return
+
+                # Read current queue
+                with open(QUEUE_FILE, 'r') as f:
+                    queue_data = json.load(f)
+
+                # Read/initialize skip history
+                try:
+                    with open(SKIP_HISTORY_FILE, 'r') as f:
+                        skip_history_data = json.load(f)
+                except (FileNotFoundError, json.JSONDecodeError):
+                    skip_history_data = {
+                        'schema_version': '1.0',
+                        'last_updated': datetime.utcnow().strftime('%Y-%m-%dT%H:%M:%SZ'),
+                        'files': []
+                    }
+
+                skipped_count = 0
+                processed_ids = []
+
+                for file_id in file_ids:
+                    # Find file in queue
+                    file_entry = None
+                    for f in queue_data['files']:
+                        if f['id'] == file_id:
+                            file_entry = f
+                            break
+
+                    if not file_entry:
+                        # Stop on first error
+                        self._send_bulk_error(f"File not found in queue: {file_id[:8]}...", skipped_count, action="skip")
+                        return
+
+                    # Mark as skipped
+                    file_entry['status'] = 'skipped'
+                    file_entry['skipped_at'] = datetime.utcnow().strftime('%Y-%m-%dT%H:%M:%SZ')
+                    skip_history_data['files'].append(file_entry.copy())
+                    processed_ids.append(file_id)
+                    skipped_count += 1
+
+                # Remove processed files from queue
+                queue_data['files'] = [f for f in queue_data['files'] if f['id'] not in processed_ids]
+                queue_data['last_updated'] = datetime.utcnow().strftime('%Y-%m-%dT%H:%M:%SZ')
+                skip_history_data['last_updated'] = datetime.utcnow().strftime('%Y-%m-%dT%H:%M:%SZ')
+
+                atomic_write_json(queue_data, QUEUE_FILE)
+                atomic_write_json(skip_history_data, SKIP_HISTORY_FILE)
+
+                self.send_response(200)
+                self.send_header('Content-type', 'application/json')
+                self.send_header('Access-Control-Allow-Origin', '*')
+                self.end_headers()
+                self.wfile.write(json.dumps({
+                    'success': True,
+                    'message': f"Successfully skipped {skipped_count} file{'s' if skipped_count != 1 else ''}",
+                    'skipped_count': skipped_count
                 }).encode())
 
             except Exception as e:

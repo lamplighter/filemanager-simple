@@ -172,3 +172,81 @@ class ViewerPage:
         """Check if a row has a specific status."""
         row_text = self.get_row_text(row_index)
         return status.lower() in row_text.lower()
+
+    # Bulk selection - Selectors
+    @property
+    def select_all_checkbox(self):
+        """Get the select all checkbox in the header."""
+        return self.page.locator("#selectAllCheckbox")
+
+    @property
+    def row_checkboxes(self):
+        """Get all row checkboxes."""
+        return self.page.locator(".row-checkbox")
+
+    @property
+    def bulk_action_bar(self):
+        """Get the bulk action bar."""
+        return self.page.locator("#bulkActionBar")
+
+    @property
+    def bulk_move_button(self):
+        """Get the bulk move button."""
+        return self.page.locator(".bulk-move-btn")
+
+    @property
+    def bulk_skip_button(self):
+        """Get the bulk skip button."""
+        return self.page.locator(".bulk-skip-btn")
+
+    @property
+    def bulk_clear_button(self):
+        """Get the clear selection button."""
+        return self.page.locator(".bulk-clear-btn")
+
+    @property
+    def selected_count(self):
+        """Get the selected count element."""
+        return self.page.locator("#selectedCount")
+
+    # Bulk selection - Actions
+    def select_row(self, index: int):
+        """Select a row by clicking its checkbox."""
+        self.row_checkboxes.nth(index).click()
+        self.page.wait_for_timeout(100)
+
+    def select_all(self):
+        """Click select all checkbox."""
+        self.select_all_checkbox.click()
+        self.page.wait_for_timeout(100)
+
+    def get_selected_count(self) -> int:
+        """Get number of selected rows."""
+        return self.page.locator(".row-checkbox:checked").count()
+
+    def click_bulk_move(self):
+        """Click bulk move button."""
+        self.bulk_move_button.click()
+
+    def click_bulk_skip(self):
+        """Click bulk skip button."""
+        self.bulk_skip_button.click()
+
+    def click_clear_selection(self):
+        """Click clear selection button."""
+        self.bulk_clear_button.click()
+        self.page.wait_for_timeout(100)
+
+    def is_bulk_bar_visible(self) -> bool:
+        """Check if bulk action bar is visible."""
+        return self.bulk_action_bar.is_visible()
+
+    def get_selected_count_text(self) -> str:
+        """Get the selected count text from the bulk bar."""
+        return self.selected_count.text_content()
+
+    def is_row_selected(self, index: int) -> bool:
+        """Check if a row is visually selected."""
+        row = self.table_rows.nth(index)
+        class_attr = row.get_attribute("class") or ""
+        return "selected" in class_attr

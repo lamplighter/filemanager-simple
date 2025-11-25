@@ -61,8 +61,11 @@ class TestQueueDisplay:
         viewer.navigate()
 
         headers = viewer.get_header_texts()
-        expected = ["Source", "Destination", "Confidence", "Approval", "Time of Evaluation"]
-        assert headers == expected
+        # First column is checkbox (may have whitespace), remaining are labeled
+        expected_labels = ["Source", "Destination", "Confidence", "Approval", "Time of Evaluation"]
+        # Strip whitespace and filter empty to get labeled headers
+        actual_labels = [h.strip() for h in headers if h.strip()]
+        assert actual_labels == expected_labels
 
     def test_displays_move_and_skip_buttons(self, page: Page, viewer_url, write_queue, temp_test_dir):
         """Pending files show Move and Skip buttons."""
