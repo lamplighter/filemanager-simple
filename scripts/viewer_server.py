@@ -41,6 +41,14 @@ class ViewerRequestHandler(http.server.SimpleHTTPRequestHandler):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, directory=PROJECT_ROOT, **kwargs)
 
+    def send_json_error(self, status_code: int, message: str):
+        """Send a JSON error response instead of HTML error page."""
+        self.send_response(status_code)
+        self.send_header('Content-type', 'application/json')
+        self.send_header('Access-Control-Allow-Origin', '*')
+        self.end_headers()
+        self.wfile.write(json.dumps({'success': False, 'error': message}).encode())
+
     def do_POST(self):
         """Handle POST requests to update file status"""
         if self.path == '/api/update-status':
@@ -53,7 +61,7 @@ class ViewerRequestHandler(http.server.SimpleHTTPRequestHandler):
                 new_status = data.get('status')
 
                 if not file_id or not new_status:
-                    self.send_error(400, "Missing id or status")
+                    self.send_json_error(400, "Missing id or status")
                     return
 
                 # Read current queue
@@ -69,7 +77,7 @@ class ViewerRequestHandler(http.server.SimpleHTTPRequestHandler):
                         break
 
                 if not file_found:
-                    self.send_error(404, "File not found")
+                    self.send_json_error(404, "File not found")
                     return
 
                 # Update last_updated timestamp
@@ -86,7 +94,7 @@ class ViewerRequestHandler(http.server.SimpleHTTPRequestHandler):
                 self.wfile.write(json.dumps({'success': True}).encode())
 
             except Exception as e:
-                self.send_error(500, str(e))
+                self.send_json_error(500, str(e))
 
         elif self.path == '/api/move-file':
             content_length = int(self.headers['Content-Length'])
@@ -97,7 +105,7 @@ class ViewerRequestHandler(http.server.SimpleHTTPRequestHandler):
                 file_id = data.get('id')
 
                 if not file_id:
-                    self.send_error(400, "Missing file id")
+                    self.send_json_error(400, "Missing file id")
                     return
 
                 # Read current queue
@@ -114,7 +122,7 @@ class ViewerRequestHandler(http.server.SimpleHTTPRequestHandler):
                         break
 
                 if not file_entry:
-                    self.send_error(404, "File not found in queue")
+                    self.send_json_error(404, "File not found in queue")
                     return
 
                 source_path = os.path.expanduser(file_entry['source_path'])
@@ -220,7 +228,7 @@ class ViewerRequestHandler(http.server.SimpleHTTPRequestHandler):
                 }).encode())
 
             except Exception as e:
-                self.send_error(500, str(e))
+                self.send_json_error(500, str(e))
 
         elif self.path == '/api/update-queue':
             content_length = int(self.headers['Content-Length'])
@@ -231,7 +239,7 @@ class ViewerRequestHandler(http.server.SimpleHTTPRequestHandler):
                 files = data.get('files')
 
                 if files is None:
-                    self.send_error(400, "Missing files array")
+                    self.send_json_error(400, "Missing files array")
                     return
 
                 # Read current queue to preserve schema
@@ -253,7 +261,7 @@ class ViewerRequestHandler(http.server.SimpleHTTPRequestHandler):
                 self.wfile.write(json.dumps({'success': True}).encode())
 
             except Exception as e:
-                self.send_error(500, str(e))
+                self.send_json_error(500, str(e))
 
         elif self.path == '/api/skip-file':
             content_length = int(self.headers['Content-Length'])
@@ -264,7 +272,7 @@ class ViewerRequestHandler(http.server.SimpleHTTPRequestHandler):
                 file_id = data.get('id')
 
                 if not file_id:
-                    self.send_error(400, "Missing file id")
+                    self.send_json_error(400, "Missing file id")
                     return
 
                 # Read current queue
@@ -281,7 +289,7 @@ class ViewerRequestHandler(http.server.SimpleHTTPRequestHandler):
                         break
 
                 if not file_entry:
-                    self.send_error(404, "File not found in queue")
+                    self.send_json_error(404, "File not found in queue")
                     return
 
                 # Update file entry with skipped status and timestamp
@@ -323,10 +331,10 @@ class ViewerRequestHandler(http.server.SimpleHTTPRequestHandler):
                 }).encode())
 
             except Exception as e:
-                self.send_error(500, str(e))
+                self.send_json_error(500, str(e))
 
         else:
-            self.send_error(404)
+            self.send_json_error(404, "Unknown API endpoint")
 
     def do_GET(self):
         """Handle GET requests"""
@@ -338,7 +346,7 @@ class ViewerRequestHandler(http.server.SimpleHTTPRequestHandler):
             dir_path = query_params.get('path', [None])[0]
 
             if not dir_path:
-                self.send_error(400, "Missing path parameter")
+                self.send_json_error(400, "Missing path parameter")
                 return
 
             # Expand ~ to user home directory
@@ -360,7 +368,7 @@ class ViewerRequestHandler(http.server.SimpleHTTPRequestHandler):
                     return
 
                 if not os.path.isdir(dir_path):
-                    self.send_error(400, "Path is not a directory")
+                    self.send_json_error(400, "Path is not a directory")
                     return
 
                 # List all files in directory
@@ -390,9 +398,9 @@ class ViewerRequestHandler(http.server.SimpleHTTPRequestHandler):
                 }).encode())
 
             except PermissionError:
-                self.send_error(403, "Permission denied")
+                self.send_json_error(403, "Permission denied")
             except Exception as e:
-                self.send_error(500, str(e))
+                self.send_json_error(500, str(e))
 
         elif parsed_url.path == '/api/file-preview':
             # Serve a local file for preview (PDF, image, etc.)
@@ -400,7 +408,7 @@ class ViewerRequestHandler(http.server.SimpleHTTPRequestHandler):
             file_path = query_params.get('path', [None])[0]
 
             if not file_path:
-                self.send_error(400, "Missing path parameter")
+                self.send_json_error(400, "Missing path parameter")
                 return
 
             # Expand ~ to user home directory
@@ -408,11 +416,11 @@ class ViewerRequestHandler(http.server.SimpleHTTPRequestHandler):
 
             # Security: Validate path exists and is a file
             if not os.path.exists(file_path):
-                self.send_error(404, "File not found")
+                self.send_json_error(404, "File not found")
                 return
 
             if not os.path.isfile(file_path):
-                self.send_error(400, "Path is not a file")
+                self.send_json_error(400, "Path is not a file")
                 return
 
             try:
@@ -434,9 +442,9 @@ class ViewerRequestHandler(http.server.SimpleHTTPRequestHandler):
                 self.wfile.write(file_content)
 
             except PermissionError:
-                self.send_error(403, "Permission denied")
+                self.send_json_error(403, "Permission denied")
             except Exception as e:
-                self.send_error(500, str(e))
+                self.send_json_error(500, str(e))
 
         else:
             # Delegate to parent class for serving static files
