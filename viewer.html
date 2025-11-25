@@ -1348,30 +1348,32 @@
         async function rejectFile(index) {
             const file = filteredData[index];
 
-            if (!confirm(`Remove this file from the queue?\n\n${file.source_path}\n\nThe file will remain in its current location.`)) {
+            if (!confirm(`Skip this file?\n\n${file.source_path}\n\nThe file will remain in its current location and be saved to skip history.`)) {
                 return;
             }
 
             try {
-                // Simply remove from queue without moving
-                const queueFileIndex = queueData.files.findIndex(f => f.id === file.id);
-                if (queueFileIndex !== -1) {
-                    queueData.files.splice(queueFileIndex, 1);
-                }
-
-                // Update the queue file via API (write back)
-                const response = await fetch('/api/update-queue', {
+                // Call skip-file API which saves to skip_history.json and removes from queue
+                const response = await fetch('/api/skip-file', {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',
                     },
                     body: JSON.stringify({
-                        files: queueData.files
+                        id: file.id
                     })
                 });
 
-                if (!response.ok) {
-                    throw new Error('Failed to update queue');
+                const result = await response.json();
+
+                if (!result.success) {
+                    throw new Error(result.error || 'Failed to skip file');
+                }
+
+                // Remove from local data
+                const queueFileIndex = queueData.files.findIndex(f => f.id === file.id);
+                if (queueFileIndex !== -1) {
+                    queueData.files.splice(queueFileIndex, 1);
                 }
 
                 // Update queue info and re-render
@@ -1381,7 +1383,7 @@
                 // If modal is open, close it
                 closeModal();
 
-                showSuccessMessage('File removed from queue');
+                showSuccessMessage(result.message || 'File skipped');
 
             } catch (error) {
                 alert(`Error: ${error.message}`);

@@ -15,6 +15,7 @@ HOST = '127.0.0.1'  # Bind to localhost only for security
 PROJECT_ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 QUEUE_FILE = os.path.join(PROJECT_ROOT, 'state', 'file_queue.json')
 HISTORY_FILE = os.path.join(PROJECT_ROOT, 'state', 'move_history.json')
+SKIP_HISTORY_FILE = os.path.join(PROJECT_ROOT, 'state', 'skip_history.json')
 
 
 def atomic_write_json(data: dict, filepath: str) -> None:
@@ -250,6 +251,76 @@ class ViewerRequestHandler(http.server.SimpleHTTPRequestHandler):
                 self.send_header('Access-Control-Allow-Origin', '*')
                 self.end_headers()
                 self.wfile.write(json.dumps({'success': True}).encode())
+
+            except Exception as e:
+                self.send_error(500, str(e))
+
+        elif self.path == '/api/skip-file':
+            content_length = int(self.headers['Content-Length'])
+            post_data = self.rfile.read(content_length)
+
+            try:
+                data = json.loads(post_data.decode('utf-8'))
+                file_id = data.get('id')
+
+                if not file_id:
+                    self.send_error(400, "Missing file id")
+                    return
+
+                # Read current queue
+                with open(QUEUE_FILE, 'r') as f:
+                    queue_data = json.load(f)
+
+                # Find the file in queue
+                file_entry = None
+                file_index = None
+                for i, file in enumerate(queue_data['files']):
+                    if file['id'] == file_id:
+                        file_entry = file
+                        file_index = i
+                        break
+
+                if not file_entry:
+                    self.send_error(404, "File not found in queue")
+                    return
+
+                # Update file entry with skipped status and timestamp
+                file_entry['status'] = 'skipped'
+                file_entry['skipped_at'] = datetime.utcnow().strftime('%Y-%m-%dT%H:%M:%SZ')
+
+                # Add to skip history
+                try:
+                    with open(SKIP_HISTORY_FILE, 'r') as f:
+                        skip_history_data = json.load(f)
+                except (FileNotFoundError, json.JSONDecodeError):
+                    skip_history_data = {
+                        'schema_version': '1.0',
+                        'last_updated': datetime.utcnow().strftime('%Y-%m-%dT%H:%M:%SZ'),
+                        'files': []
+                    }
+
+                skip_history_data['files'].append(file_entry)
+                skip_history_data['last_updated'] = datetime.utcnow().strftime('%Y-%m-%dT%H:%M:%SZ')
+
+                # Write skip history file atomically
+                atomic_write_json(skip_history_data, SKIP_HISTORY_FILE)
+
+                # Remove file from queue
+                queue_data['files'].pop(file_index)
+                queue_data['last_updated'] = datetime.utcnow().strftime('%Y-%m-%dT%H:%M:%SZ')
+
+                # Write back to queue file atomically
+                atomic_write_json(queue_data, QUEUE_FILE)
+
+                # Send success response
+                self.send_response(200)
+                self.send_header('Content-type', 'application/json')
+                self.send_header('Access-Control-Allow-Origin', '*')
+                self.end_headers()
+                self.wfile.write(json.dumps({
+                    'success': True,
+                    'message': f"Skipped {os.path.basename(file_entry['source_path'])}"
+                }).encode())
 
             except Exception as e:
                 self.send_error(500, str(e))
