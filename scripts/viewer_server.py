@@ -455,8 +455,13 @@ class ViewerRequestHandler(http.server.SimpleHTTPRequestHandler):
         self.send_header('Access-Control-Allow-Origin', '*')
         super().end_headers()
 
+class ReusableTCPServer(socketserver.TCPServer):
+    """TCPServer with SO_REUSEADDR for quick restarts during testing."""
+    allow_reuse_address = True
+
+
 if __name__ == '__main__':
-    with socketserver.TCPServer((HOST, PORT), ViewerRequestHandler) as httpd:
+    with ReusableTCPServer((HOST, PORT), ViewerRequestHandler) as httpd:
         print(f"Server running at http://{HOST}:{PORT}/")
         print(f"Open http://localhost:{PORT}/viewer.html to view the queue")
         print("Press Ctrl+C to stop")
