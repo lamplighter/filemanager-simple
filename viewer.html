@@ -112,7 +112,6 @@
             font-family: 'Monaco', 'Courier New', monospace;
             color: #333;
             word-break: break-all;
-            width: 200px;
         }
 
         .confidence-cell {
@@ -919,6 +918,13 @@
             const tableHTML = `
                 <div class="queue-table-container">
                     <table>
+                        <colgroup>
+                            <col style="width: 35%;">
+                            <col style="width: 35%;">
+                            <col style="width: 80px;">
+                            <col style="width: 90px;">
+                            <col style="width: 130px;">
+                        </colgroup>
                         <thead>
                             <tr>
                                 <th class="path-cell">Source</th>
