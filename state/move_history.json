@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0",
-  "last_updated": "2025-11-25T00:32:26Z",
+  "last_updated": "2025-11-25T01:35:26Z",
   "files": [
     {
       "id": "8af68bbe-7d7e-4d21-b3fb-62153b6aa558",
@@ -52,6 +52,210 @@
       "timestamp": "2025-01-21T20:25:00Z",
       "reasoning": "CRA (Canada Revenue Agency) document submission confirmation for 11087592 Canada Inc. (HoldCo). Dated Nov 12, 2025, confirming submission of investment statements, T5013, T1135 and other tax documents for 2022-2023 tax years. Case reference 17593071, confirmation 3655Q6H. Found existing ~/Dropbox/Taxes/HoldCo/CRA/ folder containing Notices of Assessment, audit letters, and other CRA correspondence. Applied standard naming pattern YYYY-MM-DD [Document Type] YE [years] matching existing files. High confidence based on exact folder match and consistent naming pattern.",
       "moved_at": "2025-11-25T00:32:26Z"
+    },
+    {
+      "id": "d4b1664f-ab62-45d5-b109-9c99f60671ee",
+      "source_path": "/Users/marklampert/Downloads/HoldCo_Banking_CAD_1043-5236007_Sep_29-Oct_31_2025.pdf",
+      "dest_path": "/Users/marklampert/Dropbox/Filing/HoldCo/bank statements/TD x6007 CAD/2025-10-31 CAD 1043-5236007.pdf",
+      "confidence": 95,
+      "confidence_factors": {
+        "similar_files_found": 30,
+        "file_type_match": 20,
+        "entity_keyword": 20,
+        "content_match": 15,
+        "naming_pattern": 10
+      },
+      "status": "moved",
+      "timestamp": "2025-11-24T22:45:00Z",
+      "reasoning": "TD Bank business chequing statement for HoldCo, account 1043-5236007 (CAD). Folder has 9 existing statements with naming convention YYYY-MM-DD CAD 1043-5236007.pdf.",
+      "moved_at": "2025-11-25T01:35:14Z"
+    },
+    {
+      "id": "b21fea47-0f68-40e5-98fb-5a4cddcba783",
+      "source_path": "/Users/marklampert/Downloads/HoldCo_Banking_CAD_1043-5236007_Aug_29-Sep_29_2025.pdf",
+      "dest_path": "/Users/marklampert/Dropbox/Filing/HoldCo/bank statements/TD x6007 CAD/2025-09-29 CAD 1043-5236007.pdf",
+      "confidence": 95,
+      "confidence_factors": {
+        "similar_files_found": 30,
+        "file_type_match": 20,
+        "entity_keyword": 20,
+        "content_match": 15,
+        "naming_pattern": 10
+      },
+      "status": "moved",
+      "timestamp": "2025-11-24T22:45:00Z",
+      "reasoning": "TD Bank business chequing statement for HoldCo, account x6007 (CAD). Statement ending Sep 29, 2025.",
+      "moved_at": "2025-11-25T01:35:14Z"
+    },
+    {
+      "id": "5891e259-2ebc-436e-9385-5e1556384d94",
+      "source_path": "/Users/marklampert/Downloads/HoldCo_Banking_CAD_1043-5236007_Jul_31-Aug_29_2025.pdf",
+      "dest_path": "/Users/marklampert/Dropbox/Filing/HoldCo/bank statements/TD x6007 CAD/2025-08-29 CAD 1043-5236007.pdf",
+      "confidence": 95,
+      "confidence_factors": {
+        "similar_files_found": 30,
+        "file_type_match": 20,
+        "entity_keyword": 20,
+        "content_match": 15,
+        "naming_pattern": 10
+      },
+      "status": "moved",
+      "timestamp": "2025-11-24T22:45:00Z",
+      "reasoning": "TD Bank business chequing statement for HoldCo, account x6007 (CAD). Statement ending Aug 29, 2025.",
+      "moved_at": "2025-11-25T01:35:15Z"
+    },
+    {
+      "id": "a3fb0e72-5d2d-4322-a79d-30984f7a9fa7",
+      "source_path": "/Users/marklampert/Downloads/HoldCo_Banking_CAD_1043-5236007_Jun_30-Jul_31_2025.pdf",
+      "dest_path": "/Users/marklampert/Dropbox/Filing/HoldCo/bank statements/TD x6007 CAD/2025-07-31 CAD 1043-5236007.pdf",
+      "confidence": 95,
+      "confidence_factors": {
+        "similar_files_found": 30,
+        "file_type_match": 20,
+        "entity_keyword": 20,
+        "content_match": 15,
+        "naming_pattern": 10
+      },
+      "status": "moved",
+      "timestamp": "2025-11-24T22:45:00Z",
+      "reasoning": "TD Bank business chequing statement for HoldCo, account x6007 (CAD). Statement ending Jul 31, 2025.",
+      "moved_at": "2025-11-25T01:35:16Z"
+    },
+    {
+      "id": "75a5c0f4-6fb4-447a-a3f2-377838d30fb9",
+      "source_path": "/Users/marklampert/Downloads/HoldCo_Banking_CAD_1043-5236007_May_30-Jun_30_2025.pdf",
+      "dest_path": "/Users/marklampert/Dropbox/Filing/HoldCo/bank statements/TD x6007 CAD/2025-06-30 CAD 1043-5236007.pdf",
+      "confidence": 95,
+      "confidence_factors": {
+        "similar_files_found": 30,
+        "file_type_match": 20,
+        "entity_keyword": 20,
+        "content_match": 15,
+        "naming_pattern": 10
+      },
+      "status": "moved",
+      "timestamp": "2025-11-24T22:45:00Z",
+      "reasoning": "TD Bank business chequing statement for HoldCo, account x6007 (CAD). Statement ending Jun 30, 2025.",
+      "moved_at": "2025-11-25T01:35:17Z"
+    },
+    {
+      "id": "56364c24-3613-4ebb-9554-423837424bd4",
+      "source_path": "/Users/marklampert/Downloads/HoldCo_Banking_CAD_1043-5236007_Apr_30-May_30_2025.pdf",
+      "dest_path": "/Users/marklampert/Dropbox/Filing/HoldCo/bank statements/TD x6007 CAD/2025-05-30 CAD 1043-5236007.pdf",
+      "confidence": 95,
+      "confidence_factors": {
+        "similar_files_found": 30,
+        "file_type_match": 20,
+        "entity_keyword": 20,
+        "content_match": 15,
+        "naming_pattern": 10
+      },
+      "status": "moved",
+      "timestamp": "2025-11-24T22:45:00Z",
+      "reasoning": "TD Bank business chequing statement for HoldCo, account x6007 (CAD). Statement ending May 30, 2025.",
+      "moved_at": "2025-11-25T01:35:18Z"
+    },
+    {
+      "id": "2101a350-e5e8-4dd6-952f-5177699bf3d3",
+      "source_path": "/Users/marklampert/Downloads/HoldCo_Banking_CAD_1043-5236007_Mar_31-Apr_30_2025.pdf",
+      "dest_path": "/Users/marklampert/Dropbox/Filing/HoldCo/bank statements/TD x6007 CAD/2025-04-30 CAD 1043-5236007.pdf",
+      "confidence": 95,
+      "confidence_factors": {
+        "similar_files_found": 30,
+        "file_type_match": 20,
+        "entity_keyword": 20,
+        "content_match": 15,
+        "naming_pattern": 10
+      },
+      "status": "moved",
+      "timestamp": "2025-11-24T22:45:00Z",
+      "reasoning": "TD Bank business chequing statement for HoldCo, account x6007 (CAD). Statement ending Apr 30, 2025.",
+      "moved_at": "2025-11-25T01:35:18Z"
+    },
+    {
+      "id": "4dcbb912-e1e0-4f4f-a31a-ffc403c5c685",
+      "source_path": "/Users/marklampert/Downloads/HoldCo_Banking_CAD_1043-5236007_Feb_28-Mar_31_2025.pdf",
+      "dest_path": "/Users/marklampert/Dropbox/Filing/HoldCo/bank statements/TD x6007 CAD/2025-03-31 CAD 1043-5236007.pdf",
+      "confidence": 95,
+      "confidence_factors": {
+        "similar_files_found": 30,
+        "file_type_match": 20,
+        "entity_keyword": 20,
+        "content_match": 15,
+        "naming_pattern": 10
+      },
+      "status": "moved",
+      "timestamp": "2025-11-24T22:45:00Z",
+      "reasoning": "TD Bank business chequing statement for HoldCo, account x6007 (CAD). Statement ending Mar 31, 2025.",
+      "moved_at": "2025-11-25T01:35:20Z"
+    },
+    {
+      "id": "1076f9bb-f5c2-43ee-b727-6724a56b2366",
+      "source_path": "/Users/marklampert/Downloads/HoldCo_Banking_CAD_1043-5236007_Jan_31-Feb_28_2025.pdf",
+      "dest_path": "/Users/marklampert/Dropbox/Filing/HoldCo/bank statements/TD x6007 CAD/2025-02-28 CAD 1043-5236007.pdf",
+      "confidence": 95,
+      "confidence_factors": {
+        "similar_files_found": 30,
+        "file_type_match": 20,
+        "entity_keyword": 20,
+        "content_match": 15,
+        "naming_pattern": 10
+      },
+      "status": "moved",
+      "timestamp": "2025-11-24T22:45:00Z",
+      "reasoning": "TD Bank business chequing statement for HoldCo, account x6007 (CAD). Statement ending Feb 28, 2025.",
+      "moved_at": "2025-11-25T01:35:20Z"
+    },
+    {
+      "id": "fff862ef-d23e-4ff4-9297-1d120e1d51ba",
+      "source_path": "/Users/marklampert/Downloads/HoldCo_Banking_CAD_1043-5236007_Dec_31-Jan_31_2025.pdf",
+      "dest_path": "/Users/marklampert/Dropbox/Filing/HoldCo/bank statements/TD x6007 CAD/2025-01-31 CAD 1043-5236007.pdf",
+      "confidence": 95,
+      "confidence_factors": {
+        "similar_files_found": 30,
+        "file_type_match": 20,
+        "entity_keyword": 20,
+        "content_match": 15,
+        "naming_pattern": 10
+      },
+      "status": "moved",
+      "timestamp": "2025-11-24T22:45:00Z",
+      "reasoning": "TD Bank business chequing statement for HoldCo, account x6007 (CAD). Statement ending Jan 31, 2025.",
+      "moved_at": "2025-11-25T01:35:24Z"
+    },
+    {
+      "id": "7d3ce5fa-8ccc-4609-a13d-9301e6ee57f5",
+      "source_path": "/Users/marklampert/Downloads/HoldCo_Banking_CAD_1043-5236007_Nov_29-Dec_31_2024.pdf",
+      "dest_path": "/Users/marklampert/Dropbox/Filing/HoldCo/bank statements/TD x6007 CAD/2024-12-31 CAD 1043-5236007.pdf",
+      "confidence": 95,
+      "confidence_factors": {
+        "similar_files_found": 30,
+        "file_type_match": 20,
+        "entity_keyword": 20,
+        "content_match": 15,
+        "naming_pattern": 10
+      },
+      "status": "moved",
+      "timestamp": "2025-11-24T22:45:00Z",
+      "reasoning": "TD Bank business chequing statement for HoldCo, account x6007 (CAD). Statement ending Dec 31, 2024.",
+      "moved_at": "2025-11-25T01:35:24Z"
+    },
+    {
+      "id": "a1a178a0-9424-4787-8ea9-2f99b259c3b2",
+      "source_path": "/Users/marklampert/Downloads/HoldCo_Banking_CAD_1043-5236007_Oct_31-Nov_29_2024.pdf",
+      "dest_path": "/Users/marklampert/Dropbox/Filing/HoldCo/bank statements/TD x6007 CAD/2024-11-29 CAD 1043-5236007.pdf",
+      "confidence": 95,
+      "confidence_factors": {
+        "similar_files_found": 30,
+        "file_type_match": 20,
+        "entity_keyword": 20,
+        "content_match": 15,
+        "naming_pattern": 10
+      },
+      "status": "moved",
+      "timestamp": "2025-11-24T22:45:00Z",
+      "reasoning": "TD Bank business chequing statement for HoldCo, account x6007 (CAD). Statement ending Nov 29, 2024.",
+      "moved_at": "2025-11-25T01:35:26Z"
     }
   ]
 }

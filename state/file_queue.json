@@ -1,86 +1,276 @@
 {
   "schema_version": "1.0",
-  "last_updated": "2025-11-25T00:32:26Z",
+  "last_updated": "2025-11-24T22:55:00Z",
   "files": [
     {
-      "id": "ba28b7f0-58d6-4ce6-94ef-afa340ad2582",
-      "source_path": "/Users/marklampert/Downloads/1275686-t4_summary-2024-2404958-employer.pdf",
-      "dest_path": "/Users/marklampert/Dropbox/Taxes/Personal/2024/tax slips - Mark/2024-12-30 T4 Summary - Employer.pdf",
-      "confidence": 92,
-      "confidence_factors": {
-        "similar_files_found": 30,
-        "file_type_match": 20,
-        "entity_keyword": 20,
-        "naming_pattern_match": 12,
-        "content_match": 10
-      },
+      "id": "42e7d22f-02b1-4799-842e-7bf6d282c30c",
+      "source_path": "/Users/marklampert/Downloads/HoldCo CAD x6007/x6007_2018-12_31-10_31.pdf",
+      "dest_path": "/Users/marklampert/Dropbox/Filing/HoldCo/bank statements/TD x6007 CAD/2019-10-31 CAD 1043-5236007.pdf",
+      "confidence": 95,
+      "confidence_factors": {"similar_files_found": 30, "file_type_match": 20, "entity_keyword": 20, "content_match": 15, "naming_pattern": 10},
       "status": "pending",
-      "timestamp": "2025-11-22T17:28:03Z",
-      "reasoning": "T4 Summary for 2024 tax year for Mark Lampert as employer (account 73785 6013 RP0001). Document dated 2024-12-30 showing employment income of $54,007.48 with CPP, EI, and income tax deductions. Found existing T4 files in ~/Dropbox/Taxes/Personal/2024/tax slips - Mark/ folder including other T4 documents for 2024. Naming pattern matches existing tax document format YYYY-MM-DD [Document Type]. High confidence based on exact folder match and T4 file pattern."
+      "timestamp": "2025-11-24T22:55:00Z",
+      "reasoning": "HoldCo CAD bank statement. Renamed from x6007_2018-12_31-10_31.pdf to match existing naming convention."
     },
     {
-      "id": "fcf62267-4924-4350-8c3b-876c286f2ce6",
-      "source_path": "/Users/marklampert/Downloads/2022-09-26 Gajane - CRA Response for 2021 review Ltr - Mark L.pdf",
-      "dest_path": "/Users/marklampert/Dropbox/Taxes/Personal/CRA/2022-09-26 Mark 2021 - Review letter response (PwC).pdf",
-      "confidence": 93,
-      "confidence_factors": {
-        "similar_files_found": 30,
-        "file_type_match": 20,
-        "entity_keyword": 20,
-        "naming_pattern_match": 15,
-        "content_match": 8
-      },
+      "id": "2a77f228-bdb5-4aa5-a7e3-fd71ef3cbfb3",
+      "source_path": "/Users/marklampert/Downloads/HoldCo CAD x6007/x6007_2019-10_31-12_31.pdf",
+      "dest_path": "/Users/marklampert/Dropbox/Filing/HoldCo/bank statements/TD x6007 CAD/2019-12-31 CAD 1043-5236007.pdf",
+      "confidence": 95,
+      "confidence_factors": {"similar_files_found": 30, "file_type_match": 20, "entity_keyword": 20, "content_match": 15, "naming_pattern": 10},
       "status": "pending",
-      "timestamp": "2025-11-22T17:28:03Z",
-      "reasoning": "PwC letter dated September 26, 2022, responding to CRA's processing review letter from Aug 9, 2022 regarding Mark Lampert's 2021 tax return (reference C0051806032-001-17). Letter provides supporting documentation for non-business foreign taxes paid claim of $58,871.83. Found existing CRA correspondence in ~/Dropbox/Taxes/Personal/CRA/ folder with matching naming pattern 'YYYY-MM-DD [Person] [Year] - [Document Type].pdf'. Added (PwC) suffix to distinguish from original CRA review letter. High confidence based on exact folder match and consistent naming pattern."
+      "timestamp": "2025-11-24T22:55:00Z",
+      "reasoning": "HoldCo CAD bank statement ending Dec 31, 2019."
     },
     {
-      "id": "20dc7c43-7521-4eaf-847d-753f1db0cdda",
-      "source_path": "/Users/marklampert/Downloads/00134652057_2023-11-13_Renewal_0000252724963.pdf",
-      "dest_path": "/Users/marklampert/Dropbox/Filing/TD Insurance/Cottage + Carlaw/2023-11-13 00134652057_2023-11-13_Renewal_0000252724963.pdf",
-      "confidence": 88,
-      "confidence_factors": {
-        "similar_files_found": 30,
-        "file_type_match": 20,
-        "entity_keyword": 15,
-        "naming_pattern_match": 15,
-        "date_pattern": 8
-      },
+      "id": "c1a80c29-8014-4b3c-96b8-92228c06c216",
+      "source_path": "/Users/marklampert/Downloads/HoldCo CAD x6007/x6007_2019-12_31-02_28.pdf",
+      "dest_path": "/Users/marklampert/Dropbox/Filing/HoldCo/bank statements/TD x6007 CAD/2020-02-28 CAD 1043-5236007.pdf",
+      "confidence": 95,
+      "confidence_factors": {"similar_files_found": 30, "file_type_match": 20, "entity_keyword": 20, "content_match": 15, "naming_pattern": 10},
       "status": "pending",
-      "timestamp": "2025-11-22T17:28:03Z",
-      "reasoning": "TD Insurance home insurance policy renewal for policy #00134652057, dated 2023-11-13. Found multiple files with same policy number in ~/Dropbox/Filing/TD Insurance/Cottage + Carlaw/ folder. This appears to be a duplicate of existing files but adding with date prefix to match filing pattern. Moderate-high confidence based on exact policy number match and folder location."
+      "timestamp": "2025-11-24T22:55:00Z",
+      "reasoning": "HoldCo CAD bank statement ending Feb 28, 2020."
     },
     {
-      "id": "3bd91d6f-d163-4704-88af-3c122e6eb4e6",
-      "source_path": "/Users/marklampert/Downloads/00134652057_2023-11-13_Renewal_0000252724963 (1).pdf",
-      "dest_path": "/Users/marklampert/Dropbox/Filing/TD Insurance/Cottage + Carlaw/2023-11-13 00134652057_2023-11-13_Renewal_0000252724963 (1).pdf",
-      "confidence": 85,
-      "confidence_factors": {
-        "similar_files_found": 30,
-        "file_type_match": 20,
-        "entity_keyword": 15,
-        "naming_pattern_match": 12,
-        "date_pattern": 8
-      },
+      "id": "c44c1d9c-62f2-4a84-ad39-419504bdc03f",
+      "source_path": "/Users/marklampert/Downloads/HoldCo CAD x6007/x6007_2020-02_28-03_31.pdf",
+      "dest_path": "/Users/marklampert/Dropbox/Filing/HoldCo/bank statements/TD x6007 CAD/2020-03-31 CAD 1043-5236007.pdf",
+      "confidence": 95,
+      "confidence_factors": {"similar_files_found": 30, "file_type_match": 20, "entity_keyword": 20, "content_match": 15, "naming_pattern": 10},
       "status": "pending",
-      "timestamp": "2025-11-22T17:28:03Z",
-      "reasoning": "TD Insurance home insurance policy renewal for policy #00134652057, dated 2023-11-13 (duplicate copy). Found multiple files with same policy number in ~/Dropbox/Filing/TD Insurance/Cottage + Carlaw/ folder. This is a duplicate download indicated by the (1) suffix. Moderate confidence - may be duplicate of existing file."
+      "timestamp": "2025-11-24T22:55:00Z",
+      "reasoning": "HoldCo CAD bank statement ending Mar 31, 2020."
     },
     {
-      "id": "5ba2b762-588c-4a4d-b5b0-da36fca24b9b",
-      "source_path": "/Users/marklampert/Downloads/00134652057_2023-11-13_Renewal_0000252724963 (2).pdf",
-      "dest_path": "/Users/marklampert/Dropbox/Filing/TD Insurance/Cottage + Carlaw/2023-11-13 00134652057_2023-11-13_Renewal_0000252724963 (2).pdf",
-      "confidence": 85,
-      "confidence_factors": {
-        "similar_files_found": 30,
-        "file_type_match": 20,
-        "entity_keyword": 15,
-        "naming_pattern_match": 12,
-        "date_pattern": 8
-      },
+      "id": "44232b8d-662a-4b80-92b9-af5b2bb9f2f6",
+      "source_path": "/Users/marklampert/Downloads/HoldCo CAD x6007/x6007_2020-03_31-04_30.pdf",
+      "dest_path": "/Users/marklampert/Dropbox/Filing/HoldCo/bank statements/TD x6007 CAD/2020-04-30 CAD 1043-5236007.pdf",
+      "confidence": 95,
+      "confidence_factors": {"similar_files_found": 30, "file_type_match": 20, "entity_keyword": 20, "content_match": 15, "naming_pattern": 10},
       "status": "pending",
-      "timestamp": "2025-11-22T17:28:03Z",
-      "reasoning": "TD Insurance home insurance policy renewal for policy #00134652057, dated 2023-11-13 (duplicate copy). Found multiple files with same policy number in ~/Dropbox/Filing/TD Insurance/Cottage + Carlaw/ folder. This is a duplicate download indicated by the (2) suffix. Moderate confidence - may be duplicate of existing file."
+      "timestamp": "2025-11-24T22:55:00Z",
+      "reasoning": "HoldCo CAD bank statement ending Apr 30, 2020."
+    },
+    {
+      "id": "6149bc26-cecb-4231-b02a-c64df0461ffa",
+      "source_path": "/Users/marklampert/Downloads/HoldCo CAD x6007/x6007_2020-04_30-05_29.pdf",
+      "dest_path": "/Users/marklampert/Dropbox/Filing/HoldCo/bank statements/TD x6007 CAD/2020-05-29 CAD 1043-5236007.pdf",
+      "confidence": 95,
+      "confidence_factors": {"similar_files_found": 30, "file_type_match": 20, "entity_keyword": 20, "content_match": 15, "naming_pattern": 10},
+      "status": "pending",
+      "timestamp": "2025-11-24T22:55:00Z",
+      "reasoning": "HoldCo CAD bank statement ending May 29, 2020."
+    },
+    {
+      "id": "1ca72b6f-dc7f-48d8-a385-64bb04e8125b",
+      "source_path": "/Users/marklampert/Downloads/HoldCo CAD x6007/x6007_2020-05_29-06_30.pdf",
+      "dest_path": "/Users/marklampert/Dropbox/Filing/HoldCo/bank statements/TD x6007 CAD/2020-06-30 CAD 1043-5236007.pdf",
+      "confidence": 95,
+      "confidence_factors": {"similar_files_found": 30, "file_type_match": 20, "entity_keyword": 20, "content_match": 15, "naming_pattern": 10},
+      "status": "pending",
+      "timestamp": "2025-11-24T22:55:00Z",
+      "reasoning": "HoldCo CAD bank statement ending Jun 30, 2020."
+    },
+    {
+      "id": "af2ed6fb-9f06-4df1-932c-d5aa0c15e272",
+      "source_path": "/Users/marklampert/Downloads/HoldCo CAD x6007/x6007_2020-06_30-07_31.pdf",
+      "dest_path": "/Users/marklampert/Dropbox/Filing/HoldCo/bank statements/TD x6007 CAD/2020-07-31 CAD 1043-5236007.pdf",
+      "confidence": 95,
+      "confidence_factors": {"similar_files_found": 30, "file_type_match": 20, "entity_keyword": 20, "content_match": 15, "naming_pattern": 10},
+      "status": "pending",
+      "timestamp": "2025-11-24T22:55:00Z",
+      "reasoning": "HoldCo CAD bank statement ending Jul 31, 2020."
+    },
+    {
+      "id": "70c1da35-c06b-4a46-8198-c1bb3283bed1",
+      "source_path": "/Users/marklampert/Downloads/HoldCo CAD x6007/x6007_2020-07_31-08_31.pdf",
+      "dest_path": "/Users/marklampert/Dropbox/Filing/HoldCo/bank statements/TD x6007 CAD/2020-08-31 CAD 1043-5236007.pdf",
+      "confidence": 95,
+      "confidence_factors": {"similar_files_found": 30, "file_type_match": 20, "entity_keyword": 20, "content_match": 15, "naming_pattern": 10},
+      "status": "pending",
+      "timestamp": "2025-11-24T22:55:00Z",
+      "reasoning": "HoldCo CAD bank statement ending Aug 31, 2020."
+    },
+    {
+      "id": "7457953f-fcd2-4bf1-ba26-a74a91e04151",
+      "source_path": "/Users/marklampert/Downloads/HoldCo CAD x6007/x6007_2020-08_31-10_30.pdf",
+      "dest_path": "/Users/marklampert/Dropbox/Filing/HoldCo/bank statements/TD x6007 CAD/2020-10-30 CAD 1043-5236007.pdf",
+      "confidence": 95,
+      "confidence_factors": {"similar_files_found": 30, "file_type_match": 20, "entity_keyword": 20, "content_match": 15, "naming_pattern": 10},
+      "status": "pending",
+      "timestamp": "2025-11-24T22:55:00Z",
+      "reasoning": "HoldCo CAD bank statement ending Oct 30, 2020."
+    },
+    {
+      "id": "3b19f167-bfd3-429e-8538-edcd269ee7ae",
+      "source_path": "/Users/marklampert/Downloads/HoldCo CAD x6007/x6007_2020-10_30-11_30.pdf",
+      "dest_path": "/Users/marklampert/Dropbox/Filing/HoldCo/bank statements/TD x6007 CAD/2020-11-30 CAD 1043-5236007.pdf",
+      "confidence": 95,
+      "confidence_factors": {"similar_files_found": 30, "file_type_match": 20, "entity_keyword": 20, "content_match": 15, "naming_pattern": 10},
+      "status": "pending",
+      "timestamp": "2025-11-24T22:55:00Z",
+      "reasoning": "HoldCo CAD bank statement ending Nov 30, 2020."
+    },
+    {
+      "id": "f6059a00-f2b6-4bc4-a2c9-6515422880f7",
+      "source_path": "/Users/marklampert/Downloads/HoldCo CAD x6007/x6007_2020-11_30-12_31.pdf",
+      "dest_path": "/Users/marklampert/Dropbox/Filing/HoldCo/bank statements/TD x6007 CAD/2020-12-31 CAD 1043-5236007.pdf",
+      "confidence": 95,
+      "confidence_factors": {"similar_files_found": 30, "file_type_match": 20, "entity_keyword": 20, "content_match": 15, "naming_pattern": 10},
+      "status": "pending",
+      "timestamp": "2025-11-24T22:55:00Z",
+      "reasoning": "HoldCo CAD bank statement ending Dec 31, 2020."
+    },
+    {
+      "id": "ae0cbe1a-8290-4217-87e2-67eb0b99ff28",
+      "source_path": "/Users/marklampert/Downloads/HoldCo CAD x6007/x6007_2020-12_31-01_29.pdf",
+      "dest_path": "/Users/marklampert/Dropbox/Filing/HoldCo/bank statements/TD x6007 CAD/2021-01-29 CAD 1043-5236007.pdf",
+      "confidence": 95,
+      "confidence_factors": {"similar_files_found": 30, "file_type_match": 20, "entity_keyword": 20, "content_match": 15, "naming_pattern": 10},
+      "status": "pending",
+      "timestamp": "2025-11-24T22:55:00Z",
+      "reasoning": "HoldCo CAD bank statement ending Jan 29, 2021."
+    },
+    {
+      "id": "2274739b-c857-4d82-8e57-0de54ce8fc2c",
+      "source_path": "/Users/marklampert/Downloads/HoldCo CAD x6007/x6007_2021-01_29-04_30.pdf",
+      "dest_path": "/Users/marklampert/Dropbox/Filing/HoldCo/bank statements/TD x6007 CAD/2021-04-30 CAD 1043-5236007.pdf",
+      "confidence": 95,
+      "confidence_factors": {"similar_files_found": 30, "file_type_match": 20, "entity_keyword": 20, "content_match": 15, "naming_pattern": 10},
+      "status": "pending",
+      "timestamp": "2025-11-24T22:55:00Z",
+      "reasoning": "HoldCo CAD bank statement ending Apr 30, 2021."
+    },
+    {
+      "id": "86adc874-e3f1-4f4a-8f54-e5ef356336bb",
+      "source_path": "/Users/marklampert/Downloads/HoldCo CAD x6007/x6007_2021-04_30-06_30.pdf",
+      "dest_path": "/Users/marklampert/Dropbox/Filing/HoldCo/bank statements/TD x6007 CAD/2021-06-30 CAD 1043-5236007.pdf",
+      "confidence": 95,
+      "confidence_factors": {"similar_files_found": 30, "file_type_match": 20, "entity_keyword": 20, "content_match": 15, "naming_pattern": 10},
+      "status": "pending",
+      "timestamp": "2025-11-24T22:55:00Z",
+      "reasoning": "HoldCo CAD bank statement ending Jun 30, 2021."
+    },
+    {
+      "id": "f24fd45c-7d6b-497d-b997-6db62eb4af82",
+      "source_path": "/Users/marklampert/Downloads/HoldCo CAD x6007/x6007_2021-06_30-10_29.pdf",
+      "dest_path": "/Users/marklampert/Dropbox/Filing/HoldCo/bank statements/TD x6007 CAD/2021-10-29 CAD 1043-5236007.pdf",
+      "confidence": 95,
+      "confidence_factors": {"similar_files_found": 30, "file_type_match": 20, "entity_keyword": 20, "content_match": 15, "naming_pattern": 10},
+      "status": "pending",
+      "timestamp": "2025-11-24T22:55:00Z",
+      "reasoning": "HoldCo CAD bank statement ending Oct 29, 2021."
+    },
+    {
+      "id": "cf16a09e-2d20-4d88-aa98-120e4fd58b87",
+      "source_path": "/Users/marklampert/Downloads/HoldCo USD x9548/x9548_2019_01_31-02_28.pdf",
+      "dest_path": "/Users/marklampert/Dropbox/Filing/HoldCo/bank statements/TD x9548 USD/2019-02-28 USD 1043-7309548.pdf",
+      "confidence": 95,
+      "confidence_factors": {"similar_files_found": 30, "file_type_match": 20, "entity_keyword": 20, "content_match": 15, "naming_pattern": 10},
+      "status": "pending",
+      "timestamp": "2025-11-24T22:55:00Z",
+      "reasoning": "HoldCo USD bank statement ending Feb 28, 2019."
+    },
+    {
+      "id": "506ea291-a29b-409f-80af-4639788e2bd5",
+      "source_path": "/Users/marklampert/Downloads/HoldCo USD x9548/x9548_2019_02_28-04_30.pdf",
+      "dest_path": "/Users/marklampert/Dropbox/Filing/HoldCo/bank statements/TD x9548 USD/2019-04-30 USD 1043-7309548.pdf",
+      "confidence": 95,
+      "confidence_factors": {"similar_files_found": 30, "file_type_match": 20, "entity_keyword": 20, "content_match": 15, "naming_pattern": 10},
+      "status": "pending",
+      "timestamp": "2025-11-24T22:55:00Z",
+      "reasoning": "HoldCo USD bank statement ending Apr 30, 2019."
+    },
+    {
+      "id": "80cbb864-cb43-47e9-8b37-693f1a76dec7",
+      "source_path": "/Users/marklampert/Downloads/HoldCo USD x9548/x9548_2019_04_30-05_31.pdf",
+      "dest_path": "/Users/marklampert/Dropbox/Filing/HoldCo/bank statements/TD x9548 USD/2019-05-31 USD 1043-7309548.pdf",
+      "confidence": 95,
+      "confidence_factors": {"similar_files_found": 30, "file_type_match": 20, "entity_keyword": 20, "content_match": 15, "naming_pattern": 10},
+      "status": "pending",
+      "timestamp": "2025-11-24T22:55:00Z",
+      "reasoning": "HoldCo USD bank statement ending May 31, 2019."
+    },
+    {
+      "id": "88e52078-2b0d-48a2-b924-171a6fc912a1",
+      "source_path": "/Users/marklampert/Downloads/HoldCo USD x9548/x9548_2019_05_31-06_28.pdf",
+      "dest_path": "/Users/marklampert/Dropbox/Filing/HoldCo/bank statements/TD x9548 USD/2019-06-28 USD 1043-7309548.pdf",
+      "confidence": 95,
+      "confidence_factors": {"similar_files_found": 30, "file_type_match": 20, "entity_keyword": 20, "content_match": 15, "naming_pattern": 10},
+      "status": "pending",
+      "timestamp": "2025-11-24T22:55:00Z",
+      "reasoning": "HoldCo USD bank statement ending Jun 28, 2019."
+    },
+    {
+      "id": "0bb917e1-ac7c-47ce-b748-bd54eec3bd52",
+      "source_path": "/Users/marklampert/Downloads/HoldCo USD x9548/x9548_2019_06_28-12_31.pdf",
+      "dest_path": "/Users/marklampert/Dropbox/Filing/HoldCo/bank statements/TD x9548 USD/2019-12-31 USD 1043-7309548.pdf",
+      "confidence": 95,
+      "confidence_factors": {"similar_files_found": 30, "file_type_match": 20, "entity_keyword": 20, "content_match": 15, "naming_pattern": 10},
+      "status": "pending",
+      "timestamp": "2025-11-24T22:55:00Z",
+      "reasoning": "HoldCo USD bank statement ending Dec 31, 2019."
+    },
+    {
+      "id": "c5ff273c-a751-446b-ab33-b0bf4cc5745d",
+      "source_path": "/Users/marklampert/Downloads/HoldCo USD x9548/x9548_2020_01_31-02_28.pdf",
+      "dest_path": "/Users/marklampert/Dropbox/Filing/HoldCo/bank statements/TD x9548 USD/2020-02-28 USD 1043-7309548.pdf",
+      "confidence": 95,
+      "confidence_factors": {"similar_files_found": 30, "file_type_match": 20, "entity_keyword": 20, "content_match": 15, "naming_pattern": 10},
+      "status": "pending",
+      "timestamp": "2025-11-24T22:55:00Z",
+      "reasoning": "HoldCo USD bank statement ending Feb 28, 2020."
+    },
+    {
+      "id": "95c1eb7b-704a-4536-bf06-c924995c557d",
+      "source_path": "/Users/marklampert/Downloads/HoldCo USD x9548/x9548_2020_02_28-11_30.pdf",
+      "dest_path": "/Users/marklampert/Dropbox/Filing/HoldCo/bank statements/TD x9548 USD/2020-11-30 USD 1043-7309548.pdf",
+      "confidence": 95,
+      "confidence_factors": {"similar_files_found": 30, "file_type_match": 20, "entity_keyword": 20, "content_match": 15, "naming_pattern": 10},
+      "status": "pending",
+      "timestamp": "2025-11-24T22:55:00Z",
+      "reasoning": "HoldCo USD bank statement ending Nov 30, 2020."
+    },
+    {
+      "id": "a91506f3-ade4-4fc7-8831-c608b802d523",
+      "source_path": "/Users/marklampert/Downloads/HoldCo USD x9548/x9548_2020_11_30-12_31.pdf",
+      "dest_path": "/Users/marklampert/Dropbox/Filing/HoldCo/bank statements/TD x9548 USD/2020-12-31 USD 1043-7309548.pdf",
+      "confidence": 95,
+      "confidence_factors": {"similar_files_found": 30, "file_type_match": 20, "entity_keyword": 20, "content_match": 15, "naming_pattern": 10},
+      "status": "pending",
+      "timestamp": "2025-11-24T22:55:00Z",
+      "reasoning": "HoldCo USD bank statement ending Dec 31, 2020."
+    },
+    {
+      "id": "ed1a7816-cdaf-42dc-bc40-c24f79851e82",
+      "source_path": "/Users/marklampert/Downloads/HoldCo USD x9548/x9548_2020_12_31-01_31.pdf",
+      "dest_path": "/Users/marklampert/Dropbox/Filing/HoldCo/bank statements/TD x9548 USD/2021-01-31 USD 1043-7309548.pdf",
+      "confidence": 95,
+      "confidence_factors": {"similar_files_found": 30, "file_type_match": 20, "entity_keyword": 20, "content_match": 15, "naming_pattern": 10},
+      "status": "pending",
+      "timestamp": "2025-11-24T22:55:00Z",
+      "reasoning": "HoldCo USD bank statement ending Jan 31, 2021."
+    },
+    {
+      "id": "48f4bddb-d0d9-42da-a2cb-6907708cb7df",
+      "source_path": "/Users/marklampert/Downloads/HoldCo USD x9548/x9548_2021_01_29-02_26.pdf",
+      "dest_path": "/Users/marklampert/Dropbox/Filing/HoldCo/bank statements/TD x9548 USD/2021-02-26 USD 1043-7309548.pdf",
+      "confidence": 95,
+      "confidence_factors": {"similar_files_found": 30, "file_type_match": 20, "entity_keyword": 20, "content_match": 15, "naming_pattern": 10},
+      "status": "pending",
+      "timestamp": "2025-11-24T22:55:00Z",
+      "reasoning": "HoldCo USD bank statement ending Feb 26, 2021."
+    },
+    {
+      "id": "2abd25e2-3ba3-4dba-bab4-ecb9a8f80b4d",
+      "source_path": "/Users/marklampert/Downloads/HoldCo USD x9548/x9548_2021_12_31-01_29.pdf",
+      "dest_path": "/Users/marklampert/Dropbox/Filing/HoldCo/bank statements/TD x9548 USD/2022-01-29 USD 1043-7309548.pdf",
+      "confidence": 95,
+      "confidence_factors": {"similar_files_found": 30, "file_type_match": 20, "entity_keyword": 20, "content_match": 15, "naming_pattern": 10},
+      "status": "pending",
+      "timestamp": "2025-11-24T22:55:00Z",
+      "reasoning": "HoldCo USD bank statement ending Jan 29, 2022."
     }
   ]
 }

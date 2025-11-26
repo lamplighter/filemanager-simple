@@ -1,0 +1,40 @@
+{
+  "schema_version": "1.0",
+  "last_updated": "2025-11-25T00:33:21Z",
+  "files": [
+    {
+      "id": "5ba2b762-588c-4a4d-b5b0-da36fca24b9b",
+      "source_path": "/Users/marklampert/Downloads/00134652057_2023-11-13_Renewal_0000252724963 (2).pdf",
+      "dest_path": "/Users/marklampert/Dropbox/Filing/TD Insurance/Cottage + Carlaw/2023-11-13 00134652057_2023-11-13_Renewal_0000252724963 (2).pdf",
+      "confidence": 85,
+      "confidence_factors": {
+        "similar_files_found": 30,
+        "file_type_match": 20,
+        "entity_keyword": 15,
+        "naming_pattern_match": 12,
+        "date_pattern": 8
+      },
+      "status": "skipped",
+      "timestamp": "2025-11-22T17:28:03Z",
+      "reasoning": "TD Insurance home insurance policy renewal for policy #00134652057, dated 2023-11-13 (duplicate copy). Found multiple files with same policy number in ~/Dropbox/Filing/TD Insurance/Cottage + Carlaw/ folder. This is a duplicate download indicated by the (2) suffix. Moderate confidence - may be duplicate of existing file.",
+      "skipped_at": "2025-11-25T00:33:20Z"
+    },
+    {
+      "id": "3bd91d6f-d163-4704-88af-3c122e6eb4e6",
+      "source_path": "/Users/marklampert/Downloads/00134652057_2023-11-13_Renewal_0000252724963 (1).pdf",
+      "dest_path": "/Users/marklampert/Dropbox/Filing/TD Insurance/Cottage + Carlaw/2023-11-13 00134652057_2023-11-13_Renewal_0000252724963 (1).pdf",
+      "confidence": 85,
+      "confidence_factors": {
+        "similar_files_found": 30,
+        "file_type_match": 20,
+        "entity_keyword": 15,
+        "naming_pattern_match": 12,
+        "date_pattern": 8
+      },
+      "status": "skipped",
+      "timestamp": "2025-11-22T17:28:03Z",
+      "reasoning": "TD Insurance home insurance policy renewal for policy #00134652057, dated 2023-11-13 (duplicate copy). Found multiple files with same policy number in ~/Dropbox/Filing/TD Insurance/Cottage + Carlaw/ folder. This is a duplicate download indicated by the (1) suffix. Moderate confidence - may be duplicate of existing file.",
+      "skipped_at": "2025-11-25T00:33:21Z"
+    }
+  ]
+}
