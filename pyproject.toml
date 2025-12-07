@@ -5,6 +5,7 @@ description = "Claude Code driven file organization system"
 requires-python = ">=3.9"
 dependencies = [
     "PyPDF2>=3.0.0",
+    "pytest-playwright>=0.7.1",
 ]
 
 [project.optional-dependencies]

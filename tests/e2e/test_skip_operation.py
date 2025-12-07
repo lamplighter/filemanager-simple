@@ -152,6 +152,13 @@ class TestSkipMultipleFiles:
         # Should have no rows
         assert viewer.get_row_count() == 0
 
-        # Both files should still exist
-        assert file1.exists()
-        assert file2.exists()
+        # Files should have been moved to Skipped folder (not remain at source)
+        import os
+        skipped_folder = os.path.expanduser('~/Downloads/Skipped')
+        skipped_file1 = os.path.join(skipped_folder, file1.name)
+        skipped_file2 = os.path.join(skipped_folder, file2.name)
+        assert os.path.exists(skipped_file1)
+        assert os.path.exists(skipped_file2)
+        # Clean up
+        os.remove(skipped_file1)
+        os.remove(skipped_file2)

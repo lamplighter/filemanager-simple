@@ -303,9 +303,14 @@ class TestBulkSkip:
         viewer.click_bulk_skip()
         page.wait_for_timeout(2000)
 
-        # Files should still exist at source (not moved)
+        # Files should have been moved to Skipped folder (not remain at source)
+        import os
+        skipped_folder = os.path.expanduser('~/Downloads/Skipped')
         for f in files:
-            assert f.exists()
+            assert not f.exists(), f"File {f} should have been moved from source"
+            skipped_path = os.path.join(skipped_folder, f.name)
+            assert os.path.exists(skipped_path), f"File should be in Skipped folder"
+            os.remove(skipped_path)  # Clean up
 
         # Skip history should have entries
         skip_after = read_skip_history()

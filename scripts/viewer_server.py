@@ -7,8 +7,19 @@ import json
 import os
 import shutil
 import tempfile
+import unicodedata
 from urllib.parse import parse_qs, urlparse
 from datetime import datetime
+
+
+def normalize_path(path: str) -> str:
+    """Normalize Unicode in file path to handle macOS special characters.
+
+    macOS can use different Unicode representations for the same character
+    (e.g., narrow no-break space U+202F vs regular space). This normalizes
+    paths to NFC form for consistent comparison.
+    """
+    return unicodedata.normalize('NFC', path)
 
 PORT = int(os.environ.get('FILEMANAGER_PORT', 8765))
 HOST = '127.0.0.1'  # Bind to localhost only for security
@@ -143,7 +154,7 @@ class ViewerRequestHandler(http.server.SimpleHTTPRequestHandler):
                     self.send_json_error(404, "File not found in queue")
                     return
 
-                source_path = os.path.expanduser(file_entry['source_path'])
+                source_path = normalize_path(os.path.expanduser(file_entry['source_path']))
                 dest_path = os.path.expanduser(file_entry['dest_path'])
                 action = file_entry.get('action', 'move')
 
@@ -315,7 +326,7 @@ class ViewerRequestHandler(http.server.SimpleHTTPRequestHandler):
                     return
 
                 # Move file to Skipped folder
-                source_path = file_entry['source_path']
+                source_path = normalize_path(os.path.expanduser(file_entry['source_path']))
                 os.makedirs(SKIPPED_FOLDER, exist_ok=True)
                 skipped_path = os.path.join(SKIPPED_FOLDER, os.path.basename(source_path))
                 if os.path.exists(source_path):
@@ -408,7 +419,7 @@ class ViewerRequestHandler(http.server.SimpleHTTPRequestHandler):
                         self._send_bulk_error(f"File not found in queue: {file_id[:8]}...", moved_count)
                         return
 
-                    source_path = os.path.expanduser(file_entry['source_path'])
+                    source_path = normalize_path(os.path.expanduser(file_entry['source_path']))
                     dest_path = os.path.expanduser(file_entry['dest_path'])
                     action = file_entry.get('action', 'move')
 
@@ -512,7 +523,7 @@ class ViewerRequestHandler(http.server.SimpleHTTPRequestHandler):
                         return
 
                     # Move file to Skipped folder
-                    source_path = file_entry['source_path']
+                    source_path = normalize_path(os.path.expanduser(file_entry['source_path']))
                     os.makedirs(SKIPPED_FOLDER, exist_ok=True)
                     skipped_path = os.path.join(SKIPPED_FOLDER, os.path.basename(source_path))
                     if os.path.exists(source_path):
