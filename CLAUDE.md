@@ -284,7 +284,7 @@ After adding to queue, tell the user:
 - What file was analyzed
 - Confidence score
 - Destination path
-- Next step: Open viewer (`/view`) to review and click Move or Skip
+- Next step: Run `./scripts/view_queue.sh` to review and click Move or Skip
 
 ---
 
@@ -335,7 +335,7 @@ glob "**/*Rogers*" ~/Dropbox/Filing/  # Find similar files
 "Added Rogers invoice to queue with 95% confidence.
 Destination: ~/Dropbox/Filing/Rogers - Wireless/Rogers-2024-01-15.pdf
 
-Open viewer with /view to review and click Move or Skip."
+Run ./scripts/view_queue.sh to review and click Move or Skip."
 ```
 
 ### Workflow Example: Duplicate Detected
@@ -388,7 +388,7 @@ read /Users/marklampert/Downloads/Statement-Jan-2024.pdf
 
 Added to queue with DELETE action (100% confidence - exact checksum match).
 
-Open viewer with /view to review and click Delete or Keep."
+Run ./scripts/view_queue.sh to review and click Delete or Keep."
 ```
 
 ### Workflow Example: Multiple Valid Destinations
@@ -479,7 +479,7 @@ glob "**/*Bell*" ~/Dropbox/Taxes/
 Primary: ~/Dropbox/Filing/Bell - Internet/Bell-2024-01-15.pdf
 Alternative: ~/Dropbox/Filing/Utilities/Internet/ (60% confidence)
 
-Open viewer with /view to see all options and choose."
+Run ./scripts/view_queue.sh to see all options and choose."
 ```
 
 ### Workflow Example: Proposing a New Folder
@@ -543,14 +543,14 @@ glob "**/TD WebBroker*" ~/Dropbox/Filing/
 Confidence: 75% (following existing pattern for brokerage platforms)
 Will create new folder if approved.
 
-Open viewer with /view to review and approve.""
+Run ./scripts/view_queue.sh to review and approve.""
 ```
 
 ---
 
 ## User Review and Approval via Viewer UI
 
-The **viewer UI** is the primary way to review and execute file organization. Open it with `/view` or `./scripts/view_queue.sh`.
+The **viewer UI** is the primary way to review and execute file organization. Open it with `./scripts/view_queue.sh` (launches the custom FileQueueViewer.app).
 
 **All files require explicit user action** - clicking the Move or Skip button in the UI.
 
@@ -640,7 +640,7 @@ This will check for:
 
 ```bash
 # Open viewer UI (primary method)
-/view                            # Open viewer with Move/Skip buttons
+./scripts/view_queue.sh          # Launches FileQueueViewer.app with custom icon
 
 # Optional batch operations
 ./organize.sh --dry-run          # Preview all suggestions
@@ -658,9 +658,9 @@ uuidgen | tr '[:upper:]' '[:lower:]'
 ## Summary
 
 1. **You analyze** files and add JSON entries to `state/file_queue.json`
-2. **User reviews** suggestions in the viewer UI (`/view`)
+2. **User reviews** suggestions in the viewer UI (`./scripts/view_queue.sh`)
 3. **User clicks Move** → file is immediately moved to destination
-4. **User clicks Skip** → file is removed from queue without moving
+4. **User clicks Skip** → file is moved to `~/Downloads/Skipped/` for later review
 5. **System tracks** operations in JSON for transparency
 
 Your job is to be the "brain" - analyze files intelligently and create accurate suggestions. The user is the decision-maker. The viewer UI is the "hands" - it handles all actual file operations immediately when the user clicks Move or Skip.
