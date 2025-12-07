@@ -15,10 +15,12 @@ HOST = '127.0.0.1'  # Bind to localhost only for security
 PROJECT_ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 # State directory can be overridden via environment variable (used by tests)
+
 STATE_DIR = os.environ.get('FILEMANAGER_STATE_DIR', os.path.join(PROJECT_ROOT, 'state'))
 QUEUE_FILE = os.path.join(STATE_DIR, 'file_queue.json')
 HISTORY_FILE = os.path.join(STATE_DIR, 'move_history.json')
 SKIP_HISTORY_FILE = os.path.join(STATE_DIR, 'skip_history.json')
+SKIPPED_FOLDER = os.path.expanduser('~/Downloads/Skipped')
 
 
 def atomic_write_json(data: dict, filepath: str) -> None:
@@ -157,11 +159,15 @@ class ViewerRequestHandler(http.server.SimpleHTTPRequestHandler):
                     }).encode())
                     return
 
-                # Handle DELETE action (duplicates)
+                # Handle DELETE action (duplicates or empty folders)
                 if dest_path == "DELETE" or action == "delete":
                     try:
-                        os.remove(source_path)
-                        message = f"Deleted duplicate file: {os.path.basename(source_path)}"
+                        if os.path.isdir(source_path):
+                            shutil.rmtree(source_path)
+                            message = f"Deleted directory: {os.path.basename(source_path)}"
+                        else:
+                            os.remove(source_path)
+                            message = f"Deleted file: {os.path.basename(source_path)}"
                     except Exception as e:
                         self.send_response(200)
                         self.send_header('Content-type', 'application/json')
@@ -169,7 +175,7 @@ class ViewerRequestHandler(http.server.SimpleHTTPRequestHandler):
                         self.end_headers()
                         self.wfile.write(json.dumps({
                             'success': False,
-                            'error': f'Failed to delete file: {str(e)}'
+                            'error': f'Failed to delete: {str(e)}'
                         }).encode())
                         return
                 else:
@@ -307,6 +313,16 @@ class ViewerRequestHandler(http.server.SimpleHTTPRequestHandler):
                 if not file_entry:
                     self.send_json_error(404, "File not found in queue")
                     return
+
+                # Move file to Skipped folder
+                source_path = file_entry['source_path']
+                os.makedirs(SKIPPED_FOLDER, exist_ok=True)
+                skipped_path = os.path.join(SKIPPED_FOLDER, os.path.basename(source_path))
+                if os.path.exists(source_path):
+                    shutil.move(source_path, skipped_path)
+                    file_entry['skipped_to'] = skipped_path
+                else:
+                    file_entry['skipped_to'] = None  # File was already gone
 
                 # Update file entry with skipped status and timestamp
                 file_entry['status'] = 'skipped'
@@ -494,6 +510,16 @@ class ViewerRequestHandler(http.server.SimpleHTTPRequestHandler):
                         # Stop on first error
                         self._send_bulk_error(f"File not found in queue: {file_id[:8]}...", skipped_count, action="skip")
                         return
+
+                    # Move file to Skipped folder
+                    source_path = file_entry['source_path']
+                    os.makedirs(SKIPPED_FOLDER, exist_ok=True)
+                    skipped_path = os.path.join(SKIPPED_FOLDER, os.path.basename(source_path))
+                    if os.path.exists(source_path):
+                        shutil.move(source_path, skipped_path)
+                        file_entry['skipped_to'] = skipped_path
+                    else:
+                        file_entry['skipped_to'] = None  # File was already gone
 
                     # Mark as skipped
                     file_entry['status'] = 'skipped'

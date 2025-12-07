@@ -55,10 +55,12 @@ class TestSkipOperation:
 
         assert file_id not in file_ids
 
-    def test_skip_file_remains_at_source(self, page: Page, viewer_url, write_queue, temp_test_dir, sample_txt):
-        """Skip leaves file at original location."""
+    def test_skip_file_moves_to_skipped_folder(self, page: Page, viewer_url, write_queue, temp_test_dir, sample_txt):
+        """Skip moves file to Skipped folder."""
+        import os
         source_file = sample_txt
         dest_path = temp_test_dir["dest"] / "should_not_exist.txt"
+        skipped_folder = os.path.expanduser('~/Downloads/Skipped')
 
         queue = make_queue([
             make_queue_entry(str(source_file), str(dest_path), confidence=60),
@@ -74,10 +76,15 @@ class TestSkipOperation:
         viewer.click_skip_button(0)
         page.wait_for_timeout(1000)
 
-        # File should still be at source
-        assert source_file.exists()
+        # File should NOT be at source anymore
+        assert not source_file.exists()
         # File should NOT be at destination
         assert not dest_path.exists()
+        # File should be in Skipped folder
+        skipped_path = os.path.join(skipped_folder, source_file.name)
+        assert os.path.exists(skipped_path)
+        # Clean up
+        os.remove(skipped_path)
 
     def test_skip_updates_skip_history(self, page: Page, viewer_url, write_queue, read_skip_history, temp_test_dir, sample_txt):
         """Skip adds entry to skip_history.json."""

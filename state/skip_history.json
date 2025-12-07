@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0",
-  "last_updated": "2025-11-25T00:33:21Z",
+  "last_updated": "2025-12-07T19:03:21Z",
   "files": [
     {
       "id": "5ba2b762-588c-4a4d-b5b0-da36fca24b9b",
@@ -35,6 +35,33 @@
       "timestamp": "2025-11-22T17:28:03Z",
       "reasoning": "TD Insurance home insurance policy renewal for policy #00134652057, dated 2023-11-13 (duplicate copy). Found multiple files with same policy number in ~/Dropbox/Filing/TD Insurance/Cottage + Carlaw/ folder. This is a duplicate download indicated by the (1) suffix. Moderate confidence - may be duplicate of existing file.",
       "skipped_at": "2025-11-25T00:33:21Z"
+    },
+    {
+      "id": "5adf8ce6-8e95-4d13-95be-83f22700476e",
+      "source_path": "/Users/marklampert/Downloads/image (4).png",
+      "dest_path": "/Users/marklampert/Desktop/image (4).png",
+      "confidence": 30,
+      "confidence_factors": {
+        "default_location": 30
+      },
+      "status": "skipped",
+      "action": "move",
+      "reasoning": "Generic image file. Unsure of specific destination, suggesting Desktop as default.",
+      "skipped_at": "2025-12-07T19:03:06Z"
+    },
+    {
+      "id": "a5130873-ed92-4f20-9616-dbe3f31591c0",
+      "source_path": "/Users/marklampert/Downloads/Lampert, Mark L 20251124 iFirm.zip",
+      "dest_path": "/Users/marklampert/Dropbox/Taxes/Personal/2025/Lampert, Mark L 20251124 iFirm.zip",
+      "confidence": 85,
+      "confidence_factors": {
+        "keyword_match": 50,
+        "folder_match": 35
+      },
+      "status": "skipped",
+      "action": "move",
+      "reasoning": "Contains 'iFirm' and 'Lampert', likely tax/accounting documents. Matched to Personal Taxes 2025 folder based on date in filename.",
+      "skipped_at": "2025-12-07T19:03:21Z"
     }
   ]
 }

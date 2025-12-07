@@ -877,7 +877,10 @@
         }
 
         function formatTimestamp(timestamp) {
+            if (!timestamp || timestamp === 'Invalid Date') return '<div style="color: #999;">Pending</div>';
             const date = new Date(timestamp);
+            if (isNaN(date.getTime())) return '<div style="color: #999;">Pending</div>';
+            
             const dateStr = date.toLocaleDateString();
             const timeStr = date.toLocaleTimeString();
             return `<div>${dateStr}</div><div style="font-size: 11px; color: #999;">${timeStr}</div>`;
@@ -898,16 +901,26 @@
             // Format destination cell
             let destCell;
             if (isDuplicate) {
-                const duplicatePaths = (file.duplicate_of || []).map(path =>
-                    `<span class="duplicate-path">→ ${formatPath(path)}</span>`
-                ).join('');
-                destCell = `
-                    <span class="status-badge status-duplicate">DELETE (duplicate)</span>
-                    <div class="duplicate-info">
-                        <strong>Identical to:</strong>
-                        ${duplicatePaths}
-                    </div>
-                `;
+                // Check if it's actually a duplicate (has duplicate_of or specific confidence factors)
+                const isRealDuplicate = file.duplicate_of || (file.confidence_factors && file.confidence_factors.duplicate_check);
+                
+                if (isRealDuplicate) {
+                    const duplicatePaths = (file.duplicate_of || []).map(path => 
+                        `<span class="duplicate-path">→ ${formatPath(path)}</span>`
+                    ).join('');
+                    destCell = `
+                        <span class="status-badge status-duplicate">DELETE (duplicate)</span>
+                        <div class="duplicate-info">
+                            <strong>Identical to:</strong>
+                            ${duplicatePaths}
+                        </div>
+                    `;
+                } else {
+                    // Generic delete (e.g. empty folder)
+                    destCell = `
+                        <span class="status-badge status-rejected">DELETE (empty folder)</span>
+                    `;
+                }
             } else {
                 destCell = formatPath(file.dest_path);
                 if (isNewFolder) {
