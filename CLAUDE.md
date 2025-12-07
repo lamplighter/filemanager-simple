@@ -31,6 +31,7 @@ Look in source directories (default: `~/Downloads/` and `~/Desktop/`) for unorga
 - Use `ls -lt` to list files sorted by modification time (newest first)
 - Analyze the most recent file that hasn't been processed yet
 - This ensures new downloads are organized promptly
+- **Skip subfolders**: Ignore files in `~/Downloads/Screenshots/`, `~/Downloads/installers/`, and `~/Downloads/unknown/` - these are already organized
 
 ### 2. Analyze the File
 - Check file extension, size, and basic metadata
@@ -629,9 +630,9 @@ This will check for:
 - DO NOT reduce primary confidence - each option is scored independently
 
 ### Special File Types
-- **DMG files**: `~/Files/installers/`
-- **Screenshots**: `~/Files/screenshots/`
-- **Unknown/unclear**: `~/Files/unknown/`
+- **DMG files**: `~/Downloads/installers/`
+- **Screenshots**: `~/Downloads/Screenshots/`
+- **Unknown/unclear**: `~/Downloads/unknown/`
 
 ---
 
