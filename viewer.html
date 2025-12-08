@@ -288,6 +288,13 @@
             margin-top: 2px;
         }
 
+        .delete-reason {
+            font-size: 12px;
+            color: #666;
+            margin-top: 6px;
+            line-height: 1.4;
+        }
+
         .delete-btn {
             background: #ff6b6b;
             color: white;
@@ -916,9 +923,13 @@
                         </div>
                     `;
                 } else {
-                    // Generic delete (e.g. empty folder)
+                    // Generic delete - show reasoning if available
+                    const deleteReason = file.reasoning
+                        ? (file.reasoning.length > 80 ? file.reasoning.substring(0, 80) + '...' : file.reasoning)
+                        : 'Suggested for deletion';
                     destCell = `
-                        <span class="status-badge status-rejected">DELETE (empty folder)</span>
+                        <span class="status-badge status-rejected">DELETE</span>
+                        <div class="delete-reason">${deleteReason}</div>
                     `;
                 }
             } else {
@@ -1283,21 +1294,33 @@
             // Destination section
             let destSection;
             if (isDuplicate) {
-                const duplicatePaths = (file.duplicate_of || []).map(path =>
-                    `<div class="modal-path" style="margin-top: 8px;">${formatPath(path)}</div>`
-                ).join('');
-                destSection = `
-                    <div class="modal-section">
-                        <div class="modal-section-title">Action</div>
-                        <span class="status-badge status-duplicate">DELETE (duplicate)</span>
-                    </div>
+                const isRealDuplicate = file.duplicate_of || (file.confidence_factors && file.confidence_factors.duplicate_check);
 
-                    <div class="modal-section">
-                        <div class="modal-section-title">Identical Files Found</div>
-                        ${duplicatePaths}
-                        ${file.checksum ? `<div style="margin-top: 12px; font-size: 11px; color: #666; font-family: monospace;">SHA256: ${file.checksum.substring(0, 16)}...</div>` : ''}
-                    </div>
-                `;
+                if (isRealDuplicate) {
+                    const duplicatePaths = (file.duplicate_of || []).map(path =>
+                        `<div class="modal-path" style="margin-top: 8px;">${formatPath(path)}</div>`
+                    ).join('');
+                    destSection = `
+                        <div class="modal-section">
+                            <div class="modal-section-title">Action</div>
+                            <span class="status-badge status-duplicate">DELETE (duplicate)</span>
+                        </div>
+
+                        <div class="modal-section">
+                            <div class="modal-section-title">Identical Files Found</div>
+                            ${duplicatePaths}
+                            ${file.checksum ? `<div style="margin-top: 12px; font-size: 11px; color: #666; font-family: monospace;">SHA256: ${file.checksum.substring(0, 16)}...</div>` : ''}
+                        </div>
+                    `;
+                } else {
+                    // Non-duplicate delete action - show reasoning
+                    destSection = `
+                        <div class="modal-section">
+                            <div class="modal-section-title">Action</div>
+                            <span class="status-badge status-rejected">DELETE</span>
+                        </div>
+                    `;
+                }
             } else {
                 destSection = `
                     <div class="modal-section">
