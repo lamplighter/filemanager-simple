@@ -652,6 +652,43 @@ class ViewerRequestHandler(http.server.SimpleHTTPRequestHandler):
             except Exception as e:
                 self.send_json_error(500, str(e))
 
+        elif parsed_url.path == '/api/file-info':
+            # Get file metadata (size, etc.)
+            query_params = parse_qs(parsed_url.query)
+            file_path = query_params.get('path', [None])[0]
+
+            if not file_path:
+                self.send_json_error(400, "Missing path parameter")
+                return
+
+            file_path = os.path.expanduser(file_path)
+
+            if not os.path.exists(file_path):
+                self.send_response(200)
+                self.send_header('Content-type', 'application/json')
+                self.send_header('Access-Control-Allow-Origin', '*')
+                self.end_headers()
+                self.wfile.write(json.dumps({
+                    'success': False,
+                    'error': 'File not found',
+                    'size': None
+                }).encode())
+                return
+
+            try:
+                stat = os.stat(file_path)
+                self.send_response(200)
+                self.send_header('Content-type', 'application/json')
+                self.send_header('Access-Control-Allow-Origin', '*')
+                self.end_headers()
+                self.wfile.write(json.dumps({
+                    'success': True,
+                    'size': stat.st_size,
+                    'modified': datetime.fromtimestamp(stat.st_mtime).strftime('%Y-%m-%d %H:%M:%S')
+                }).encode())
+            except Exception as e:
+                self.send_json_error(500, str(e))
+
         elif parsed_url.path == '/api/file-preview':
             # Serve a local file for preview (PDF, image, etc.)
             query_params = parse_qs(parsed_url.query)

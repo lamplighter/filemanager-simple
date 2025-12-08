@@ -1396,6 +1396,10 @@
                             <div class="modal-meta-value">${file.status}</div>
                         </div>
                         <div class="modal-meta-item">
+                            <div class="modal-meta-label">File Size</div>
+                            <div class="modal-meta-value" id="modal-file-size">Loading...</div>
+                        </div>
+                        <div class="modal-meta-item">
                             <div class="modal-meta-label">Added</div>
                             <div class="modal-meta-value">${formatTimestamp(file.timestamp)}</div>
                         </div>
@@ -1414,9 +1418,39 @@
             document.getElementById('modalBody').innerHTML = modalContent;
             document.getElementById('modalOverlay').classList.add('active');
 
+            // Fetch and display file size
+            loadFileSize(file.source_path);
+
             // Fetch and display directory files (only for non-duplicates)
             if (!isDuplicate) {
                 loadDirectoryFiles(file.dest_path);
+            }
+        }
+
+        function formatFileSize(bytes) {
+            if (bytes === null || bytes === undefined) return 'Unknown';
+            if (bytes === 0) return '0 B';
+            const k = 1024;
+            const sizes = ['B', 'KB', 'MB', 'GB'];
+            const i = Math.floor(Math.log(bytes) / Math.log(k));
+            return parseFloat((bytes / Math.pow(k, i)).toFixed(1)) + ' ' + sizes[i];
+        }
+
+        async function loadFileSize(sourcePath) {
+            const container = document.getElementById('modal-file-size');
+            if (!container) return;
+
+            try {
+                const response = await fetch(`/api/file-info?path=${encodeURIComponent(sourcePath)}`);
+                const data = await response.json();
+
+                if (data.success) {
+                    container.textContent = formatFileSize(data.size);
+                } else {
+                    container.textContent = 'File not found';
+                }
+            } catch (error) {
+                container.textContent = 'Error loading';
             }
         }
 
