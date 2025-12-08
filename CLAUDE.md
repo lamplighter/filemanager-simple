@@ -159,6 +159,35 @@ If NO existing folder is appropriate for the file, you can propose creating a ne
 - For each alternative, document key differences from primary choice
 - For unclear categorization, examine 3-5 similar files for pattern confirmation
 
+### 4.5. Validate Destination Path (MANDATORY)
+
+**CRITICAL**: Before calculating confidence, validate the proposed destination:
+
+```bash
+./scripts/validate_destination.sh "<proposed_dest_path>"
+```
+
+**If validation fails:**
+- DO NOT add to queue
+- Re-analyze and choose an allowed destination
+- Work files (including Uken corporate docs like Daybreak) → `~/Downloads/Uken/`
+- Files to delete → `~/Downloads/TO_DELETE/`
+
+**Allowed Destinations** (configured in `config.yaml`):
+- `~/Dropbox/Filing/` - Personal filing (financial, utilities, real estate, etc.)
+- `~/Dropbox/Taxes/` - Tax documents (HoldCo, Personal, Family Trust)
+- `~/Downloads/Uken/` - Work files (including corporate entities like Daybreak)
+- `~/Downloads/TO_DELETE/` - Temporary files for deletion
+- `~/Downloads/Skipped/` - Files skipped for later review
+- `~/Downloads/installers/` - Software installers
+- `~/Downloads/Screenshots/` - Screenshots
+- `~/Downloads/unknown/` - Unclear categorization
+
+**NEVER use (forbidden in config.yaml):**
+- `~/Dropbox/Uken/` - Work archive (read-only reference, NEVER file here!)
+- `~/Dropbox/Apps/` - Application data
+- `~/Documents/` - System folder
+
 ### 5. Calculate Confidence Score (0-100%)
 
 **Positive Factors:**

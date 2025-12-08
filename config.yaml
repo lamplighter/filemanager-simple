@@ -93,3 +93,23 @@ entities:
       patterns: ["40 Gibson Ave", "40 GIBSON AVE", "40 Gibson Avenue"]
     - short_name: "Carlaw"
       patterns: ["319 Carlaw Ave", "319 CARLAW AVE", "Unit 711", "Carlaw Avenue"]
+
+# Allowed destination prefixes - paths MUST start with one of these
+# This is enforced by scripts/validate_destination.sh
+allowed_destinations:
+  # Permanent filing (Dropbox)
+  - ~/Dropbox/Filing/
+  - ~/Dropbox/Taxes/
+  # Temporary/work files (Downloads - NOT Dropbox)
+  - ~/Downloads/Uken/
+  - ~/Downloads/TO_DELETE/
+  - ~/Downloads/Skipped/
+  - ~/Downloads/installers/
+  - ~/Downloads/Screenshots/
+  - ~/Downloads/unknown/
+
+# Explicitly forbidden paths - NEVER suggest these as destinations
+forbidden_destinations:
+  - ~/Dropbox/Uken/
+  - ~/Dropbox/Apps/
+  - ~/Documents/
