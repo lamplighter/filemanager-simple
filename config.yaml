@@ -37,3 +37,59 @@ safety:
   max_file_size: 0
   # Require confirmation for batch operations over this many files
   batch_confirm_threshold: 10
+
+# Entity detection patterns for content analysis
+# Used by scripts/analyze_content.py to identify known entities in file contents
+entities:
+  financial:
+    banks:
+      - name: "TD"
+        patterns: ["TD Canada Trust", "TD Bank", "Toronto-Dominion", "TD Direct Investing"]
+      - name: "RBC"
+        patterns: ["Royal Bank", "RBC", "RBC Direct Investing"]
+      - name: "Tangerine"
+        patterns: ["Tangerine", "ING Direct"]
+      - name: "Wealthsimple"
+        patterns: ["Wealthsimple", "WEALTHSIMPLE"]
+      - name: "EQ Bank"
+        patterns: ["EQ Bank", "Equitable Bank"]
+    credit_cards:
+      - name: "TD Visa"
+        patterns: ["TD Visa", "Visa Infinite", "TD VISA INFINITE"]
+      - name: "Amex"
+        patterns: ["American Express", "AMEX", "Membership Rewards"]
+
+  utilities:
+    telecom:
+      - name: "Rogers"
+        patterns: ["Rogers Communications", "Rogers Wireless", "Rogers Internet"]
+      - name: "Bell"
+        patterns: ["Bell Canada", "Bell Mobility", "Bell Internet"]
+      - name: "Fido"
+        patterns: ["Fido", "FIDO Solutions"]
+    hydro:
+      - name: "Toronto Hydro"
+        patterns: ["Toronto Hydro", "Toronto Hydro-Electric"]
+      - name: "Hydro One"
+        patterns: ["Hydro One", "HYDRO ONE"]
+    gas:
+      - name: "Enbridge"
+        patterns: ["Enbridge", "Enbridge Gas"]
+
+  insurance:
+    - name: "TD Insurance"
+      patterns: ["TD Insurance", "Meloche Monnex", "TD Home and Auto"]
+    - name: "Intact"
+      patterns: ["Intact Insurance", "INTACT"]
+
+  work:
+    - name: "Uken"
+      patterns: ["Uken Games", "Uken Studios", "UKEN"]
+
+  properties:
+    - short_name: "Cottage"
+      patterns: ["1035 Fire Route 20G", "1035 FIRE ROUTE 20G", "Gravenhurst", "Muskoka"]
+    - short_name: "40 Gibson"
+      patterns: ["40 Gibson Ave", "40 GIBSON AVE", "40 Gibson Avenue"]
+    - short_name: "Carlaw"
+      patterns: ["319 Carlaw Ave", "319 CARLAW AVE", "Unit 711", "Carlaw Avenue"]

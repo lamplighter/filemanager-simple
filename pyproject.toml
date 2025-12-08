@@ -5,6 +5,9 @@ description = "Claude Code driven file organization system"
 requires-python = ">=3.9"
 dependencies = [
     "PyPDF2>=3.0.0",
+    "openpyxl>=3.1.0",
+    "python-docx>=1.1.0",
+    "PyYAML>=6.0.0",
     "pytest-playwright>=0.7.1",
 ]
 

@@ -33,11 +33,29 @@ Look in source directories (default: `~/Downloads/` and `~/Desktop/`) for unorga
 - This ensures new downloads are organized promptly
 - **Skip subfolders**: Ignore files in `~/Downloads/Screenshots/`, `~/Downloads/installers/`, `~/Downloads/unknown/`, `~/Downloads/Skipped/`, `~/Downloads/TO_DELETE/`, and `~/Downloads/Uken/` - these are already organized or pending review
 
-### 2. Analyze the File
-- Check file extension, size, and basic metadata
-- For text files: Use Read tool to examine content (first ~50 lines)
-- For spreadsheets/PDFs: Examine content for entity names and domain-specific terms
-- Identify potential category matches from filing structure
+### 2. Analyze the File Content (MANDATORY)
+
+**CRITICAL**: You MUST run content analysis before making any suggestions. Never guess from filenames alone.
+
+```bash
+./scripts/analyze_content.sh "<source_path>"
+```
+
+This script analyzes the actual file content and returns JSON with:
+- `content_summary`: Human-readable description of what the file contains
+- `detected_entities`: Known entities found (TD, Rogers, Uken, etc.)
+- `detected_dates`: Dates extracted from the content
+- `suggested_category`: Category hint based on content analysis
+- `confidence_boost`: Additional confidence points from content match
+
+**Use the output to:**
+- Understand what the file actually contains (not just its filename)
+- Extract entity names for accurate destination matching
+- Find dates for proper filename generation
+- Add `confidence_boost` to your confidence calculation
+- Include `content_analysis` field in your queue entry
+
+**Never suggest a destination without first running content analysis.**
 
 **Special handling for Insurance PDFs**:
 - Read PDF content to identify:
@@ -145,16 +163,18 @@ If NO existing folder is appropriate for the file, you can propose creating a ne
 
 **Positive Factors:**
 - **+30%**: Found similar files in exact destination folder
-- **+20%**: File extension matches folder's typical content
-- **+20%**: Filename contains strong entity keywords (TD, Rogers, Insurance, etc.)
-- **+15%**: Content analysis matches category patterns
+- **+20%**: Content analysis detected entity name matching destination folder
+- **+15%**: Content analysis confirms document type (invoice, statement, etc.)
+- **+15%**: File extension matches folder's typical content
 - **+10%**: Date pattern matches existing files in folder
+- **+10%**: `confidence_boost` from content analysis script
 - **+5%**: File size similar to existing files in category
 
 **Negative Factors:**
-- **-20%**: Ambiguous filename or generic terms
-- **-30%**: No similar files found in Filing directory
-- **-20%**: Multiple equally valid destinations exist
+- **-30%**: No content analysis performed (MUST run ./scripts/analyze_content.sh)
+- **-20%**: Ambiguous or unreadable content
+- **-20%**: No similar files found in Filing directory
+- **-15%**: Multiple equally valid destinations exist
 
 ### 6. Apply Naming Conventions
 
@@ -206,14 +226,20 @@ Add the suggestion to `state/file_queue.json` using the Write tool.
       "confidence": 95,
       "confidence_factors": {
         "similar_files_found": 30,
-        "file_type_match": 20,
-        "entity_keyword": 20,
-        "content_match": 15,
-        "naming_pattern": 10
+        "content_entity_match": 20,
+        "content_type_match": 15,
+        "file_type_match": 15,
+        "naming_pattern": 10,
+        "content_boost": 5
+      },
+      "content_analysis": {
+        "summary": "3 page PDF. Content preview: TD Canada Trust Statement Period: January 1 - January 31, 2024 Account: x2705...",
+        "detected_entities": ["TD"],
+        "detected_dates": ["2024-01-01", "2024-01-31"]
       },
       "status": "pending",
       "timestamp": "2025-01-21T10:25:00Z",
-      "reasoning": "Found 8 similar TD bank statements in destination folder with account number x2705. PDF format matches typical bank statements. Date in filename (Jan2024) converted to standard YYYY-MM-DD format. Strong confidence based on clear account number match."
+      "reasoning": "Content analysis found TD bank statement for account x2705 with statement period Jan 2024. Found 8 similar TD statements in destination folder. High confidence based on entity match and content type."
     }
   ]
 }
@@ -251,9 +277,13 @@ When a duplicate is detected, the entry looks like this:
 - **dest_path**: Full absolute path to destination including new filename (or `"DELETE"` for duplicates)
 - **confidence**: Integer 0-100
 - **confidence_factors**: Object with individual scoring factors and their values
+- **content_analysis**: Object from analyze_content.sh output (REQUIRED for all files):
+  - **summary**: Human-readable content description
+  - **detected_entities**: Array of entities found (e.g., `["TD", "Rogers"]`)
+  - **detected_dates**: Array of dates found (e.g., `["2024-01-15"]`)
 - **status**: Always `"pending"` for new suggestions
 - **timestamp**: ISO 8601 format `YYYY-MM-DDTHH:MM:SSZ` (use UTC)
-- **reasoning**: Detailed explanation of why this destination was chosen (1-3 sentences)
+- **reasoning**: Detailed explanation referencing actual file content (not just filename)
 
 #### Optional Fields
 
@@ -293,12 +323,21 @@ After adding to queue, tell the user:
 ```bash
 # User says: "organize next file"
 
-# 1. You find and analyze the file
+# 1. You find the next file
 ls -lt ~/Downloads/  # Find next file (sorted by newest first)
 # Found: "Rogers-Invoice-Jan-2024.pdf" (most recent file)
 
-# 2. Analyze the file content
-read /Users/marklampert/Downloads/Rogers-Invoice-Jan-2024.pdf
+# 2. MANDATORY: Run content analysis FIRST
+./scripts/analyze_content.sh "/Users/marklampert/Downloads/Rogers-Invoice-Jan-2024.pdf"
+# Returns JSON:
+# {
+#   "file_type": "pdf",
+#   "content_summary": "3 page PDF. Content preview: Rogers Communications Invoice Date: January 15, 2024 Account: 12345...",
+#   "detected_entities": ["Rogers"],
+#   "detected_dates": ["2024-01-15"],
+#   "suggested_category": "Utilities - Rogers",
+#   "confidence_boost": 15
+# }
 
 # 2.5. Check for duplicates BEFORE exploring destinations
 ./scripts/find_duplicates.sh \
@@ -307,13 +346,13 @@ read /Users/marklampert/Downloads/Rogers-Invoice-Jan-2024.pdf
 # Returns: {"source_checksum": "abc123...", "duplicates": []}
 # No duplicates found - continue to exploration
 
-# 3. You explore and categorize
+# 3. You explore and categorize (using detected entities to guide search)
 glob "**/*Rogers*" ~/Dropbox/Filing/  # Find similar files
 # Found: ~/Dropbox/Filing/Rogers - Wireless/ with similar invoices
 
-# 4. You calculate confidence (95%) and create suggestion
+# 4. You calculate confidence using content analysis + similar files
 
-# 5. You generate UUID and add to queue
+# 5. You generate UUID and add to queue with content_analysis
 {
   "id": "7c9e6679-7425-40de-944b-e07fc1f90ae7",
   "source_path": "/Users/marklampert/Downloads/Rogers-Invoice-Jan-2024.pdf",
@@ -321,18 +360,25 @@ glob "**/*Rogers*" ~/Dropbox/Filing/  # Find similar files
   "confidence": 95,
   "confidence_factors": {
     "similar_files_found": 30,
-    "file_type_match": 20,
-    "entity_keyword": 20,
-    "content_match": 15,
-    "naming_pattern": 10
+    "content_entity_match": 20,
+    "content_type_match": 15,
+    "file_type_match": 15,
+    "naming_pattern": 10,
+    "content_boost": 5
+  },
+  "content_analysis": {
+    "summary": "3 page PDF. Rogers Communications invoice for January 2024",
+    "detected_entities": ["Rogers"],
+    "detected_dates": ["2024-01-15"]
   },
   "status": "pending",
   "timestamp": "2025-01-21T14:30:00Z",
-  "reasoning": "Found 12 similar Rogers wireless invoices in destination folder. PDF format matches typical invoice format. Applied standard naming pattern Rogers-YYYY-MM-DD.pdf used by existing files."
+  "reasoning": "Content analysis confirmed Rogers invoice dated Jan 15, 2024. Found 12 similar Rogers invoices in destination folder. Entity and date extracted from PDF content, not filename."
 }
 
 # 6. You inform the user
 "Added Rogers invoice to queue with 95% confidence.
+Content: Rogers Communications invoice dated January 15, 2024
 Destination: ~/Dropbox/Filing/Rogers - Wireless/Rogers-2024-01-15.pdf
 
 Run ./scripts/view_queue.sh to review and click Move or Skip."
@@ -639,6 +685,9 @@ This will check for:
 ## Quick Command Reference
 
 ```bash
+# MANDATORY: Analyze file content before suggesting destination
+./scripts/analyze_content.sh <file_path>      # Returns JSON with content analysis
+
 # Open viewer UI (primary method)
 ./scripts/view_queue.sh          # Launches FileQueueViewer.app with custom icon
 
@@ -648,6 +697,9 @@ This will check for:
 
 # Validate before adding
 ./scripts/validate_suggestion.sh <source> <dest>
+
+# Check for duplicates
+./scripts/find_duplicates.sh <source> <dest_dir>
 
 # Generate UUID for file ID
 uuidgen | tr '[:upper:]' '[:lower:]'
