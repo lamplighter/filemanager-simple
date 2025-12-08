@@ -473,6 +473,21 @@
             display: block;
         }
 
+        .text-preview-content {
+            margin: 0;
+            padding: 15px;
+            font-family: 'Monaco', 'Courier New', monospace;
+            font-size: 12px;
+            line-height: 1.5;
+            white-space: pre-wrap;
+            word-wrap: break-word;
+            max-height: 400px;
+            overflow-y: auto;
+            background: #f8f9fa;
+            color: #333;
+            border-radius: 6px;
+        }
+
         .error-message {
             background: #f8d7da;
             color: #721c24;
@@ -1242,6 +1257,15 @@
                         </div>
                     </div>
                 `;
+            } else if (['txt', 'md', 'json', 'csv', 'log', 'xml', 'yaml', 'yml', 'js', 'py', 'sh', 'html', 'css'].includes(ext)) {
+                return `
+                    <div class="modal-section">
+                        <div class="modal-section-title">Preview</div>
+                        <div class="modal-preview" id="text-preview">
+                            <pre class="text-preview-content">Loading...</pre>
+                        </div>
+                    </div>
+                `;
             }
             return '';
         }
@@ -1421,6 +1445,9 @@
             // Fetch and display file size
             loadFileSize(file.source_path);
 
+            // Fetch and display text preview if applicable
+            loadTextPreview(file.source_path);
+
             // Fetch and display directory files (only for non-duplicates)
             if (!isDuplicate) {
                 loadDirectoryFiles(file.dest_path);
@@ -1451,6 +1478,35 @@
                 }
             } catch (error) {
                 container.textContent = 'Error loading';
+            }
+        }
+
+        function escapeHtml(text) {
+            const div = document.createElement('div');
+            div.textContent = text;
+            return div.innerHTML;
+        }
+
+        async function loadTextPreview(sourcePath) {
+            const container = document.getElementById('text-preview');
+            if (!container) return;
+
+            try {
+                const response = await fetch(`/api/file-preview?path=${encodeURIComponent(sourcePath)}`);
+                const text = await response.text();
+                const lines = text.split('\n');
+                const displayLines = lines.slice(0, 50);
+                const truncated = lines.length > 50;
+
+                const preElement = container.querySelector('pre');
+                if (preElement) {
+                    preElement.textContent = displayLines.join('\n') + (truncated ? '\n\n... (' + (lines.length - 50) + ' more lines)' : '');
+                }
+            } catch (error) {
+                const preElement = container.querySelector('pre');
+                if (preElement) {
+                    preElement.textContent = 'Error loading preview';
+                }
             }
         }
 
