@@ -95,7 +95,8 @@ entities:
       patterns: ["319 Carlaw Ave", "319 CARLAW AVE", "Unit 711", "Carlaw Avenue"]
 
 # Allowed destination prefixes - paths MUST start with one of these
-# This is enforced by scripts/validate_destination.sh
+# Anything not in this list is automatically rejected
+# Enforced by scripts/validate_destination.sh
 allowed_destinations:
   # Permanent filing (Dropbox)
   - ~/Dropbox/Filing/
@@ -107,9 +108,3 @@ allowed_destinations:
   - ~/Downloads/installers/
   - ~/Downloads/Screenshots/
   - ~/Downloads/unknown/
-
-# Explicitly forbidden paths - NEVER suggest these as destinations
-forbidden_destinations:
-  - ~/Dropbox/Uken/
-  - ~/Dropbox/Apps/
-  - ~/Documents/

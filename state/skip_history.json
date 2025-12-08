@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0",
-  "last_updated": "2025-12-07T19:03:21Z",
+  "last_updated": "2025-12-08T01:38:20Z",
   "files": [
     {
       "id": "5ba2b762-588c-4a4d-b5b0-da36fca24b9b",
@@ -62,6 +62,744 @@
       "action": "move",
       "reasoning": "Contains 'iFirm' and 'Lampert', likely tax/accounting documents. Matched to Personal Taxes 2025 folder based on date in filename.",
       "skipped_at": "2025-12-07T19:03:21Z"
+    },
+    {
+      "id": "4ac1b581-e660-4fec-acf4-0832168d6914",
+      "source_path": "/Users/marklampert/Downloads/Invoice-8132E33D-0022.pdf",
+      "dest_path": "DELETE",
+      "action": "delete",
+      "confidence": 70,
+      "confidence_factors": {
+        "work_document": 40,
+        "not_personal_filing": 30
+      },
+      "status": "skipped",
+      "timestamp": "2025-12-07T01:30:00Z",
+      "reasoning": "Hex invoice billed TO Uken Inc (work expense). This is a company vendor invoice, not personal filing. Suggest delete unless you need to keep work invoices personally.",
+      "skipped_to": "/Users/marklampert/Downloads/Skipped/Invoice-8132E33D-0022.pdf",
+      "skipped_at": "2025-12-08T00:26:07Z"
+    },
+    {
+      "id": "a92ab3d6-9e45-4f70-ab45-5b98537dafc8",
+      "source_path": "/Users/marklampert/Downloads/Invoice-8132E33D-0023.pdf",
+      "dest_path": "DELETE",
+      "action": "delete",
+      "confidence": 70,
+      "confidence_factors": {
+        "work_document": 40,
+        "not_personal_filing": 30
+      },
+      "status": "skipped",
+      "timestamp": "2025-12-07T01:30:00Z",
+      "reasoning": "Hex invoice billed TO Uken Inc (work expense). This is a company vendor invoice, not personal filing. Suggest delete unless you need to keep work invoices personally.",
+      "skipped_to": "/Users/marklampert/Downloads/Skipped/Invoice-8132E33D-0023.pdf",
+      "skipped_at": "2025-12-08T00:26:08Z"
+    },
+    {
+      "id": "27f11fae-dc3e-459c-a6d7-d5ef640d4515",
+      "source_path": "/Users/marklampert/Downloads/M3D_AB_dashboard_Annotated.png",
+      "dest_path": "/Users/marklampert/Downloads/TO_DELETE/M3D_AB_dashboard_Annotated.png",
+      "confidence": 60,
+      "confidence_factors": {
+        "random_image": 60
+      },
+      "status": "skipped",
+      "timestamp": "2025-12-08T00:37:00Z",
+      "reasoning": "Random image file. Review before deleting.",
+      "skipped_to": "/Users/marklampert/Downloads/Skipped/M3D_AB_dashboard_Annotated.png",
+      "skipped_at": "2025-12-08T00:38:08Z"
+    },
+    {
+      "id": "be00e8a7-b104-4b70-bdf9-01efdcc6d127",
+      "source_path": "/Users/marklampert/Downloads/dashboard.png",
+      "dest_path": "/Users/marklampert/Downloads/TO_DELETE/dashboard.png",
+      "confidence": 60,
+      "confidence_factors": {
+        "random_image": 60
+      },
+      "status": "skipped",
+      "timestamp": "2025-12-08T00:37:00Z",
+      "reasoning": "Random image file. Review before deleting.",
+      "skipped_to": "/Users/marklampert/Downloads/Skipped/dashboard.png",
+      "skipped_at": "2025-12-08T00:38:13Z"
+    },
+    {
+      "id": "b00f93c5-95b7-4f8a-a1e3-a9fdd5054f92",
+      "source_path": "/Users/marklampert/Downloads/AvasManor_GoogleMeetBG.jpg",
+      "dest_path": "/Users/marklampert/Downloads/TO_DELETE/AvasManor_GoogleMeetBG.jpg",
+      "confidence": 60,
+      "confidence_factors": {
+        "random_image": 60
+      },
+      "status": "skipped",
+      "timestamp": "2025-12-08T00:37:00Z",
+      "reasoning": "Random image file. Review before deleting.",
+      "skipped_to": "/Users/marklampert/Downloads/Skipped/AvasManor_GoogleMeetBG.jpg",
+      "skipped_at": "2025-12-08T00:38:22Z"
+    },
+    {
+      "id": "1d86e332-6d42-47f0-a6f1-c263a345e58b",
+      "source_path": "/Users/marklampert/Downloads/Please_DocuSign_(Ontario)_124_-_Notice_of_Fu.pdf",
+      "dest_path": "/Users/marklampert/Downloads/Uken/Please_DocuSign_(Ontario)_124_-_Notice_of_Fu.pdf",
+      "confidence": 80,
+      "confidence_factors": {
+        "work_contract": 80
+      },
+      "status": "skipped",
+      "timestamp": "2025-12-08T00:37:00Z",
+      "reasoning": "Work contract/agreement. Moving to Uken folder.",
+      "skipped_to": "/Users/marklampert/Downloads/Skipped/Please_DocuSign_(Ontario)_124_-_Notice_of_Fu.pdf",
+      "skipped_at": "2025-12-08T00:38:44Z"
+    },
+    {
+      "id": "73f0c76a-c4d6-4522-8239-562d784535b1",
+      "source_path": "/Users/marklampert/Downloads/level_0003.asset.png",
+      "dest_path": "/Users/marklampert/Downloads/TO_DELETE/level_0003.asset.png",
+      "confidence": 60,
+      "confidence_factors": {
+        "random_image": 60
+      },
+      "status": "skipped",
+      "timestamp": "2025-12-08T00:37:00Z",
+      "reasoning": "Random image file. Review before deleting.",
+      "skipped_to": "/Users/marklampert/Downloads/Skipped/level_0003.asset.png",
+      "skipped_at": "2025-12-08T00:39:10Z"
+    },
+    {
+      "id": "c058791b-fdaa-4549-9722-bd81203fd59e",
+      "source_path": "/Users/marklampert/Downloads/Year_end_requirements_listing_for_October 31 2025 follow-up.pdf",
+      "dest_path": "/Users/marklampert/Downloads/Uken/Year_end_requirements_listing_for_October 31 2025 follow-up.pdf",
+      "confidence": 90,
+      "confidence_factors": {
+        "work_executive": 90
+      },
+      "status": "skipped",
+      "timestamp": "2025-12-08T00:37:00Z",
+      "reasoning": "Executive/board document. Moving to Uken folder.",
+      "skipped_to": "/Users/marklampert/Downloads/Skipped/Year_end_requirements_listing_for_October 31 2025 follow-up.pdf",
+      "skipped_at": "2025-12-08T00:39:17Z"
+    },
+    {
+      "id": "4288e550-4f7f-44a6-b443-860336b46c17",
+      "source_path": "/Users/marklampert/Downloads/AI4PH_Assignment_1.Rmd",
+      "dest_path": "/Users/marklampert/Downloads/TO_DELETE/AI4PH_Assignment_1.Rmd",
+      "confidence": 70,
+      "confidence_factors": {
+        "coursework": 70
+      },
+      "status": "skipped",
+      "timestamp": "2025-12-08T00:37:00Z",
+      "reasoning": "R markdown file - likely coursework. Review before deleting.",
+      "skipped_to": "/Users/marklampert/Downloads/Skipped/AI4PH_Assignment_1.Rmd",
+      "skipped_at": "2025-12-08T00:39:22Z"
+    },
+    {
+      "id": "acde6b00-6a66-4fd0-8375-54dc44238982",
+      "source_path": "/Users/marklampert/Downloads/Executive Contractor Agreement - CEO (Pankaj Gogia) - 2023-2026 - executed.pdf",
+      "dest_path": "/Users/marklampert/Downloads/Uken/Executive Contractor Agreement - CEO (Pankaj Gogia) - 2023-2026 - executed.pdf",
+      "confidence": 80,
+      "confidence_factors": {
+        "work_contract": 80
+      },
+      "status": "skipped",
+      "timestamp": "2025-12-08T00:37:00Z",
+      "reasoning": "Work contract/agreement. Moving to Uken folder.",
+      "skipped_to": "/Users/marklampert/Downloads/Skipped/Executive Contractor Agreement - CEO (Pankaj Gogia) - 2023-2026 - executed.pdf",
+      "skipped_at": "2025-12-08T00:39:27Z"
+    },
+    {
+      "id": "8197a9bf-d512-4ba7-b0dc-ab60fa669e90",
+      "source_path": "/Users/marklampert/Downloads/Annabelle bday 2.jpg",
+      "dest_path": "/Users/marklampert/Downloads/TO_DELETE/Annabelle bday 2.jpg",
+      "confidence": 60,
+      "confidence_factors": {
+        "random_image": 60
+      },
+      "status": "skipped",
+      "timestamp": "2025-12-08T00:37:00Z",
+      "reasoning": "Random image file. Review before deleting.",
+      "skipped_to": "/Users/marklampert/Downloads/Skipped/Annabelle bday 2.jpg",
+      "skipped_at": "2025-12-08T00:39:44Z"
+    },
+    {
+      "id": "ca9a046d-8bd1-4100-8a7c-6b7619022b82",
+      "source_path": "/Users/marklampert/Downloads/ag1 package stolen 2.jpg",
+      "dest_path": "/Users/marklampert/Downloads/TO_DELETE/ag1 package stolen 2.jpg",
+      "confidence": 60,
+      "confidence_factors": {
+        "random_image": 60
+      },
+      "status": "skipped",
+      "timestamp": "2025-12-08T00:37:00Z",
+      "reasoning": "Random image file. Review before deleting.",
+      "skipped_to": "/Users/marklampert/Downloads/Skipped/ag1 package stolen 2.jpg",
+      "skipped_at": "2025-12-08T00:39:47Z"
+    },
+    {
+      "id": "ffdb439f-d564-4386-8256-82f4aba278a0",
+      "source_path": "/Users/marklampert/Downloads/Annabelle.jpg",
+      "dest_path": "/Users/marklampert/Downloads/TO_DELETE/Annabelle.jpg",
+      "confidence": 60,
+      "confidence_factors": {
+        "random_image": 60
+      },
+      "status": "skipped",
+      "timestamp": "2025-12-08T00:37:00Z",
+      "reasoning": "Random image file. Review before deleting.",
+      "skipped_to": "/Users/marklampert/Downloads/Skipped/Annabelle.jpg",
+      "skipped_at": "2025-12-08T00:39:48Z"
+    },
+    {
+      "id": "83736ece-9154-4037-84ed-b18281bf995d",
+      "source_path": "/Users/marklampert/Downloads/ubuntu-25.04-desktop-arm64.iso",
+      "dest_path": "/Users/marklampert/Downloads/installers/ubuntu-25.04-desktop-arm64.iso",
+      "confidence": 100,
+      "confidence_factors": {
+        "installer": 100
+      },
+      "status": "skipped",
+      "timestamp": "2025-12-08T00:37:00Z",
+      "reasoning": "ISO disk image. Moving to installers folder.",
+      "skipped_to": "/Users/marklampert/Downloads/Skipped/ubuntu-25.04-desktop-arm64.iso",
+      "skipped_at": "2025-12-08T00:52:34Z"
+    },
+    {
+      "id": "58ed59fa-a894-4449-a570-e2f2a122acba",
+      "source_path": "/Users/marklampert/Downloads/GVP IV LP Recycling letter October 21-25.pdf",
+      "dest_path": "/Users/marklampert/Downloads/Uken/GVP IV LP Recycling letter October 21-25.pdf",
+      "confidence": 90,
+      "confidence_factors": {
+        "work_executive": 90
+      },
+      "status": "skipped",
+      "timestamp": "2025-12-08T00:37:00Z",
+      "reasoning": "Executive/board document. Moving to Uken folder.",
+      "skipped_to": "/Users/marklampert/Downloads/Skipped/GVP IV LP Recycling letter October 21-25.pdf",
+      "skipped_at": "2025-12-08T00:52:50Z"
+    },
+    {
+      "id": "4c41ed86-6e11-4b44-a03a-07e7b14558e1",
+      "source_path": "/Users/marklampert/Downloads/42A542F1-2B38-4B01-B11D-780A4D1E0749_1_105_c.jpeg",
+      "dest_path": "/Users/marklampert/Downloads/TO_DELETE/42A542F1-2B38-4B01-B11D-780A4D1E0749_1_105_c.jpeg",
+      "confidence": 60,
+      "confidence_factors": {
+        "random_image": 60
+      },
+      "status": "skipped",
+      "timestamp": "2025-12-08T00:37:00Z",
+      "reasoning": "Random image file. Review before deleting.",
+      "skipped_to": "/Users/marklampert/Downloads/Skipped/42A542F1-2B38-4B01-B11D-780A4D1E0749_1_105_c.jpeg",
+      "skipped_at": "2025-12-08T00:52:58Z"
+    },
+    {
+      "id": "94d84d58-7690-4cc5-963b-ad0bd098546d",
+      "source_path": "/Users/marklampert/Downloads/Annabelle bday.jpg",
+      "dest_path": "/Users/marklampert/Downloads/TO_DELETE/Annabelle bday.jpg",
+      "confidence": 60,
+      "confidence_factors": {
+        "random_image": 60
+      },
+      "status": "skipped",
+      "timestamp": "2025-12-08T00:37:00Z",
+      "reasoning": "Random image file. Review before deleting.",
+      "skipped_to": "/Users/marklampert/Downloads/Skipped/Annabelle bday.jpg",
+      "skipped_at": "2025-12-08T00:53:00Z"
+    },
+    {
+      "id": "550bdf80-6956-42b1-b735-ce72cf5b868e",
+      "source_path": "/Users/marklampert/Downloads/Applied Rec Cap Table on Divestiture v2.xlsx",
+      "dest_path": "/Users/marklampert/Downloads/Uken/Applied Rec Cap Table on Divestiture v2.xlsx",
+      "confidence": 85,
+      "confidence_factors": {
+        "work_spreadsheet": 85
+      },
+      "status": "skipped",
+      "timestamp": "2025-12-08T00:37:00Z",
+      "reasoning": "Work spreadsheet. Moving to Uken folder.",
+      "skipped_to": "/Users/marklampert/Downloads/Skipped/Applied Rec Cap Table on Divestiture v2.xlsx",
+      "skipped_at": "2025-12-08T00:53:22Z"
+    },
+    {
+      "id": "b6a62a12-baec-4115-bad7-0795b5047096",
+      "source_path": "/Users/marklampert/Downloads/Executive Contractor Agreement - CTO (Ray) - 2024-2026 - executed.pdf",
+      "dest_path": "/Users/marklampert/Downloads/Uken/Executive Contractor Agreement - CTO (Ray) - 2024-2026 - executed.pdf",
+      "confidence": 80,
+      "confidence_factors": {
+        "work_contract": 80
+      },
+      "status": "skipped",
+      "timestamp": "2025-12-08T00:37:00Z",
+      "reasoning": "Work contract/agreement. Moving to Uken folder.",
+      "skipped_to": "/Users/marklampert/Downloads/Skipped/Executive Contractor Agreement - CTO (Ray) - 2024-2026 - executed.pdf",
+      "skipped_at": "2025-12-08T00:53:23Z"
+    },
+    {
+      "id": "0a681af1-1329-477f-8077-f643811a0e35",
+      "source_path": "/Users/marklampert/Downloads/gianluca.jpeg",
+      "dest_path": "/Users/marklampert/Downloads/TO_DELETE/gianluca.jpeg",
+      "confidence": 60,
+      "confidence_factors": {
+        "random_image": 60
+      },
+      "status": "skipped",
+      "timestamp": "2025-12-08T00:37:00Z",
+      "reasoning": "Random image file. Review before deleting.",
+      "skipped_to": "/Users/marklampert/Downloads/Skipped/gianluca.jpeg",
+      "skipped_at": "2025-12-08T00:53:42Z"
+    },
+    {
+      "id": "1df86ed1-0a77-4687-b89e-dbef1d164616",
+      "source_path": "/Users/marklampert/Downloads/HoldCo x9548.xlsx",
+      "dest_path": "/Users/marklampert/Downloads/Uken/HoldCo x9548.xlsx",
+      "confidence": 85,
+      "confidence_factors": {
+        "work_spreadsheet": 85
+      },
+      "status": "skipped",
+      "timestamp": "2025-12-08T00:37:00Z",
+      "reasoning": "Work spreadsheet. Moving to Uken folder.",
+      "skipped_to": "/Users/marklampert/Downloads/Skipped/HoldCo x9548.xlsx",
+      "skipped_at": "2025-12-08T00:53:44Z"
+    },
+    {
+      "id": "ab75ed2d-a5a9-4373-a612-9b0c7e07f380",
+      "source_path": "/Users/marklampert/Downloads/HoldCo Finances.xlsx",
+      "dest_path": "/Users/marklampert/Downloads/Uken/HoldCo Finances.xlsx",
+      "confidence": 85,
+      "confidence_factors": {
+        "work_spreadsheet": 85
+      },
+      "status": "skipped",
+      "timestamp": "2025-12-08T00:37:00Z",
+      "reasoning": "Work spreadsheet. Moving to Uken folder.",
+      "skipped_to": "/Users/marklampert/Downloads/Skipped/HoldCo Finances.xlsx",
+      "skipped_at": "2025-12-08T00:53:45Z"
+    },
+    {
+      "id": "73308752-3582-4f75-a8cc-3dbbaf055f9e",
+      "source_path": "/Users/marklampert/Downloads/ag1 package stolen.jpg",
+      "dest_path": "/Users/marklampert/Downloads/TO_DELETE/ag1 package stolen.jpg",
+      "confidence": 60,
+      "confidence_factors": {
+        "random_image": 60
+      },
+      "status": "skipped",
+      "timestamp": "2025-12-08T00:37:00Z",
+      "reasoning": "Random image file. Review before deleting.",
+      "skipped_to": "/Users/marklampert/Downloads/Skipped/ag1 package stolen.jpg",
+      "skipped_at": "2025-12-08T00:53:56Z"
+    },
+    {
+      "id": "260da9d4-58d0-410d-a3a2-6acfdaddc754",
+      "source_path": "/Users/marklampert/Downloads/conversion_rate_by_variant.png",
+      "dest_path": "/Users/marklampert/Downloads/TO_DELETE/conversion_rate_by_variant.png",
+      "confidence": 60,
+      "confidence_factors": {
+        "random_image": 60
+      },
+      "status": "skipped",
+      "timestamp": "2025-12-08T00:37:00Z",
+      "reasoning": "Random image file. Review before deleting.",
+      "skipped_to": "/Users/marklampert/Downloads/Skipped/conversion_rate_by_variant.png",
+      "skipped_at": "2025-12-08T00:54:08Z"
+    },
+    {
+      "id": "8591b91c-e489-4fc1-b335-3f95aea9b430",
+      "source_path": "/Users/marklampert/Downloads/Bond_Decision_Table_Canada.xlsx",
+      "dest_path": "/Users/marklampert/Downloads/Uken/Bond_Decision_Table_Canada.xlsx",
+      "confidence": 85,
+      "confidence_factors": {
+        "work_spreadsheet": 85
+      },
+      "status": "skipped",
+      "timestamp": "2025-12-08T00:37:00Z",
+      "reasoning": "Work spreadsheet. Moving to Uken folder.",
+      "skipped_to": "/Users/marklampert/Downloads/Skipped/Bond_Decision_Table_Canada.xlsx",
+      "skipped_at": "2025-12-08T00:54:19Z"
+    },
+    {
+      "id": "af66cf03-b1c7-4159-91de-364d00bbe757",
+      "source_path": "/Users/marklampert/Downloads/disclosures.zip",
+      "dest_path": "/Users/marklampert/Downloads/TO_DELETE/disclosures.zip",
+      "confidence": 65,
+      "confidence_factors": {
+        "temp_archive": 65
+      },
+      "status": "skipped",
+      "timestamp": "2025-12-08T00:36:30Z",
+      "reasoning": "Archive file - likely temporary download. Review before deleting.",
+      "skipped_to": "/Users/marklampert/Downloads/Skipped/disclosures.zip",
+      "skipped_at": "2025-12-08T00:54:36Z"
+    },
+    {
+      "id": "b9842b6b-5912-48b3-b5c9-05852e7847a1",
+      "source_path": "/Users/marklampert/Downloads/aria_ciao_family_tree_download.json",
+      "dest_path": "/Users/marklampert/Downloads/TO_DELETE/aria_ciao_family_tree_download.json",
+      "confidence": 70,
+      "confidence_factors": {
+        "temp_data": 70
+      },
+      "status": "skipped",
+      "timestamp": "2025-12-08T00:36:30Z",
+      "reasoning": "JSON data file - likely temporary. Review before deleting.",
+      "skipped_to": "/Users/marklampert/Downloads/Skipped/aria_ciao_family_tree_download.json",
+      "skipped_at": "2025-12-08T00:54:40Z"
+    },
+    {
+      "id": "7938206b-3350-4ed3-ba62-42336cc42a59",
+      "source_path": "/Users/marklampert/Downloads/ConfidentialData.zip",
+      "dest_path": "/Users/marklampert/Downloads/TO_DELETE/ConfidentialData.zip",
+      "confidence": 65,
+      "confidence_factors": {
+        "temp_archive": 65
+      },
+      "status": "skipped",
+      "timestamp": "2025-12-08T00:36:30Z",
+      "reasoning": "Archive file - likely temporary download. Review before deleting.",
+      "skipped_to": "/Users/marklampert/Downloads/Skipped/ConfidentialData.zip",
+      "skipped_at": "2025-12-08T00:57:04Z"
+    },
+    {
+      "id": "7b04156f-f78f-4c62-a894-8f4ad9e3d4c8",
+      "source_path": "/Users/marklampert/Downloads/package.zip",
+      "dest_path": "/Users/marklampert/Downloads/TO_DELETE/package.zip",
+      "confidence": 65,
+      "confidence_factors": {
+        "temp_archive": 65
+      },
+      "status": "skipped",
+      "timestamp": "2025-12-08T00:36:30Z",
+      "reasoning": "Archive file - likely temporary download. Review before deleting.",
+      "skipped_to": "/Users/marklampert/Downloads/Skipped/package.zip",
+      "skipped_at": "2025-12-08T00:57:20Z"
+    },
+    {
+      "id": "e53c49f6-d04f-43ab-b385-06652f75d5a2",
+      "source_path": "/Users/marklampert/Downloads/download.zip",
+      "dest_path": "/Users/marklampert/Downloads/TO_DELETE/download.zip",
+      "confidence": 65,
+      "confidence_factors": {
+        "temp_archive": 65
+      },
+      "status": "skipped",
+      "timestamp": "2025-12-08T00:36:30Z",
+      "reasoning": "Archive file - likely temporary download. Review before deleting.",
+      "skipped_to": "/Users/marklampert/Downloads/Skipped/download.zip",
+      "skipped_at": "2025-12-08T00:57:21Z"
+    },
+    {
+      "id": "901b5acd-d9a3-4c16-9ee3-8be3956bc4ae",
+      "source_path": "/Users/marklampert/Downloads/Ava's ROAS - July 2025 - Sheet2.csv",
+      "dest_path": "/Users/marklampert/Downloads/TO_DELETE/Ava's ROAS - July 2025 - Sheet2.csv",
+      "confidence": 70,
+      "confidence_factors": {
+        "temp_data_export": 70
+      },
+      "status": "skipped",
+      "timestamp": "2025-12-08T00:36:07Z",
+      "reasoning": "CSV data export - likely temporary. Review before deleting.",
+      "skipped_to": "/Users/marklampert/Downloads/Skipped/Ava's ROAS - July 2025 - Sheet2.csv",
+      "skipped_at": "2025-12-08T01:02:53Z"
+    },
+    {
+      "id": "eb6d376e-99d3-41be-9595-b2528c585bcf",
+      "source_path": "/Users/marklampert/Downloads/df_ab_users_2025-10-28T1407.csv",
+      "dest_path": "/Users/marklampert/Downloads/TO_DELETE/df_ab_users_2025-10-28T1407.csv",
+      "confidence": 70,
+      "confidence_factors": {
+        "temp_data_export": 70
+      },
+      "status": "skipped",
+      "timestamp": "2025-12-08T00:36:07Z",
+      "reasoning": "CSV data export - likely temporary. Review before deleting.",
+      "skipped_to": "/Users/marklampert/Downloads/Skipped/df_ab_users_2025-10-28T1407.csv",
+      "skipped_at": "2025-12-08T01:02:54Z"
+    },
+    {
+      "id": "0cf441ea-8561-4008-a4bd-9f3f95038ba0",
+      "source_path": "/Users/marklampert/Downloads/Complete_with_Docusign_Nima_Gholipour_-_Opti.zip",
+      "dest_path": "/Users/marklampert/Downloads/TO_DELETE/Complete_with_Docusign_Nima_Gholipour_-_Opti.zip",
+      "confidence": 65,
+      "confidence_factors": {
+        "temp_archive": 65
+      },
+      "status": "skipped",
+      "timestamp": "2025-12-08T00:36:30Z",
+      "reasoning": "Archive file - likely temporary download. Review before deleting.",
+      "skipped_to": "/Users/marklampert/Downloads/Skipped/Complete_with_Docusign_Nima_Gholipour_-_Opti.zip",
+      "skipped_at": "2025-12-08T01:03:01Z"
+    },
+    {
+      "id": "48a1e7e8-4845-49b7-b62c-e4aac0a6ba43",
+      "source_path": "/Users/marklampert/Downloads/Top Apps using Adjoe SDK - Jul 31, 2025.csv",
+      "dest_path": "/Users/marklampert/Downloads/TO_DELETE/Top Apps using Adjoe SDK - Jul 31, 2025.csv",
+      "confidence": 70,
+      "confidence_factors": {
+        "temp_data_export": 70
+      },
+      "status": "skipped",
+      "timestamp": "2025-12-08T00:36:07Z",
+      "reasoning": "CSV data export - likely temporary. Review before deleting.",
+      "skipped_to": "/Users/marklampert/Downloads/Skipped/Top Apps using Adjoe SDK - Jul 31, 2025.csv",
+      "skipped_at": "2025-12-08T01:03:07Z"
+    },
+    {
+      "id": "4175f064-adab-4438-89ae-bd4850e402f5",
+      "source_path": "/Users/marklampert/Downloads/IMG_0223.jpeg",
+      "dest_path": "/Users/marklampert/Downloads/Screenshots/IMG_0223.jpeg",
+      "confidence": 95,
+      "confidence_factors": {
+        "filename_pattern": 50,
+        "designated_folder": 45
+      },
+      "status": "skipped",
+      "timestamp": "2025-12-08T00:32:17Z",
+      "reasoning": "Phone screenshot. Moving to Screenshots folder.",
+      "skipped_to": "/Users/marklampert/Downloads/Skipped/IMG_0223.jpeg",
+      "skipped_at": "2025-12-08T01:03:39Z"
+    },
+    {
+      "id": "47c7a3b5-284a-4b0d-b6ed-bb70bd7e7c43",
+      "source_path": "/Users/marklampert/Downloads/Screenshot_20250522_174350_Match Factory~2.jpg",
+      "dest_path": "/Users/marklampert/Downloads/Screenshots/Screenshot_20250522_174350_Match Factory~2.jpg",
+      "confidence": 95,
+      "confidence_factors": {
+        "filename_pattern": 50,
+        "designated_folder": 45
+      },
+      "status": "skipped",
+      "timestamp": "2025-12-08T00:32:17Z",
+      "reasoning": "Phone screenshot. Moving to Screenshots folder.",
+      "skipped_to": "/Users/marklampert/Downloads/Skipped/Screenshot_20250522_174350_Match Factory~2.jpg",
+      "skipped_at": "2025-12-08T01:04:01Z"
+    },
+    {
+      "id": "16a18144-578d-40d6-b735-f9bfa734d532",
+      "source_path": "/Users/marklampert/Downloads/Screenshot_20250526_183521_RuPaul's Drag Race Superstar~2.jpg",
+      "dest_path": "/Users/marklampert/Downloads/Screenshots/Screenshot_20250526_183521_RuPaul's Drag Race Superstar~2.jpg",
+      "confidence": 95,
+      "confidence_factors": {
+        "filename_pattern": 50,
+        "designated_folder": 45
+      },
+      "status": "skipped",
+      "timestamp": "2025-12-08T00:32:17Z",
+      "reasoning": "Phone screenshot. Moving to Screenshots folder.",
+      "skipped_to": "/Users/marklampert/Downloads/Skipped/Screenshot_20250526_183521_RuPaul's Drag Race Superstar~2.jpg",
+      "skipped_at": "2025-12-08T01:04:02Z"
+    },
+    {
+      "id": "47846a4f-6391-4a00-a59d-2f91882a126f",
+      "source_path": "/Users/marklampert/Downloads/SOV_H1_2025.pdf",
+      "dest_path": "/Users/marklampert/Downloads/TO_DELETE/SOV_H1_2025.pdf",
+      "confidence": 75,
+      "confidence_factors": {
+        "reference_report": 40,
+        "no_filing_category": 25,
+        "content_boost": 5,
+        "investment_reference": 5
+      },
+      "content_analysis": {
+        "summary": "20 page PDF. AngelList State of U.S. Early-Stage Venture H1 2025 report. Market benchmarks, startup index, fund performance data.",
+        "detected_entities": [],
+        "detected_dates": [
+          "August 2025"
+        ]
+      },
+      "status": "skipped",
+      "timestamp": "2025-12-08T02:35:00Z",
+      "reasoning": "Industry reference report from AngelList on venture market conditions. Publicly available market research - no personal filing value. Safe to delete.",
+      "skipped_to": "/Users/marklampert/Downloads/Skipped/SOV_H1_2025.pdf",
+      "skipped_at": "2025-12-08T01:34:01Z"
+    },
+    {
+      "id": "4976dcbc-2957-485b-873d-9aad919a8fb8",
+      "source_path": "/Users/marklampert/Downloads/Stolen Package Report.pdf",
+      "dest_path": "/Users/marklampert/Downloads/TO_DELETE/Stolen Package Report.pdf",
+      "confidence": 70,
+      "confidence_factors": {
+        "police_report": 30,
+        "temporary_document": 25,
+        "content_boost": 25,
+        "minor_incident": -10
+      },
+      "content_analysis": {
+        "summary": "1 page PDF. Toronto Police Service theft report for stolen package ($205 vitamins) at 40 Gibson Ave. Report date Oct 24, 2025.",
+        "detected_entities": [
+          "40 Gibson"
+        ],
+        "detected_dates": [
+          "2025-10-24",
+          "2025-10-23"
+        ]
+      },
+      "status": "skipped",
+      "timestamp": "2025-12-08T02:35:00Z",
+      "reasoning": "Police report for minor stolen package incident ($205). While it references 40 Gibson, this is a one-time incident report with no ongoing filing need. Safe to delete after insurance claim if any.",
+      "skipped_to": "/Users/marklampert/Downloads/Skipped/Stolen Package Report.pdf",
+      "skipped_at": "2025-12-08T01:34:05Z"
+    },
+    {
+      "id": "2328969f-8f0e-4788-bf71-a7aa16411a1d",
+      "source_path": "/Users/marklampert/Downloads/archive.zip",
+      "dest_path": "/Users/marklampert/Downloads/TO_DELETE/archive.zip",
+      "confidence": 85,
+      "confidence_factors": {
+        "temp_dev_data": 40,
+        "no_filing_category": 25,
+        "work_related": 20
+      },
+      "content_analysis": {
+        "summary": "ZIP archive containing 4 SST level simulation CSVs (coin stats, win percentages). Dev export from game simulation.",
+        "detected_entities": [
+          "Uken"
+        ],
+        "detected_dates": [
+          "2025-12-05"
+        ]
+      },
+      "status": "skipped",
+      "timestamp": "2025-12-08T02:30:00Z",
+      "reasoning": "ZIP contains SST (Story Solitaire) game simulation data - level stats CSVs for coins and win rates. Temporary development export with no permanent filing value. Safe to delete.",
+      "skipped_to": "/Users/marklampert/Downloads/Skipped/archive.zip",
+      "skipped_at": "2025-12-08T01:34:29Z"
+    },
+    {
+      "id": "4af2457e-82c9-4ea7-a2c8-4f9a79a3c810",
+      "source_path": "/Users/marklampert/Downloads/GoRemote-White Elephant Gifts - Art Draw.zip",
+      "dest_path": "/Users/marklampert/Downloads/TO_DELETE/GoRemote-White Elephant Gifts - Art Draw.zip",
+      "confidence": 80,
+      "confidence_factors": {
+        "temp_event_export": 40,
+        "no_filing_category": 25,
+        "fun_work_event": 15
+      },
+      "content_analysis": {
+        "summary": "ZIP archive with 3 PNG drawings from GoGame white elephant gift exchange event. Includes art from Kate Liu, Mark Lampert, Jon Ho.",
+        "detected_entities": [
+          "Uken"
+        ],
+        "detected_dates": [
+          "2025-12-04"
+        ]
+      },
+      "status": "skipped",
+      "timestamp": "2025-12-08T02:30:00Z",
+      "reasoning": "Fun work event export - art drawings from GoRemote white elephant gift exchange. No permanent filing value for event game drawings. Safe to delete after viewing if desired.",
+      "skipped_to": "/Users/marklampert/Downloads/Skipped/GoRemote-White Elephant Gifts - Art Draw.zip",
+      "skipped_at": "2025-12-08T01:34:43Z"
+    },
+    {
+      "id": "986a3722-1fd1-41a9-b5a6-053b8854b91f",
+      "source_path": "/Users/marklampert/Downloads/Rogers-2025-07-10.pdf",
+      "dest_path": "/Users/marklampert/Dropbox/Filing/Rogers - Wireless/invoices/Rogers-2025-07-10.pdf",
+      "confidence": 95,
+      "confidence_factors": {
+        "content_entity_match": 25,
+        "similar_files_found": 30,
+        "content_type_match": 20,
+        "file_type_match": 15,
+        "content_boost": 5
+      },
+      "content_analysis": {
+        "summary": "18 page PDF. Rogers wireless bill dated July 10, 2025. Account 4-7062-9296, amount $175.74. Bill addressed to Mark Lampert.",
+        "detected_entities": [
+          "Rogers",
+          "40 Gibson"
+        ],
+        "detected_dates": [
+          "July 10 2025",
+          "August 09 2025"
+        ]
+      },
+      "status": "skipped",
+      "timestamp": "2025-12-08T02:20:00Z",
+      "reasoning": "Content analysis confirmed Rogers wireless bill for July 2025, account 4-7062-9296, $175.74. Found 100+ similar Rogers invoices in destination folder. Filename already matches Rogers-YYYY-MM-DD.pdf pattern.",
+      "skipped_to": "/Users/marklampert/Downloads/Skipped/Rogers-2025-07-10.pdf",
+      "skipped_at": "2025-12-08T01:35:40Z"
+    },
+    {
+      "id": "a9abe6d4-b781-4e7f-9611-9e0cef10fe09",
+      "source_path": "/Users/marklampert/Downloads/PC_CoralloAshleyandLampertMarkHousehold_Quarterly_Statement_Mark_2025-09-30.pdf",
+      "dest_path": "/Users/marklampert/Dropbox/Filing/Mawer/Mawer Direct/reporting/PC_CoralloAshleyandLampertMarkHousehold_Quarterly_Statement_Mark_2025-09-30.pdf",
+      "confidence": 95,
+      "confidence_factors": {
+        "similar_files_found": 30,
+        "content_entity_match": 20,
+        "content_type_match": 15,
+        "file_type_match": 15,
+        "naming_pattern_match": 15
+      },
+      "content_analysis": {
+        "summary": "29 page PDF. Portfolio Counsel quarterly statement for Mark Lampert household, Q3 2025. Investment report from Mawer.",
+        "detected_entities": [
+          "40 Gibson"
+        ],
+        "detected_dates": [
+          "September 30 2025",
+          "October 2025"
+        ]
+      },
+      "status": "skipped",
+      "timestamp": "2025-12-08T02:15:00Z",
+      "reasoning": "Content analysis confirmed Mawer Portfolio Counsel quarterly statement for Q3 2025. Found 5 similar PC_ files in Mawer/Mawer Direct/reporting/ folder. Naming pattern matches existing files exactly.",
+      "skipped_to": "/Users/marklampert/Downloads/Skipped/PC_CoralloAshleyandLampertMarkHousehold_Quarterly_Statement_Mark_2025-09-30.pdf",
+      "skipped_at": "2025-12-08T01:36:49Z"
+    },
+    {
+      "id": "756f191f-39fc-4f81-b1bf-10755aea04e4",
+      "source_path": "/Users/marklampert/Downloads/Remedial_Annual_Resolutions_FY_2022_-_2024_-_Daybreak_Industries_Inc..pdf",
+      "dest_path": "/Users/marklampert/Dropbox/Uken/4 - Daybreak Industries Inc/Legal/Remedial Annual Resolutions FY 2022-2024.pdf",
+      "confidence": 90,
+      "confidence_factors": {
+        "similar_files_found": 30,
+        "content_entity_match": 20,
+        "content_type_match": 20,
+        "file_type_match": 15,
+        "content_boost": 5
+      },
+      "content_analysis": {
+        "summary": "5 page PDF. Daybreak Industries Inc board resolutions confirming annual meeting actions for FY 2022-2024. Corporate record clarification.",
+        "detected_entities": [
+          "Uken"
+        ],
+        "detected_dates": [
+          "December 31 2022",
+          "December 31 2023",
+          "December 31 2024"
+        ]
+      },
+      "status": "skipped",
+      "timestamp": "2025-12-08T02:40:00Z",
+      "reasoning": "Corporate resolutions for Daybreak Industries Inc. Filing in existing Daybreak/Legal folder alongside other corporate documents. Renamed to cleaner format removing underscores and double period.",
+      "skipped_to": "/Users/marklampert/Downloads/Skipped/Remedial_Annual_Resolutions_FY_2022_-_2024_-_Daybreak_Industries_Inc..pdf",
+      "skipped_at": "2025-12-08T01:38:00Z"
+    },
+    {
+      "id": "e18998dc-a11e-49f1-ac80-f3bc100c947a",
+      "source_path": "/Users/marklampert/Downloads/Invoice_9982.pdf",
+      "dest_path": "/Users/marklampert/Dropbox/Taxes/HoldCo/2024 - HoldCo/2025-04-30 K&P Invoice 9982.pdf",
+      "confidence": 95,
+      "confidence_factors": {
+        "similar_files_found": 30,
+        "content_entity_match": 25,
+        "content_type_match": 20,
+        "file_type_match": 15,
+        "content_boost": 5
+      },
+      "content_analysis": {
+        "summary": "1 page PDF. K&P CPAs invoice #9982 for $9,322.50. Corporate tax return prep for 11087592 Canada Inc (HoldCo), Oct 2024 tax year.",
+        "detected_entities": [],
+        "detected_dates": [
+          "2025-04-30",
+          "2025-05-07"
+        ]
+      },
+      "status": "skipped",
+      "timestamp": "2025-12-08T02:40:00Z",
+      "reasoning": "K&P CPAs invoice for HoldCo (11087592 Canada Inc) corporate tax return preparation. Found existing K&P doc in HoldCo 2024 folder. Naming with invoice date and number for consistency.",
+      "skipped_to": "/Users/marklampert/Downloads/Skipped/Invoice_9982.pdf",
+      "skipped_at": "2025-12-08T01:38:20Z"
     }
   ]
 }

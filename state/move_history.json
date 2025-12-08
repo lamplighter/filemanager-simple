@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0",
-  "last_updated": "2025-12-07T01:19:38Z",
+  "last_updated": "2025-12-08T01:37:10Z",
   "files": [
     {
       "id": "8af68bbe-7d7e-4d21-b3fb-62153b6aa558",
@@ -771,6 +771,2545 @@
       "action": "move",
       "reasoning": "CSV data dump related to Club IAP/ARPDAU analysis. Matches 'data dumps (CSVs)' folder in Uken Mark - data.",
       "moved_at": "2025-12-07T01:19:38Z"
+    },
+    {
+      "id": "869b7049-bd19-40d0-a9ca-907e491fd9e7",
+      "source_path": "/Users/marklampert/Desktop/SCR-20250822-ngpg.png",
+      "dest_path": "/Users/marklampert/Downloads/Screenshots/SCR-20250822-ngpg.png",
+      "confidence": 100,
+      "confidence_factors": {
+        "filename_pattern": 40,
+        "file_type_match": 30,
+        "designated_folder": 30
+      },
+      "status": "moved",
+      "timestamp": "2025-12-07T01:30:00Z",
+      "reasoning": "Screenshot file (SCR-* naming pattern). Moving to designated Screenshots folder.",
+      "moved_at": "2025-12-07T23:57:24Z"
+    },
+    {
+      "id": "db6483b9-3eec-4edf-9d48-88e4fa6aba0a",
+      "source_path": "/Users/marklampert/Desktop/SCR-20250409-lpqj.png",
+      "dest_path": "/Users/marklampert/Downloads/Screenshots/SCR-20250409-lpqj.png",
+      "confidence": 100,
+      "confidence_factors": {
+        "filename_pattern": 40,
+        "file_type_match": 30,
+        "designated_folder": 30
+      },
+      "status": "moved",
+      "timestamp": "2025-12-07T01:30:00Z",
+      "reasoning": "Screenshot file (SCR-* naming pattern). Moving to designated Screenshots folder.",
+      "moved_at": "2025-12-07T23:57:24Z"
+    },
+    {
+      "id": "c1dffb4b-e88b-4456-b93b-1977abfe7848",
+      "source_path": "/Users/marklampert/Desktop/SCR-20250409-lose.png",
+      "dest_path": "/Users/marklampert/Downloads/Screenshots/SCR-20250409-lose.png",
+      "confidence": 100,
+      "confidence_factors": {
+        "filename_pattern": 40,
+        "file_type_match": 30,
+        "designated_folder": 30
+      },
+      "status": "moved",
+      "timestamp": "2025-12-07T01:30:00Z",
+      "reasoning": "Screenshot file (SCR-* naming pattern). Moving to designated Screenshots folder.",
+      "moved_at": "2025-12-07T23:57:24Z"
+    },
+    {
+      "id": "f7742f77-f393-4458-b80e-6902017a747e",
+      "source_path": "/Users/marklampert/Desktop/LWScreenShot 2025-11-04 at 4.47.43\u202fPM (3).png",
+      "dest_path": "/Users/marklampert/Downloads/Screenshots/LWScreenShot 2025-11-04 at 4.47.43 PM (3).png",
+      "confidence": 100,
+      "confidence_factors": {
+        "filename_pattern": 40,
+        "file_type_match": 30,
+        "designated_folder": 30
+      },
+      "status": "moved",
+      "timestamp": "2025-12-07T01:30:00Z",
+      "reasoning": "Screenshot file (LWScreenShot naming pattern). Moving to designated Screenshots folder.",
+      "moved_at": "2025-12-07T23:57:24Z"
+    },
+    {
+      "id": "817b7dd0-b6a3-439d-b319-dbd3d5b41bf1",
+      "source_path": "/Users/marklampert/Desktop/LWScreenShot 2025-11-04 at 4.47.43\u202fPM (2).png",
+      "dest_path": "/Users/marklampert/Downloads/Screenshots/LWScreenShot 2025-11-04 at 4.47.43 PM (2).png",
+      "confidence": 100,
+      "confidence_factors": {
+        "filename_pattern": 40,
+        "file_type_match": 30,
+        "designated_folder": 30
+      },
+      "status": "moved",
+      "timestamp": "2025-12-07T01:30:00Z",
+      "reasoning": "Screenshot file (LWScreenShot naming pattern). Moving to designated Screenshots folder.",
+      "moved_at": "2025-12-07T23:57:24Z"
+    },
+    {
+      "id": "227eb424-1452-443d-95d5-534c5e0217d2",
+      "source_path": "/Users/marklampert/Desktop/LWScreenShot 2025-11-04 at 4.47.43\u202fPM.png",
+      "dest_path": "/Users/marklampert/Downloads/Screenshots/LWScreenShot 2025-11-04 at 4.47.43 PM.png",
+      "confidence": 100,
+      "confidence_factors": {
+        "filename_pattern": 40,
+        "file_type_match": 30,
+        "designated_folder": 30
+      },
+      "status": "moved",
+      "timestamp": "2025-12-07T01:30:00Z",
+      "reasoning": "Screenshot file (LWScreenShot naming pattern). Moving to designated Screenshots folder.",
+      "moved_at": "2025-12-07T23:57:24Z"
+    },
+    {
+      "id": "0b82fd8b-85b2-4619-88b1-6fc8332d696e",
+      "source_path": "/Users/marklampert/Downloads/googlechromecanary.dmg",
+      "dest_path": "/Users/marklampert/Downloads/installers/googlechromecanary.dmg",
+      "confidence": 100,
+      "confidence_factors": {
+        "file_extension": 40,
+        "designated_folder": 30,
+        "clear_purpose": 30
+      },
+      "status": "moved",
+      "timestamp": "2025-12-07T01:30:00Z",
+      "reasoning": "DMG installer file. Moving to designated installers folder.",
+      "moved_at": "2025-12-07T23:57:25Z"
+    },
+    {
+      "id": "189f2f6a-41bc-45a0-817f-fc6b4c1289a6",
+      "source_path": "/Users/marklampert/Downloads/Cursor-darwin-arm64.dmg",
+      "dest_path": "/Users/marklampert/Downloads/installers/Cursor-darwin-arm64.dmg",
+      "confidence": 100,
+      "confidence_factors": {
+        "file_extension": 40,
+        "designated_folder": 30,
+        "clear_purpose": 30
+      },
+      "status": "moved",
+      "timestamp": "2025-12-07T01:30:00Z",
+      "reasoning": "DMG installer file (Cursor IDE). Moving to designated installers folder.",
+      "moved_at": "2025-12-07T23:57:25Z"
+    },
+    {
+      "id": "d93c2ab5-b1a8-42a5-839e-64992bf64148",
+      "source_path": "/Users/marklampert/Downloads/Obsidian-1.10.3.dmg",
+      "dest_path": "/Users/marklampert/Downloads/installers/Obsidian-1.10.3.dmg",
+      "confidence": 100,
+      "confidence_factors": {
+        "file_extension": 40,
+        "designated_folder": 30,
+        "clear_purpose": 30
+      },
+      "status": "moved",
+      "timestamp": "2025-12-07T01:30:00Z",
+      "reasoning": "DMG installer file (Obsidian). Moving to designated installers folder.",
+      "moved_at": "2025-12-07T23:57:25Z"
+    },
+    {
+      "id": "fc4f76c0-375a-408c-8721-1673c01a75c8",
+      "source_path": "/Users/marklampert/Downloads/Antigravity.dmg",
+      "dest_path": "/Users/marklampert/Downloads/installers/Antigravity.dmg",
+      "confidence": 100,
+      "confidence_factors": {
+        "file_extension": 40,
+        "designated_folder": 30,
+        "clear_purpose": 30
+      },
+      "status": "moved",
+      "timestamp": "2025-12-07T01:30:00Z",
+      "reasoning": "DMG installer file. Moving to designated installers folder.",
+      "moved_at": "2025-12-07T23:57:25Z"
+    },
+    {
+      "id": "6be488f6-d315-4cec-b602-75a532dc0e1d",
+      "source_path": "/Users/marklampert/Downloads/2025-11-13_250930_Inovia Venture Fund V,L.P._Quarterly Report_Q3-2025.pdf",
+      "dest_path": "/Users/marklampert/Dropbox/Filing/Investments - Funds/Inovia Fund V - Connected Venture Fund V/2025-11-13_250930_Inovia Venture Fund V,L.P._Quarterly Report_Q3-2025.pdf",
+      "confidence": 98,
+      "confidence_factors": {
+        "existing_folder": 30,
+        "matching_naming_pattern": 30,
+        "similar_files_found": 28,
+        "content_match": 10
+      },
+      "status": "moved",
+      "timestamp": "2025-12-07T01:30:00Z",
+      "reasoning": "Inovia Fund V quarterly report Q3-2025. Matches existing folder and naming pattern exactly.",
+      "moved_at": "2025-12-08T00:01:47Z"
+    },
+    {
+      "id": "95addbde-27f1-4c20-be7e-708d724ba285",
+      "source_path": "/Users/marklampert/Downloads/2025-11-13_250930_Inovia Venture Fund V,L.P._Connected Venture Fund V SPV Limited Partnership_Capital Statement_Q3-2025.pdf",
+      "dest_path": "/Users/marklampert/Dropbox/Filing/Investments - Funds/Inovia Fund V - Connected Venture Fund V/2025-11-13_250930_Inovia Venture Fund V,L.P._Connected Venture Fund V SPV Limited Partnership_Capital Statement_Q3-2025.pdf",
+      "confidence": 98,
+      "confidence_factors": {
+        "existing_folder": 30,
+        "matching_naming_pattern": 30,
+        "similar_files_found": 28,
+        "content_match": 10
+      },
+      "status": "moved",
+      "timestamp": "2025-12-07T01:30:00Z",
+      "reasoning": "Inovia Fund V capital statement Q3-2025. Matches existing folder and naming pattern.",
+      "moved_at": "2025-12-08T00:01:48Z"
+    },
+    {
+      "id": "ad7adf67-a33e-4a4e-90aa-93ea67dd3855",
+      "source_path": "/Users/marklampert/Downloads/2025-11-13_250930_Inovia Venture Fund V,L.P._Quarterly Company Profiles_Q3-2025_LP.pdf",
+      "dest_path": "/Users/marklampert/Dropbox/Filing/Investments - Funds/Inovia Fund V - Connected Venture Fund V/2025-11-13_250930_Inovia Venture Fund V,L.P._Quarterly Company Profiles_Q3-2025_LP.pdf",
+      "confidence": 98,
+      "confidence_factors": {
+        "existing_folder": 30,
+        "matching_naming_pattern": 30,
+        "similar_files_found": 28,
+        "content_match": 10
+      },
+      "status": "moved",
+      "timestamp": "2025-12-07T01:30:00Z",
+      "reasoning": "Inovia Fund V company profiles Q3-2025. Matches existing folder and naming pattern.",
+      "moved_at": "2025-12-08T00:01:51Z"
+    },
+    {
+      "id": "2aef3dde-6ad6-4059-af04-3e6442c9ec8d",
+      "source_path": "/Users/marklampert/Downloads/20241106 Q3 UKEN Results.pdf",
+      "dest_path": "/Users/marklampert/Downloads/Uken/20241106 Q3 UKEN Results.pdf",
+      "confidence": 100,
+      "confidence_factors": {
+        "keyword_match": 50,
+        "designated_folder": 50
+      },
+      "status": "moved",
+      "timestamp": "2025-12-08T00:21:06Z",
+      "reasoning": "Uken work file. Moving to designated Uken folder.",
+      "moved_at": "2025-12-08T00:24:47Z"
+    },
+    {
+      "id": "1aea3a48-9a57-4365-8cc2-131605d76414",
+      "source_path": "/Users/marklampert/Downloads/Amalgamation Documents - Uken Inc .zip",
+      "dest_path": "/Users/marklampert/Downloads/Uken/Amalgamation Documents - Uken Inc .zip",
+      "confidence": 100,
+      "confidence_factors": {
+        "keyword_match": 50,
+        "designated_folder": 50
+      },
+      "status": "moved",
+      "timestamp": "2025-12-08T00:21:06Z",
+      "reasoning": "Uken work file. Moving to designated Uken folder.",
+      "moved_at": "2025-12-08T00:24:49Z"
+    },
+    {
+      "id": "76fe89a8-94bb-4a10-92c9-949110a3a2d6",
+      "source_path": "/Users/marklampert/Downloads/Amalgamation Documents - Uken Inc ",
+      "dest_path": "/Users/marklampert/Downloads/Uken/Amalgamation Documents - Uken Inc ",
+      "confidence": 100,
+      "confidence_factors": {
+        "keyword_match": 50,
+        "designated_folder": 50
+      },
+      "status": "moved",
+      "timestamp": "2025-12-08T00:21:06Z",
+      "reasoning": "Uken work file. Moving to designated Uken folder.",
+      "moved_at": "2025-12-08T00:24:50Z"
+    },
+    {
+      "id": "0c5dd0a7-4ffd-4120-a2ba-7e2383d4d025",
+      "source_path": "/Users/marklampert/Downloads/Complete_with_Docusign_Uken_Inc_-_Directors.pdf",
+      "dest_path": "/Users/marklampert/Downloads/Uken/Complete_with_Docusign_Uken_Inc_-_Directors.pdf",
+      "confidence": 100,
+      "confidence_factors": {
+        "keyword_match": 50,
+        "designated_folder": 50
+      },
+      "status": "moved",
+      "timestamp": "2025-12-08T00:21:06Z",
+      "reasoning": "Uken work file. Moving to designated Uken folder.",
+      "moved_at": "2025-12-08T00:24:54Z"
+    },
+    {
+      "id": "77fb43b9-229b-4940-96bf-8babf61a4b1b",
+      "source_path": "/Users/marklampert/Downloads/Execution_Copy_-_Officer_s_Certificate_-_Uken_Inc.__111050_.pdf",
+      "dest_path": "/Users/marklampert/Downloads/Uken/Execution_Copy_-_Officer_s_Certificate_-_Uken_Inc.__111050_.pdf",
+      "confidence": 100,
+      "confidence_factors": {
+        "keyword_match": 50,
+        "designated_folder": 50
+      },
+      "status": "moved",
+      "timestamp": "2025-12-08T00:21:06Z",
+      "reasoning": "Uken work file. Moving to designated Uken folder.",
+      "moved_at": "2025-12-08T00:24:55Z"
+    },
+    {
+      "id": "b5db4524-aaa8-4586-8d21-bfccf30b91d7",
+      "source_path": "/Users/marklampert/Downloads/Plan A Underwriting Terms Uken Games 6.09.25.docx.pdf",
+      "dest_path": "/Users/marklampert/Downloads/Uken/Plan A Underwriting Terms Uken Games 6.09.25.docx.pdf",
+      "confidence": 100,
+      "confidence_factors": {
+        "keyword_match": 50,
+        "designated_folder": 50
+      },
+      "status": "moved",
+      "timestamp": "2025-12-08T00:21:06Z",
+      "reasoning": "Uken work file. Moving to designated Uken folder.",
+      "moved_at": "2025-12-08T00:25:00Z"
+    },
+    {
+      "id": "6956b62c-b110-4777-916b-5796068ac1b4",
+      "source_path": "/Users/marklampert/Downloads/ProblematicAds_Uken Games-IronSource_07-4-2025 (1).xlsx",
+      "dest_path": "/Users/marklampert/Downloads/Uken/ProblematicAds_Uken Games-IronSource_07-4-2025 (1).xlsx",
+      "confidence": 100,
+      "confidence_factors": {
+        "keyword_match": 50,
+        "designated_folder": 50
+      },
+      "status": "moved",
+      "timestamp": "2025-12-08T00:21:06Z",
+      "reasoning": "Uken work file. Moving to designated Uken folder.",
+      "moved_at": "2025-12-08T00:25:02Z"
+    },
+    {
+      "id": "6b2ce526-9c5f-41b8-9dd4-adf6b1a08a99",
+      "source_path": "/Users/marklampert/Downloads/ProblematicAds_Uken Games-IronSource_07-4-2025.xlsx",
+      "dest_path": "/Users/marklampert/Downloads/Uken/ProblematicAds_Uken Games-IronSource_07-4-2025.xlsx",
+      "confidence": 100,
+      "confidence_factors": {
+        "keyword_match": 50,
+        "designated_folder": 50
+      },
+      "status": "moved",
+      "timestamp": "2025-12-08T00:21:06Z",
+      "reasoning": "Uken work file. Moving to designated Uken folder.",
+      "moved_at": "2025-12-08T00:25:03Z"
+    },
+    {
+      "id": "e7351d66-af8d-453f-a276-a72c9917f5b0",
+      "source_path": "/Users/marklampert/Downloads/SisenseUken_Games_Sales_Order_for_your_e-sig.pdf",
+      "dest_path": "/Users/marklampert/Downloads/Uken/SisenseUken_Games_Sales_Order_for_your_e-sig.pdf",
+      "confidence": 100,
+      "confidence_factors": {
+        "keyword_match": 50,
+        "designated_folder": 50
+      },
+      "status": "moved",
+      "timestamp": "2025-12-08T00:21:06Z",
+      "reasoning": "Uken work file. Moving to designated Uken folder.",
+      "moved_at": "2025-12-08T00:25:06Z"
+    },
+    {
+      "id": "b128048f-23f9-442c-bab4-04465bfec034",
+      "source_path": "/Users/marklampert/Downloads/Team_List_(Uken_Games) - cye Aug11.xlsx",
+      "dest_path": "/Users/marklampert/Downloads/Uken/Team_List_(Uken_Games) - cye Aug11.xlsx",
+      "confidence": 100,
+      "confidence_factors": {
+        "keyword_match": 50,
+        "designated_folder": 50
+      },
+      "status": "moved",
+      "timestamp": "2025-12-08T00:21:06Z",
+      "reasoning": "Uken work file. Moving to designated Uken folder.",
+      "moved_at": "2025-12-08T00:25:11Z"
+    },
+    {
+      "id": "934cf22b-6119-4393-93d6-4d37e2f325b6",
+      "source_path": "/Users/marklampert/Downloads/Team_List_(Uken_Games) - cye Aug8 (1).xlsx",
+      "dest_path": "/Users/marklampert/Downloads/Uken/Team_List_(Uken_Games) - cye Aug8 (1).xlsx",
+      "confidence": 100,
+      "confidence_factors": {
+        "keyword_match": 50,
+        "designated_folder": 50
+      },
+      "status": "moved",
+      "timestamp": "2025-12-08T00:21:06Z",
+      "reasoning": "Uken work file. Moving to designated Uken folder.",
+      "moved_at": "2025-12-08T00:25:11Z"
+    },
+    {
+      "id": "8e4596d1-4dfa-4071-bd29-b45e160b64df",
+      "source_path": "/Users/marklampert/Downloads/Team_List_(Uken_Games) - cye Aug8.xlsx",
+      "dest_path": "/Users/marklampert/Downloads/Uken/Team_List_(Uken_Games) - cye Aug8.xlsx",
+      "confidence": 100,
+      "confidence_factors": {
+        "keyword_match": 50,
+        "designated_folder": 50
+      },
+      "status": "moved",
+      "timestamp": "2025-12-08T00:21:06Z",
+      "reasoning": "Uken work file. Moving to designated Uken folder.",
+      "moved_at": "2025-12-08T00:25:12Z"
+    },
+    {
+      "id": "8fca0b56-33a0-4078-8c05-f59bb3fe58d6",
+      "source_path": "/Users/marklampert/Downloads/Team_List_(Uken_Games) - cye Jul17 (1).xlsx",
+      "dest_path": "/Users/marklampert/Downloads/Uken/Team_List_(Uken_Games) - cye Jul17 (1).xlsx",
+      "confidence": 100,
+      "confidence_factors": {
+        "keyword_match": 50,
+        "designated_folder": 50
+      },
+      "status": "moved",
+      "timestamp": "2025-12-08T00:21:06Z",
+      "reasoning": "Uken work file. Moving to designated Uken folder.",
+      "moved_at": "2025-12-08T00:25:12Z"
+    },
+    {
+      "id": "1e650803-a61a-47be-b025-5dc51222e592",
+      "source_path": "/Users/marklampert/Downloads/Team_List_(Uken_Games) - cye Jul17.xlsx",
+      "dest_path": "/Users/marklampert/Downloads/Uken/Team_List_(Uken_Games) - cye Jul17.xlsx",
+      "confidence": 100,
+      "confidence_factors": {
+        "keyword_match": 50,
+        "designated_folder": 50
+      },
+      "status": "moved",
+      "timestamp": "2025-12-08T00:21:06Z",
+      "reasoning": "Uken work file. Moving to designated Uken folder.",
+      "moved_at": "2025-12-08T00:25:13Z"
+    },
+    {
+      "id": "c26109af-a253-40b6-8bc5-6ed98f82fc87",
+      "source_path": "/Users/marklampert/Downloads/Team_List_(Uken_Games) - cye Jun 17 am.xlsx",
+      "dest_path": "/Users/marklampert/Downloads/Uken/Team_List_(Uken_Games) - cye Jun 17 am.xlsx",
+      "confidence": 100,
+      "confidence_factors": {
+        "keyword_match": 50,
+        "designated_folder": 50
+      },
+      "status": "moved",
+      "timestamp": "2025-12-08T00:21:06Z",
+      "reasoning": "Uken work file. Moving to designated Uken folder.",
+      "moved_at": "2025-12-08T00:25:13Z"
+    },
+    {
+      "id": "6a55f072-b41c-47ec-a8b9-f382f4e62f39",
+      "source_path": "/Users/marklampert/Downloads/Team_List_(Uken_Games) - cye Jun 17 pm.xlsx",
+      "dest_path": "/Users/marklampert/Downloads/Uken/Team_List_(Uken_Games) - cye Jun 17 pm.xlsx",
+      "confidence": 100,
+      "confidence_factors": {
+        "keyword_match": 50,
+        "designated_folder": 50
+      },
+      "status": "moved",
+      "timestamp": "2025-12-08T00:21:06Z",
+      "reasoning": "Uken work file. Moving to designated Uken folder.",
+      "moved_at": "2025-12-08T00:25:14Z"
+    },
+    {
+      "id": "91db6911-7d4c-497d-b99d-ff6ec03af062",
+      "source_path": "/Users/marklampert/Downloads/Team_List_(Uken_Games) - cye Jun19 - group 1 final.xlsx",
+      "dest_path": "/Users/marklampert/Downloads/Uken/Team_List_(Uken_Games) - cye Jun19 - group 1 final.xlsx",
+      "confidence": 100,
+      "confidence_factors": {
+        "keyword_match": 50,
+        "designated_folder": 50
+      },
+      "status": "moved",
+      "timestamp": "2025-12-08T00:21:06Z",
+      "reasoning": "Uken work file. Moving to designated Uken folder.",
+      "moved_at": "2025-12-08T00:25:14Z"
+    },
+    {
+      "id": "e0eb87d0-15de-4a1c-ad27-401a6e8bc79c",
+      "source_path": "/Users/marklampert/Downloads/Uken - Option Agreement - Chris Ye (Dec 10 2024) (signed).pdf",
+      "dest_path": "/Users/marklampert/Downloads/Uken/Uken - Option Agreement - Chris Ye (Dec 10 2024) (signed).pdf",
+      "confidence": 100,
+      "confidence_factors": {
+        "keyword_match": 50,
+        "designated_folder": 50
+      },
+      "status": "moved",
+      "timestamp": "2025-12-08T00:21:06Z",
+      "reasoning": "Uken work file. Moving to designated Uken folder.",
+      "moved_at": "2025-12-08T00:25:16Z"
+    },
+    {
+      "id": "d15dd3b6-bcd8-450d-82e5-66d0a726b58c",
+      "source_path": "/Users/marklampert/Downloads/Uken FY25 Budget Template_V3.xlsx",
+      "dest_path": "/Users/marklampert/Downloads/Uken/Uken FY25 Budget Template_V3.xlsx",
+      "confidence": 100,
+      "confidence_factors": {
+        "keyword_match": 50,
+        "designated_folder": 50
+      },
+      "status": "moved",
+      "timestamp": "2025-12-08T00:21:06Z",
+      "reasoning": "Uken work file. Moving to designated Uken folder.",
+      "moved_at": "2025-12-08T00:25:18Z"
+    },
+    {
+      "id": "da57c2f0-49d9-414e-a41f-8e21a168844d",
+      "source_path": "/Users/marklampert/Downloads/Uken Games Market Report - Mar 2025 (DRAFT).pdf",
+      "dest_path": "/Users/marklampert/Downloads/Uken/Uken Games Market Report - Mar 2025 (DRAFT).pdf",
+      "confidence": 100,
+      "confidence_factors": {
+        "keyword_match": 50,
+        "designated_folder": 50
+      },
+      "status": "moved",
+      "timestamp": "2025-12-08T00:21:06Z",
+      "reasoning": "Uken work file. Moving to designated Uken folder.",
+      "moved_at": "2025-12-08T00:25:21Z"
+    },
+    {
+      "id": "729cc76d-4bca-447b-8671-7b2c02f81641",
+      "source_path": "/Users/marklampert/Downloads/Uken Holdings Inc. - Annual Directors Resolution - 2022 - 2024.docx",
+      "dest_path": "/Users/marklampert/Downloads/Uken/Uken Holdings Inc. - Annual Directors Resolution - 2022 - 2024.docx",
+      "confidence": 100,
+      "confidence_factors": {
+        "keyword_match": 50,
+        "designated_folder": 50
+      },
+      "status": "moved",
+      "timestamp": "2025-12-08T00:21:06Z",
+      "reasoning": "Uken work file. Moving to designated Uken folder.",
+      "moved_at": "2025-12-08T00:25:22Z"
+    },
+    {
+      "id": "37426fdc-7ac9-4e6f-9de1-32a121b7d448",
+      "source_path": "/Users/marklampert/Downloads/Uken Holdings Inc. - Annual Directors Resolution - 2022 - 2024.docx.pdf",
+      "dest_path": "/Users/marklampert/Downloads/Uken/Uken Holdings Inc. - Annual Directors Resolution - 2022 - 2024.docx.pdf",
+      "confidence": 100,
+      "confidence_factors": {
+        "keyword_match": 50,
+        "designated_folder": 50
+      },
+      "status": "moved",
+      "timestamp": "2025-12-08T00:21:06Z",
+      "reasoning": "Uken work file. Moving to designated Uken folder.",
+      "moved_at": "2025-12-08T00:25:23Z"
+    },
+    {
+      "id": "677eaa08-f3f0-4b53-a6de-b73a000811d4",
+      "source_path": "/Users/marklampert/Downloads/Uken Holdings Inc. - Annual Shareholder Resolution - 2022 - 2024.docx",
+      "dest_path": "/Users/marklampert/Downloads/Uken/Uken Holdings Inc. - Annual Shareholder Resolution - 2022 - 2024.docx",
+      "confidence": 100,
+      "confidence_factors": {
+        "keyword_match": 50,
+        "designated_folder": 50
+      },
+      "status": "moved",
+      "timestamp": "2025-12-08T00:21:06Z",
+      "reasoning": "Uken work file. Moving to designated Uken folder.",
+      "moved_at": "2025-12-08T00:25:23Z"
+    },
+    {
+      "id": "cc0f7df5-aaa2-415e-951e-805f652c3503",
+      "source_path": "/Users/marklampert/Downloads/Uken Holdings Inc. - Annual Shareholder Resolution - 2022 - 2024.docx.pdf",
+      "dest_path": "/Users/marklampert/Downloads/Uken/Uken Holdings Inc. - Annual Shareholder Resolution - 2022 - 2024.docx.pdf",
+      "confidence": 100,
+      "confidence_factors": {
+        "keyword_match": 50,
+        "designated_folder": 50
+      },
+      "status": "moved",
+      "timestamp": "2025-12-08T00:21:06Z",
+      "reasoning": "Uken work file. Moving to designated Uken folder.",
+      "moved_at": "2025-12-08T00:25:24Z"
+    },
+    {
+      "id": "4aa38057-e04d-4669-8336-5bc5f51bcf78",
+      "source_path": "/Users/marklampert/Downloads/Uken Holdings Inc. - Board Resolution Approving Option Pool Increase (2024) (signed).pdf",
+      "dest_path": "/Users/marklampert/Downloads/Uken/Uken Holdings Inc. - Board Resolution Approving Option Pool Increase (2024) (signed).pdf",
+      "confidence": 100,
+      "confidence_factors": {
+        "keyword_match": 50,
+        "designated_folder": 50
+      },
+      "status": "moved",
+      "timestamp": "2025-12-08T00:21:06Z",
+      "reasoning": "Uken work file. Moving to designated Uken folder.",
+      "moved_at": "2025-12-08T00:25:24Z"
+    },
+    {
+      "id": "d9caab89-3636-4883-971c-62817195d1d3",
+      "source_path": "/Users/marklampert/Downloads/Uken Holdings Inc. - FED Form 3 - Change in registered address.pdf",
+      "dest_path": "/Users/marklampert/Downloads/Uken/Uken Holdings Inc. - FED Form 3 - Change in registered address.pdf",
+      "confidence": 100,
+      "confidence_factors": {
+        "keyword_match": 50,
+        "designated_folder": 50
+      },
+      "status": "moved",
+      "timestamp": "2025-12-08T00:21:06Z",
+      "reasoning": "Uken work file. Moving to designated Uken folder.",
+      "moved_at": "2025-12-08T00:25:25Z"
+    },
+    {
+      "id": "9ca742cd-98c8-4700-888a-ae4c8f4b2b26",
+      "source_path": "/Users/marklampert/Downloads/Uken Holdings Inc. - Non-Voting Shareholders Annual Resolutions 2022 - 2024.docx",
+      "dest_path": "/Users/marklampert/Downloads/Uken/Uken Holdings Inc. - Non-Voting Shareholders Annual Resolutions 2022 - 2024.docx",
+      "confidence": 100,
+      "confidence_factors": {
+        "keyword_match": 50,
+        "designated_folder": 50
+      },
+      "status": "moved",
+      "timestamp": "2025-12-08T00:21:06Z",
+      "reasoning": "Uken work file. Moving to designated Uken folder.",
+      "moved_at": "2025-12-08T00:25:26Z"
+    },
+    {
+      "id": "f9151bb2-b8c5-43da-b762-2b8d29163951",
+      "source_path": "/Users/marklampert/Downloads/Uken Holdings Inc. - Non-Voting Shareholders Annual Resolutions 2022 - 2024.docx.pdf",
+      "dest_path": "/Users/marklampert/Downloads/Uken/Uken Holdings Inc. - Non-Voting Shareholders Annual Resolutions 2022 - 2024.docx.pdf",
+      "confidence": 100,
+      "confidence_factors": {
+        "keyword_match": 50,
+        "designated_folder": 50
+      },
+      "status": "moved",
+      "timestamp": "2025-12-08T00:21:06Z",
+      "reasoning": "Uken work file. Moving to designated Uken folder.",
+      "moved_at": "2025-12-08T00:25:26Z"
+    },
+    {
+      "id": "f46265de-e100-44b0-af29-ef1833ff1eca",
+      "source_path": "/Users/marklampert/Downloads/Uken Holdings Inc. - Shareholder Resolution Approving Option Pool Increase (2024) (signed).pdf",
+      "dest_path": "/Users/marklampert/Downloads/Uken/Uken Holdings Inc. - Shareholder Resolution Approving Option Pool Increase (2024) (signed).pdf",
+      "confidence": 100,
+      "confidence_factors": {
+        "keyword_match": 50,
+        "designated_folder": 50
+      },
+      "status": "moved",
+      "timestamp": "2025-12-08T00:21:06Z",
+      "reasoning": "Uken work file. Moving to designated Uken folder.",
+      "moved_at": "2025-12-08T00:25:27Z"
+    },
+    {
+      "id": "219d7f05-c575-487f-9da8-0a94503ad2c4",
+      "source_path": "/Users/marklampert/Downloads/Uken Inc Budget Template - FY 2026.xlsx",
+      "dest_path": "/Users/marklampert/Downloads/Uken/Uken Inc Budget Template - FY 2026.xlsx",
+      "confidence": 100,
+      "confidence_factors": {
+        "keyword_match": 50,
+        "designated_folder": 50
+      },
+      "status": "moved",
+      "timestamp": "2025-12-08T00:21:06Z",
+      "reasoning": "Uken work file. Moving to designated Uken folder.",
+      "moved_at": "2025-12-08T00:25:27Z"
+    },
+    {
+      "id": "7c30a141-5124-4014-a893-22c4e19d2eab",
+      "source_path": "/Users/marklampert/Downloads/Uken Inc Financial PreClose July 2025 (1).pdf",
+      "dest_path": "/Users/marklampert/Downloads/Uken/Uken Inc Financial PreClose July 2025 (1).pdf",
+      "confidence": 100,
+      "confidence_factors": {
+        "keyword_match": 50,
+        "designated_folder": 50
+      },
+      "status": "moved",
+      "timestamp": "2025-12-08T00:21:06Z",
+      "reasoning": "Uken work file. Moving to designated Uken folder.",
+      "moved_at": "2025-12-08T00:25:29Z"
+    },
+    {
+      "id": "985f2bf3-8ded-42c9-81f2-1bc6ad1e4247",
+      "source_path": "/Users/marklampert/Downloads/Uken Inc Financial PreClose July 2025.pdf",
+      "dest_path": "/Users/marklampert/Downloads/Uken/Uken Inc Financial PreClose July 2025.pdf",
+      "confidence": 100,
+      "confidence_factors": {
+        "keyword_match": 50,
+        "designated_folder": 50
+      },
+      "status": "moved",
+      "timestamp": "2025-12-08T00:21:06Z",
+      "reasoning": "Uken work file. Moving to designated Uken folder.",
+      "moved_at": "2025-12-08T00:25:29Z"
+    },
+    {
+      "id": "65e46c13-9678-4fb0-920d-045ce4ed6f56",
+      "source_path": "/Users/marklampert/Downloads/Uken Inc Financials - 2025 October Preclose.pdf",
+      "dest_path": "/Users/marklampert/Downloads/Uken/Uken Inc Financials - 2025 October Preclose.pdf",
+      "confidence": 100,
+      "confidence_factors": {
+        "keyword_match": 50,
+        "designated_folder": 50
+      },
+      "status": "moved",
+      "timestamp": "2025-12-08T00:21:06Z",
+      "reasoning": "Uken work file. Moving to designated Uken folder.",
+      "moved_at": "2025-12-08T00:25:33Z"
+    },
+    {
+      "id": "ec333315-32ca-4a14-ba59-bc66d1f2bacc",
+      "source_path": "/Users/marklampert/Downloads/Uken Inc Financials - 2025 Q1 Forecast (V2) - bank (1).xlsx",
+      "dest_path": "/Users/marklampert/Downloads/Uken/Uken Inc Financials - 2025 Q1 Forecast (V2) - bank (1).xlsx",
+      "confidence": 100,
+      "confidence_factors": {
+        "keyword_match": 50,
+        "designated_folder": 50
+      },
+      "status": "moved",
+      "timestamp": "2025-12-08T00:21:06Z",
+      "reasoning": "Uken work file. Moving to designated Uken folder.",
+      "moved_at": "2025-12-08T00:25:34Z"
+    },
+    {
+      "id": "d757d632-6c3d-45d5-abfb-1b7a00b7ee98",
+      "source_path": "/Users/marklampert/Downloads/Uken Inc Financials - 2025 Q1 Forecast (V2) - bank.xlsx",
+      "dest_path": "/Users/marklampert/Downloads/Uken/Uken Inc Financials - 2025 Q1 Forecast (V2) - bank.xlsx",
+      "confidence": 100,
+      "confidence_factors": {
+        "keyword_match": 50,
+        "designated_folder": 50
+      },
+      "status": "moved",
+      "timestamp": "2025-12-08T00:21:06Z",
+      "reasoning": "Uken work file. Moving to designated Uken folder.",
+      "moved_at": "2025-12-08T00:25:34Z"
+    },
+    {
+      "id": "02a59f47-6bea-44cc-ad83-8fb0be4fab1f",
+      "source_path": "/Users/marklampert/Downloads/Uken Inc Financials - 2025 Q1 Forecast (V2).xlsx",
+      "dest_path": "/Users/marklampert/Downloads/Uken/Uken Inc Financials - 2025 Q1 Forecast (V2).xlsx",
+      "confidence": 100,
+      "confidence_factors": {
+        "keyword_match": 50,
+        "designated_folder": 50
+      },
+      "status": "moved",
+      "timestamp": "2025-12-08T00:21:06Z",
+      "reasoning": "Uken work file. Moving to designated Uken folder.",
+      "moved_at": "2025-12-08T00:25:35Z"
+    },
+    {
+      "id": "614f7dab-6861-4f17-b666-7069f997d1df",
+      "source_path": "/Users/marklampert/Downloads/Uken Inc Financials - November PreClose.pdf",
+      "dest_path": "/Users/marklampert/Downloads/Uken/Uken Inc Financials - November PreClose.pdf",
+      "confidence": 100,
+      "confidence_factors": {
+        "keyword_match": 50,
+        "designated_folder": 50
+      },
+      "status": "moved",
+      "timestamp": "2025-12-08T00:21:06Z",
+      "reasoning": "Uken work file. Moving to designated Uken folder.",
+      "moved_at": "2025-12-08T00:25:36Z"
+    },
+    {
+      "id": "ad8932a9-11f1-4a34-8175-b4621f23a0a5",
+      "source_path": "/Users/marklampert/Downloads/Uken Inc. - Directors Resolution Change in Registered Office.docx",
+      "dest_path": "/Users/marklampert/Downloads/Uken/Uken Inc. - Directors Resolution Change in Registered Office.docx",
+      "confidence": 100,
+      "confidence_factors": {
+        "keyword_match": 50,
+        "designated_folder": 50
+      },
+      "status": "moved",
+      "timestamp": "2025-12-08T00:21:06Z",
+      "reasoning": "Uken work file. Moving to designated Uken folder.",
+      "moved_at": "2025-12-08T00:25:37Z"
+    },
+    {
+      "id": "474146a4-85ed-458f-b9e1-bcb09528e4a9",
+      "source_path": "/Users/marklampert/Downloads/Uken Inc. - FED Form 3 - Change in registered address.pdf",
+      "dest_path": "/Users/marklampert/Downloads/Uken/Uken Inc. - FED Form 3 - Change in registered address.pdf",
+      "confidence": 100,
+      "confidence_factors": {
+        "keyword_match": 50,
+        "designated_folder": 50
+      },
+      "status": "moved",
+      "timestamp": "2025-12-08T00:21:06Z",
+      "reasoning": "Uken work file. Moving to designated Uken folder.",
+      "moved_at": "2025-12-08T00:25:38Z"
+    },
+    {
+      "id": "207c4048-68f5-48a6-8a76-e76675ce2a29",
+      "source_path": "/Users/marklampert/Downloads/Uken Inc. and Uken Holdings Inc. - Annual Resolutions.zip",
+      "dest_path": "/Users/marklampert/Downloads/Uken/Uken Inc. and Uken Holdings Inc. - Annual Resolutions.zip",
+      "confidence": 100,
+      "confidence_factors": {
+        "keyword_match": 50,
+        "designated_folder": 50
+      },
+      "status": "moved",
+      "timestamp": "2025-12-08T00:21:06Z",
+      "reasoning": "Uken work file. Moving to designated Uken folder.",
+      "moved_at": "2025-12-08T00:25:44Z"
+    },
+    {
+      "id": "9af33b59-cfbb-478c-8ef0-c085da62359e",
+      "source_path": "/Users/marklampert/Downloads/Uken_Games_-_2024_Renewal-Uken_Games_-_2024_Renewal-0Q0CPQ57816-11-Jul-2024-16-46-20 (1).pdf",
+      "dest_path": "/Users/marklampert/Downloads/Uken/Uken_Games_-_2024_Renewal-Uken_Games_-_2024_Renewal-0Q0CPQ57816-11-Jul-2024-16-46-20 (1).pdf",
+      "confidence": 100,
+      "confidence_factors": {
+        "keyword_match": 50,
+        "designated_folder": 50
+      },
+      "status": "moved",
+      "timestamp": "2025-12-08T00:21:06Z",
+      "reasoning": "Uken work file. Moving to designated Uken folder.",
+      "moved_at": "2025-12-08T00:25:50Z"
+    },
+    {
+      "id": "4e379d7d-9dfb-43c1-87c0-fd88d6150d50",
+      "source_path": "/Users/marklampert/Downloads/Uken_Games_-_2024_Renewal-Uken_Games_-_2024_Renewal-0Q0CPQ57816-11-Jul-2024-16-46-20 (2).pdf",
+      "dest_path": "/Users/marklampert/Downloads/Uken/Uken_Games_-_2024_Renewal-Uken_Games_-_2024_Renewal-0Q0CPQ57816-11-Jul-2024-16-46-20 (2).pdf",
+      "confidence": 100,
+      "confidence_factors": {
+        "keyword_match": 50,
+        "designated_folder": 50
+      },
+      "status": "moved",
+      "timestamp": "2025-12-08T00:21:06Z",
+      "reasoning": "Uken work file. Moving to designated Uken folder.",
+      "moved_at": "2025-12-08T00:25:52Z"
+    },
+    {
+      "id": "292cf3f0-ffae-4c59-a502-4f6d6f64265c",
+      "source_path": "/Users/marklampert/Downloads/Uken_Games_-_2024_Renewal-Uken_Games_-_2024_Renewal-0Q0CPQ57816-11-Jul-2024-16-46-20.pdf",
+      "dest_path": "/Users/marklampert/Downloads/Uken/Uken_Games_-_2024_Renewal-Uken_Games_-_2024_Renewal-0Q0CPQ57816-11-Jul-2024-16-46-20.pdf",
+      "confidence": 100,
+      "confidence_factors": {
+        "keyword_match": 50,
+        "designated_folder": 50
+      },
+      "status": "moved",
+      "timestamp": "2025-12-08T00:21:06Z",
+      "reasoning": "Uken work file. Moving to designated Uken folder.",
+      "moved_at": "2025-12-08T00:25:53Z"
+    },
+    {
+      "id": "10c6116a-d412-4ba7-9868-e2fa1b9b2a22",
+      "source_path": "/Users/marklampert/Downloads/Uken_IRAP AI Assist Project Outline.pdf",
+      "dest_path": "/Users/marklampert/Downloads/Uken/Uken_IRAP AI Assist Project Outline.pdf",
+      "confidence": 100,
+      "confidence_factors": {
+        "keyword_match": 50,
+        "designated_folder": 50
+      },
+      "status": "moved",
+      "timestamp": "2025-12-08T00:21:06Z",
+      "reasoning": "Uken work file. Moving to designated Uken folder.",
+      "moved_at": "2025-12-08T00:25:54Z"
+    },
+    {
+      "id": "2cd0ed6f-f718-414c-bee9-5ffebb6e7c8c",
+      "source_path": "/Users/marklampert/Downloads/Uken_Level_Up_Newsletter_Nov 17 2025.pdf",
+      "dest_path": "/Users/marklampert/Downloads/Uken/Uken_Level_Up_Newsletter_Nov 17 2025.pdf",
+      "confidence": 100,
+      "confidence_factors": {
+        "keyword_match": 50,
+        "designated_folder": 50
+      },
+      "status": "moved",
+      "timestamp": "2025-12-08T00:21:06Z",
+      "reasoning": "Uken work file. Moving to designated Uken folder.",
+      "moved_at": "2025-12-08T00:25:55Z"
+    },
+    {
+      "id": "56719933-47d4-4f02-8a00-e74a8b3fb3b4",
+      "source_path": "/Users/marklampert/Downloads/Uken_X_Inc._-_Board_resolution_approving_Gary_Kramer_s_share_repurchase__signature_ (1).pdf",
+      "dest_path": "/Users/marklampert/Downloads/Uken/Uken_X_Inc._-_Board_resolution_approving_Gary_Kramer_s_share_repurchase__signature_ (1).pdf",
+      "confidence": 100,
+      "confidence_factors": {
+        "keyword_match": 50,
+        "designated_folder": 50
+      },
+      "status": "moved",
+      "timestamp": "2025-12-08T00:21:06Z",
+      "reasoning": "Uken work file. Moving to designated Uken folder.",
+      "moved_at": "2025-12-08T00:25:56Z"
+    },
+    {
+      "id": "4ec08d92-25b1-44d3-8d92-e8e4e324ef52",
+      "source_path": "/Users/marklampert/Downloads/Uken_X_Inc._-_Board_resolution_approving_Gary_Kramer_s_share_repurchase__signature_.pdf",
+      "dest_path": "/Users/marklampert/Downloads/Uken/Uken_X_Inc._-_Board_resolution_approving_Gary_Kramer_s_share_repurchase__signature_.pdf",
+      "confidence": 100,
+      "confidence_factors": {
+        "keyword_match": 50,
+        "designated_folder": 50
+      },
+      "status": "moved",
+      "timestamp": "2025-12-08T00:21:06Z",
+      "reasoning": "Uken work file. Moving to designated Uken folder.",
+      "moved_at": "2025-12-08T00:25:57Z"
+    },
+    {
+      "id": "200ee4e1-e3ee-4524-9844-109c2f5f3770",
+      "source_path": "/Users/marklampert/Downloads/e01efcbc-81c5-4d7d-bfde-9c6c7d4864c1_01963f3c-9287-711e-a309-87ffc1ec9081_screenshots_Redshift_Tables-Inspect_Table-1758929498775.png",
+      "dest_path": "/Users/marklampert/Downloads/Uken/e01efcbc-81c5-4d7d-bfde-9c6c7d4864c1_01963f3c-9287-711e-a309-87ffc1ec9081_screenshots_Redshift_Tables-Inspect_Table-1758929498775.png",
+      "confidence": 95,
+      "confidence_factors": {
+        "work_keyword": 50,
+        "designated_folder": 45
+      },
+      "status": "moved",
+      "timestamp": "2025-12-08T00:27:16Z",
+      "reasoning": "SST/game development work file. Moving to Uken folder.",
+      "moved_at": "2025-12-08T00:28:04Z"
+    },
+    {
+      "id": "79c3162b-78b2-4805-97a4-6641cce7640b",
+      "source_path": "/Users/marklampert/Downloads/SST AB Tests.yaml",
+      "dest_path": "/Users/marklampert/Downloads/Uken/SST AB Tests.yaml",
+      "confidence": 95,
+      "confidence_factors": {
+        "work_keyword": 50,
+        "designated_folder": 45
+      },
+      "status": "moved",
+      "timestamp": "2025-12-08T00:27:16Z",
+      "reasoning": "SST/game development work file. Moving to Uken folder.",
+      "moved_at": "2025-12-08T00:28:05Z"
+    },
+    {
+      "id": "5c21f90b-6383-42dd-b116-38ccf9aef864",
+      "source_path": "/Users/marklampert/Downloads/e01efcbc-81c5-4d7d-bfde-9c6c7d4864c1_0198ed19-dd26-788d-addf-25f1760f60dc_screenshots_SST__AB_Tests__new___-2025_07_23__Ava_s_2_4__Existing_Users__3rd_cohort_-Overview-1760697230373 (1).png",
+      "dest_path": "/Users/marklampert/Downloads/Uken/e01efcbc-81c5-4d7d-bfde-9c6c7d4864c1_0198ed19-dd26-788d-addf-25f1760f60dc_screenshots_SST__AB_Tests__new___-2025_07_23__Ava_s_2_4__Existing_Users__3rd_cohort_-Overview-1760697230373 (1).png",
+      "confidence": 95,
+      "confidence_factors": {
+        "work_keyword": 50,
+        "designated_folder": 45
+      },
+      "status": "moved",
+      "timestamp": "2025-12-08T00:27:16Z",
+      "reasoning": "SST/game development work file. Moving to Uken folder.",
+      "moved_at": "2025-12-08T00:28:10Z"
+    },
+    {
+      "id": "3a1002c1-026f-4db5-8ad3-1b9e2616b2fb",
+      "source_path": "/Users/marklampert/Downloads/[SST] LS_ Segmented Step Up V4.pdf",
+      "dest_path": "/Users/marklampert/Downloads/Uken/[SST] LS_ Segmented Step Up V4.pdf",
+      "confidence": 95,
+      "confidence_factors": {
+        "work_keyword": 50,
+        "designated_folder": 45
+      },
+      "status": "moved",
+      "timestamp": "2025-12-08T00:27:16Z",
+      "reasoning": "SST/game development work file. Moving to Uken folder.",
+      "moved_at": "2025-12-08T00:28:10Z"
+    },
+    {
+      "id": "2d51bf4e-46bd-43b4-bf5a-a45f06e3ceae",
+      "source_path": "/Users/marklampert/Downloads/AB Test_ Segmented StepUp Offer v5.pdf",
+      "dest_path": "/Users/marklampert/Downloads/Uken/AB Test_ Segmented StepUp Offer v5.pdf",
+      "confidence": 95,
+      "confidence_factors": {
+        "work_keyword": 50,
+        "designated_folder": 45
+      },
+      "status": "moved",
+      "timestamp": "2025-12-08T00:27:16Z",
+      "reasoning": "SST/game development work file. Moving to Uken folder.",
+      "moved_at": "2025-12-08T00:28:12Z"
+    },
+    {
+      "id": "a7099ccc-63fe-4fa9-93c7-f0c96782ca13",
+      "source_path": "/Users/marklampert/Downloads/Feature_ Whale Rewarded Ads (1).pdf",
+      "dest_path": "/Users/marklampert/Downloads/Uken/Feature_ Whale Rewarded Ads (1).pdf",
+      "confidence": 95,
+      "confidence_factors": {
+        "work_keyword": 50,
+        "designated_folder": 45
+      },
+      "status": "moved",
+      "timestamp": "2025-12-08T00:27:16Z",
+      "reasoning": "SST/game development work file. Moving to Uken folder.",
+      "moved_at": "2025-12-08T00:28:14Z"
+    },
+    {
+      "id": "0f786318-dbfa-4a8d-87a7-8dcec0500da4",
+      "source_path": "/Users/marklampert/Downloads/e01efcbc-81c5-4d7d-bfde-9c6c7d4864c1_0198ed19-dd26-788d-addf-25f1760f60dc_screenshots_SST__AB_Tests-2025_10_16__Remove_Dolphin_Ads-Overview-1764585624999.pdf",
+      "dest_path": "/Users/marklampert/Downloads/Uken/e01efcbc-81c5-4d7d-bfde-9c6c7d4864c1_0198ed19-dd26-788d-addf-25f1760f60dc_screenshots_SST__AB_Tests-2025_10_16__Remove_Dolphin_Ads-Overview-1764585624999.pdf",
+      "confidence": 95,
+      "confidence_factors": {
+        "work_keyword": 50,
+        "designated_folder": 45
+      },
+      "status": "moved",
+      "timestamp": "2025-12-08T00:27:16Z",
+      "reasoning": "SST/game development work file. Moving to Uken folder.",
+      "moved_at": "2025-12-08T00:28:15Z"
+    },
+    {
+      "id": "69c5b620-42fc-4848-b599-10a35f157d74",
+      "source_path": "/Users/marklampert/Downloads/[SST] PLS_ Segmented Step Up V3.pdf",
+      "dest_path": "/Users/marklampert/Downloads/Uken/[SST] PLS_ Segmented Step Up V3.pdf",
+      "confidence": 95,
+      "confidence_factors": {
+        "work_keyword": 50,
+        "designated_folder": 45
+      },
+      "status": "moved",
+      "timestamp": "2025-12-08T00:27:16Z",
+      "reasoning": "SST/game development work file. Moving to Uken folder.",
+      "moved_at": "2025-12-08T00:28:18Z"
+    },
+    {
+      "id": "4324b0d5-8562-46aa-b827-b434afcdd34d",
+      "source_path": "/Users/marklampert/Downloads/e01efcbc-81c5-4d7d-bfde-9c6c7d4864c1_dc4e2190-7077-487b-81a5-08f196c7cd78_screenshots_Daily_Key_Metrics-Last_7_Days___All_Titles-1745842860351.pdf",
+      "dest_path": "/Users/marklampert/Downloads/Uken/e01efcbc-81c5-4d7d-bfde-9c6c7d4864c1_dc4e2190-7077-487b-81a5-08f196c7cd78_screenshots_Daily_Key_Metrics-Last_7_Days___All_Titles-1745842860351.pdf",
+      "confidence": 95,
+      "confidence_factors": {
+        "work_keyword": 50,
+        "designated_folder": 45
+      },
+      "status": "moved",
+      "timestamp": "2025-12-08T00:27:16Z",
+      "reasoning": "SST/game development work file. Moving to Uken folder.",
+      "moved_at": "2025-12-08T00:28:19Z"
+    },
+    {
+      "id": "57ed2393-53ba-43b6-8c5a-8cb70ed100e9",
+      "source_path": "/Users/marklampert/Downloads/Feature_ Whale Rewarded Ads.pdf",
+      "dest_path": "/Users/marklampert/Downloads/Uken/Feature_ Whale Rewarded Ads.pdf",
+      "confidence": 95,
+      "confidence_factors": {
+        "work_keyword": 50,
+        "designated_folder": 45
+      },
+      "status": "moved",
+      "timestamp": "2025-12-08T00:27:16Z",
+      "reasoning": "SST/game development work file. Moving to Uken folder.",
+      "moved_at": "2025-12-08T00:28:19Z"
+    },
+    {
+      "id": "4e8b74dc-1871-4e55-82e9-c503e78536d0",
+      "source_path": "/Users/marklampert/Downloads/Periscope - AB Test dashboard.png",
+      "dest_path": "/Users/marklampert/Downloads/Uken/Periscope - AB Test dashboard.png",
+      "confidence": 95,
+      "confidence_factors": {
+        "work_keyword": 50,
+        "designated_folder": 45
+      },
+      "status": "moved",
+      "timestamp": "2025-12-08T00:27:16Z",
+      "reasoning": "SST/game development work file. Moving to Uken folder.",
+      "moved_at": "2025-12-08T00:28:20Z"
+    },
+    {
+      "id": "d74107cc-3c0a-46d6-9d15-7ea989e44d5f",
+      "source_path": "/Users/marklampert/Downloads/e01efcbc-81c5-4d7d-bfde-9c6c7d4864c1_0198ed19-dd26-788d-addf-25f1760f60dc_screenshots_SST__AB_Tests__new___-2025_07_23__Ava_s_2_4__Existing_Users__3rd_cohort_-Overview-1760524442559.png",
+      "dest_path": "/Users/marklampert/Downloads/Uken/e01efcbc-81c5-4d7d-bfde-9c6c7d4864c1_0198ed19-dd26-788d-addf-25f1760f60dc_screenshots_SST__AB_Tests__new___-2025_07_23__Ava_s_2_4__Existing_Users__3rd_cohort_-Overview-1760524442559.png",
+      "confidence": 95,
+      "confidence_factors": {
+        "work_keyword": 50,
+        "designated_folder": 45
+      },
+      "status": "moved",
+      "timestamp": "2025-12-08T00:27:16Z",
+      "reasoning": "SST/game development work file. Moving to Uken folder.",
+      "moved_at": "2025-12-08T00:28:23Z"
+    },
+    {
+      "id": "9647f263-0dd9-44d9-b0ce-9f163029a0e6",
+      "source_path": "/Users/marklampert/Downloads/[SST] LS_ __ Template __.md",
+      "dest_path": "/Users/marklampert/Downloads/Uken/[SST] LS_ __ Template __.md",
+      "confidence": 95,
+      "confidence_factors": {
+        "work_keyword": 50,
+        "designated_folder": 45
+      },
+      "status": "moved",
+      "timestamp": "2025-12-08T00:27:16Z",
+      "reasoning": "SST/game development work file. Moving to Uken folder.",
+      "moved_at": "2025-12-08T00:29:54Z"
+    },
+    {
+      "id": "88cb61f6-72c4-4251-a090-764d1cc8c320",
+      "source_path": "/Users/marklampert/Downloads/HyperHQ_ChooseAdventure_Playable.html",
+      "dest_path": "/Users/marklampert/Downloads/Uken/HyperHQ_ChooseAdventure_Playable.html",
+      "confidence": 95,
+      "confidence_factors": {
+        "work_keyword": 50,
+        "designated_folder": 45
+      },
+      "status": "moved",
+      "timestamp": "2025-12-08T00:27:16Z",
+      "reasoning": "SST/game development work file. Moving to Uken folder.",
+      "moved_at": "2025-12-08T00:29:56Z"
+    },
+    {
+      "id": "15f05f60-4b19-4d20-bb01-80b8227c577d",
+      "source_path": "/Users/marklampert/Downloads/HyperHQ_ChooseAdventure_Playable (1).html",
+      "dest_path": "/Users/marklampert/Downloads/Uken/HyperHQ_ChooseAdventure_Playable (1).html",
+      "confidence": 95,
+      "confidence_factors": {
+        "work_keyword": 50,
+        "designated_folder": 45
+      },
+      "status": "moved",
+      "timestamp": "2025-12-08T00:27:16Z",
+      "reasoning": "SST/game development work file. Moving to Uken folder.",
+      "moved_at": "2025-12-08T00:29:57Z"
+    },
+    {
+      "id": "3bd407e7-e4f0-4c4d-b97b-2e79ae4e2541",
+      "source_path": "/Users/marklampert/Downloads/e01efcbc-81c5-4d7d-bfde-9c6c7d4864c1_0198ed19-dd26-788d-addf-25f1760f60dc_screenshots_SST__AB_Tests-2025_09_22__Play_Modal_v2-Setup-1764583994017.pdf",
+      "dest_path": "/Users/marklampert/Downloads/Uken/e01efcbc-81c5-4d7d-bfde-9c6c7d4864c1_0198ed19-dd26-788d-addf-25f1760f60dc_screenshots_SST__AB_Tests-2025_09_22__Play_Modal_v2-Setup-1764583994017.pdf",
+      "confidence": 95,
+      "confidence_factors": {
+        "work_keyword": 50,
+        "designated_folder": 45
+      },
+      "status": "moved",
+      "timestamp": "2025-12-08T00:27:16Z",
+      "reasoning": "SST/game development work file. Moving to Uken folder.",
+      "moved_at": "2025-12-08T00:29:57Z"
+    },
+    {
+      "id": "116255a5-c53f-49f4-8e54-a8e80b13c6f3",
+      "source_path": "/Users/marklampert/Downloads/SSTFBCommunityDashboard_2025-12-2_1121 (1).pdf",
+      "dest_path": "/Users/marklampert/Downloads/Uken/SSTFBCommunityDashboard_2025-12-2_1121 (1).pdf",
+      "confidence": 95,
+      "confidence_factors": {
+        "work_keyword": 50,
+        "designated_folder": 45
+      },
+      "status": "moved",
+      "timestamp": "2025-12-08T00:27:16Z",
+      "reasoning": "SST/game development work file. Moving to Uken folder.",
+      "moved_at": "2025-12-08T00:29:58Z"
+    },
+    {
+      "id": "b77c277a-769a-4698-a20c-5fcc772206cb",
+      "source_path": "/Users/marklampert/Downloads/SST - high level overview.pdf",
+      "dest_path": "/Users/marklampert/Downloads/Uken/SST - high level overview.pdf",
+      "confidence": 95,
+      "confidence_factors": {
+        "work_keyword": 50,
+        "designated_folder": 45
+      },
+      "status": "moved",
+      "timestamp": "2025-12-08T00:27:16Z",
+      "reasoning": "SST/game development work file. Moving to Uken folder.",
+      "moved_at": "2025-12-08T00:30:01Z"
+    },
+    {
+      "id": "a6ffb4e8-01b1-47c6-9402-f9a8f7eaafad",
+      "source_path": "/Users/marklampert/Downloads/1Pager_ [0Dev] Segmented Step Up V4.pdf",
+      "dest_path": "/Users/marklampert/Downloads/Uken/1Pager_ [0Dev] Segmented Step Up V4.pdf",
+      "confidence": 95,
+      "confidence_factors": {
+        "work_keyword": 50,
+        "designated_folder": 45
+      },
+      "status": "moved",
+      "timestamp": "2025-12-08T00:27:16Z",
+      "reasoning": "SST/game development work file. Moving to Uken folder.",
+      "moved_at": "2025-12-08T00:30:02Z"
+    },
+    {
+      "id": "c926a27f-56cc-4e13-8174-76c77e7a306c",
+      "source_path": "/Users/marklampert/Downloads/e01efcbc-81c5-4d7d-bfde-9c6c7d4864c1_0198ed19-dd26-788d-addf-25f1760f60dc_screenshots_SST__AB_Tests-2025_11_14__Offers_Inside_Events_v2-Overview-1764585815625.pdf",
+      "dest_path": "/Users/marklampert/Downloads/Uken/e01efcbc-81c5-4d7d-bfde-9c6c7d4864c1_0198ed19-dd26-788d-addf-25f1760f60dc_screenshots_SST__AB_Tests-2025_11_14__Offers_Inside_Events_v2-Overview-1764585815625.pdf",
+      "confidence": 95,
+      "confidence_factors": {
+        "work_keyword": 50,
+        "designated_folder": 45
+      },
+      "status": "moved",
+      "timestamp": "2025-12-08T00:27:16Z",
+      "reasoning": "SST/game development work file. Moving to Uken folder.",
+      "moved_at": "2025-12-08T00:30:03Z"
+    },
+    {
+      "id": "00c7495b-afe1-47e7-97d0-64f90080cc4f",
+      "source_path": "/Users/marklampert/Downloads/e01efcbc-81c5-4d7d-bfde-9c6c7d4864c1_0198ed19-dd26-788d-addf-25f1760f60dc_screenshots_SST__AB_Tests-2025_09_05__SSU_v5-Setup-1764585110695.pdf",
+      "dest_path": "/Users/marklampert/Downloads/Uken/e01efcbc-81c5-4d7d-bfde-9c6c7d4864c1_0198ed19-dd26-788d-addf-25f1760f60dc_screenshots_SST__AB_Tests-2025_09_05__SSU_v5-Setup-1764585110695.pdf",
+      "confidence": 95,
+      "confidence_factors": {
+        "work_keyword": 50,
+        "designated_folder": 45
+      },
+      "status": "moved",
+      "timestamp": "2025-12-08T00:27:16Z",
+      "reasoning": "SST/game development work file. Moving to Uken folder.",
+      "moved_at": "2025-12-08T00:30:04Z"
+    },
+    {
+      "id": "d7da5648-5eab-4641-aba7-27d135ee0178",
+      "source_path": "/Users/marklampert/Downloads/SSTFBCommunityDashboard_2025-12-2_1121.pdf",
+      "dest_path": "/Users/marklampert/Downloads/Uken/SSTFBCommunityDashboard_2025-12-2_1121.pdf",
+      "confidence": 95,
+      "confidence_factors": {
+        "work_keyword": 50,
+        "designated_folder": 45
+      },
+      "status": "moved",
+      "timestamp": "2025-12-08T00:27:16Z",
+      "reasoning": "SST/game development work file. Moving to Uken folder.",
+      "moved_at": "2025-12-08T00:30:09Z"
+    },
+    {
+      "id": "8bd8c8c9-2231-462a-9cfb-48fb245b9bd7",
+      "source_path": "/Users/marklampert/Downloads/e01efcbc-81c5-4d7d-bfde-9c6c7d4864c1_0198ed19-dd26-788d-addf-25f1760f60dc_screenshots_SST__AB_Tests__new___-2025_07_23__Ava_s_2_4__Existing_Users__3rd_cohort_-Overview-1760697230373.png",
+      "dest_path": "/Users/marklampert/Downloads/Uken/e01efcbc-81c5-4d7d-bfde-9c6c7d4864c1_0198ed19-dd26-788d-addf-25f1760f60dc_screenshots_SST__AB_Tests__new___-2025_07_23__Ava_s_2_4__Existing_Users__3rd_cohort_-Overview-1760697230373.png",
+      "confidence": 95,
+      "confidence_factors": {
+        "work_keyword": 50,
+        "designated_folder": 45
+      },
+      "status": "moved",
+      "timestamp": "2025-12-08T00:27:16Z",
+      "reasoning": "SST/game development work file. Moving to Uken folder.",
+      "moved_at": "2025-12-08T00:30:10Z"
+    },
+    {
+      "id": "19a3844d-2550-4c54-a7f4-23a3a2539aaa",
+      "source_path": "/Users/marklampert/Downloads/image (4).png",
+      "dest_path": "/Users/marklampert/Downloads/Screenshots/image (4).png",
+      "confidence": 100,
+      "confidence_factors": {
+        "filename_pattern": 50,
+        "designated_folder": 50
+      },
+      "status": "moved",
+      "timestamp": "2025-12-08T00:27:16Z",
+      "reasoning": "Screenshot file. Moving to Screenshots folder.",
+      "moved_at": "2025-12-08T00:30:25Z"
+    },
+    {
+      "id": "1918db51-1997-4093-b494-28b3a39e017c",
+      "source_path": "/Users/marklampert/Downloads/image (3).png",
+      "dest_path": "/Users/marklampert/Downloads/Screenshots/image (3).png",
+      "confidence": 100,
+      "confidence_factors": {
+        "filename_pattern": 50,
+        "designated_folder": 50
+      },
+      "status": "moved",
+      "timestamp": "2025-12-08T00:27:16Z",
+      "reasoning": "Screenshot file. Moving to Screenshots folder.",
+      "moved_at": "2025-12-08T00:30:26Z"
+    },
+    {
+      "id": "ef529785-69b5-432f-a46e-f82e34a71a2a",
+      "source_path": "/Users/marklampert/Downloads/image (2).png",
+      "dest_path": "/Users/marklampert/Downloads/Screenshots/image (2).png",
+      "confidence": 100,
+      "confidence_factors": {
+        "filename_pattern": 50,
+        "designated_folder": 50
+      },
+      "status": "moved",
+      "timestamp": "2025-12-08T00:27:16Z",
+      "reasoning": "Screenshot file. Moving to Screenshots folder.",
+      "moved_at": "2025-12-08T00:30:26Z"
+    },
+    {
+      "id": "5dbaf0de-cee0-42a8-9d56-dcce894dc73a",
+      "source_path": "/Users/marklampert/Downloads/image (1).png",
+      "dest_path": "/Users/marklampert/Downloads/Screenshots/image (1).png",
+      "confidence": 100,
+      "confidence_factors": {
+        "filename_pattern": 50,
+        "designated_folder": 50
+      },
+      "status": "moved",
+      "timestamp": "2025-12-08T00:27:16Z",
+      "reasoning": "Screenshot file. Moving to Screenshots folder.",
+      "moved_at": "2025-12-08T00:30:27Z"
+    },
+    {
+      "id": "17ee8d51-d648-48e4-9f2b-795f84076454",
+      "source_path": "/Users/marklampert/Downloads/image.png",
+      "dest_path": "/Users/marklampert/Downloads/Screenshots/image.png",
+      "confidence": 100,
+      "confidence_factors": {
+        "filename_pattern": 50,
+        "designated_folder": 50
+      },
+      "status": "moved",
+      "timestamp": "2025-12-08T00:27:16Z",
+      "reasoning": "Screenshot file. Moving to Screenshots folder.",
+      "moved_at": "2025-12-08T00:30:28Z"
+    },
+    {
+      "id": "8ab31adb-cd37-4d68-8bad-494526d18e8a",
+      "source_path": "/Users/marklampert/Desktop/SCR-20251207-qxea.png",
+      "dest_path": "/Users/marklampert/Downloads/Screenshots/SCR-20251207-qxea.png",
+      "confidence": 100,
+      "confidence_factors": {
+        "filename_pattern": 50,
+        "designated_folder": 50
+      },
+      "status": "moved",
+      "timestamp": "2025-12-08T00:27:16Z",
+      "reasoning": "Screenshot file. Moving to Screenshots folder.",
+      "moved_at": "2025-12-08T00:30:29Z"
+    },
+    {
+      "id": "ad0b3059-65de-48e5-8d1c-82a2f03394b0",
+      "source_path": "/Users/marklampert/Downloads/Vivaldi.7.6.3797.63.universal.dmg",
+      "dest_path": "/Users/marklampert/Downloads/installers/Vivaldi.7.6.3797.63.universal.dmg",
+      "confidence": 100,
+      "confidence_factors": {
+        "file_type": 50,
+        "designated_folder": 50
+      },
+      "status": "moved",
+      "timestamp": "2025-12-08T00:27:16Z",
+      "reasoning": "Installer/DMG file. Moving to installers folder.",
+      "moved_at": "2025-12-08T00:30:29Z"
+    },
+    {
+      "id": "82898d03-6776-4d24-b48b-5766cb098ab8",
+      "source_path": "/Users/marklampert/Downloads/Sunsama Mac Installer.zip",
+      "dest_path": "/Users/marklampert/Downloads/installers/Sunsama Mac Installer.zip",
+      "confidence": 100,
+      "confidence_factors": {
+        "file_type": 50,
+        "designated_folder": 50
+      },
+      "status": "moved",
+      "timestamp": "2025-12-08T00:27:16Z",
+      "reasoning": "Installer/DMG file. Moving to installers folder.",
+      "moved_at": "2025-12-08T00:31:05Z"
+    },
+    {
+      "id": "d2c4b42b-a6e3-422f-9334-1920059ad7aa",
+      "source_path": "/Users/marklampert/Downloads/Firefox 142.0.1.dmg",
+      "dest_path": "/Users/marklampert/Downloads/installers/Firefox 142.0.1.dmg",
+      "confidence": 100,
+      "confidence_factors": {
+        "file_type": 50,
+        "designated_folder": 50
+      },
+      "status": "moved",
+      "timestamp": "2025-12-08T00:27:16Z",
+      "reasoning": "Installer/DMG file. Moving to installers folder.",
+      "moved_at": "2025-12-08T00:31:06Z"
+    },
+    {
+      "id": "76a2a3ed-7481-4ac8-aeea-d0cab4bffbb1",
+      "source_path": "/Users/marklampert/Downloads/ntws-latest-standalone-macos-arm (1).dmg",
+      "dest_path": "/Users/marklampert/Downloads/installers/ntws-latest-standalone-macos-arm (1).dmg",
+      "confidence": 100,
+      "confidence_factors": {
+        "file_type": 50,
+        "designated_folder": 50
+      },
+      "status": "moved",
+      "timestamp": "2025-12-08T00:27:16Z",
+      "reasoning": "Installer/DMG file. Moving to installers folder.",
+      "moved_at": "2025-12-08T00:31:07Z"
+    },
+    {
+      "id": "5d7dfd6c-a37c-4c15-834e-ebd9ac76272c",
+      "source_path": "/Users/marklampert/Downloads/CleanShot-X-4.5.1.dmg",
+      "dest_path": "/Users/marklampert/Downloads/installers/CleanShot-X-4.5.1.dmg",
+      "confidence": 100,
+      "confidence_factors": {
+        "file_type": 50,
+        "designated_folder": 50
+      },
+      "status": "moved",
+      "timestamp": "2025-12-08T00:27:16Z",
+      "reasoning": "Installer/DMG file. Moving to installers folder.",
+      "moved_at": "2025-12-08T00:31:08Z"
+    },
+    {
+      "id": "131a99bf-7452-485a-b0c8-74ffea21ee9d",
+      "source_path": "/Users/marklampert/Downloads/Insomnia.Core-11.2.0.dmg",
+      "dest_path": "/Users/marklampert/Downloads/installers/Insomnia.Core-11.2.0.dmg",
+      "confidence": 100,
+      "confidence_factors": {
+        "file_type": 50,
+        "designated_folder": 50
+      },
+      "status": "moved",
+      "timestamp": "2025-12-08T00:27:16Z",
+      "reasoning": "Installer/DMG file. Moving to installers folder.",
+      "moved_at": "2025-12-08T00:31:09Z"
+    },
+    {
+      "id": "b685e443-5388-4309-88bd-77ca9da0380e",
+      "source_path": "/Users/marklampert/Downloads/UnityHubSetup-arm64.dmg",
+      "dest_path": "/Users/marklampert/Downloads/installers/UnityHubSetup-arm64.dmg",
+      "confidence": 100,
+      "confidence_factors": {
+        "file_type": 50,
+        "designated_folder": 50
+      },
+      "status": "moved",
+      "timestamp": "2025-12-08T00:27:16Z",
+      "reasoning": "Installer/DMG file. Moving to installers folder.",
+      "moved_at": "2025-12-08T00:31:09Z"
+    },
+    {
+      "id": "1cb71e42-1627-46f5-ad02-8a9f27b7b862",
+      "source_path": "/Users/marklampert/Downloads/openvpn-connect-3.6.0.5410_signed.dmg",
+      "dest_path": "/Users/marklampert/Downloads/installers/openvpn-connect-3.6.0.5410_signed.dmg",
+      "confidence": 100,
+      "confidence_factors": {
+        "file_type": 50,
+        "designated_folder": 50
+      },
+      "status": "moved",
+      "timestamp": "2025-12-08T00:27:16Z",
+      "reasoning": "Installer/DMG file. Moving to installers folder.",
+      "moved_at": "2025-12-08T00:31:12Z"
+    },
+    {
+      "id": "55a0e1ce-2e2e-4e09-90b0-12a0462f7c1c",
+      "source_path": "/Users/marklampert/Downloads/Brave-Browser.dmg",
+      "dest_path": "/Users/marklampert/Downloads/installers/Brave-Browser.dmg",
+      "confidence": 100,
+      "confidence_factors": {
+        "file_type": 50,
+        "designated_folder": 50
+      },
+      "status": "moved",
+      "timestamp": "2025-12-08T00:27:16Z",
+      "reasoning": "Installer/DMG file. Moving to installers folder.",
+      "moved_at": "2025-12-08T00:31:12Z"
+    },
+    {
+      "id": "982f1300-bcc3-4efa-9b43-e35cf011d917",
+      "source_path": "/Users/marklampert/Downloads/WhatsApp-2.24.13.79.dmg",
+      "dest_path": "/Users/marklampert/Downloads/installers/WhatsApp-2.24.13.79.dmg",
+      "confidence": 100,
+      "confidence_factors": {
+        "file_type": 50,
+        "designated_folder": 50
+      },
+      "status": "moved",
+      "timestamp": "2025-12-08T00:27:16Z",
+      "reasoning": "Installer/DMG file. Moving to installers folder.",
+      "moved_at": "2025-12-08T00:31:13Z"
+    },
+    {
+      "id": "5e97a652-6f7e-4d0f-9836-32496c41da9f",
+      "source_path": "/Users/marklampert/Downloads/ChatGPT_Atlas.dmg",
+      "dest_path": "/Users/marklampert/Downloads/installers/ChatGPT_Atlas.dmg",
+      "confidence": 100,
+      "confidence_factors": {
+        "file_type": 50,
+        "designated_folder": 50
+      },
+      "status": "moved",
+      "timestamp": "2025-12-08T00:27:16Z",
+      "reasoning": "Installer/DMG file. Moving to installers folder.",
+      "moved_at": "2025-12-08T00:31:13Z"
+    },
+    {
+      "id": "6eb80f7a-81fd-4c0d-a799-6fca3d5598b7",
+      "source_path": "/Users/marklampert/Downloads/Slack-4.39.88-macOS.dmg",
+      "dest_path": "/Users/marklampert/Downloads/installers/Slack-4.39.88-macOS.dmg",
+      "confidence": 100,
+      "confidence_factors": {
+        "file_type": 50,
+        "designated_folder": 50
+      },
+      "status": "moved",
+      "timestamp": "2025-12-08T00:27:16Z",
+      "reasoning": "Installer/DMG file. Moving to installers folder.",
+      "moved_at": "2025-12-08T00:31:14Z"
+    },
+    {
+      "id": "0e44f351-27ea-446b-af61-2e6ffab3af38",
+      "source_path": "/Users/marklampert/Downloads/Notion Calendar Mac Installer.zip",
+      "dest_path": "/Users/marklampert/Downloads/installers/Notion Calendar Mac Installer.zip",
+      "confidence": 100,
+      "confidence_factors": {
+        "file_type": 50,
+        "designated_folder": 50
+      },
+      "status": "moved",
+      "timestamp": "2025-12-08T00:27:16Z",
+      "reasoning": "Installer/DMG file. Moving to installers folder.",
+      "moved_at": "2025-12-08T00:31:14Z"
+    },
+    {
+      "id": "ffe44b69-7c17-4d5f-ad3d-2eac17991c0f",
+      "source_path": "/Users/marklampert/Downloads/openvpn-connect-3.4.7.4745_signed.dmg",
+      "dest_path": "/Users/marklampert/Downloads/installers/openvpn-connect-3.4.7.4745_signed.dmg",
+      "confidence": 100,
+      "confidence_factors": {
+        "file_type": 50,
+        "designated_folder": 50
+      },
+      "status": "moved",
+      "timestamp": "2025-12-08T00:27:16Z",
+      "reasoning": "Installer/DMG file. Moving to installers folder.",
+      "moved_at": "2025-12-08T00:31:15Z"
+    },
+    {
+      "id": "4cf9e3f6-0c27-4fef-adfb-24883948666f",
+      "source_path": "/Users/marklampert/Downloads/SpotifyInstaller.zip",
+      "dest_path": "/Users/marklampert/Downloads/installers/SpotifyInstaller.zip",
+      "confidence": 100,
+      "confidence_factors": {
+        "file_type": 50,
+        "designated_folder": 50
+      },
+      "status": "moved",
+      "timestamp": "2025-12-08T00:27:16Z",
+      "reasoning": "Installer/DMG file. Moving to installers folder.",
+      "moved_at": "2025-12-08T00:31:16Z"
+    },
+    {
+      "id": "e3f83fb9-a9cd-4bcd-87fb-95ffaf640fb1",
+      "source_path": "/Users/marklampert/Downloads/WhatsApp-2.24.25.94.dmg",
+      "dest_path": "/Users/marklampert/Downloads/installers/WhatsApp-2.24.25.94.dmg",
+      "confidence": 100,
+      "confidence_factors": {
+        "file_type": 50,
+        "designated_folder": 50
+      },
+      "status": "moved",
+      "timestamp": "2025-12-08T00:27:16Z",
+      "reasoning": "Installer/DMG file. Moving to installers folder.",
+      "moved_at": "2025-12-08T00:31:16Z"
+    },
+    {
+      "id": "5813207b-382b-4b6a-b1f1-ddab688c21c3",
+      "source_path": "/Users/marklampert/Downloads/strawberry-0.0.65.dmg",
+      "dest_path": "/Users/marklampert/Downloads/installers/strawberry-0.0.65.dmg",
+      "confidence": 100,
+      "confidence_factors": {
+        "file_type": 50,
+        "designated_folder": 50
+      },
+      "status": "moved",
+      "timestamp": "2025-12-08T00:27:16Z",
+      "reasoning": "Installer/DMG file. Moving to installers folder.",
+      "moved_at": "2025-12-08T00:31:16Z"
+    },
+    {
+      "id": "85bd5dbc-ef5c-4771-93c2-8830e033e6ea",
+      "source_path": "/Users/marklampert/Downloads/Cursor Mac Installer.zip",
+      "dest_path": "/Users/marklampert/Downloads/installers/Cursor Mac Installer.zip",
+      "confidence": 100,
+      "confidence_factors": {
+        "file_type": 50,
+        "designated_folder": 50
+      },
+      "status": "moved",
+      "timestamp": "2025-12-08T00:27:16Z",
+      "reasoning": "Installer/DMG file. Moving to installers folder.",
+      "moved_at": "2025-12-08T00:31:17Z"
+    },
+    {
+      "id": "5c352e9a-b3ee-4dff-ac01-5ce176627f58",
+      "source_path": "/Users/marklampert/Downloads/Beekeeper-Studio-5.3.4-arm64.dmg",
+      "dest_path": "/Users/marklampert/Downloads/installers/Beekeeper-Studio-5.3.4-arm64.dmg",
+      "confidence": 100,
+      "confidence_factors": {
+        "file_type": 50,
+        "designated_folder": 50
+      },
+      "status": "moved",
+      "timestamp": "2025-12-08T00:27:16Z",
+      "reasoning": "Installer/DMG file. Moving to installers folder.",
+      "moved_at": "2025-12-08T00:31:17Z"
+    },
+    {
+      "id": "69917a03-01c8-4c4e-b10c-fdd6a41123c4",
+      "source_path": "/Users/marklampert/Downloads/Docker.dmg",
+      "dest_path": "/Users/marklampert/Downloads/installers/Docker.dmg",
+      "confidence": 100,
+      "confidence_factors": {
+        "file_type": 50,
+        "designated_folder": 50
+      },
+      "status": "moved",
+      "timestamp": "2025-12-08T00:27:16Z",
+      "reasoning": "Installer/DMG file. Moving to installers folder.",
+      "moved_at": "2025-12-08T00:31:18Z"
+    },
+    {
+      "id": "cc867d95-a69d-4d04-9b1f-40c7d73c5da5",
+      "source_path": "/Users/marklampert/Downloads/Superhuman-arm64.dmg",
+      "dest_path": "/Users/marklampert/Downloads/installers/Superhuman-arm64.dmg",
+      "confidence": 100,
+      "confidence_factors": {
+        "file_type": 50,
+        "designated_folder": 50
+      },
+      "status": "moved",
+      "timestamp": "2025-12-08T00:27:16Z",
+      "reasoning": "Installer/DMG file. Moving to installers folder.",
+      "moved_at": "2025-12-08T00:31:18Z"
+    },
+    {
+      "id": "73d1377c-2dc8-432e-b9f8-aad4d3fb1488",
+      "source_path": "/Users/marklampert/Downloads/Amazon Q.dmg",
+      "dest_path": "/Users/marklampert/Downloads/installers/Amazon Q.dmg",
+      "confidence": 100,
+      "confidence_factors": {
+        "file_type": 50,
+        "designated_folder": 50
+      },
+      "status": "moved",
+      "timestamp": "2025-12-08T00:27:16Z",
+      "reasoning": "Installer/DMG file. Moving to installers folder.",
+      "moved_at": "2025-12-08T00:31:18Z"
+    },
+    {
+      "id": "059d5eab-2181-4a9f-b608-adb846343d5c",
+      "source_path": "/Users/marklampert/Downloads/ChatGPT_Desktop_public_latest.dmg",
+      "dest_path": "/Users/marklampert/Downloads/installers/ChatGPT_Desktop_public_latest.dmg",
+      "confidence": 100,
+      "confidence_factors": {
+        "file_type": 50,
+        "designated_folder": 50
+      },
+      "status": "moved",
+      "timestamp": "2025-12-08T00:27:16Z",
+      "reasoning": "Installer/DMG file. Moving to installers folder.",
+      "moved_at": "2025-12-08T00:31:19Z"
+    },
+    {
+      "id": "340a758b-d108-47b3-b7e2-291f2ce69e94",
+      "source_path": "/Users/marklampert/Downloads/QuipInstaller.dmg",
+      "dest_path": "/Users/marklampert/Downloads/installers/QuipInstaller.dmg",
+      "confidence": 100,
+      "confidence_factors": {
+        "file_type": 50,
+        "designated_folder": 50
+      },
+      "status": "moved",
+      "timestamp": "2025-12-08T00:27:16Z",
+      "reasoning": "Installer/DMG file. Moving to installers folder.",
+      "moved_at": "2025-12-08T00:31:19Z"
+    },
+    {
+      "id": "22b36866-c515-482e-8606-360c2a5a3084",
+      "source_path": "/Users/marklampert/Downloads/DevUtils-1.17.0.dmg",
+      "dest_path": "/Users/marklampert/Downloads/installers/DevUtils-1.17.0.dmg",
+      "confidence": 100,
+      "confidence_factors": {
+        "file_type": 50,
+        "designated_folder": 50
+      },
+      "status": "moved",
+      "timestamp": "2025-12-08T00:27:16Z",
+      "reasoning": "Installer/DMG file. Moving to installers folder.",
+      "moved_at": "2025-12-08T00:31:19Z"
+    },
+    {
+      "id": "6eb21cc2-2a4a-4fba-957f-c4039ea10b32",
+      "source_path": "/Users/marklampert/Downloads/Boom.dmg",
+      "dest_path": "/Users/marklampert/Downloads/installers/Boom.dmg",
+      "confidence": 100,
+      "confidence_factors": {
+        "file_type": 50,
+        "designated_folder": 50
+      },
+      "status": "moved",
+      "timestamp": "2025-12-08T00:27:16Z",
+      "reasoning": "Installer/DMG file. Moving to installers folder.",
+      "moved_at": "2025-12-08T00:31:20Z"
+    },
+    {
+      "id": "7714dbfd-f498-4ad7-ade4-b90e0ef567e3",
+      "source_path": "/Users/marklampert/Downloads/Shottr-1.8.1.dmg",
+      "dest_path": "/Users/marklampert/Downloads/installers/Shottr-1.8.1.dmg",
+      "confidence": 100,
+      "confidence_factors": {
+        "file_type": 50,
+        "designated_folder": 50
+      },
+      "status": "moved",
+      "timestamp": "2025-12-08T00:27:16Z",
+      "reasoning": "Installer/DMG file. Moving to installers folder.",
+      "moved_at": "2025-12-08T00:31:20Z"
+    },
+    {
+      "id": "637209e2-8aa7-4b01-86ec-5b2dfe8f27ec",
+      "source_path": "/Users/marklampert/Downloads/comet_latest (1).dmg",
+      "dest_path": "/Users/marklampert/Downloads/installers/comet_latest (1).dmg",
+      "confidence": 100,
+      "confidence_factors": {
+        "file_type": 50,
+        "designated_folder": 50
+      },
+      "status": "moved",
+      "timestamp": "2025-12-08T00:27:16Z",
+      "reasoning": "Installer/DMG file. Moving to installers folder.",
+      "moved_at": "2025-12-08T00:31:20Z"
+    },
+    {
+      "id": "21729827-1357-48d4-8b9f-fd867c30d2ff",
+      "source_path": "/Users/marklampert/Downloads/RStudio-2024.12.0-467.dmg",
+      "dest_path": "/Users/marklampert/Downloads/installers/RStudio-2024.12.0-467.dmg",
+      "confidence": 100,
+      "confidence_factors": {
+        "file_type": 50,
+        "designated_folder": 50
+      },
+      "status": "moved",
+      "timestamp": "2025-12-08T00:27:16Z",
+      "reasoning": "Installer/DMG file. Moving to installers folder.",
+      "moved_at": "2025-12-08T00:31:20Z"
+    },
+    {
+      "id": "acb94188-b9f4-4590-948d-4d75818ee716",
+      "source_path": "/Users/marklampert/Downloads/superwhisper.dmg",
+      "dest_path": "/Users/marklampert/Downloads/installers/superwhisper.dmg",
+      "confidence": 100,
+      "confidence_factors": {
+        "file_type": 50,
+        "designated_folder": 50
+      },
+      "status": "moved",
+      "timestamp": "2025-12-08T00:27:16Z",
+      "reasoning": "Installer/DMG file. Moving to installers folder.",
+      "moved_at": "2025-12-08T00:31:21Z"
+    },
+    {
+      "id": "dcfc70f7-c5c9-4d8b-bb5e-133b382709c9",
+      "source_path": "/Users/marklampert/Downloads/DropboxInstaller.dmg",
+      "dest_path": "/Users/marklampert/Downloads/installers/DropboxInstaller.dmg",
+      "confidence": 100,
+      "confidence_factors": {
+        "file_type": 50,
+        "designated_folder": 50
+      },
+      "status": "moved",
+      "timestamp": "2025-12-08T00:27:16Z",
+      "reasoning": "Installer/DMG file. Moving to installers folder.",
+      "moved_at": "2025-12-08T00:31:21Z"
+    },
+    {
+      "id": "e230b03a-1872-4ce5-b841-e330ae80064d",
+      "source_path": "/Users/marklampert/Downloads/Raycast.dmg",
+      "dest_path": "/Users/marklampert/Downloads/installers/Raycast.dmg",
+      "confidence": 100,
+      "confidence_factors": {
+        "file_type": 50,
+        "designated_folder": 50
+      },
+      "status": "moved",
+      "timestamp": "2025-12-08T00:27:16Z",
+      "reasoning": "Installer/DMG file. Moving to installers folder.",
+      "moved_at": "2025-12-08T00:31:48Z"
+    },
+    {
+      "id": "8a84cd5d-5960-4e59-bcef-2b85451f525d",
+      "source_path": "/Users/marklampert/Downloads/Boom (1).dmg",
+      "dest_path": "/Users/marklampert/Downloads/installers/Boom (1).dmg",
+      "confidence": 100,
+      "confidence_factors": {
+        "file_type": 50,
+        "designated_folder": 50
+      },
+      "status": "moved",
+      "timestamp": "2025-12-08T00:27:16Z",
+      "reasoning": "Installer/DMG file. Moving to installers folder.",
+      "moved_at": "2025-12-08T00:31:49Z"
+    },
+    {
+      "id": "a3753628-3122-4939-8c6e-000afae6c38d",
+      "source_path": "/Users/marklampert/Downloads/Claude.dmg",
+      "dest_path": "/Users/marklampert/Downloads/installers/Claude.dmg",
+      "confidence": 100,
+      "confidence_factors": {
+        "file_type": 50,
+        "designated_folder": 50
+      },
+      "status": "moved",
+      "timestamp": "2025-12-08T00:27:16Z",
+      "reasoning": "Installer/DMG file. Moving to installers folder.",
+      "moved_at": "2025-12-08T00:31:49Z"
+    },
+    {
+      "id": "8b304076-2bee-44bf-bd7a-7bfdb431ffa0",
+      "source_path": "/Users/marklampert/Downloads/comet_latest.dmg",
+      "dest_path": "/Users/marklampert/Downloads/installers/comet_latest.dmg",
+      "confidence": 100,
+      "confidence_factors": {
+        "file_type": 50,
+        "designated_folder": 50
+      },
+      "status": "moved",
+      "timestamp": "2025-12-08T00:27:16Z",
+      "reasoning": "Installer/DMG file. Moving to installers folder.",
+      "moved_at": "2025-12-08T00:31:49Z"
+    },
+    {
+      "id": "f6f40299-33d0-4d14-9e95-4a16475b4d16",
+      "source_path": "/Users/marklampert/Downloads/Notion-3.9.6-universal.dmg",
+      "dest_path": "/Users/marklampert/Downloads/installers/Notion-3.9.6-universal.dmg",
+      "confidence": 100,
+      "confidence_factors": {
+        "file_type": 50,
+        "designated_folder": 50
+      },
+      "status": "moved",
+      "timestamp": "2025-12-08T00:27:16Z",
+      "reasoning": "Installer/DMG file. Moving to installers folder.",
+      "moved_at": "2025-12-08T00:31:50Z"
+    },
+    {
+      "id": "a71e8e33-84df-4b02-b92d-0ce27e117435",
+      "source_path": "/Users/marklampert/Downloads/Notion+Mail-latest-mac-universal.dmg",
+      "dest_path": "/Users/marklampert/Downloads/installers/Notion+Mail-latest-mac-universal.dmg",
+      "confidence": 100,
+      "confidence_factors": {
+        "file_type": 50,
+        "designated_folder": 50
+      },
+      "status": "moved",
+      "timestamp": "2025-12-08T00:27:16Z",
+      "reasoning": "Installer/DMG file. Moving to installers folder.",
+      "moved_at": "2025-12-08T00:31:50Z"
+    },
+    {
+      "id": "fbbc3edf-e259-4834-949b-42fd2aed0a95",
+      "source_path": "/Users/marklampert/Downloads/ntws-latest-standalone-macos-arm.dmg",
+      "dest_path": "/Users/marklampert/Downloads/installers/ntws-latest-standalone-macos-arm.dmg",
+      "confidence": 100,
+      "confidence_factors": {
+        "file_type": 50,
+        "designated_folder": 50
+      },
+      "status": "moved",
+      "timestamp": "2025-12-08T00:27:16Z",
+      "reasoning": "Installer/DMG file. Moving to installers folder.",
+      "moved_at": "2025-12-08T00:31:51Z"
+    },
+    {
+      "id": "023c607e-ab91-4858-9285-e23260144203",
+      "source_path": "/Users/marklampert/Downloads/Flow-v1.3.365.dmg",
+      "dest_path": "/Users/marklampert/Downloads/installers/Flow-v1.3.365.dmg",
+      "confidence": 100,
+      "confidence_factors": {
+        "file_type": 50,
+        "designated_folder": 50
+      },
+      "status": "moved",
+      "timestamp": "2025-12-08T00:27:16Z",
+      "reasoning": "Installer/DMG file. Moving to installers folder.",
+      "moved_at": "2025-12-08T00:31:51Z"
+    },
+    {
+      "id": "d666dc9b-dd00-437c-b98a-84906cf970c9",
+      "source_path": "/Users/marklampert/Downloads/ntws-beta-standalone-macos-arm.dmg",
+      "dest_path": "/Users/marklampert/Downloads/installers/ntws-beta-standalone-macos-arm.dmg",
+      "confidence": 100,
+      "confidence_factors": {
+        "file_type": 50,
+        "designated_folder": 50
+      },
+      "status": "moved",
+      "timestamp": "2025-12-08T00:27:16Z",
+      "reasoning": "Installer/DMG file. Moving to installers folder.",
+      "moved_at": "2025-12-08T00:31:52Z"
+    },
+    {
+      "id": "bcdd7f39-3d7e-40f0-a6aa-480d66f57676",
+      "source_path": "/Users/marklampert/Downloads/oneshot_0006.webp",
+      "dest_path": "/Users/marklampert/Downloads/TO_DELETE/oneshot_0006.webp",
+      "confidence": 60,
+      "confidence_factors": {
+        "random_image": 60
+      },
+      "status": "moved",
+      "timestamp": "2025-12-08T00:37:00Z",
+      "reasoning": "Random image file. Review before deleting.",
+      "moved_at": "2025-12-08T00:39:02Z"
+    },
+    {
+      "id": "8bf4b3b0-7755-42cd-8853-3893df8022c9",
+      "source_path": "/Users/marklampert/Downloads/Kings of Pool Revenue.xlsx",
+      "dest_path": "/Users/marklampert/Downloads/Uken/Kings of Pool Revenue.xlsx",
+      "confidence": 85,
+      "confidence_factors": {
+        "work_spreadsheet": 85
+      },
+      "status": "moved",
+      "timestamp": "2025-12-08T00:37:00Z",
+      "reasoning": "Work spreadsheet. Moving to Uken folder.",
+      "moved_at": "2025-12-08T00:39:31Z"
+    },
+    {
+      "id": "45cde09b-363d-4721-8390-68edacf24728",
+      "source_path": "/Users/marklampert/Downloads/20250924-1006_level_0003.asset",
+      "dest_path": "/Users/marklampert/Downloads/Uken/20250924-1006_level_0003.asset",
+      "confidence": 85,
+      "confidence_factors": {
+        "game_asset": 85
+      },
+      "status": "moved",
+      "timestamp": "2025-12-08T00:37:00Z",
+      "reasoning": "Game asset file. Moving to Uken folder.",
+      "moved_at": "2025-12-08T00:39:34Z"
+    },
+    {
+      "id": "aaf6aa57-efef-485a-9e95-669b1d3ea46f",
+      "source_path": "/Users/marklampert/Downloads/Exit Interview - Pauline Joseph.pdf",
+      "dest_path": "/Users/marklampert/Downloads/Uken/Exit Interview - Pauline Joseph.pdf",
+      "confidence": 90,
+      "confidence_factors": {
+        "work_executive": 90
+      },
+      "status": "moved",
+      "timestamp": "2025-12-08T00:37:00Z",
+      "reasoning": "Executive/board document. Moving to Uken folder.",
+      "moved_at": "2025-12-08T00:39:35Z"
+    },
+    {
+      "id": "71c2f327-ef46-499c-8f79-a873a7999019",
+      "source_path": "/Users/marklampert/Downloads/145-EiswOG7BnTA_11.png",
+      "dest_path": "/Users/marklampert/Downloads/TO_DELETE/145-EiswOG7BnTA_11.png",
+      "confidence": 60,
+      "confidence_factors": {
+        "random_image": 60
+      },
+      "status": "moved",
+      "timestamp": "2025-12-08T00:37:00Z",
+      "reasoning": "Random image file. Review before deleting.",
+      "moved_at": "2025-12-08T00:52:45Z"
+    },
+    {
+      "id": "78440c31-3ee1-465a-98d3-228481aa7361",
+      "source_path": "/Users/marklampert/Downloads/level_0003.asset",
+      "dest_path": "/Users/marklampert/Downloads/Uken/level_0003.asset",
+      "confidence": 85,
+      "confidence_factors": {
+        "game_asset": 85
+      },
+      "status": "moved",
+      "timestamp": "2025-12-08T00:37:00Z",
+      "reasoning": "Game asset file. Moving to Uken folder.",
+      "moved_at": "2025-12-08T00:52:45Z"
+    },
+    {
+      "id": "f7522029-bb42-4bd5-895b-ab6a49200b1a",
+      "source_path": "/Users/marklampert/Downloads/oneshot_0009.webp",
+      "dest_path": "/Users/marklampert/Downloads/TO_DELETE/oneshot_0009.webp",
+      "confidence": 60,
+      "confidence_factors": {
+        "random_image": 60
+      },
+      "status": "moved",
+      "timestamp": "2025-12-08T00:37:00Z",
+      "reasoning": "Random image file. Review before deleting.",
+      "moved_at": "2025-12-08T00:53:11Z"
+    },
+    {
+      "id": "1992174f-e46c-4d60-8856-0dc9e48b96de",
+      "source_path": "/Users/marklampert/Downloads/Steve_Harvey_Preview_Mar05.png",
+      "dest_path": "/Users/marklampert/Downloads/TO_DELETE/Steve_Harvey_Preview_Mar05.png",
+      "confidence": 60,
+      "confidence_factors": {
+        "random_image": 60
+      },
+      "status": "moved",
+      "timestamp": "2025-12-08T00:37:00Z",
+      "reasoning": "Random image file. Review before deleting.",
+      "moved_at": "2025-12-08T00:53:29Z"
+    },
+    {
+      "id": "59dfa596-c853-4306-890f-e1b80ee23ad1",
+      "source_path": "/Users/marklampert/Downloads/chris ceo equity - Nov 2024.xlsx",
+      "dest_path": "/Users/marklampert/Downloads/Uken/chris ceo equity - Nov 2024.xlsx",
+      "confidence": 85,
+      "confidence_factors": {
+        "work_spreadsheet": 85
+      },
+      "status": "moved",
+      "timestamp": "2025-12-08T00:37:00Z",
+      "reasoning": "Work spreadsheet. Moving to Uken folder.",
+      "moved_at": "2025-12-08T00:53:33Z"
+    },
+    {
+      "id": "a881d009-af90-432c-a607-602935fda5b0",
+      "source_path": "/Users/marklampert/Downloads/template.asset",
+      "dest_path": "/Users/marklampert/Downloads/Uken/template.asset",
+      "confidence": 85,
+      "confidence_factors": {
+        "game_asset": 85
+      },
+      "status": "moved",
+      "timestamp": "2025-12-08T00:37:00Z",
+      "reasoning": "Game asset file. Moving to Uken folder.",
+      "moved_at": "2025-12-08T00:53:50Z"
+    },
+    {
+      "id": "56039754-f2af-4fa8-af9b-eaefaa9a2fa4",
+      "source_path": "/Users/marklampert/Downloads/Feature_ Play Modal Revamp.pdf",
+      "dest_path": "/Users/marklampert/Downloads/Uken/Feature_ Play Modal Revamp.pdf",
+      "confidence": 90,
+      "confidence_factors": {
+        "work_feature_doc": 90
+      },
+      "status": "moved",
+      "timestamp": "2025-12-08T00:37:00Z",
+      "reasoning": "Game feature document. Moving to Uken folder.",
+      "moved_at": "2025-12-08T00:54:04Z"
+    },
+    {
+      "id": "483d8a55-960c-430a-8dc6-05a4c2bd728d",
+      "source_path": "/Users/marklampert/Downloads/openai-chatgpt-latest.vsix",
+      "dest_path": "/Users/marklampert/Downloads/installers/openai-chatgpt-latest.vsix",
+      "confidence": 100,
+      "confidence_factors": {
+        "installer": 100
+      },
+      "status": "moved",
+      "timestamp": "2025-12-08T00:37:00Z",
+      "reasoning": "VS Code extension. Moving to installers folder.",
+      "moved_at": "2025-12-08T00:54:28Z"
+    },
+    {
+      "id": "4d6dc50b-0601-4de1-9e3e-0e0f6f530de8",
+      "source_path": "/Users/marklampert/Downloads/VSCode-darwin-arm64.zip",
+      "dest_path": "/Users/marklampert/Downloads/TO_DELETE/VSCode-darwin-arm64.zip",
+      "confidence": 65,
+      "confidence_factors": {
+        "temp_archive": 65
+      },
+      "status": "moved",
+      "timestamp": "2025-12-08T00:36:30Z",
+      "reasoning": "Archive file - likely temporary download. Review before deleting.",
+      "moved_at": "2025-12-08T00:54:44Z"
+    },
+    {
+      "id": "4146efe1-2843-4eee-b00e-863d0df71ec9",
+      "source_path": "/Users/marklampert/Downloads/BrowserTools-1.2.0-extension.zip",
+      "dest_path": "/Users/marklampert/Downloads/TO_DELETE/BrowserTools-1.2.0-extension.zip",
+      "confidence": 65,
+      "confidence_factors": {
+        "temp_archive": 65
+      },
+      "status": "moved",
+      "timestamp": "2025-12-08T00:36:30Z",
+      "reasoning": "Archive file - likely temporary download. Review before deleting.",
+      "moved_at": "2025-12-08T00:54:46Z"
+    },
+    {
+      "id": "ad92c0f7-ea5e-4620-ad38-9106a5de2fd2",
+      "source_path": "/Users/marklampert/Downloads/sqlfluff_config_redshift.txt",
+      "dest_path": "/Users/marklampert/Downloads/TO_DELETE/sqlfluff_config_redshift.txt",
+      "confidence": 60,
+      "confidence_factors": {
+        "temp_text": 60
+      },
+      "status": "moved",
+      "timestamp": "2025-12-08T00:36:30Z",
+      "reasoning": "Text file - likely temporary. Review before deleting.",
+      "moved_at": "2025-12-08T00:57:15Z"
+    },
+    {
+      "id": "39c413bf-cfbe-46b7-aca8-fe63455653ea",
+      "source_path": "/Users/marklampert/Downloads/2025-Federal-Budget.pdf",
+      "dest_path": "/Users/marklampert/Downloads/Uken/2025-Federal-Budget.pdf",
+      "confidence": 90,
+      "confidence_factors": {
+        "work_financial": 90
+      },
+      "status": "moved",
+      "timestamp": "2025-12-08T00:36:07Z",
+      "reasoning": "Work financial document. Moving to Uken folder.",
+      "moved_at": "2025-12-08T01:02:42Z"
+    },
+    {
+      "id": "f3c32bfa-52f2-44bb-b5e6-4d50a98b5412",
+      "source_path": "/Users/marklampert/Downloads/Team Breakdown.xlsx",
+      "dest_path": "/Users/marklampert/Downloads/Uken/Team Breakdown.xlsx",
+      "confidence": 95,
+      "confidence_factors": {
+        "work_hr_finance": 95
+      },
+      "status": "moved",
+      "timestamp": "2025-12-08T00:36:07Z",
+      "reasoning": "Work HR/staffing file. Moving to Uken folder.",
+      "moved_at": "2025-12-08T01:02:50Z"
+    },
+    {
+      "id": "27d34f7a-f42e-408a-90c0-f271e0fe11e6",
+      "source_path": "/Users/marklampert/Downloads/Browserosaurus-darwin-arm64-20.9.1.zip",
+      "dest_path": "/Users/marklampert/Downloads/TO_DELETE/Browserosaurus-darwin-arm64-20.9.1.zip",
+      "confidence": 65,
+      "confidence_factors": {
+        "temp_archive": 65
+      },
+      "status": "moved",
+      "timestamp": "2025-12-08T00:36:30Z",
+      "reasoning": "Archive file - likely temporary download. Review before deleting.",
+      "moved_at": "2025-12-08T01:02:56Z"
+    },
+    {
+      "id": "320d5668-aeed-4114-847e-46690a6ccaee",
+      "source_path": "/Users/marklampert/Downloads/Screenshot_20250522_170027_Brawl Stars~3.jpg",
+      "dest_path": "/Users/marklampert/Downloads/Screenshots/Screenshot_20250522_170027_Brawl Stars~3.jpg",
+      "confidence": 95,
+      "confidence_factors": {
+        "filename_pattern": 50,
+        "designated_folder": 45
+      },
+      "status": "moved",
+      "timestamp": "2025-12-08T00:32:17Z",
+      "reasoning": "Phone screenshot. Moving to Screenshots folder.",
+      "moved_at": "2025-12-08T01:03:27Z"
+    },
+    {
+      "id": "5f549b5c-e2b0-4f34-97b6-b9b199d5cd2f",
+      "source_path": "/Users/marklampert/Downloads/IMG_0222.jpeg",
+      "dest_path": "/Users/marklampert/Downloads/Screenshots/IMG_0222.jpeg",
+      "confidence": 95,
+      "confidence_factors": {
+        "filename_pattern": 50,
+        "designated_folder": 45
+      },
+      "status": "moved",
+      "timestamp": "2025-12-08T00:32:17Z",
+      "reasoning": "Phone screenshot. Moving to Screenshots folder.",
+      "moved_at": "2025-12-08T01:03:28Z"
+    },
+    {
+      "id": "4f723012-1da3-4cb7-8831-a26455509a6e",
+      "source_path": "/Users/marklampert/Downloads/Screenshot_20250522_172019_Royal Match~2.jpg",
+      "dest_path": "/Users/marklampert/Downloads/Screenshots/Screenshot_20250522_172019_Royal Match~2.jpg",
+      "confidence": 95,
+      "confidence_factors": {
+        "filename_pattern": 50,
+        "designated_folder": 45
+      },
+      "status": "moved",
+      "timestamp": "2025-12-08T00:32:17Z",
+      "reasoning": "Phone screenshot. Moving to Screenshots folder.",
+      "moved_at": "2025-12-08T01:03:30Z"
+    },
+    {
+      "id": "61375633-2614-49bf-a5af-4f8a51d23541",
+      "source_path": "/Users/marklampert/Downloads/Screenshot_20250522_174358_Match Factory~2.jpg",
+      "dest_path": "/Users/marklampert/Downloads/Screenshots/Screenshot_20250522_174358_Match Factory~2.jpg",
+      "confidence": 95,
+      "confidence_factors": {
+        "filename_pattern": 50,
+        "designated_folder": 45
+      },
+      "status": "moved",
+      "timestamp": "2025-12-08T00:32:17Z",
+      "reasoning": "Phone screenshot. Moving to Screenshots folder.",
+      "moved_at": "2025-12-08T01:03:30Z"
+    },
+    {
+      "id": "4f163893-59a3-47ec-9864-59f09b5257ee",
+      "source_path": "/Users/marklampert/Downloads/Screenshot_20250522_174403_Match Factory~2.jpg",
+      "dest_path": "/Users/marklampert/Downloads/Screenshots/Screenshot_20250522_174403_Match Factory~2.jpg",
+      "confidence": 95,
+      "confidence_factors": {
+        "filename_pattern": 50,
+        "designated_folder": 45
+      },
+      "status": "moved",
+      "timestamp": "2025-12-08T00:32:17Z",
+      "reasoning": "Phone screenshot. Moving to Screenshots folder.",
+      "moved_at": "2025-12-08T01:04:06Z"
+    },
+    {
+      "id": "239d091c-8830-405f-a1a4-f02a56a455d3",
+      "source_path": "/Users/marklampert/Downloads/Screenshot_20250522_172027_Royal Match~2.jpg",
+      "dest_path": "/Users/marklampert/Downloads/Screenshots/Screenshot_20250522_172027_Royal Match~2.jpg",
+      "confidence": 95,
+      "confidence_factors": {
+        "filename_pattern": 50,
+        "designated_folder": 45
+      },
+      "status": "moved",
+      "timestamp": "2025-12-08T00:32:17Z",
+      "reasoning": "Phone screenshot. Moving to Screenshots folder.",
+      "moved_at": "2025-12-08T01:04:07Z"
+    },
+    {
+      "id": "80db72d2-2c82-41f3-a01a-eeccab0463da",
+      "source_path": "/Users/marklampert/Downloads/Screenshot_20250522_165942_Brawl Stars~2.jpg",
+      "dest_path": "/Users/marklampert/Downloads/Screenshots/Screenshot_20250522_165942_Brawl Stars~2.jpg",
+      "confidence": 95,
+      "confidence_factors": {
+        "filename_pattern": 50,
+        "designated_folder": 45
+      },
+      "status": "moved",
+      "timestamp": "2025-12-08T00:32:17Z",
+      "reasoning": "Phone screenshot. Moving to Screenshots folder.",
+      "moved_at": "2025-12-08T01:04:07Z"
+    },
+    {
+      "id": "4eff1344-debc-4d19-aac6-6fc79623a172",
+      "source_path": "/Users/marklampert/Downloads/Studio Staffing - Team 2025.pdf",
+      "dest_path": "/Users/marklampert/Downloads/Uken/Studio Staffing - Team 2025.pdf",
+      "confidence": 95,
+      "confidence_factors": {
+        "work_hr_finance": 95
+      },
+      "status": "moved",
+      "timestamp": "2025-12-08T00:36:07Z",
+      "reasoning": "Work HR/staffing file. Moving to Uken folder.",
+      "moved_at": "2025-12-08T01:04:10Z"
+    },
+    {
+      "id": "e6b8dd89-47bd-4eda-8a6b-b1ebdf909aa3",
+      "source_path": "/Users/marklampert/Downloads/Studio Staffing - Team 2025.png",
+      "dest_path": "/Users/marklampert/Downloads/Uken/Studio Staffing - Team 2025.png",
+      "confidence": 95,
+      "confidence_factors": {
+        "work_hr_finance": 95
+      },
+      "status": "moved",
+      "timestamp": "2025-12-08T00:36:07Z",
+      "reasoning": "Work HR/staffing file. Moving to Uken folder.",
+      "moved_at": "2025-12-08T01:04:11Z"
+    },
+    {
+      "id": "c160bf8a-41e2-4c0f-9380-438b6d9a9362",
+      "source_path": "/Users/marklampert/Downloads/Vendor Spend by Month Netsuite.xlsx",
+      "dest_path": "/Users/marklampert/Downloads/Uken/Vendor Spend by Month Netsuite.xlsx",
+      "confidence": 95,
+      "confidence_factors": {
+        "work_hr_finance": 95
+      },
+      "status": "moved",
+      "timestamp": "2025-12-08T00:36:07Z",
+      "reasoning": "Work HR/staffing file. Moving to Uken folder.",
+      "moved_at": "2025-12-08T01:04:11Z"
+    },
+    {
+      "id": "f223d2f8-01d5-4fa9-9996-3efae8ca0f0d",
+      "source_path": "/Users/marklampert/Downloads/WIP-Salary & Bonus 2024 (cye).xlsx",
+      "dest_path": "/Users/marklampert/Downloads/Uken/WIP-Salary & Bonus 2024 (cye).xlsx",
+      "confidence": 95,
+      "confidence_factors": {
+        "work_hr_finance": 95
+      },
+      "status": "moved",
+      "timestamp": "2025-12-08T00:36:07Z",
+      "reasoning": "Work HR/staffing file. Moving to Uken folder.",
+      "moved_at": "2025-12-08T01:04:13Z"
+    },
+    {
+      "id": "a0d3359c-cfdd-4f01-abbf-ea9470981cda",
+      "source_path": "/Users/marklampert/Downloads/IRAP project Plan 2025.pdf",
+      "dest_path": "/Users/marklampert/Downloads/Uken/IRAP project Plan 2025.pdf",
+      "confidence": 95,
+      "confidence_factors": {
+        "work_grant": 95
+      },
+      "status": "moved",
+      "timestamp": "2025-12-08T00:36:07Z",
+      "reasoning": "IRAP grant document. Moving to Uken folder.",
+      "moved_at": "2025-12-08T01:04:16Z"
+    },
+    {
+      "id": "0f88f912-95fd-4bef-962d-872106b67bfc",
+      "source_path": "/Users/marklampert/Downloads/Balance Sheet May 2025.pdf",
+      "dest_path": "/Users/marklampert/Downloads/Uken/Balance Sheet May 2025.pdf",
+      "confidence": 90,
+      "confidence_factors": {
+        "work_financial": 90
+      },
+      "status": "moved",
+      "timestamp": "2025-12-08T00:36:07Z",
+      "reasoning": "Work financial document. Moving to Uken folder.",
+      "moved_at": "2025-12-08T01:04:17Z"
+    },
+    {
+      "id": "12e4caff-9db3-4e40-a469-7d239c1cab14",
+      "source_path": "/Users/marklampert/Downloads/2025Q2 Results.pdf",
+      "dest_path": "/Users/marklampert/Downloads/Uken/2025Q2 Results.pdf",
+      "confidence": 90,
+      "confidence_factors": {
+        "work_financial": 90
+      },
+      "status": "moved",
+      "timestamp": "2025-12-08T00:36:07Z",
+      "reasoning": "Work financial document. Moving to Uken folder.",
+      "moved_at": "2025-12-08T01:04:17Z"
+    },
+    {
+      "id": "34e2a6ba-0a68-4251-8428-fa39b326476e",
+      "source_path": "/Users/marklampert/Downloads/ChatGPT tips and tricks.pdf",
+      "dest_path": "/Users/marklampert/Downloads/TO_DELETE/ChatGPT tips and tricks.pdf",
+      "confidence": 80,
+      "confidence_factors": {
+        "temp_reference_doc": 40,
+        "no_filing_category": 25,
+        "content_boost": 5,
+        "related_to_other_delete": 10
+      },
+      "content_analysis": {
+        "summary": "1 page PDF. ChatGPT Beyond the Basics slide deck download page. Lunch & Learn training reference document.",
+        "detected_entities": [],
+        "detected_dates": []
+      },
+      "status": "moved",
+      "timestamp": "2025-12-08T02:35:00Z",
+      "reasoning": "Single-page download link for ChatGPT training presentation. Related to chagpt-beyond-the-basics.pdf (also being deleted). No permanent filing value for training materials.",
+      "moved_at": "2025-12-08T01:33:39Z"
+    },
+    {
+      "id": "db950aa0-36c1-46ac-8a6c-506d8f96337b",
+      "source_path": "/Users/marklampert/Downloads/INOVIA COINVESTORS SPV IV, LIMITED PARTNERSHIP - Wire Instructions.pdf",
+      "dest_path": "/Users/marklampert/Dropbox/Filing/Investments - Angel/Cohere (Inovia)/INOVIA COINVESTORS SPV IV - Wire Instructions.pdf",
+      "confidence": 95,
+      "confidence_factors": {
+        "similar_files_found": 30,
+        "content_entity_match": 20,
+        "content_type_match": 20,
+        "file_type_match": 15,
+        "content_boost": 10
+      },
+      "content_analysis": {
+        "summary": "1 page PDF. Wire transfer instructions for Inovia Coinvestors SPV IV. CAD and USD wire details to RBC for investment.",
+        "detected_entities": [
+          "RBC"
+        ],
+        "detected_dates": []
+      },
+      "status": "moved",
+      "timestamp": "2025-12-08T02:35:00Z",
+      "reasoning": "Wire instructions for Inovia Coinvestors SPV IV investment (Cohere co-investment). Found existing Inovia/Cohere folder with subscription agreements and quarterly reports. Filing alongside related investment documents.",
+      "moved_at": "2025-12-08T01:34:24Z"
+    },
+    {
+      "id": "507c35fb-3011-4579-96ed-8f804f2877cb",
+      "source_path": "/Users/marklampert/Downloads/Mark-Lampert-10-16-2025-1003969.pdf",
+      "dest_path": "/Users/marklampert/Dropbox/Filing/_Receipts/2025-10-16 massage Emmanuelle.pdf",
+      "confidence": 95,
+      "confidence_factors": {
+        "similar_files_found": 30,
+        "content_type_match": 25,
+        "naming_pattern_match": 25,
+        "file_type_match": 15
+      },
+      "content_analysis": {
+        "summary": "1 page PDF. Massage therapy receipt from Emmanuelle Pain, Oct 16, 2025. $141.25 (60 min @ $125 + HST). Invoice #1003969.",
+        "detected_entities": [
+          "40 Gibson"
+        ],
+        "detected_dates": [
+          "2025-10-16"
+        ]
+      },
+      "status": "moved",
+      "timestamp": "2025-12-08T02:35:00Z",
+      "reasoning": "Massage therapy receipt matching existing pattern in _Receipts folder. Found 4 similar massage receipts with YYYY-MM-DD massage [provider].pdf naming convention. Renamed to match pattern.",
+      "moved_at": "2025-12-08T01:34:28Z"
+    },
+    {
+      "id": "b12209c3-b59a-4805-b0bb-4792d09df9a5",
+      "source_path": "/Users/marklampert/Downloads/CopyofJoinDateIAPArpdaubyClubStatusUsersWhoJoinedinJuneJulyorAugust_2025-11-25_1041 (1).csv",
+      "dest_path": "DELETE",
+      "duplicate_of": [
+        "/Users/marklampert/Downloads/CopyofJoinDateIAPArpdaubyClubStatusUsersWhoJoinedinJuneJulyorAugust_2025-11-25_1041.csv"
+      ],
+      "checksum": "6efbb5c11b77425c8d695fcb87f71b8ede56571c380aa87f422eda8cdd148845",
+      "action": "delete",
+      "confidence": 100,
+      "confidence_factors": {
+        "exact_checksum_match": 100
+      },
+      "content_analysis": {
+        "summary": "287 rows with columns: join_date, period, club_join, iap_revenue, dau, arpdau. Club metrics data for users who joined June-Aug 2024.",
+        "detected_entities": [],
+        "detected_dates": [
+          "2024-06-05",
+          "2024-06-06",
+          "2024-07-26"
+        ]
+      },
+      "status": "moved",
+      "timestamp": "2025-12-08T02:30:00Z",
+      "reasoning": "Exact duplicate detected. File has (1) suffix and identical SHA256 checksum as existing file without suffix in Downloads. Source file can be safely deleted.",
+      "moved_at": "2025-12-08T01:34:47Z"
+    },
+    {
+      "id": "fe5b371b-d892-4476-b4a0-f95e173793f0",
+      "source_path": "/Users/marklampert/Downloads/Lampert, Mark L 20251124 iFirm.zip",
+      "dest_path": "DELETE",
+      "duplicate_of": [
+        "/Users/marklampert/Dropbox/Taxes/Personal/2023-2024 audit/2025-11-24 CRA submission package/"
+      ],
+      "action": "delete",
+      "confidence": 95,
+      "confidence_factors": {
+        "contents_already_extracted": 50,
+        "matching_file_names": 30,
+        "matching_file_sizes": 15
+      },
+      "content_analysis": {
+        "summary": "ZIP with 21 files: 2023-2024 CRA Personal Package Submission. Contains T1 returns, T5013 slips, T1135 foreign asset forms, investment statements.",
+        "detected_entities": [],
+        "detected_dates": [
+          "2025-11-24",
+          "2023",
+          "2024"
+        ]
+      },
+      "status": "moved",
+      "timestamp": "2025-12-08T02:30:00Z",
+      "reasoning": "ZIP contents already extracted to Taxes/Personal/2023-2024 audit/2025-11-24 CRA submission package/. All 21 files match in name and size. Original zip no longer needed.",
+      "moved_at": "2025-12-08T01:35:14Z"
+    },
+    {
+      "id": "6e1f29fd-c61d-4d7a-83de-fb8d0de2ad89",
+      "source_path": "/Users/marklampert/Downloads/chagpt-beyond-the-basics.pdf",
+      "dest_path": "/Users/marklampert/Downloads/TO_DELETE/chagpt-beyond-the-basics.pdf",
+      "confidence": 70,
+      "confidence_factors": {
+        "temp_reference_doc": 40,
+        "no_filing_category": 20,
+        "content_boost": 5,
+        "no_entity_match": -5
+      },
+      "content_analysis": {
+        "summary": "12 page PDF. ChatGPT 201 presentation/training slides comparing LLM options (ChatGPT, Gemini, Uken LLM). Reference document.",
+        "detected_entities": [],
+        "detected_dates": []
+      },
+      "status": "moved",
+      "timestamp": "2025-12-08T02:20:00Z",
+      "reasoning": "Content analysis shows ChatGPT training presentation slides. No permanent filing category for reference/training docs. Mentions 'Uken LLM' but this is a comparison chart, not Uken business document. Safe to delete after review.",
+      "moved_at": "2025-12-08T01:35:43Z"
+    },
+    {
+      "id": "8b5bf3ad-b818-4a45-9067-be1e5b7c6a63",
+      "source_path": "/Users/marklampert/Downloads/Game P&L May 2025.pdf",
+      "dest_path": "/Users/marklampert/Downloads/Uken/Game P&L May 2025.pdf",
+      "confidence": 90,
+      "confidence_factors": {
+        "content_entity_match": 25,
+        "content_type_match": 25,
+        "file_type_match": 15,
+        "content_boost": 25
+      },
+      "content_analysis": {
+        "summary": "5 page PDF. Uken game P&L financial statement for May 2025. Shows revenue ($2.7M), cost of revenue, marketing costs, and net income breakdown.",
+        "detected_entities": [
+          "Uken"
+        ],
+        "detected_dates": [
+          "May 2025"
+        ]
+      },
+      "status": "moved",
+      "timestamp": "2025-12-08T02:20:00Z",
+      "reasoning": "Content analysis confirmed Uken game P&L for May 2025 showing $2.7M revenue. Virtual goods sales, advertising revenue, development revenue breakdown. Work financial document - moving to Uken folder.",
+      "moved_at": "2025-12-08T01:35:44Z"
+    },
+    {
+      "id": "b1e4e80f-5d54-4643-a3c1-e0d130659104",
+      "source_path": "/Users/marklampert/Downloads/costs (3).csv",
+      "dest_path": "/Users/marklampert/Downloads/TO_DELETE/costs (3).csv",
+      "confidence": 85,
+      "confidence_factors": {
+        "duplicate_suffix": 40,
+        "content_type_match": 20,
+        "temp_export_data": 25
+      },
+      "content_analysis": {
+        "summary": "7 rows with AWS infrastructure costs: Redshift, S3, EMR, API Gateway, OpenSearch, Kinesis, etc. Monthly costs May-Sep 2025.",
+        "detected_entities": [],
+        "detected_dates": [
+          "2025-05-01",
+          "2025-06-01",
+          "2025-07-01",
+          "2025-08-01",
+          "2025-09-01"
+        ]
+      },
+      "status": "moved",
+      "timestamp": "2025-12-08T02:15:00Z",
+      "reasoning": "Content analysis shows AWS infrastructure cost report (Redshift, S3, EMR). File has (3) suffix indicating 4th download of same data. Other copies exist: costs.csv, costs (1).csv, costs (2).csv. Temporary work export - safe to delete.",
+      "moved_at": "2025-12-08T01:35:51Z"
+    },
+    {
+      "id": "d4a4088d-3749-4e8c-86c6-a6705f6e6a20",
+      "source_path": "/Users/marklampert/Downloads/20250915 Audit_information_2025_09_15_16_45_51_199.pdf",
+      "dest_path": "/Users/marklampert/Dropbox/Taxes/HoldCo/2022-23 HoldCo Audit/2025-09-15 CRA Audit Information Request.pdf",
+      "confidence": 95,
+      "confidence_factors": {
+        "content_entity_match": 25,
+        "similar_files_found": 30,
+        "content_type_match": 20,
+        "file_type_match": 15,
+        "content_boost": 5
+      },
+      "content_analysis": {
+        "summary": "6 page PDF. CRA audit letter for 11087550 Canada Inc. Subject: Audit of income tax returns Nov 2020 - Oct 2022. Case number 92554071.",
+        "detected_entities": [
+          "Uken"
+        ],
+        "detected_dates": [
+          "September 15 2025",
+          "November 1 2020",
+          "October 31 2022"
+        ]
+      },
+      "status": "moved",
+      "timestamp": "2025-12-08T02:15:00Z",
+      "reasoning": "Content analysis extracted CRA audit letter for 11087550 Canada Inc (Uken-related entity). Audit covers fiscal years 2020-2022. Filing in HoldCo audit folder with descriptive name based on content.",
+      "moved_at": "2025-12-08T01:36:16Z"
+    },
+    {
+      "id": "df18f4bf-e58f-4fc3-b121-e7abe374a715",
+      "source_path": "/Users/marklampert/Downloads/rc519_11087592 Canada Inc.pdf",
+      "dest_path": "/Users/marklampert/Dropbox/Taxes/HoldCo/2024 - HoldCo/rc519_11087592 Canada Inc.pdf",
+      "confidence": 80,
+      "confidence_factors": {
+        "filename_entity_match": 25,
+        "similar_files_found": 25,
+        "file_type_match": 15,
+        "cra_form_pattern": 15
+      },
+      "content_analysis": {
+        "summary": "Encrypted PDF - content could not be extracted. Filename indicates CRA form rc519 for 11087592 Canada Inc (HoldCo entity).",
+        "detected_entities": [],
+        "detected_dates": []
+      },
+      "status": "moved",
+      "timestamp": "2025-12-08T02:15:00Z",
+      "reasoning": "PDF is encrypted, content unreadable. Based on filename: rc519 is a CRA authorization form, 11087592 Canada Inc is HoldCo. Filing in HoldCo 2024 tax folder based on filename pattern.",
+      "moved_at": "2025-12-08T01:36:32Z"
+    },
+    {
+      "id": "e0f1b28f-e165-4ec8-ac44-512a5bb215f4",
+      "source_path": "/Users/marklampert/Downloads/Total_2025-05-28_2025-11-27.csv",
+      "dest_path": "/Users/marklampert/Downloads/Uken/Total_2025-05-28_2025-11-27.csv",
+      "confidence": 75,
+      "confidence_factors": {
+        "content_type_match": 20,
+        "work_metrics_data": 30,
+        "file_type_match": 15,
+        "content_boost": 5,
+        "no_entity_keyword": -10
+      },
+      "content_analysis": {
+        "summary": "184 rows with columns: timestamp, dbus, dollars. Daily metrics data export covering May-Nov 2025.",
+        "detected_entities": [],
+        "detected_dates": [
+          "2025-05-28",
+          "2025-11-27"
+        ]
+      },
+      "status": "moved",
+      "timestamp": "2025-12-08T02:10:00Z",
+      "reasoning": "Content analysis shows daily metrics export with 'dbus' (daily business units - gaming metric) and 'dollars' columns. This is work analytics data covering May-Nov 2025. No permanent filing category - moving to Uken work folder for review.",
+      "moved_at": "2025-12-08T01:36:50Z"
+    },
+    {
+      "id": "d6dbfe14-3642-48bf-a6d5-bd3e0b2a93e2",
+      "source_path": "/Users/marklampert/Downloads/N49P_Fund_III_-_2Q25_Update_.pdf",
+      "dest_path": "/Users/marklampert/Dropbox/Filing/Investments - Funds/N49P Fund III/quarterly reports/N49P_Fund_III_2Q25_Update.pdf",
+      "new_folder": true,
+      "confidence": 85,
+      "confidence_factors": {
+        "similar_folder_pattern": 25,
+        "content_type_match": 25,
+        "file_type_match": 15,
+        "naming_pattern_match": 15,
+        "content_boost": 5
+      },
+      "content_analysis": {
+        "summary": "6 page PDF. N49P Fund III Q2 2025 investor update. Fund invested in 23 companies for $16.45M total. 85% capital called.",
+        "detected_entities": [],
+        "detected_dates": []
+      },
+      "status": "moved",
+      "timestamp": "2025-12-08T02:40:00Z",
+      "reasoning": "N49P Fund III quarterly report. Proposing new folder following pattern of existing N49P Fund and N49P Fund II folders with quarterly reports subfolder. File is investment LP update for Q2 2025.",
+      "moved_at": "2025-12-08T01:37:10Z"
     }
   ]
 }

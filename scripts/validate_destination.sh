@@ -34,31 +34,6 @@ if [[ "$DEST_PATH" == "DELETE" ]]; then
     exit 0
 fi
 
-# Parse forbidden_destinations from config
-parse_forbidden() {
-    local in_section=false
-    while IFS= read -r line; do
-        if [[ "$line" =~ ^forbidden_destinations: ]]; then
-            in_section=true
-            continue
-        fi
-        if [[ "$in_section" == true ]]; then
-            # Stop at next section (line starting without space) or empty line followed by non-list
-            if [[ "$line" =~ ^[a-zA-Z] && ! "$line" =~ ^[[:space:]] ]]; then
-                break
-            fi
-            # Extract path from "  - ~/path"
-            if [[ "$line" =~ ^[[:space:]]*-[[:space:]]*(.*) ]]; then
-                local path="${BASH_REMATCH[1]}"
-                # Expand ~ and remove trailing spaces
-                path="${path/#\~/$HOME}"
-                path="${path%% *}"
-                echo "$path"
-            fi
-        fi
-    done < "$CONFIG_FILE"
-}
-
 # Parse allowed_destinations from config
 parse_allowed() {
     local in_section=false
@@ -89,16 +64,7 @@ parse_allowed() {
     done < "$CONFIG_FILE"
 }
 
-# Check against forbidden paths first
-while IFS= read -r forbidden_path; do
-    if [[ -n "$forbidden_path" && "$DEST_PATH" == "$forbidden_path"* ]]; then
-        echo -e "${RED}ERROR: Destination is FORBIDDEN: $forbidden_path${NC}"
-        echo "This path should never be used as a filing destination."
-        exit 1
-    fi
-done < <(parse_forbidden)
-
-# Check against allowed paths
+# Check against allowed paths (whitelist)
 while IFS= read -r allowed_path; do
     if [[ -n "$allowed_path" && "$DEST_PATH" == "$allowed_path"* ]]; then
         echo -e "${GREEN}OK: Destination allowed under $allowed_path${NC}"

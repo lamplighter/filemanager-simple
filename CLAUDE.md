@@ -183,11 +183,6 @@ If NO existing folder is appropriate for the file, you can propose creating a ne
 - `~/Downloads/Screenshots/` - Screenshots
 - `~/Downloads/unknown/` - Unclear categorization
 
-**NEVER use (forbidden in config.yaml):**
-- `~/Dropbox/Uken/` - Work archive (read-only reference, NEVER file here!)
-- `~/Dropbox/Apps/` - Application data
-- `~/Documents/` - System folder
-
 ### 5. Calculate Confidence Score (0-100%)
 
 **Positive Factors:**
