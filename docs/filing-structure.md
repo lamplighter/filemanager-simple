@@ -28,10 +28,9 @@
   *Note: Organized by entity and year, contains CRA/IRS official documents*
 
 ### Special Directories
-- `~/Files/` - **EXISTING** but empty base directory
-- `~/Files/installers/` - **NEEDS CREATION** - DMG files and software installers
-- `~/Files/screenshots/` - **NEEDS CREATION** - Screenshot images  
-- `~/Files/unknown/` - **NEEDS CREATION** - Files that cannot be categorized
+- `~/Downloads/installers/` - DMG files and software installers
+- `~/Downloads/Screenshots/` - Screenshot images
+- `~/Downloads/unknown/` - Files that cannot be categorized
 
 ## Major Filing Categories
 
@@ -114,6 +113,6 @@ For archived, old, or legacy content, use the **z prefix** to push folders to th
 Given the existing `~/Dropbox/Filing/` structure is entity-based rather than file-type based:
 - **Financial documents**: Place in appropriate entity folder in `~/Dropbox/Filing/`
 - **Personal documents**: Place in appropriate entity folder or create new entity folder
-- **DMG/installers**: `~/Files/installers/` (needs creation)
-- **Screenshots**: `~/Files/screenshots/` (needs creation)
-- **Unclear files**: `~/Files/unknown/` (needs creation)
+- **DMG/installers**: `~/Downloads/installers/`
+- **Screenshots**: `~/Downloads/Screenshots/`
+- **Unclear files**: `~/Downloads/unknown/`

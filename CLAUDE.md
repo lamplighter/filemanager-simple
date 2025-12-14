@@ -8,7 +8,7 @@ This is a Claude Code driven file organization system. Claude analyzes files and
 - **Filing Structure**: See `docs/filing-structure.md`
 - **Naming Conventions**: See `docs/naming-conventions.md`
 - **Examples**: See `docs/examples.md`
-- **State Files**: `state/file_queue.json` (pending files), `state/history.json` (undo capability)
+- **State Files**: `state/file_queue.json` (pending files), `state/move_history.json` (undo capability)
 
 ## How the System Works
 

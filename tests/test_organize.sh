@@ -53,8 +53,8 @@ setup() {
     if [[ -f state/file_queue.json ]]; then
         cp state/file_queue.json state/file_queue.json.backup
     fi
-    if [[ -f state/history.json ]]; then
-        cp state/history.json state/history.json.backup
+    if [[ -f state/move_history.json ]]; then
+        cp state/move_history.json state/move_history.json.backup
     fi
 
     echo -e "${GREEN}Setup complete${NC}"
@@ -73,8 +73,8 @@ cleanup() {
     if [[ -f state/file_queue.json.backup ]]; then
         mv state/file_queue.json.backup state/file_queue.json
     fi
-    if [[ -f state/history.json.backup ]]; then
-        mv state/history.json.backup state/history.json
+    if [[ -f state/move_history.json.backup ]]; then
+        mv state/move_history.json.backup state/move_history.json
     fi
 
     echo -e "${GREEN}Cleanup complete${NC}"
@@ -116,10 +116,10 @@ test_state_files_exist() {
         fail "file_queue.json missing"
     fi
 
-    if [[ -f state/history.json ]]; then
-        pass "history.json exists"
+    if [[ -f state/move_history.json ]]; then
+        pass "move_history.json exists"
     else
-        fail "history.json missing"
+        fail "move_history.json missing"
     fi
 }
 
@@ -132,10 +132,10 @@ test_json_validity() {
         fail "file_queue.json is invalid JSON"
     fi
 
-    if jq empty state/history.json 2>/dev/null; then
-        pass "history.json is valid JSON"
+    if jq empty state/move_history.json 2>/dev/null; then
+        pass "move_history.json is valid JSON"
     else
-        fail "history.json is invalid JSON"
+        fail "move_history.json is invalid JSON"
     fi
 }
 

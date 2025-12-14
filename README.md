@@ -111,9 +111,9 @@ Entity-based organization:
 - **Legal/Personal**: Family Trust, Wills, etc.
 
 ### Special Directories
-- `~/Files/installers/` - DMG files and software
-- `~/Files/screenshots/` - Screenshot images
-- `~/Files/unknown/` - Low-confidence files
+- `~/Downloads/installers/` - DMG files and software
+- `~/Downloads/Screenshots/` - Screenshot images
+- `~/Downloads/unknown/` - Low-confidence files
 
 ## 🔧 Command Reference
 

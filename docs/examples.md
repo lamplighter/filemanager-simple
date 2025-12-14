@@ -13,7 +13,7 @@ For each file to be organized:
 3. **Calculate** confidence score based on findings
 4. **Generate** UUID and create JSON entry
 5. **Add** to `state/file_queue.json`
-6. **User runs** `./organize.sh` to execute
+6. **User reviews** in viewer UI (`./scripts/view_queue.sh`) and clicks Move or Skip
 
 ## Enhanced Workflow Examples
 
@@ -166,7 +166,7 @@ Write state/file_queue.json
 {
   "id": "12345678-90ab-cdef-1234-567890abcdef",
   "source_path": "/Users/marklampert/Downloads/Adobe_Installer_v2.dmg",
-  "dest_path": "/Users/marklampert/Files/installers/Adobe_Installer_v2.dmg",
+  "dest_path": "/Users/marklampert/Downloads/installers/Adobe_Installer_v2.dmg",
   "confidence": 100,
   "confidence_factors": {
     "file_type_match": 40,
@@ -196,15 +196,15 @@ Write state/file_queue.json
 - **Content indicators**: premium schedules, death benefits, cash surrender values (CSV), policy illustrations
 - **Company names**: Sun Life, Manulife, Equitable, Canada Life, Industrial Alliance
 - **Common filenames**: scenarios, consolidated model, illustration, policy, premium schedule
-- **Destination**: `~/Dropbox/Filing/Personal/Life Insurance/`
+- **Destination**: `~/Dropbox/Filing/Life Insurance/`
 
-#### Investment Documents  
+#### Investment Documents
 - **Content indicators**: portfolio performance, asset allocation, fund holdings, market analysis
 - **Company names**: TD Direct, RBC Direct, Questrade, Wealthsimple
 - **Common filenames**: statement, holdings, performance report, portfolio summary
-- **Destination**: `~/Dropbox/Filing/Financial/Investments/`
+- **Destination**: `~/Dropbox/Filing/` (under entity-specific folders like `TD WebBroker/`, `Wealthsimple/`, etc.)
 
 #### Banking Documents
 - **Content indicators**: account balances, transactions, statements, credit card activity
 - **Company names**: TD Bank, RBC, Tangerine, Scotia, BMO
-- **Destination**: `~/Dropbox/Filing/Financial/Banking/[Bank Name]/`
+- **Destination**: `~/Dropbox/Filing/` (under entity-specific folders like `TD Chequing/`, `RBC/`, `Tangerine/`)

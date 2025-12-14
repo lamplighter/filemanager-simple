@@ -8,15 +8,14 @@ This directory contains JSON files that track the file organization system's sta
 Tracks all files pending organization. Each entry has:
 - `id`: Unique identifier (UUID)
 - `source_path`: Full path to source file
-- `dest_path`: Full path to destination
-- `new_filename`: New filename to apply
+- `dest_path`: Full path to destination (includes the new filename)
 - `confidence`: Score 0-100
 - `confidence_factors`: Object with individual scoring factors
-- `status`: "pending", "approved", "executed", or "rejected"
+- `status`: "pending", "approved", "completed", or "failed"
 - `timestamp`: ISO 8601 timestamp when added
 - `reasoning`: Why this destination was chosen
 
-### history.json
+### move_history.json
 Tracks all executed file operations for undo capability. Each operation has:
 - `id`: Matches file_queue.json entry
 - `source_path`: Original location
