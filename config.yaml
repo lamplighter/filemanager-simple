@@ -11,9 +11,9 @@ taxes_root: ~/Dropbox/Taxes
 
 # Special purpose directories
 special_directories:
-  installers: ~/Files/installers
-  screenshots: ~/Files/screenshots
-  unknown: ~/Files/unknown
+  installers: ~/Downloads/installers
+  screenshots: ~/Downloads/Screenshots
+  unknown: ~/Downloads/unknown
 
 # Confidence thresholds (0-100)
 thresholds:

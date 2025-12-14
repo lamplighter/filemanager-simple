@@ -689,7 +689,7 @@ This will check for:
 - organize.sh will handle conflicts during execution (ask user to overwrite/rename/skip)
 
 ### Very Low Confidence (<30%)
-- Set destination to unknown folder: `~/Files/unknown/`
+- Set destination to unknown folder: `~/Downloads/unknown/`
 - Include reasoning about why categorization is unclear
 
 ### Multiple Valid Destinations
