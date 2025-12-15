@@ -13,7 +13,7 @@ For each file to be organized:
 3. **Calculate** confidence score based on findings
 4. **Generate** UUID and create JSON entry
 5. **Add** to `state/file_queue.json`
-6. **User reviews** in viewer UI (`./scripts/view_queue.sh`) and clicks Move or Skip
+6. **User reviews** in viewer UI (run `./scripts/view_queue.sh`) and clicks Move or Skip
 
 ## Enhanced Workflow Examples
 

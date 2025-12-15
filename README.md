@@ -26,19 +26,25 @@ filemanager-simple/
 ├── config.yaml                 # ⚙️  Configuration (paths & thresholds)
 ├── state/                      # 📊 State management
 │   ├── file_queue.json        # Pending file operations
-│   ├── history.json           # Undo capability
+│   ├── move_history.json      # Undo capability (moved files)
+│   ├── skip_history.json      # Skipped files history
 │   └── README.md              # State file documentation
 ├── scripts/                    # 🔧 Helper scripts
-│   ├── validate_suggestion.sh # Validation tool for Claude
-│   ├── auto_execute.sh.bak    # (archived)
-│   └── execute.sh.bak         # (archived)
+│   ├── analyze_content.sh     # Content analysis wrapper
+│   ├── analyze_content.py     # Content analysis (Python)
+│   ├── find_duplicates.sh     # Duplicate detection
+│   ├── validate_destination.sh# Destination whitelist validation
+│   ├── validate_suggestion.sh # Full suggestion validation
+│   ├── view_queue.sh          # Launch viewer UI
+│   ├── viewer_server.py       # API server for viewer
+│   ├── calculate_checksum.sh  # SHA256 checksum utility
+│   └── stop_viewer_server.sh  # Stop the viewer server
 ├── docs/                       # 📖 Documentation
 │   ├── filing-structure.md    # Directory layout
 │   ├── naming-conventions.md  # File naming patterns
 │   └── examples.md            # Usage examples
-├── logs/                       # 📝 Archived logs (old system)
-│   ├── organize_log.md.bak
-│   └── execution_log.md.bak
+├── viewer.html                 # 📺 Web-based queue viewer UI
+├── FileQueueViewer.app/        # 🍎 macOS app wrapper for viewer
 ├── CLAUDE.md                   # 🧠 Instructions for Claude
 └── README.md                   # 👋 This file
 ```
@@ -56,9 +62,9 @@ filemanager-simple/
 2. **organize.sh Executes** - You run the script to process the queue:
    - **90-100% confidence**: Auto-approved, executed immediately
    - **50-89% confidence**: Asks for your confirmation
-   - **0-49% confidence**: Moved to `~/Files/unknown/`
+   - **0-49% confidence**: Moved to `~/Downloads/unknown/`
 
-3. **Full Undo** - Every operation is tracked in `history.json`:
+3. **Full Undo** - Every operation is tracked in `move_history.json`:
    - Run `./organize.sh --undo` to revert the last batch
    - File hashes ensure integrity
 
@@ -138,7 +144,7 @@ Entity-based organization:
 cat state/file_queue.json | jq '.files[] | select(.status == "pending")'
 
 # View history
-cat state/history.json | jq '.operations[-5:]'  # Last 5 operations
+cat state/move_history.json | jq '.files[-5:]'  # Last 5 operations
 ```
 
 ## ⚙️ Configuration
@@ -212,8 +218,8 @@ cat state/file_queue.json | jq  # View raw JSON
 # Clear queue (keep history for undo)
 echo '{"schema_version": "1.0", "files": []}' > state/file_queue.json
 
-# Clear everything
-echo '{"schema_version": "1.0", "operations": []}' > state/history.json
+# Clear move history
+echo '{"schema_version": "1.0", "files": []}' > state/move_history.json
 ```
 
 ### Validation failing?
