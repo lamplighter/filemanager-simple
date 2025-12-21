@@ -5,8 +5,12 @@ import QuickLookUI
 struct PreviewView: View {
     let filePath: String
 
+    private var expandedPath: String {
+        (filePath as NSString).expandingTildeInPath
+    }
+
     private var fileExtension: String {
-        (filePath as NSString).pathExtension.lowercased()
+        (expandedPath as NSString).pathExtension.lowercased()
     }
 
     private var isImage: Bool {
@@ -22,7 +26,7 @@ struct PreviewView: View {
     }
 
     var body: some View {
-        if !FileManager.default.fileExists(atPath: filePath) {
+        if !FileManager.default.fileExists(atPath: expandedPath) {
             VStack {
                 Image(systemName: "doc.questionmark")
                     .font(.largeTitle)
@@ -32,11 +36,11 @@ struct PreviewView: View {
             }
             .frame(maxWidth: .infinity, maxHeight: .infinity)
         } else if isPDF {
-            PDFPreviewView(path: filePath)
+            PDFPreviewView(path: expandedPath)
         } else if isImage {
-            ImagePreviewView(path: filePath)
+            ImagePreviewView(path: expandedPath)
         } else if isText {
-            TextPreviewView(path: filePath)
+            TextPreviewView(path: expandedPath)
         } else {
             VStack {
                 Image(systemName: "doc")
