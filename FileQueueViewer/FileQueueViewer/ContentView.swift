@@ -157,7 +157,15 @@ struct ContentView: View {
                     .width(100)
 
                     TableColumn("Actions") { file in
-                        HStack(spacing: 8) {
+                        HStack(spacing: 4) {
+                            Button {
+                                selectedFile = file
+                            } label: {
+                                Image(systemName: "info.circle")
+                            }
+                            .buttonStyle(.borderless)
+                            .help("View Details")
+
                             if file.isDelete {
                                 Button(role: .destructive) {
                                     deleteFile(file)
@@ -184,7 +192,7 @@ struct ContentView: View {
                             }
                         }
                     }
-                    .width(100)
+                    .width(120)
                 }
                 .tableStyle(.inset(alternatesRowBackgrounds: true))
                 .onChange(of: sortOrder) { _, newOrder in
