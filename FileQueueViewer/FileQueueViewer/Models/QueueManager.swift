@@ -12,15 +12,30 @@ class QueueManager: ObservableObject {
     private let queuePath: String
     private let historyPath: String
     private let skipHistoryPath: String
+    private let enableWatching: Bool
 
     init() {
         let basePath = "/Users/marklampert/Code/_TOOLS/hoot/state"
         self.queuePath = "\(basePath)/file_queue.json"
         self.historyPath = "\(basePath)/move_history.json"
         self.skipHistoryPath = "\(basePath)/skip_history.json"
+        self.enableWatching = true
 
         loadQueue()
         startWatching()
+    }
+
+    /// Test initializer with custom paths
+    init(queuePath: String, historyPath: String, skipHistoryPath: String, enableWatching: Bool = false) {
+        self.queuePath = queuePath
+        self.historyPath = historyPath
+        self.skipHistoryPath = skipHistoryPath
+        self.enableWatching = enableWatching
+
+        loadQueue()
+        if enableWatching {
+            startWatching()
+        }
     }
 
     deinit {

@@ -16,7 +16,20 @@
         007 /* PreviewView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 107; };
         008 /* DirectoryListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 108; };
         009 /* FileDetailSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 109; };
+        010 /* FileEntryTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 111; };
+        011 /* FileOperationsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 112; };
+        012 /* QueueManagerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 113; };
 /* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+        700 /* PBXContainerItemProxy */ = {
+            isa = PBXContainerItemProxy;
+            containerPortal = 500;
+            proxyType = 1;
+            remoteGlobalIDString = 300;
+            remoteInfo = FileQueueViewer;
+        };
+/* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
         100 /* FileQueueViewer.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FileQueueViewer.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -30,6 +43,10 @@
         108 /* DirectoryListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DirectoryListView.swift; sourceTree = "<group>"; };
         109 /* FileDetailSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileDetailSheet.swift; sourceTree = "<group>"; };
         110 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+        111 /* FileEntryTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileEntryTests.swift; sourceTree = "<group>"; };
+        112 /* FileOperationsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileOperationsTests.swift; sourceTree = "<group>"; };
+        113 /* QueueManagerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QueueManagerTests.swift; sourceTree = "<group>"; };
+        114 /* FileQueueViewerTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = FileQueueViewerTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXGroup section */
@@ -37,6 +54,7 @@
             isa = PBXGroup;
             children = (
                 201 /* FileQueueViewer */,
+                206 /* FileQueueViewerTests */,
                 202 /* Products */,
             );
             sourceTree = "<group>";
@@ -58,6 +76,7 @@
             isa = PBXGroup;
             children = (
                 100 /* FileQueueViewer.app */,
+                114 /* FileQueueViewerTests.xctest */,
             );
             name = Products;
             sourceTree = "<group>";
@@ -90,6 +109,16 @@
             path = Services;
             sourceTree = "<group>";
         };
+        206 /* FileQueueViewerTests */ = {
+            isa = PBXGroup;
+            children = (
+                111 /* FileEntryTests.swift */,
+                112 /* FileOperationsTests.swift */,
+                113 /* QueueManagerTests.swift */,
+            );
+            path = FileQueueViewerTests;
+            sourceTree = "<group>";
+        };
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -110,6 +139,24 @@
             productReference = 100 /* FileQueueViewer.app */;
             productType = "com.apple.product-type.application";
         };
+        310 /* FileQueueViewerTests */ = {
+            isa = PBXNativeTarget;
+            buildConfigurationList = 410;
+            buildPhases = (
+                311 /* Sources */,
+                312 /* Frameworks */,
+                313 /* Resources */,
+            );
+            buildRules = (
+            );
+            dependencies = (
+                701 /* PBXTargetDependency */,
+            );
+            name = FileQueueViewerTests;
+            productName = FileQueueViewerTests;
+            productReference = 114 /* FileQueueViewerTests.xctest */;
+            productType = "com.apple.product-type.bundle.unit-test";
+        };
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -122,6 +169,10 @@
                 TargetAttributes = {
                     300 = {
                         CreatedOnToolsVersion = 15.0;
+                    };
+                    310 = {
+                        CreatedOnToolsVersion = 15.0;
+                        TestTargetID = 300;
                     };
                 };
             };
@@ -139,12 +190,20 @@
             projectRoot = "";
             targets = (
                 300 /* FileQueueViewer */,
+                310 /* FileQueueViewerTests */,
             );
         };
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
         303 /* Resources */ = {
+            isa = PBXResourcesBuildPhase;
+            buildActionMask = 2147483647;
+            files = (
+            );
+            runOnlyForDeploymentPostprocessing = 0;
+        };
+        313 /* Resources */ = {
             isa = PBXResourcesBuildPhase;
             buildActionMask = 2147483647;
             files = (
@@ -170,6 +229,16 @@
             );
             runOnlyForDeploymentPostprocessing = 0;
         };
+        311 /* Sources */ = {
+            isa = PBXSourcesBuildPhase;
+            buildActionMask = 2147483647;
+            files = (
+                010 /* FileEntryTests.swift in Sources */,
+                011 /* FileOperationsTests.swift in Sources */,
+                012 /* QueueManagerTests.swift in Sources */,
+            );
+            runOnlyForDeploymentPostprocessing = 0;
+        };
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -180,7 +249,22 @@
             );
             runOnlyForDeploymentPostprocessing = 0;
         };
+        312 /* Frameworks */ = {
+            isa = PBXFrameworksBuildPhase;
+            buildActionMask = 2147483647;
+            files = (
+            );
+            runOnlyForDeploymentPostprocessing = 0;
+        };
 /* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+        701 /* PBXTargetDependency */ = {
+            isa = PBXTargetDependency;
+            target = 300 /* FileQueueViewer */;
+            targetProxy = 700 /* PBXContainerItemProxy */;
+        };
+/* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
         600 /* Debug */ = {
@@ -353,6 +437,42 @@
             };
             name = Release;
         };
+        612 /* Debug */ = {
+            isa = XCBuildConfiguration;
+            buildSettings = {
+                BUNDLE_LOADER = "$(TEST_HOST)";
+                CODE_SIGN_STYLE = Automatic;
+                CURRENT_PROJECT_VERSION = 1;
+                DEVELOPMENT_TEAM = "";
+                GENERATE_INFOPLIST_FILE = YES;
+                MACOSX_DEPLOYMENT_TARGET = 14.0;
+                MARKETING_VERSION = 1.0;
+                PRODUCT_BUNDLE_IDENTIFIER = com.hoot.FileQueueViewerTests;
+                PRODUCT_NAME = "$(TARGET_NAME)";
+                SWIFT_EMIT_LOC_STRINGS = NO;
+                SWIFT_VERSION = 5.0;
+                TEST_HOST = "$(BUILT_PRODUCTS_DIR)/FileQueueViewer.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/FileQueueViewer";
+            };
+            name = Debug;
+        };
+        613 /* Release */ = {
+            isa = XCBuildConfiguration;
+            buildSettings = {
+                BUNDLE_LOADER = "$(TEST_HOST)";
+                CODE_SIGN_STYLE = Automatic;
+                CURRENT_PROJECT_VERSION = 1;
+                DEVELOPMENT_TEAM = "";
+                GENERATE_INFOPLIST_FILE = YES;
+                MACOSX_DEPLOYMENT_TARGET = 14.0;
+                MARKETING_VERSION = 1.0;
+                PRODUCT_BUNDLE_IDENTIFIER = com.hoot.FileQueueViewerTests;
+                PRODUCT_NAME = "$(TARGET_NAME)";
+                SWIFT_EMIT_LOC_STRINGS = NO;
+                SWIFT_VERSION = 5.0;
+                TEST_HOST = "$(BUILT_PRODUCTS_DIR)/FileQueueViewer.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/FileQueueViewer";
+            };
+            name = Release;
+        };
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -361,6 +481,15 @@
             buildConfigurations = (
                 602 /* Debug */,
                 603 /* Release */,
+            );
+            defaultConfigurationIsVisible = 0;
+            defaultConfigurationName = Release;
+        };
+        410 /* Build configuration list for PBXNativeTarget "FileQueueViewerTests" */ = {
+            isa = XCConfigurationList;
+            buildConfigurations = (
+                612 /* Debug */,
+                613 /* Release */,
             );
             defaultConfigurationIsVisible = 0;
             defaultConfigurationName = Release;
