@@ -620,7 +620,21 @@ Run ./scripts/view_queue.sh to review and approve.""
 
 ## User Review and Approval via Viewer UI
 
-The **viewer UI** is the primary way to review and execute file organization. Open it with `./scripts/view_queue.sh` (launches the custom FileQueueViewer.app).
+The **viewer UI** is the primary way to review and execute file organization.
+
+**Option A: Native SwiftUI App (Recommended)**
+Open the Xcode project and build:
+```bash
+open FileQueueViewer/FileQueueViewer.xcodeproj
+# Build with ⌘R in Xcode
+```
+No server required - the native app reads JSON files directly.
+
+**Option B: Web-based Viewer (Legacy)**
+```bash
+./scripts/view_queue.sh
+```
+Launches Chrome-based viewer with Python HTTP server on port 8765.
 
 **All files require explicit user action** - clicking the Move or Skip button in the UI.
 
@@ -712,8 +726,9 @@ This will check for:
 # MANDATORY: Analyze file content before suggesting destination
 ./scripts/analyze_content.sh <file_path>      # Returns JSON with content analysis
 
-# Open viewer UI (primary method)
-./scripts/view_queue.sh          # Launches FileQueueViewer.app with custom icon
+# Open viewer UI (choose one)
+open FileQueueViewer/FileQueueViewer.xcodeproj  # SwiftUI native app (build in Xcode)
+./scripts/view_queue.sh          # Legacy web viewer (requires Python server)
 
 # Optional batch operations
 ./organize.sh --dry-run          # Preview all suggestions
