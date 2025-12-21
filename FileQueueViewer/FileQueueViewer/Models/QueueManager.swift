@@ -79,8 +79,10 @@ class QueueManager: ObservableObject {
             let outputData = try encoder.encode(queue)
 
             let tempPath = queuePath + ".tmp"
-            try outputData.write(to: URL(fileURLWithPath: tempPath))
-            try FileManager.default.moveItem(atPath: tempPath, toPath: queuePath)
+            let tempURL = URL(fileURLWithPath: tempPath)
+            let destURL = URL(fileURLWithPath: queuePath)
+            try outputData.write(to: tempURL)
+            _ = try FileManager.default.replaceItemAt(destURL, withItemAt: tempURL)
         } catch {
             self.error = "Failed to save queue: \(error.localizedDescription)"
         }
