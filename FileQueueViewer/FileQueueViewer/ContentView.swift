@@ -9,6 +9,7 @@ struct ContentView: View {
     @State private var showingAlert = false
     @State private var alertMessage = ""
     @State private var alertTitle = ""
+    @State private var recentlyMovedFiles: [FileEntry] = []  // Files that were just moved (for display)
 
     enum ConfidenceFilter: String, CaseIterable {
         case all = "All"
@@ -26,10 +27,18 @@ struct ContentView: View {
         }
     }
 
+    private var recentlyMovedIds: Set<String> {
+        Set(recentlyMovedFiles.map { $0.id })
+    }
+
     private var filteredFiles: [FileEntry] {
-        queueManager.files
+        let pending = queueManager.files
             .filter { filterLevel.matches($0.confidence) }
-            .sorted(using: sortOrder)
+        // Include recently moved files at their original position
+        let combined = pending + recentlyMovedFiles.filter { moved in
+            !pending.contains { $0.id == moved.id } && filterLevel.matches(moved.confidence)
+        }
+        return combined.sorted(using: sortOrder)
     }
 
     var body: some View {
@@ -157,38 +166,44 @@ struct ContentView: View {
                     .width(100)
 
                     TableColumn("Actions") { file in
-                        HStack(spacing: 4) {
-                            Button {
-                                selectedFile = file
-                            } label: {
-                                Image(systemName: "info.circle")
-                            }
-                            .buttonStyle(.borderless)
-                            .help("View Details")
-
-                            if file.isDelete {
-                                Button(role: .destructive) {
-                                    deleteFile(file)
-                                } label: {
-                                    Image(systemName: "trash")
-                                }
-                                .buttonStyle(.bordered)
-                            } else {
+                        if recentlyMovedIds.contains(file.id) {
+                            Text("MOVED")
+                                .font(.caption.bold())
+                                .foregroundColor(.green)
+                        } else {
+                            HStack(spacing: 4) {
                                 Button {
-                                    skipFile(file)
+                                    selectedFile = file
                                 } label: {
-                                    Image(systemName: "arrow.right.circle")
+                                    Image(systemName: "info.circle")
                                 }
-                                .buttonStyle(.bordered)
-                                .help("Skip")
+                                .buttonStyle(.borderless)
+                                .help("View Details")
 
-                                Button {
-                                    moveFile(file)
-                                } label: {
-                                    Image(systemName: "checkmark.circle.fill")
+                                if file.isDelete {
+                                    Button(role: .destructive) {
+                                        deleteFile(file)
+                                    } label: {
+                                        Image(systemName: "trash")
+                                    }
+                                    .buttonStyle(.bordered)
+                                } else {
+                                    Button {
+                                        skipFile(file)
+                                    } label: {
+                                        Image(systemName: "arrow.right.circle")
+                                    }
+                                    .buttonStyle(.bordered)
+                                    .help("Skip")
+
+                                    Button {
+                                        moveFile(file)
+                                    } label: {
+                                        Image(systemName: "checkmark.circle.fill")
+                                    }
+                                    .buttonStyle(.borderedProminent)
+                                    .help("Move")
                                 }
-                                .buttonStyle(.borderedProminent)
-                                .help("Move")
                             }
                         }
                     }
@@ -255,6 +270,10 @@ struct ContentView: View {
         } message: {
             Text(alertMessage)
         }
+        .onChange(of: queueManager.files) { _, _ in
+            // Clear recently moved files when queue reloads
+            recentlyMovedFiles.removeAll()
+        }
         .frame(minWidth: 900, minHeight: 500)
     }
 
@@ -264,8 +283,8 @@ struct ContentView: View {
         do {
             try FileOperations.shared.moveFile(from: file.sourcePath, to: file.destPath)
             queueManager.appendToHistory(file, movedAt: Date())
+            recentlyMovedFiles.append(file)
             queueManager.removeFile(id: file.id)
-            showSuccess("Moved \(file.sourceFileName)")
         } catch {
             showError("Move failed: \(error.localizedDescription)")
         }
@@ -275,8 +294,8 @@ struct ContentView: View {
         do {
             let skippedTo = try FileOperations.shared.skipFile(from: file.sourcePath)
             queueManager.appendToSkipHistory(file, skippedAt: Date(), skippedTo: skippedTo)
+            recentlyMovedFiles.append(file)
             queueManager.removeFile(id: file.id)
-            showSuccess("Skipped \(file.sourceFileName)")
         } catch {
             showError("Skip failed: \(error.localizedDescription)")
         }
@@ -286,16 +305,15 @@ struct ContentView: View {
         do {
             try FileOperations.shared.deleteFile(at: file.sourcePath)
             queueManager.appendToHistory(file, movedAt: Date())
+            recentlyMovedFiles.append(file)
             queueManager.removeFile(id: file.id)
-            showSuccess("Deleted \(file.sourceFileName)")
         } catch {
             showError("Delete failed: \(error.localizedDescription)")
         }
     }
 
     private func moveSelected() {
-        let filesToMove = filteredFiles.filter { selection.contains($0.id) }
-        var successCount = 0
+        let filesToMove = filteredFiles.filter { selection.contains($0.id) && !recentlyMovedIds.contains($0.id) }
         var lastError: String?
 
         for file in filesToMove {
@@ -306,8 +324,8 @@ struct ContentView: View {
                     try FileOperations.shared.moveFile(from: file.sourcePath, to: file.destPath)
                 }
                 queueManager.appendToHistory(file, movedAt: Date())
+                recentlyMovedFiles.append(file)
                 queueManager.removeFile(id: file.id)
-                successCount += 1
             } catch {
                 lastError = error.localizedDescription
             }
@@ -316,23 +334,20 @@ struct ContentView: View {
         selection.removeAll()
 
         if let error = lastError {
-            showError("Moved \(successCount)/\(filesToMove.count). Last error: \(error)")
-        } else {
-            showSuccess("Moved \(successCount) files")
+            showError("Some files failed to move: \(error)")
         }
     }
 
     private func skipSelected() {
-        let filesToSkip = filteredFiles.filter { selection.contains($0.id) }
-        var successCount = 0
+        let filesToSkip = filteredFiles.filter { selection.contains($0.id) && !recentlyMovedIds.contains($0.id) }
         var lastError: String?
 
         for file in filesToSkip {
             do {
                 let skippedTo = try FileOperations.shared.skipFile(from: file.sourcePath)
                 queueManager.appendToSkipHistory(file, skippedAt: Date(), skippedTo: skippedTo)
+                recentlyMovedFiles.append(file)
                 queueManager.removeFile(id: file.id)
-                successCount += 1
             } catch {
                 lastError = error.localizedDescription
             }
@@ -341,9 +356,7 @@ struct ContentView: View {
         selection.removeAll()
 
         if let error = lastError {
-            showError("Skipped \(successCount)/\(filesToSkip.count). Last error: \(error)")
-        } else {
-            showSuccess("Skipped \(successCount) files")
+            showError("Some files failed to skip: \(error)")
         }
     }
 
@@ -359,12 +372,6 @@ struct ContentView: View {
 
     private func shortenPath(_ path: String) -> String {
         path.replacingOccurrences(of: NSHomeDirectory(), with: "~")
-    }
-
-    private func showSuccess(_ message: String) {
-        alertTitle = "Success"
-        alertMessage = message
-        showingAlert = true
     }
 
     private func showError(_ message: String) {
