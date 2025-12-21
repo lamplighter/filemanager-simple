@@ -201,6 +201,10 @@ struct ContentView: View {
                 .onDoubleClick(of: FileEntry.self) { file in
                     selectedFile = file
                 }
+                .onKeyPress(.space) {
+                    openInfoForSelection()
+                    return .handled
+                }
             }
 
             Divider()
@@ -230,7 +234,7 @@ struct ContentView: View {
                     }
                     .buttonStyle(.borderedProminent)
                 } else {
-                    Text("Double-click a row to see details")
+                    Text("Press Space or double-click to see details")
                         .foregroundColor(.secondary)
                     Spacer()
                 }
@@ -344,6 +348,14 @@ struct ContentView: View {
     }
 
     // MARK: - Helpers
+
+    private func openInfoForSelection() {
+        // Open info modal for the first selected file
+        if let firstSelectedId = selection.first,
+           let file = filteredFiles.first(where: { $0.id == firstSelectedId }) {
+            selectedFile = file
+        }
+    }
 
     private func shortenPath(_ path: String) -> String {
         path.replacingOccurrences(of: NSHomeDirectory(), with: "~")
