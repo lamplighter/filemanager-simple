@@ -300,7 +300,7 @@ final class QueueManagerTests: XCTestCase {
         wait(for: [loadExpectation], timeout: 2.0)
 
         let entry = manager.files[0]
-        manager.appendToSkipHistory(entry, skippedAt: Date(), skippedTo: "/Skipped/skip.pdf")
+        manager.appendToSkipHistory(entry, skippedAt: Date(), skippedTo: "/Skipped/skip.pdf", reason: "Wrong category")
 
         // Skip history file should now exist
         XCTAssertTrue(fileManager.fileExists(atPath: skipHistoryPath))
@@ -313,5 +313,6 @@ final class QueueManagerTests: XCTestCase {
         XCTAssertEqual(history?[0]["id"] as? String, "skip-test")
         XCTAssertEqual(history?[0]["status"] as? String, "skipped")
         XCTAssertEqual(history?[0]["skipped_to"] as? String, "/Skipped/skip.pdf")
+        XCTAssertEqual(history?[0]["reason"] as? String, "Wrong category")
     }
 }

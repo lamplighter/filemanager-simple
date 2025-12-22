@@ -10,6 +10,10 @@ struct ContentView: View {
     @State private var alertMessage = ""
     @State private var alertTitle = ""
     @State private var recentlyMovedFiles: [FileEntry] = []  // Files that were just moved (for display)
+    @State private var fileToSkip: FileEntry?  // File pending skip (waiting for reason)
+    @State private var skipReason = ""
+    @State private var showingBulkSkipReason = false
+    @State private var bulkSkipReason = ""
 
     enum ConfidenceFilter: String, CaseIterable {
         case all = "All"
@@ -189,7 +193,7 @@ struct ContentView: View {
                                     .buttonStyle(.bordered)
                                 } else {
                                     Button {
-                                        skipFile(file)
+                                        promptSkipReason(file)
                                     } label: {
                                         Image(systemName: "arrow.right.circle")
                                     }
@@ -237,7 +241,7 @@ struct ContentView: View {
                     Spacer()
 
                     Button {
-                        skipSelected()
+                        showingBulkSkipReason = true
                     } label: {
                         Label("Skip Selected", systemImage: "arrow.right.circle")
                     }
@@ -261,7 +265,12 @@ struct ContentView: View {
             FileDetailSheet(
                 file: file,
                 onMove: moveFile,
-                onSkip: skipFile,
+                onSkip: { f in
+                    selectedFile = nil  // Close detail sheet first
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
+                        promptSkipReason(f)
+                    }
+                },
                 onDelete: deleteFile
             )
         }
@@ -269,6 +278,36 @@ struct ContentView: View {
             Button("OK") { }
         } message: {
             Text(alertMessage)
+        }
+        .sheet(item: $fileToSkip) { file in
+            SkipReasonSheet(
+                fileName: file.sourceFileName,
+                reason: $skipReason,
+                onSkip: {
+                    skipFile(file, reason: skipReason)
+                    skipReason = ""
+                    fileToSkip = nil
+                },
+                onCancel: {
+                    skipReason = ""
+                    fileToSkip = nil
+                }
+            )
+        }
+        .sheet(isPresented: $showingBulkSkipReason) {
+            SkipReasonSheet(
+                fileName: "\(selection.count) files",
+                reason: $bulkSkipReason,
+                onSkip: {
+                    skipSelected(reason: bulkSkipReason)
+                    bulkSkipReason = ""
+                    showingBulkSkipReason = false
+                },
+                onCancel: {
+                    bulkSkipReason = ""
+                    showingBulkSkipReason = false
+                }
+            )
         }
         .onChange(of: queueManager.files) { _, _ in
             // Clear recently moved files when queue reloads
@@ -290,10 +329,14 @@ struct ContentView: View {
         }
     }
 
-    private func skipFile(_ file: FileEntry) {
+    private func promptSkipReason(_ file: FileEntry) {
+        fileToSkip = file
+    }
+
+    private func skipFile(_ file: FileEntry, reason: String = "") {
         do {
             let skippedTo = try FileOperations.shared.skipFile(from: file.sourcePath)
-            queueManager.appendToSkipHistory(file, skippedAt: Date(), skippedTo: skippedTo)
+            queueManager.appendToSkipHistory(file, skippedAt: Date(), skippedTo: skippedTo, reason: reason)
             recentlyMovedFiles.append(file)
             queueManager.removeFile(id: file.id)
         } catch {
@@ -338,14 +381,14 @@ struct ContentView: View {
         }
     }
 
-    private func skipSelected() {
+    private func skipSelected(reason: String = "") {
         let filesToSkip = filteredFiles.filter { selection.contains($0.id) && !recentlyMovedIds.contains($0.id) }
         var lastError: String?
 
         for file in filesToSkip {
             do {
                 let skippedTo = try FileOperations.shared.skipFile(from: file.sourcePath)
-                queueManager.appendToSkipHistory(file, skippedAt: Date(), skippedTo: skippedTo)
+                queueManager.appendToSkipHistory(file, skippedAt: Date(), skippedTo: skippedTo, reason: reason)
                 recentlyMovedFiles.append(file)
                 queueManager.removeFile(id: file.id)
             } catch {

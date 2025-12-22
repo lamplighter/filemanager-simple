@@ -29,3 +29,5 @@ node_modules/
 __pycache__/
 *.pyc
 *.pyoFileQueueViewer/FileQueueViewer.app/
+FileQueueViewer/build/
+FileQueueViewer/FileQueueViewer.app/

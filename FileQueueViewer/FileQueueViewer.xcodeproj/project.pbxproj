@@ -19,6 +19,7 @@
         010 /* FileEntryTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 111; };
         011 /* FileOperationsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 112; };
         012 /* QueueManagerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 113; };
+        013 /* SkipReasonSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 115; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -47,6 +48,7 @@
         112 /* FileOperationsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileOperationsTests.swift; sourceTree = "<group>"; };
         113 /* QueueManagerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QueueManagerTests.swift; sourceTree = "<group>"; };
         114 /* FileQueueViewerTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = FileQueueViewerTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+        115 /* SkipReasonSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SkipReasonSheet.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXGroup section */
@@ -97,6 +99,7 @@
                 107 /* PreviewView.swift */,
                 108 /* DirectoryListView.swift */,
                 109 /* FileDetailSheet.swift */,
+                115 /* SkipReasonSheet.swift */,
             );
             path = Views;
             sourceTree = "<group>";
@@ -226,6 +229,7 @@
                 007 /* PreviewView.swift in Sources */,
                 008 /* DirectoryListView.swift in Sources */,
                 009 /* FileDetailSheet.swift in Sources */,
+                013 /* SkipReasonSheet.swift in Sources */,
             );
             runOnlyForDeploymentPostprocessing = 0;
         };

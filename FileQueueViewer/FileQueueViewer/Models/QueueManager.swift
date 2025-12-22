@@ -107,8 +107,12 @@ class QueueManager: ObservableObject {
         appendToHistoryFile(historyPath, entry: entry, timestamp: movedAt, status: "moved")
     }
 
-    func appendToSkipHistory(_ entry: FileEntry, skippedAt: Date, skippedTo: String) {
-        appendToHistoryFile(skipHistoryPath, entry: entry, timestamp: skippedAt, status: "skipped", extraFields: ["skipped_to": skippedTo])
+    func appendToSkipHistory(_ entry: FileEntry, skippedAt: Date, skippedTo: String, reason: String) {
+        var fields = ["skipped_to": skippedTo]
+        if !reason.isEmpty {
+            fields["reason"] = reason
+        }
+        appendToHistoryFile(skipHistoryPath, entry: entry, timestamp: skippedAt, status: "skipped", extraFields: fields)
     }
 
     private func appendToHistoryFile(_ path: String, entry: FileEntry, timestamp: Date, status: String, extraFields: [String: String] = [:]) {
