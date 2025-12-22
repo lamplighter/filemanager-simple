@@ -88,10 +88,9 @@ class QueueManager: ObservableObject {
             let data = try Data(contentsOf: URL(fileURLWithPath: queuePath))
             var queue = try JSONDecoder().decode(FileQueue.self, from: data)
 
-            // Update with our current files
-            let pendingIds = Set(files.map { $0.id })
-            queue.files = queue.files.filter { !pendingIds.contains($0.id) || $0.status != "pending" }
-            queue.files.append(contentsOf: files.filter { $0.status == "pending" })
+            // Keep non-pending items from disk, replace pending items with our current list
+            let nonPendingFiles = queue.files.filter { $0.status != "pending" }
+            queue.files = nonPendingFiles + files
 
             // Write atomically
             let encoder = JSONEncoder()
