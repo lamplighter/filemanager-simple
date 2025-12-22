@@ -20,6 +20,7 @@
         011 /* FileOperationsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 112; };
         012 /* QueueManagerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 113; };
         013 /* SkipReasonSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 115; };
+        014 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 116; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -49,6 +50,7 @@
         113 /* QueueManagerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QueueManagerTests.swift; sourceTree = "<group>"; };
         114 /* FileQueueViewerTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = FileQueueViewerTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
         115 /* SkipReasonSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SkipReasonSheet.swift; sourceTree = "<group>"; };
+        116 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXGroup section */
@@ -69,6 +71,7 @@
                 203 /* Models */,
                 204 /* Views */,
                 205 /* Services */,
+                116 /* Assets.xcassets */,
                 110 /* Info.plist */,
             );
             path = FileQueueViewer;
@@ -203,6 +206,7 @@
             isa = PBXResourcesBuildPhase;
             buildActionMask = 2147483647;
             files = (
+                014 /* Assets.xcassets in Resources */,
             );
             runOnlyForDeploymentPostprocessing = 0;
         };
