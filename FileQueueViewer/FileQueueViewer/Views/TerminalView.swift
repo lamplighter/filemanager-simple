@@ -10,14 +10,10 @@ struct TerminalView: NSViewRepresentable {
         // Configure terminal appearance
         terminal.font = NSFont.monospacedSystemFont(ofSize: 13, weight: .regular)
 
-        // Start shell in the working directory
-        let shell = ProcessInfo.processInfo.environment["SHELL"] ?? "/bin/zsh"
-        terminal.startProcess(executable: shell, args: [], environment: nil, execName: nil)
-
-        // Change to working directory
-        if !workingDirectory.isEmpty {
-            terminal.send(txt: "cd \"\(workingDirectory)\" && clear\n")
-        }
+        // Launch Claude Code directly in the working directory
+        let currentDir = workingDirectory.isEmpty ? FileManager.default.currentDirectoryPath : workingDirectory
+        FileManager.default.changeCurrentDirectoryPath(currentDir)
+        terminal.startProcess(executable: "/opt/homebrew/bin/claude", args: [], environment: nil, execName: nil)
 
         return terminal
     }
