@@ -309,9 +309,11 @@ struct ContentView: View {
                 }
             )
         }
-        .onChange(of: queueManager.files) { _, _ in
-            // Clear recently moved files when queue reloads
-            recentlyMovedFiles.removeAll()
+        .onChange(of: queueManager.isLoading) { wasLoading, isLoading in
+            // Clear recently moved files when queue finishes reloading
+            if wasLoading && !isLoading {
+                recentlyMovedFiles.removeAll()
+            }
         }
         .frame(minWidth: 900, minHeight: 500)
     }
