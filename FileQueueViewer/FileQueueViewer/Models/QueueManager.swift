@@ -53,8 +53,13 @@ class QueueManager: ObservableObject {
                 let data = try Data(contentsOf: URL(fileURLWithPath: self.queuePath))
                 let queue = try JSONDecoder().decode(FileQueue.self, from: data)
 
+                // Filter to pending files where source still exists
+                let pendingFiles = queue.files.filter { entry in
+                    entry.status == "pending" && FileManager.default.fileExists(atPath: entry.sourcePath)
+                }
+
                 DispatchQueue.main.async {
-                    self.files = queue.files.filter { $0.status == "pending" }
+                    self.files = pendingFiles
                     self.isLoading = false
                 }
             } catch {
