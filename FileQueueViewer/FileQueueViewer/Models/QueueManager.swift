@@ -13,6 +13,7 @@ class QueueManager: ObservableObject {
     private let historyPath: String
     private let skipHistoryPath: String
     private let enableWatching: Bool
+    private let checkFileExists: Bool
 
     init() {
         let basePath = "/Users/marklampert/Code/_TOOLS/hoot/state"
@@ -20,17 +21,19 @@ class QueueManager: ObservableObject {
         self.historyPath = "\(basePath)/move_history.json"
         self.skipHistoryPath = "\(basePath)/skip_history.json"
         self.enableWatching = true
+        self.checkFileExists = true
 
         loadQueue()
         startWatching()
     }
 
     /// Test initializer with custom paths
-    init(queuePath: String, historyPath: String, skipHistoryPath: String, enableWatching: Bool = false) {
+    init(queuePath: String, historyPath: String, skipHistoryPath: String, enableWatching: Bool = false, checkFileExists: Bool = false) {
         self.queuePath = queuePath
         self.historyPath = historyPath
         self.skipHistoryPath = skipHistoryPath
         self.enableWatching = enableWatching
+        self.checkFileExists = checkFileExists
 
         loadQueue()
         if enableWatching {
@@ -53,9 +56,9 @@ class QueueManager: ObservableObject {
                 let data = try Data(contentsOf: URL(fileURLWithPath: self.queuePath))
                 let queue = try JSONDecoder().decode(FileQueue.self, from: data)
 
-                // Filter to pending files where source still exists
+                // Filter to pending files (and optionally check source still exists)
                 let pendingFiles = queue.files.filter { entry in
-                    entry.status == "pending" && FileManager.default.fileExists(atPath: entry.sourcePath)
+                    entry.status == "pending" && (!self.checkFileExists || FileManager.default.fileExists(atPath: entry.sourcePath))
                 }
 
                 DispatchQueue.main.async {

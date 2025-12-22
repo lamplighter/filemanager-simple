@@ -177,6 +177,60 @@ final class QueueManagerTests: XCTestCase {
         XCTAssertEqual(manager.files[0].id, "to-keep")
     }
 
+    func testRemoveFileActuallyRemovesFromJSON() throws {
+        // Create a test queue file
+        let queueJSON = """
+        {
+            "schema_version": "1.0",
+            "last_updated": "2024-01-15T10:30:00Z",
+            "files": [
+                {
+                    "id": "to-remove",
+                    "source_path": "/Downloads/remove.pdf",
+                    "dest_path": "/Filing/remove.pdf",
+                    "confidence": 90,
+                    "status": "pending",
+                    "timestamp": "2024-01-15T10:00:00Z"
+                },
+                {
+                    "id": "to-keep",
+                    "source_path": "/Downloads/keep.pdf",
+                    "dest_path": "/Filing/keep.pdf",
+                    "confidence": 80,
+                    "status": "pending",
+                    "timestamp": "2024-01-15T10:30:00Z"
+                }
+            ]
+        }
+        """
+        try queueJSON.write(toFile: queuePath, atomically: true, encoding: .utf8)
+
+        let manager = QueueManager(
+            queuePath: queuePath,
+            historyPath: historyPath,
+            skipHistoryPath: skipHistoryPath
+        )
+
+        // Wait for load
+        let loadExpectation = XCTestExpectation(description: "Queue loaded")
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+            loadExpectation.fulfill()
+        }
+        wait(for: [loadExpectation], timeout: 2.0)
+
+        // Remove file
+        manager.removeFile(id: "to-remove")
+
+        // Read the JSON file directly and verify the removed file is gone
+        let savedData = try Data(contentsOf: URL(fileURLWithPath: queuePath))
+        let savedQueue = try JSONDecoder().decode(FileQueue.self, from: savedData)
+
+        // The removed file should NOT be in the saved JSON
+        XCTAssertEqual(savedQueue.files.count, 1, "Removed file should not persist in JSON")
+        XCTAssertEqual(savedQueue.files[0].id, "to-keep")
+        XCTAssertFalse(savedQueue.files.contains { $0.id == "to-remove" }, "Removed file ID should not exist in saved JSON")
+    }
+
     // MARK: - Update Status Tests
 
     func testUpdateFileStatus() throws {
