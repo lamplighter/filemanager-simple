@@ -21,6 +21,9 @@
         012 /* QueueManagerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 113; };
         013 /* SkipReasonSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 115; };
         014 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 116; };
+        015 /* TerminalView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 117; };
+        016 /* TerminalPanelView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 118; };
+        017 /* SwiftTerm in Frameworks */ = {isa = PBXBuildFile; productRef = 801; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -51,6 +54,8 @@
         114 /* FileQueueViewerTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = FileQueueViewerTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
         115 /* SkipReasonSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SkipReasonSheet.swift; sourceTree = "<group>"; };
         116 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+        117 /* TerminalView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TerminalView.swift; sourceTree = "<group>"; };
+        118 /* TerminalPanelView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TerminalPanelView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXGroup section */
@@ -103,6 +108,8 @@
                 108 /* DirectoryListView.swift */,
                 109 /* FileDetailSheet.swift */,
                 115 /* SkipReasonSheet.swift */,
+                117 /* TerminalView.swift */,
+                118 /* TerminalPanelView.swift */,
             );
             path = Views;
             sourceTree = "<group>";
@@ -141,6 +148,9 @@
             dependencies = (
             );
             name = FileQueueViewer;
+            packageProductDependencies = (
+                801 /* SwiftTerm */,
+            );
             productName = FileQueueViewer;
             productReference = 100 /* FileQueueViewer.app */;
             productType = "com.apple.product-type.application";
@@ -191,6 +201,9 @@
                 Base,
             );
             mainGroup = 200;
+            packageReferences = (
+                800 /* XCRemoteSwiftPackageReference "SwiftTerm" */,
+            );
             productRefGroup = 202 /* Products */;
             projectDirPath = "";
             projectRoot = "";
@@ -234,6 +247,8 @@
                 008 /* DirectoryListView.swift in Sources */,
                 009 /* FileDetailSheet.swift in Sources */,
                 013 /* SkipReasonSheet.swift in Sources */,
+                015 /* TerminalView.swift in Sources */,
+                016 /* TerminalPanelView.swift in Sources */,
             );
             runOnlyForDeploymentPostprocessing = 0;
         };
@@ -254,6 +269,7 @@
             isa = PBXFrameworksBuildPhase;
             buildActionMask = 2147483647;
             files = (
+                017 /* SwiftTerm in Frameworks */,
             );
             runOnlyForDeploymentPostprocessing = 0;
         };
@@ -512,6 +528,25 @@
             defaultConfigurationName = Release;
         };
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+        800 /* XCRemoteSwiftPackageReference "SwiftTerm" */ = {
+            isa = XCRemoteSwiftPackageReference;
+            repositoryURL = "https://github.com/migueldeicaza/SwiftTerm";
+            requirement = {
+                kind = upToNextMajorVersion;
+                minimumVersion = 1.0.0;
+            };
+        };
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+        801 /* SwiftTerm */ = {
+            isa = XCSwiftPackageProductDependency;
+            package = 800 /* XCRemoteSwiftPackageReference "SwiftTerm" */;
+            productName = SwiftTerm;
+        };
+/* End XCSwiftPackageProductDependency section */
 
     };
     rootObject = 500 /* Project object */;

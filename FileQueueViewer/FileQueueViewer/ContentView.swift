@@ -14,6 +14,7 @@ struct ContentView: View {
     @State private var skipReason = ""
     @State private var showingBulkSkipReason = false
     @State private var bulkSkipReason = ""
+    @AppStorage("showTerminal") private var showTerminal = false
 
     enum ConfidenceFilter: String, CaseIterable {
         case all = "All"
@@ -46,6 +47,29 @@ struct ContentView: View {
     }
 
     var body: some View {
+        VSplitView {
+            fileQueueView
+
+            if showTerminal {
+                TerminalPanelView(isVisible: $showTerminal)
+                    .frame(minHeight: 150, idealHeight: 250)
+            }
+        }
+        .frame(minWidth: 900, minHeight: showTerminal ? 700 : 500)
+        .toolbar {
+            ToolbarItem(placement: .automatic) {
+                Button {
+                    showTerminal.toggle()
+                } label: {
+                    Image(systemName: showTerminal ? "terminal.fill" : "terminal")
+                }
+                .help("Toggle Terminal (Cmd+T)")
+                .keyboardShortcut("t", modifiers: .command)
+            }
+        }
+    }
+
+    private var fileQueueView: some View {
         VStack(spacing: 0) {
             // Toolbar
             HStack {
@@ -315,7 +339,6 @@ struct ContentView: View {
                 recentlyMovedFiles.removeAll()
             }
         }
-        .frame(minWidth: 900, minHeight: 500)
     }
 
     // MARK: - Actions
